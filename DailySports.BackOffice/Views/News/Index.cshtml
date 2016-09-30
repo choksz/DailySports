@@ -1,0 +1,109 @@
+﻿@model IEnumerable<DailySports.DataLayer.Model.News>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">News List</h3>
+                </div>
+                <div class="box-body">
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                      Author
+                                    </th>
+                                    <th>
+                                       Category
+                                    </th>
+                                    <th>
+                                        Game
+                                    </th>
+                                    <th>
+                                      Tournament
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.NewsImage)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Date)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tag)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.status)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Author.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.category.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.game.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tournament.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(item.Description.ToString())
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.NewsImage)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tag)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.status)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Create New", "Create")
+            <a href="@Url.Action("Preview","News")" class="btn btn-success">Preview</a>
+
+        </div>
+    </div>
+
+</section>
+

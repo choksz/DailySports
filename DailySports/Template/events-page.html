@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+    <title>Daily Esports Events Page</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/hover-min.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="event_page">
+<div class="custom_nav navbar_bg">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="images/Long-Logo.png" alt="#"> </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="hvr-underline-from-left"><a href="#">Latest</a></li>
+                    <li class="hvr-underline-from-left"><a href="news-page.html">News</a></li>
+                    <li class="hvr-underline-from-left"><a href="videos-page.html">Videos</a></li>
+                    <li class="hvr-underline-from-left"><a href="tournaments.html">Tournaments</a></li>
+                    <li class="hvr-underline-from-left"><a href="events-page.html">Events</a></li>
+                </ul>
+            </div>
+        </div><!--/.container-fluid -->
+    </nav>
+</div>
+<div class="basic_bg_image">
+<div class="container bg-inherit">
+<div class="home_content">
+<!--<div class="content_bg_img"></div>-->
+<div class="h_content">
+<div class="basic_content">
+<div class="post_page_header bg_light_black">
+    <div class="col-sm-7 video_filter_bg">
+        <div class="videos_filter float_left">
+            <ul class="filters">
+                <li data-filter="*" class="current"><a href="javascript:void(0)">All</a></li>
+                <li data-filter=".NORTH-AMERICA"><a href="">NORTH AMERICA</a></li>
+                <li data-filter=".SOUTH-AMERICA"><a href="">SOUTH AMERICA</a></li>
+                <li data-filter=".EUROPE"><a href=""> EUROPE </a></li>
+                <li data-filter=".CHINA"><a href="">CHINA </a></li>
+                <li data-filter=".AFRICA"><a href="">AFRICA</a></li>
+                <li data-filter=".SEA"><a href="">SEA</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-sm-5 pad-zero">
+        <div class="sb_search">
+            <i class="fa fa-search"></i>
+            <input type="text" class="form-control" placeholder="Search...">
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 br-bottom">
+    <div class="video_banner_filter">
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".dota"><img src="images/dota.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".lol"><img src="images/lol.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".cs_go"><img src="images/cs_go.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".smite"><img src="images/smite_lg.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".starcraft"><img src="images/starcraft.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".hots"><img src="images/hots_lg.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".hearthstone"><img src="images/hearthstone_lg.png" alt="#"></a>
+        </div>
+        <div class="col-sm-3 hot_ban">
+            <a href="#" class="filters_one" data-filter=".others"><img src="images/others.png" alt="#"></a>
+        </div>
+    </div>
+</div>
+<div class="col-sm-12 pad-zero">
+    <div class="event_page_isotopes">
+        <div class="isotope float_left">
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone SEA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone SEA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone SOUTH-AMERICA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone smite dota">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone smite SOUTH-AMERICA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA  hearthstone SOUTH-AMERICA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone CHINA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone SOUTH-AMERICA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone dota">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA SOUTH-AMERICA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA dota">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA CHINA">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA dota">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 element-item all NORTH-AMERICA dota">
+                <div class="latest_event_box">
+                    <a href="#">
+                        <div class="col-sm-9 latest_event_img pad-zero bg-image" data-image="images/event_img.jpg">
+                            <div class="event_details">
+                                <div class="event_name">International Gaming Festival</div>
+                                <div class="countdown">
+                                    <div class="timing-titles"><span>Days</span><span>Hours</span><span>MINUTES</span><span>Seconds</span></div>
+                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                </div>
+                                <div class="event_city">Novi Sad</div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                        <h3><a href="#">Buy tickets</a></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="video_carousel_button">
+        <button class="btn submit_e_btn">SUBMIT AN EVENT</button>
+        <button class="btn re-prev"><i class="fa fa-caret-left"></i> PREV</button>
+        <button class="btn re-next">NEXT <i class="fa fa-caret-right"></i></button>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer_area">
+    <div class="container">
+        <div class="col-sm-1 pad-zero">
+            <img src="images/footer_logo.png" alt="#">
+        </div>
+        <div class="col-sm-3">
+            <h4>Daily eSports,<br>All Rights Reserved.</h4>
+        </div>
+        <div class="col-sm-2 text-center">
+            <h4>For business inquiries,<br> please contact us.</h4>
+        </div>
+        <div class="col-sm-6 pad-zero">
+            <div class="footer_socials">
+                <a href="#" class="hvr-float"><img src="images/facebook_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/twitter_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/youtube_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/Instagram_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/Twitch_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/steam_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/Reddit_ico.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/isotope.pkgd.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript">
+    jQuery(window).load(function() {
+        // init Isotope
+        var $container = jQuery('.isotope').isotope({
+            itemSelector: '.element-item',
+            layoutMode: 'masonry',
+            resizable: false, // disable normal resizing
+            getSortData: {
+                name: '.name'
+            },
+            transformsEnabled: false
+        });
+        jQuery('.filters li').on('click',function(){
+            jQuery('.isotope').show();
+            jQuery('.filters .current').removeClass('current');
+            jQuery(this).addClass('current');
+            var filterValue = jQuery(this).attr('data-filter');
+            $container.isotope({ filter: filterValue });
+            return false;
+        });
+        /*
+         jQuery('.hot_ban').on('click',function(){
+         jQuery('.hot_ban .current').removeClass('current');
+         jQuery(this).find('a').addClass('current');
+         var filterValue = jQuery(this).find('a').attr('data-filter');
+         $container.isotope({ filter: filterValue });
+         return false;
+         });*/
+        jQuery('.hot_ban').on('click',function(){
+            //jQuery('.filters .current').removeClass('current');
+            if (jQuery(this).find('a').hasClass('current')){
+                jQuery('.hot_ban .current').removeClass('current');
+                jQuery('.isotope').slideUp();
+            } else {
+                console.log('Class added');
+                jQuery('.isotope').show();
+                jQuery('.hot_ban .current').removeClass('current');
+                jQuery(this).find('a').addClass('current');
+                var filterValue = jQuery(this).find('a').attr('data-filter');
+                $container.isotope({ filter: filterValue });
+            }
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

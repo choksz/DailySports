@@ -1,0 +1,1756 @@
+@media (min-width: 320px) and (max-width: 374px) {
+    .custom_nav .navbar-brand {
+        width: auto;
+    }
+    .custom_nav .navbar {
+        padding: 10px 0;
+    }
+    body {
+        padding-top: 75px;
+    }
+    .custom_carousel_indi {
+        float: left;
+        width: 100%;
+        margin: 8px 0;
+    }
+    .custom_carousel_indi .carousel-indicators {
+        left: 32%;
+        top: 0;
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    .footer_area {
+        text-align: center;
+    }
+    .footer_socials {
+        margin-top: 20px;
+    }
+    .custom_nav .navbar-nav {
+        float: left;
+    }
+    .home_content {
+        min-height: 5300px;
+    }
+    .tournament_box_img img {
+        width: 100%;
+    }
+    .matches_box_img {
+        display: none;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .news_page .home_content {
+        min-height: 4000px;
+    }
+    .sb_titles_col_img, .sb_titles_col_text {
+        width: 100%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .more_tour_btn {
+        width: 100%;
+        margin: 12px auto;
+    }
+    .sb_titles_small {
+        float: left;
+        width: 100%;
+        margin-top: 50px;
+    }
+    /* -- News Page ENd-- */
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    .socials_btns a {
+        margin-bottom: 15px;
+    }
+    .news_post_page .home_content {
+        min-height: 3700px;
+    }
+    /* -- News Post End -- */
+    .tour_search_header ul li {
+        margin-right: 8px;
+    }
+    .tournament_details {
+        margin-top: 160px;
+    }
+    .tour_page .home_content{
+        min-height: 3500px;
+    }
+    .tour_filter_box_image img {
+        width: 100%;
+    }
+    /* -- Tournaments End -- */
+    .featured_stream_middle {
+        text-align: center;
+    }
+    .tour_post_page .tour_search_header ul li {
+        padding: 0 8px;
+    }
+    .tour_post_page .tournament_details {
+        margin-top: 70px;
+    }
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .tour_matches .tour_stream_box .lower_matches .btn-group {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .tour_post_page .tour_stream_box .lower_matches .dropdown-menu {
+        left: -30px;
+    }
+    .team_last {
+        text-align: center;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .videos_page .home_content {
+        min-height: 5100px;
+    }
+    .video_carousel_button .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    /* -- Videos Page ENd  -- */
+    .videos_post_page .home_content {
+        min-height: 2500px;
+    }
+    /* -- Videos post ENd  -- */
+    .hiring_page .home_content {
+        min-height: 3500px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4500px;
+    }
+    /* --Events Page ENd  -- */
+    .event_post .home_content {
+        min-height: 2800px;
+    }
+    .counter_left .countdown {
+        right: 0;
+    }
+    .counter_right .countdown {
+        left: 0;
+        bottom: 18%;
+    }
+    /* --Events Post ENd  -- */
+    .contact_area  {
+        min-height: 600px;
+    }
+    .contact_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Contact ENd  -- */
+    .about_logo {
+        width: 100%;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 5300px;
+    }
+    /* -- ABout ENd  -- */
+    .semi_final_team {
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    .game_stats {
+        height: auto;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+    .match_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- Match Post ENd  -- */
+    .live_game_box {
+
+    }
+}
+@media (min-width: 375px) and (max-width: 413px) {
+    .custom_nav .navbar-brand {
+        width: auto;
+    }
+    .custom_nav .navbar {
+        padding: 10px 0;
+    }
+    body {
+        padding-top: 75px;
+    }
+    .custom_carousel_indi {
+        float: left;
+        width: 100%;
+        margin: 8px 0;
+    }
+    .custom_carousel_indi .carousel-indicators {
+        left: 50%;
+        top: 0;
+        margin-bottom: 10px;
+    }
+    .footer_area {
+        text-align: center;
+    }
+    .footer_socials {
+        margin-top: 20px;
+    }
+    .home_upper_heading {
+        width: 100%;
+    }
+    .custom_nav .navbar-nav {
+        float: left;
+    }
+    .tournament_box_img img {
+        width: 100%;
+    }
+    .home_content {
+        min-height: 5500px;
+    }
+    .matches_box_img {
+        display: none;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .news_page .home_content {
+        min-height: 4000px;
+    }
+    .sb_titles_col_img, .sb_titles_col_text {
+        width: 100%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .more_tour_btn {
+        width: 100%;
+        margin: 12px auto;
+    }
+    .sb_titles_small {
+        float: left;
+        width: 100%;
+        margin-top: 50px;
+    }
+    /* -- News Page ENd-- */
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    .socials_btns a {
+        margin-bottom: 15px;
+    }
+    .news_post_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- News Post End -- */
+    .tour_search_header ul li {
+        margin-right: 8px;
+    }
+    .tournament_details {
+        margin-top: 160px;
+    }
+    .tour_page .home_content{
+        min-height: 3500px;
+    }
+    .tour_filter_box_image img {
+        width: 100%;
+    }
+    .tour_live_games {
+        width: 100%;
+        text-align: center;
+    }
+    .tour_live_games .btn {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    /* -- Tournaments End -- */
+    .featured_stream_middle {
+        text-align: center;
+    }
+    .tour_post_page .tour_search_header ul li {
+        padding: 0 8px;
+    }
+    .tour_post_page .tournament_details {
+        margin-top: 70px;
+    }
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .tour_matches .tour_stream_box .lower_matches .btn-group {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .tour_post_page .tour_stream_box .lower_matches .dropdown-menu {
+        left: -30px;
+    }
+    .team_last {
+        text-align: center;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .videos_page .home_content {
+        min-height: 5100px;
+    }
+    .video_carousel_button .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    /* -- Videos Page ENd  -- */
+    .videos_post_page .home_content {
+        min-height: 2500px;
+    }
+    /* -- Videos post ENd  -- */
+    .hiring_page .home_content {
+        min-height: 3400px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4500px;
+    }
+    /* -- Event Page ENd  -- */
+    .event_post .home_content {
+        min-height: 2800px;
+    }
+    .counter_left .countdown {
+        right: 0;
+    }
+    .counter_right .countdown {
+        left: 0;
+        bottom: 18%;
+    }
+    /* --Events Post ENd  -- */
+    .contact_area  {
+        min-height: 600px;
+    }
+    .contact_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Contact ENd  -- */
+    .about_logo {
+        width: 100%;
+        height: auto;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 5000px;
+    }
+    /* -- ABout ENd  -- */
+    .semi_final_team {
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    .game_stats {
+        height: auto;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+    .match_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- Match Post ENd  -- */
+}
+@media (min-width: 414px) and (max-width: 479px) {
+    .custom_nav .navbar-brand {
+        width: auto;
+    }
+    .custom_nav .navbar {
+        padding: 10px 0;
+    }
+    body {
+        padding-top: 75px;
+    }
+    .custom_carousel_indi {
+        float: left;
+        width: 100%;
+        margin: 8px 0;
+    }
+    .custom_carousel_indi .carousel-indicators {
+        left: 50%;
+        top: 0;
+        margin-bottom: 10px;
+    }
+    .footer_area {
+        text-align: center;
+    }
+    .footer_socials {
+        margin-top: 20px;
+    }
+    .home_upper_heading {
+        width: 100%;
+    }
+    .custom_nav .navbar-nav {
+        float: left;
+    }
+    .tournament_box_img img {
+        width: 100%;
+    }
+    .home_content {
+        min-height: 5500px;
+    }
+    .matches_box_img {
+        display: none;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .news_page .home_content {
+        min-height: 4000px;
+    }
+    .sb_titles_col_img, .sb_titles_col_text {
+        width: 100%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .more_tour_btn {
+        width: 100%;
+        margin: 12px auto;
+    }
+    .sb_titles_small {
+        float: left;
+        width: 100%;
+        margin-top: 50px;
+    }
+    /* -- News Page ENd-- */
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    .socials_btns a {
+        margin-bottom: 15px;
+    }
+    .news_post_page .home_content {
+        min-height: 3100px;
+    }
+    /* -- News Post End -- */
+    .tour_search_header ul li {
+        margin-right: 8px;
+    }
+    .tournament_details {
+        margin-top: 160px;
+    }
+    .tour_page .home_content{
+        min-height: 2900px;
+    }
+    .tour_filter_box_image {
+        height: 150px;
+        overflow: hidden;
+    }
+    .tour_filter_box_image img {
+        width: 100%;
+    }
+    .tour_live_games {
+        width: 100%;
+        text-align: center;
+    }
+    .tour_live_games .btn {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .filter2 {
+        width: 100%;
+    }
+    /* -- Tournaments End -- */
+    .featured_stream_middle {
+        text-align: center;
+    }
+    .tour_post_page .tour_search_header ul li {
+        padding: 0 8px;
+    }
+    .tour_post_page .tournament_details {
+        margin-top: 70px;
+    }
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .tour_matches .tour_stream_box .lower_matches .btn-group {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .tour_post_page .tour_stream_box .lower_matches .dropdown-menu {
+        left: -30px;
+    }
+    .team_last {
+        text-align: center;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .videos_page .home_content {
+        min-height: 5100px;
+    }
+    .video_carousel_button .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    /* -- Videos Page ENd  -- */
+    .videos_post_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Videos post ENd  -- */
+    .hiring_page .home_content {
+        min-height: 3300px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4500px;
+    }
+    .event_page .hot_ban img {
+        height: auto;
+    }
+    /* -- Event Page ENd  -- */
+    .event_post .home_content {
+        min-height: 2600px;
+    }
+    .counter_left .countdown {
+        right: 0;
+    }
+    .counter_right .countdown {
+        left: 0;
+        bottom: 18%;
+    }
+    /* --Events Post ENd  -- */
+    .contact_area  {
+        min-height: 600px;
+    }
+    .contact_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Contact ENd  -- */
+    .about_logo {
+        width: 100%;
+        height: auto;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 5000px;
+    }
+    /* -- ABout ENd  -- */
+    .semi_final_team {
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    .game_stats {
+        height: auto;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+    .match_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- Match Post ENd  -- */
+}
+@media (min-width:480px) and (max-width:567px) {
+    .custom_nav .navbar-brand {
+        width: auto;
+    }
+    .custom_nav .navbar {
+        padding: 10px 0;
+    }
+    body {
+        padding-top: 75px;
+    }
+    .custom_carousel_indi {
+        float: left;
+        width: 100%;
+        margin: 8px 0;
+    }
+    .custom_carousel_indi .carousel-indicators {
+        left: 50%;
+        top: 0;
+        margin-bottom: 10px;
+    }
+    .footer_area {
+        text-align: center;
+    }
+    .footer_socials {
+        margin-top: 20px;
+    }
+    .home_upper_heading {
+        width: 100%;
+    }
+    .custom_nav .navbar-nav {
+        float: left;
+    }
+    .tournament_box_img img {
+        width: 100%;
+    }
+    .home_content {
+        min-height: 5500px;
+    }
+    .matches_box_img {
+        display: none;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    .home_small_box .news_area {
+        background-size: cover;
+    }
+    .pet_image {
+        background-size: cover;
+    }
+    .footer_socials {
+        width: 100%;
+    }
+    .live_game_box .live_middle {
+        margin-top: 20px;
+        margin-bottom: 80px;
+    }
+    .tournament_box_img {
+        max-height: 200px;
+        overflow: hidden;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .news_page .home_content {
+        min-height: 4000px;
+    }
+    .sb_titles_col_img, .sb_titles_col_text {
+        width: 100%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .more_tour_btn {
+        width: 100%;
+        margin: 12px auto;
+    }
+    .sb_titles_small {
+        float: left;
+        width: 100%;
+        margin-top: 50px;
+    }
+    /* -- News Page ENd-- */
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    .socials_btns a {
+        margin-bottom: 15px;
+    }
+    .news_post_page .home_content {
+        min-height: 2800px;
+    }
+    /* -- News Post End -- */
+    .tour_search_header ul li {
+        margin-right: 8px;
+    }
+    .tournament_details {
+        margin-top: 160px;
+    }
+    .tour_page .home_content{
+        min-height: 2850px;
+    }
+    .tour_filter_box_image {
+        height: 150px;
+        overflow: hidden;
+    }
+    .tour_filter_box_image img {
+        width: 100%;
+    }
+    .tour_live_games {
+        width: 100%;
+        text-align: center;
+    }
+    .tour_live_games .btn {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .filter2 {
+        width: 100%;
+    }
+    /* -- Tournaments End -- */
+    .featured_stream_middle {
+        text-align: center;
+    }
+    .tour_post_page .tour_search_header ul li {
+        padding: 0 8px;
+    }
+    .tour_post_page .tournament_details {
+        margin-top: 70px;
+    }
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .tour_matches .tour_stream_box .lower_matches .btn-group {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .tour_post_page .tour_stream_box .lower_matches .dropdown-menu {
+        left: -30px;
+    }
+    .team_last {
+        text-align: center;
+    }
+    .tour_post_page .home_content {
+        min-height: 5100px;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .videos_page .home_content {
+        min-height: 5200px;
+    }
+    .video_carousel_button .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    .hot_ban img {
+        height: auto;
+    }
+    /* -- Videos Page ENd  -- */
+    .videos_post_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Videos post ENd  -- */
+    .hiring_page .home_content {
+        min-height: 3300px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4600px;
+    }
+    .event_page .hot_ban img {
+        height: auto;
+    }
+    /* -- Event Page ENd  -- */
+    .event_post .home_content {
+        min-height: 2600px;
+    }
+    .counter_left .countdown {
+        right: 0;
+    }
+    .counter_right .countdown {
+        left: 0;
+        bottom: 18%;
+        text-align: center;
+    }
+    /* --Events Post ENd  -- */
+    .contact_area  {
+        min-height: 600px;
+    }
+    .contact_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Contact ENd  -- */
+    .about_logo {
+        width: 100%;
+        height: auto;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 5000px;
+    }
+    /* -- ABout ENd  -- */
+    .semi_final_team {
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    .game_stats {
+        height: auto;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+    .match_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- Match Post ENd  -- */
+}
+@media (min-width:568px) and (max-width:684px) {
+    #carousel-example-generic {
+        height: 260px !important;
+    }
+    .custom_nav .navbar-brand {
+        width: auto;
+    }
+    .custom_nav .navbar {
+        padding: 10px 0;
+    }
+    body {
+        padding-top: 75px;
+    }
+    .custom_carousel_indi {
+        float: left;
+        width: 100%;
+        margin: 8px 0;
+    }
+    .custom_carousel_indi .carousel-indicators {
+        left: 50%;
+        top: 0;
+        margin-bottom: 10px;
+    }
+    .footer_area {
+        text-align: center;
+    }
+    .footer_socials {
+        margin-top: 20px;
+    }
+    .home_upper_heading {
+        width: 100%;
+    }
+    .custom_nav .navbar-nav {
+        float: left;
+    }
+    .tournament_box_img img {
+        width: 100%;
+    }
+    .home_content {
+        min-height: 5500px;
+    }
+    .matches_box_img {
+        display: none;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    .home_small_box .news_area {
+        background-size: cover;
+    }
+    .pet_image {
+        background-size: cover;
+    }
+    .footer_socials {
+        width: 100%;
+    }
+    .live_game_box .live_middle {
+        margin-top: 20px;
+        margin-bottom: 85px;
+    }
+    .tournament_box_img {
+        max-height: 200px;
+        overflow: hidden;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .news_page .home_content {
+        min-height: 4000px;
+    }
+    .sb_titles_col_img, .sb_titles_col_text {
+        width: 100%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .sb_titles_small {
+        float: left;
+        width: 100%;
+        margin-top: 50px;
+    }
+    /* -- News Page ENd-- */
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    .socials_btns a {
+        margin-bottom: 15px;
+    }
+    .news_post_page .home_content {
+        min-height: 2800px;
+    }
+    /* -- News Post End -- */
+    .tour_search_header ul li {
+        margin-right: 8px;
+    }
+    .tournament_details {
+        margin-top: 160px;
+    }
+    .tour_page .home_content{
+        min-height: 2550px;
+    }
+    .tour_filter_box_image {
+        height: 150px;
+        overflow: hidden;
+    }
+    .tour_filter_box_image img {
+        width: 100%;
+    }
+    .tour_live_games {
+        width: 100%;
+        text-align: center;
+    }
+    .tour_live_games .btn {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .filter2 {
+        width: 100%;
+    }
+    /* -- Tournaments End -- */
+    .featured_stream_middle {
+        text-align: center;
+    }
+    .tour_post_page .tournament_details {
+        margin-top: 70px;
+    }
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .tour_matches .tour_stream_box .lower_matches .btn-group {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .team_last {
+        text-align: center;
+    }
+    .tour_post_page .home_content {
+        min-height: 5100px;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .videos_page .home_content {
+        min-height: 5300px;
+    }
+    .video_carousel_button .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    .hot_ban img {
+        height: auto;
+    }
+    /* -- Videos Page ENd  -- */
+    .videos_post_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Videos post ENd  -- */
+    .hiring_page .home_content {
+        min-height: 3200px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4500px;
+    }
+    .event_page .hot_ban img {
+        height: auto;
+    }
+    /* -- Event Page ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4700px;
+    }
+    .event_page .hot_ban img {
+        height: auto;
+    }
+    .event_page .video_carousel_button .btn {
+        margin-right: 5px;
+        margin-left: 0px;
+        width: auto;
+    }
+    /* -- Event Page ENd  -- */
+    .event_post .home_content {
+        min-height: 2600px;
+    }
+    .counter_left .countdown {
+        right: 58%;
+    }
+    .counter_right .countdown {
+        left: 50%;
+    }
+    /* --Events Post ENd  -- */
+    .contact_area  {
+        min-height: 600px;
+    }
+    .contact_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Contact ENd  -- */
+    .staff_content {
+        text-align: center;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 5000px;
+    }
+    /* -- ABout ENd  -- */
+    .semi_final_team {
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    .game_stats {
+        height: auto;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+    .match_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- Match Post ENd  -- */
+}
+@media (min-width:685px) and (max-width:767px) {
+    #carousel-example-generic {
+        height: 280px !important;
+    }
+    .custom_nav .navbar-brand {
+        width: auto;
+    }
+    .custom_nav .navbar {
+        padding: 10px 0;
+    }
+    body {
+        padding-top: 75px;
+    }
+    .custom_carousel_indi {
+        float: left;
+        width: 100%;
+        margin: 8px 0;
+    }
+    .custom_carousel_indi .carousel-indicators {
+        left: 50%;
+        top: 0;
+        margin-bottom: 10px;
+    }
+    .footer_area {
+        text-align: center;
+    }
+    .footer_socials {
+        margin-top: 20px;
+    }
+    .home_upper_heading {
+        width: 100%;
+    }
+    .custom_nav .navbar-nav {
+        float: left;
+    }
+    .tournament_box_img img {
+        width: 100%;
+    }
+    .home_content {
+        min-height: 5500px;
+    }
+    .matches_box_img {
+        display: none;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    .home_small_box .news_area {
+        background-size: cover;
+    }
+    .pet_image {
+        background-size: cover;
+    }
+    .footer_socials {
+        width: 100%;
+    }
+    .live_game_box .live_middle {
+        margin-top: 20px;
+        margin-bottom: 85px;
+    }
+    .tournament_box_img {
+        max-height: 250px;
+        overflow: hidden;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .news_page .home_content {
+        min-height: 4000px;
+    }
+    .sb_titles_col_img, .sb_titles_col_text {
+        width: 100%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .sb_titles_small {
+        float: left;
+        width: 100%;
+        margin-top: 50px;
+    }
+    /* -- News Page ENd-- */
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+    }
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    .socials_btns a {
+        margin-bottom: 15px;
+    }
+    .news_post_page .home_content {
+        min-height: 2500px;
+    }
+    /* -- News Post End -- */
+    .tour_search_header ul li {
+        margin-right: 8px;
+    }
+    .tournament_details {
+        margin-top: 160px;
+    }
+    .tour_page .home_content{
+        min-height: 2550px;
+    }
+    .tour_filter_box_image {
+        height: 150px;
+        overflow: hidden;
+    }
+    .tour_filter_box_image img {
+        width: 100%;
+    }
+    .tour_live_games {
+        width: 100%;
+        text-align: center;
+    }
+    .tour_live_games .btn {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+    .filter2 {
+        width: 100%;
+    }
+    /* -- Tournaments End -- */
+    .featured_stream_middle {
+        text-align: center;
+    }
+    .tour_post_page .tournament_details {
+        margin-top: 70px;
+    }
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .tour_matches .tour_stream_box .lower_matches .btn-group {
+        margin-top: 10px;
+        text-align: center;
+    }
+    .team_last {
+        text-align: center;
+    }
+    .tour_post_page .home_content {
+        min-height: 5100px;
+    }
+    .tables_col {
+        width: 25%;
+        float: left;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .videos_page .home_content {
+        min-height: 5500px;
+    }
+    .video_carousel_button .btn {
+        width: 100%;
+        margin-bottom: 10px;
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    .hot_ban img {
+        height: auto;
+    }
+    /* -- Videos Page ENd  -- */
+    .videos_post_page .home_content {
+        min-height: 2300px;
+    }
+    /* -- Videos post ENd  -- */
+    .hiring_page .home_content {
+        min-height: 3200px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page_isotopes .col-sm-6 {
+        width: 100%;
+    }
+    .event_page .latest_event_img {
+        height: 150px;
+    }
+    .event_page .latest_event_box{
+        height: auto;
+        overflow: visible;
+    }
+    .event_page .event_buy h3 {
+        position: relative;
+        top: 0;
+        left: 10%;
+        text-align: center;
+        margin: 0 auto;
+        transform: translate(0, 0);
+        padding: 10px 0;
+    }
+    .event_page .home_content {
+        min-height: 4800px;
+    }
+    .event_page .hot_ban img {
+        height: auto;
+    }
+    .event_page .video_carousel_button .btn {
+        margin-right: 6px;
+        margin-left: 13px;
+        width: auto;
+    }
+    /* -- Event Page ENd  -- */
+    .event_post .home_content {
+        min-height: 2600px;
+    }
+    .counter_left .countdown {
+        right: 58%;
+    }
+    .counter_right .countdown {
+        left: 50%;
+    }
+    /* --Events Post ENd  -- */
+    .contact_page .home_content {
+        min-height: 2100px;
+    }
+    /* -- Contact ENd  -- */
+    .staff_content {
+        text-align: center;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 4500px;
+    }
+    /* -- ABout ENd  -- */
+    .semi_final_team {
+        padding: 0;
+        margin-bottom: 50px;
+    }
+    .game_stats {
+        height: auto;
+        background-position: 50% 50%;
+        background-size: contain;
+    }
+    .match_page .home_content {
+        min-height: 3200px;
+    }
+    /* -- Match Post ENd  -- */
+}
+@media (min-width:768px) and (max-width:991px) {
+    #carousel-example-generic {
+        height: 390px !important;
+    }
+    #carousel-example-generic .carousel-caption {
+        bottom: 70px;
+    }
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+    .pet_image {
+        background-position: 50% 50%;
+    }
+    .custom_nav .navbar-nav li a {
+        padding: 15px 10px;
+        font-size: 18px;
+    }
+    .home_content {
+        min-height: 2500px;
+    }
+    .footer_socials a {
+        margin-bottom: 12px;
+    }
+    /* -- Home End -- */
+    /* -- News Page -- */
+    .news_area {
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+    .sb_titles_col {
+        text-align: center;
+    }
+    .news_page .home_content {
+        min-height: 1700px;
+    }
+    /* -- News Page ENd-- */
+    .news_widget {
+        float: left;
+        width: 100%;
+    }
+    .news_post_area_img {
+        background-position: 50%;
+    }
+    .news_post_content {
+        min-height: 80px;
+        height: auto;
+        text-align: center;
+    }
+    /* -- News Post End -- */
+    .filter2 ul li {
+        margin-right: 2px;
+    }
+    .tour_search_header ul li {
+        margin-right: 5px;
+        padding: 0 10px;
+    }
+    .tour_page .home_content{
+        min-height: 1200px;
+    }
+    /* -- Tournaments End -- */
+    .tour_prize_pool {
+        float: left;
+        width: 100%;
+    }
+    .tour_post_page .tour_latest .tournament_box {
+        height: auto;
+        padding-bottom: 10px;
+    }
+    .team_last {
+        text-align: center;
+    }
+    .tour_post_page .home_content {
+        min-height: 2000px;
+    }
+    /* -- Tournaments Post End -- */
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    .hot_ban img {
+        height: auto;
+    }
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+    }
+    /* -- Videos Page ENd  -- */
+    .hiring_page .home_content {
+        min-height: 2200px;
+    }
+    /* --Hiring ENd  -- */
+    .event_page .videos_filter ul li {
+        min-height: 35px;
+    }
+    .event_page .event_buy h3 {
+        font-size: 15px;
+    }
+    /* -- Event Page ENd  -- */
+    .counter_left .countdown {
+        right: 58%;
+    }
+    .counter_right .countdown {
+        left: 45%;
+    }
+    /* --Events Post ENd  -- */
+    .about_logo {
+        width: 100%;
+    }
+    .staff_content {
+        text-align: center;
+    }
+    .about_upper {
+        height: auto;
+        margin-bottom: 10px;
+    }
+    .about_page .home_content {
+        min-height: 2000px;
+    }
+    /* -- ABout ENd  -- */
+}
+@media (min-width:992px) and (max-width:1023px) {
+    #carousel-example-generic {
+        height: 430px;
+    }
+    .videos_page .videos_filter ul li {
+        min-height: 36px;
+    }
+    .video_small_box_image {
+        max-height: 150px;
+        overflow: hidden;
+    }
+    .video_small_box_image img {
+        width: 100%;
+    }
+    .hot_ban img {
+        height: auto;
+    }
+    .post_page_header {
+        min-height: 40px;
+        height: auto;
+    }
+    /* -- Videos Page ENd  -- */
+    .hiring_page .home_content {
+        min-height: 2200px;
+    }
+    /* --Hiring ENd  -- */
+
+    .counter_left .countdown {
+        right: 58%;
+    }
+    .counter_right .countdown {
+        left: 45%;
+    }
+    /* --Events Post ENd  -- */
+    .matches_con {
+        min-height: 60px;
+        height: auto;
+    }
+}
+@media (min-width:1024px) and (max-width:1100px) {}
+@media (max-width:991px) {
+
+}
+@media (min-width:1400px) and (max-width:1520px) {
+    #carousel-example-generic .carousel-caption {
+        left: 12%;
+    }
+    #carousel-example-generic {
+        height: 560px;
+    }
+}
+@media (min-width:1530px) and (max-width:1900px) {
+    #carousel-example-generic .carousel-caption {
+        left: 18.3%;
+    }
+    #carousel-example-generic {
+        height: 620px;
+    }
+}
+@media (min-width:1910px){
+    #carousel-example-generic .carousel-caption {
+        left: 22%;
+    }
+    #carousel-example-generic {
+        height: 660px;
+    }
+}

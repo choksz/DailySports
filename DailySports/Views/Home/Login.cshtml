@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="basic_bg_image">
+    <div class="container bg-inherit">
+        <div class="home_content">
+            <div class="signin_content">
+                <div class="basic_content">
+                    <div class="col-sm-12 pad-zero">
+                        @using (Html.BeginForm("Signin", "Home", FormMethod.Post))
+                        {
+                            <div class="col-sm-12">
+                                <h3 class="text-center">SIGN IN</h3>
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form_fields br-top">
+                                    @Html.TextBox("Email", "", new { @placeholder = "Username or email", @class = "UserName form-control" })
+                                    @Html.TextBox("Password", "", new { @placeholder = "Password", @class = "form-control Password", @type = "password" })
+
+                                    <div class="col-md-5 pad-zero MargT20">
+                                        <button class=" btn btn-block loginFB">Log in with Facebook</button>
+                                        <button class="signInBtn MargT20" type="submit">SIGN IN</button>
+                                    </div>
+                                    <div class="col-md-2 text-center OR">
+                                        <label>OR</label>
+                                    </div>
+                                    <div class="col-md-5 pad-zero text-right">
+                                        @Html.CheckBox("rememberme", false,new {@class="myCheckBox" })
+                                        <label class="myCheckbox ">
+                                            <span class="GreyFont">remember me</span>
+                                        </label>   
+                                        <br />
+                                        <a href="@Url.Action("ForgetPassword","Home")" class="GreyFont">forget your password?</a>
+                                       
+                                        <a href="@Url.Action("Register","Home")"  class="btn btn-block RegisterBtn MargT30">REGISTER</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</div>

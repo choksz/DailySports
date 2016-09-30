@@ -1,0 +1,158 @@
+﻿@model DailySports.ServiceLayer.Dtos.NewsDto
+@{
+    ViewBag.Title = "GetNews";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "854ea013-b4bc-4a7a-aab5-8e5c26e958e7", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1651609955149884";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="basic_bg_image">
+    <div class="container bg-inherit">
+        <div class="home_content">
+            <div class="content_bg_img"></div>
+            <div class="h_content">
+                <div class="basic_content">
+                    <div class="post_page_header">
+                        <div class="col-sm-9 br-bottom">
+                            <h4 class="f_bol main_head"><img src="@Model.NewsImage" alt="#"> @Model.Title</h4>
+                        </div>
+                        <div class="col-sm-3 pad-zero">
+                            <div class="sb_search">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 pad-zero br-right">
+                        <div class="news_post_area">
+                            <div class="news_post_area_img bg-image" style="background-image:url('@Model.NewsImage')">
+                                <div class="news_post_content hvr-sweep-to-top">
+                                    <div class="col-sm-2">
+                                        <div class="news_post_subimg">
+                                            <a href="#"><img src="~/images/user.png" alt="#"></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                       
+                                        <h4 class="f_bol">@Model.AuthorName<span class='st_facebook_large' displayText='Facebook'></span><span class='st_twitter_large' displayText='Tweet'></span><span class='st_googleplus_large' displayText='Google +'></span>  </h4>
+                                        <p>@Model.AuthorBigraphy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="news_widget">
+                            <div class="col-sm-12">
+                                <h2 class="blue_new">@Html.Raw(Model.Description.ToString().Take(20))</h2>
+                                <button class="btn btn-default" data-toggle="collapse" data-target="#showmore" type="button">Show More</button>
+                                <div class="collapse" id="showmore">
+                                    @Html.Raw(Model.Description.ToString())
+                                    @Html.Raw(Model.Description.ToString())
+                                </div>
+                               
+                               </div>
+                            
+                        </div>
+                        <div class="news_share_icons">
+                            <div class="col-sm-12">
+                                <h4 class="f_bol">Share This:</h4>
+                                <div class="socials_btns">
+                                    <span class='st_sharethis_large' displayText='ShareThis'></span>
+                                    <span class='st_facebook_large' displayText='Facebook'></span>
+                                    <span class='st_twitter_large' displayText='Tweet'></span>
+                                    <span class='st_googleplus_large' displayText='Google +'></span>
+                                    <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                                    <span class='st_pinterest_large' displayText='Pinterest'></span>
+                                    <span class='st_email_large' displayText='Email'></span>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="disqus_comment float_left height_200 text-center">
+                            <h2>Disqus Comments here</h2>
+                            <div class="fb-comments"  data-numposts="5"></div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 pad-zero">
+                        <div class="side_bar float_left">
+                            <div class="matches_sidebar float_left">
+                                <h4 class="col-sm-12 f_bol main_head">NEXT MATCHES</h4>
+                                <div class="matches_box">
+                                    @foreach (var match in Model.NextMatches)
+                                    {
+                                    <div class="matches_con">
+                                        <div class="col-sm-1 matches_box_img pad-zero">
+                                            <img src="~/images/Overwatch.png" alt="#">
+                                        </div>
+                                        <div class="col-sm-11 matches_box_con pad-zero">
+                                            <div class="upper_matches">
+                                                <h5>@match.TournamentName <span>Americas Qualifier Semifinals</span></h5>
+                                            </div>
+                                            <div class="lower_matches">
+                                                <h5 class="lower_m1"><img src="images/BR-Flag-copy.png" alt="">@match.TeamAName </h5>
+                                                <h5 class="lower_m2">VS <img src="images/BR-Flag-copy.png" alt="">@match.TeamBName</h5>
+                                                <h5 class="lower_m3">@match.Date.ToLocalTime()</h5>
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Watch >
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                    
+                                </div>
+                            </div>
+                            <div class="pet_day float_left">
+                                <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
+                                <div class="pet_of_day float_left">
+                                    @foreach (var pet in Model.PetOfTheDate)
+                                    {
+                                    <div class="bg-image pet_image" style="background-image:url('../../images/@pet.PetImage')">
+                                        <div class="pet_day_heading"><h4>@pet.Title</h4></div>
+                                        <div class="pet_day_overlay">
+                                            <p>Name: @pet.Description</p>
+                                            @if (pet.Gender == true)
+                                            {
+                                            <p>Gender: Female</p>
+                                            }
+                                            else
+                                            {
+                                                <p>Gender: Male</p>
+
+                                            }
+                                            <p>Age: @pet.Age</p><p>Breed: Mixed</p>
+                                            <p>Fun Fact: @pet.FunFact </p>
+                                            <p>Owner: @pet.Owner </p>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="float_left">
+                                <h4 class="f_bol col-sm-12 main_head">#DAILYESPORTS</h4>
+                                <div class="twitter_widget col-sm-12">
+                                    <a data-height="500" class="twitter-timeline" href="https://twitter.com/TwitterDev/timelines/539487832448843776">National Park Tweets - Curated tweets by TwitterDev</a>
+                                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
