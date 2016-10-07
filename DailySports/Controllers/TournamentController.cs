@@ -18,8 +18,10 @@ namespace DailySports.Controllers
             _matchService = matchService;
         }
         // GET: Tournament
+     
         public ActionResult Index()
         {
+            ModelState.Clear();
             if (Session["LoggedInUser"] != null)
             {
                 TounamentListDto newTournamentList = new TounamentListDto();
