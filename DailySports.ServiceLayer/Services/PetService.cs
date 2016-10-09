@@ -55,7 +55,7 @@ namespace DailySports.ServiceLayer.Services
             }
             catch(Exception ex)
             {
-                return null;
+                return new List<PetOfTheWeekDto>();
             }
         }
     }

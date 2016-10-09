@@ -53,7 +53,7 @@
                                 <img src="@news.NewsImage" style="height:86px; width: 156px;" alt="#">
                             </div>
                             <div class="col-sm-7 sb_titles_col_text hvr-bounce-to-right">
-                                <a href="#"><h4>@news.Title</h4></a>
+                                <a href="@Url.Action("GetNews",new {@id=news.Id })"><h4>@news.Title</h4></a>
                             </div>
                             }
                         </div>

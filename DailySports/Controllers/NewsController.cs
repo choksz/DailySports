@@ -97,7 +97,7 @@ namespace DailySports.Controllers
             NewsDto news = new NewsDto();
             news = _newsService.GetNews(id);
             news.NextMatches = _matchService.NextMatches(_tournamentService.GetLatestTornamentId());
-           List<PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
+            List<PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
             pet = _petService.GetPetOfTheWeek();
             if (pet.Count != 0)
             {

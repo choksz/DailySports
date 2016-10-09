@@ -240,3 +240,7 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/DailySports.BackOffice/Attachments
+
+*/Web.*.config
+*/Web.config
