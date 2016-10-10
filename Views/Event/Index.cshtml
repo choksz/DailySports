@@ -1,0 +1,110 @@
+﻿@model  IEnumerable<DailySports.ServiceLayer.Dtos.EventDto>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="basic_bg_image">
+    <div class="container bg-inherit">
+        <div class="home_content">
+            <!--<div class="content_bg_img"></div>-->
+            <div class="h_content">
+                <div class="basic_content">
+                    <div class="post_page_header bg_light_black">
+                        <div class="col-sm-7 video_filter_bg">
+                            <div class="videos_filter float_left">
+                                <ul class="filters">
+                                    <li data-filter="*" class="current"><a href="javascript:void(0)">All</a></li>
+                                    <li data-filter=".NORTH-AMERICA"><a href="">NORTH AMERICA</a></li>
+                                    <li data-filter=".SOUTH-AMERICA"><a href="">SOUTH AMERICA</a></li>
+                                    <li data-filter=".EUROPE"><a href=""> EUROPE </a></li>
+                                    <li data-filter=".CHINA"><a href="">CHINA </a></li>
+                                    <li data-filter=".AFRICA"><a href="">AFRICA</a></li>
+                                    <li data-filter=".SEA"><a href="">SEA</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-5 pad-zero">
+                            <div class="sb_search">
+                                @using (Html.BeginForm("Search", "Event", FormMethod.Post))
+                                {
+                                    <i  class="fa fa-search"></i>
+
+                                    @Html.TextBox("Search", "", new { @type = "text", @autocomplete = "on",@class="form-control", @placeholder = "Search..." })
+
+                                }
+                               
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 br-bottom">
+                        <div class="video_banner_filter">
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".dota"><img src="~/images/dota.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".lol"><img src="~/images/lol.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".cs_go"><img src="~/images/cs_go.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".smite"><img src="~/images/smite_lg.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".starcraft"><img src="~/images/starcraft.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".hots"><img src="~/images/hots_lg.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".hearthstone"><img src="~/images/hearthstone_lg.png" alt="#"></a>
+                            </div>
+                            <div class="col-sm-3 hot_ban">
+                                <a href="#" class="filters_one" data-filter=".others"><img src="~/images/others.png" alt="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 pad-zero">
+                        <div class="event_page_isotopes">
+                            <div class="isotope float_left">
+                                            @foreach (var Event in Model)
+                                            {
+                                                <div class="col-sm-6 element-item all NORTH-AMERICA hearthstone SEA">
+
+                                                    <div class="latest_event_box">
+
+                                                        <a href="@Url.Action("GetEvent",new {@id=Event.Id })">
+                                                            <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-image:url('@Event.EventImage')">
+                                                                <div class="event_details">
+                                                                    <div class="event_name">@Event.Title</div>
+                                                                    <div class="countdown">
+                                                                        <div class="timing-titles"><span>@Event.StartDate.Value.Day</span><span>@Event.StartDate.Value.Month</span><span>@Event.StartDate.Value.Year</span></div>
+
+                                                                    </div>
+                                                                    <div class="event_city">@Event.Location</div>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                                                            <h3><a href="#">Buy tickets</a></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            }
+                          </div>
+                        </div>
+                        <div class="video_carousel_button">
+                            
+                            <button class="btn re-prev"><i class="fa fa-caret-left"></i> PREV</button>
+                            <button class="btn re-next">NEXT <i class="fa fa-caret-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
