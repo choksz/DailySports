@@ -13,7 +13,7 @@
                     @foreach (var latest in Model.Latest)
                     {
                     <div class="news_area bg-image" style="background-image:url('@latest.NewsImage'); background-size: 767px 430px;">
-                        <div class="news_dota_ico"><img src="~/images/Starcraft2.png" alt="#" class=""></div>
+                        <div class="news_dota_ico"><img src="@latest.Game.GameImage" alt="@latest.Game.Name" class=""></div>
                         <div class="news_title">
                             <a href="@Url.Action("GetNews", new { @id = latest.Id })"><h4>@latest.Title</h4></a>
                         </div>
@@ -27,7 +27,7 @@
                             {
                             <div class="col-sm-6 new_small_box">
                                 <div class="news_area bg-image" style="background-image:url('@news.NewsImage'); background-size: 368px 260px;">
-                                    <div class="news_dota_ico"><img src="~/images/CSGO.png" alt="#" class=""></div>
+                                    <div class="news_dota_ico"><img src="@news.Game.GameImage" alt="@news.Game.Name" class=""></div>
                                     <div class="news_title">
                                         <a href="@Url.Action("GetNews",new {@id=news.Id })"><h4>@news.Title</h4></a>
                                     </div>

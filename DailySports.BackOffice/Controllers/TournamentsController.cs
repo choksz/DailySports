@@ -29,18 +29,6 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
             return View();
         }
-        public string GetBaseUrl()
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
 
         // POST: Tournaments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -51,8 +39,8 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Images/" + "" + fileName;
+                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
+                var virtualpath = "backend/Attachments/Images/" + "" + fileName;
 
                 var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
                 file.SaveAs(path);

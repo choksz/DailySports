@@ -60,7 +60,7 @@
                             <div class="col-sm-6 home_small_video_box">
                                 <div class="home_small_box">
                                     <div class="news_area bg-image" style="background-image: url('@news.NewsImage')">
-                                        <div class="news_dota_ico"><img src="~/images/CoD.png" alt="#" class=""></div>
+                                        <div class="news_dota_ico"><img src="@news.Game.GameImage" alt="@news.Game.Name" class=""></div>
                                         <div class="news_title">
                                             <a href="@Url.Action("GetNews","News")"><h3>@news.Title</h3></a>
                                         </div>

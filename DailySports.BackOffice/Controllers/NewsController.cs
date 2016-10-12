@@ -32,18 +32,6 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
             return View();
         }
-        public string GetBaseUrl()
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
 
         // POST: News/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -54,8 +42,8 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Images/" + "" + fileName;
+                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
+                var virtualpath = "backend/Attachments/Images/" + fileName;
 
                 var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
                 file.SaveAs(path);
@@ -100,10 +88,11 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
+                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
+                var virtualpath = "backend/Attachments/Images/" + fileName;
                 var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
                 file.SaveAs(path);
-                news.NewsImage = path;
+                news.NewsImage = virtualpath;
                 db.Entry(news).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

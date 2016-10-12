@@ -26,7 +26,6 @@ namespace DailySports.Controllers
         // GET: Event
         public ActionResult Index()
         {
-            int x = 0;
            if (Session["LoggedInUser"] != null)
             {
                 List<EventDto> allEvents = new List<EventDto>();
@@ -37,7 +36,6 @@ namespace DailySports.Controllers
             {
                 List<EventDto> allEvents = new List<EventDto>();
                 allEvents = _eventService.GetAll();
-
                 return View(allEvents);
            }
           else 
