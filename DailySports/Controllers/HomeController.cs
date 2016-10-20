@@ -22,7 +22,7 @@ namespace DailySports.Controllers
         private ITournementsService _tournamentService;
         private IPetService _petService;
         private IGameService _gameservice;
-        public HomeController(ILatestService LatestService, IGameService gameService, IPetService petService, IMatchService matchService, ITournementsService tournamentService, IUserService userService)
+        public HomeController(ILatestService LatestService,IGameService gameService,IPetService petService,IMatchService matchService,ITournementsService tournamentService,IUserService userService)
         {
             _LatestService = LatestService;
             _userService = userService;
@@ -35,20 +35,20 @@ namespace DailySports.Controllers
         public ActionResult Index()
         {
             LatestDto Latest = new LatestDto();
-            Latest.LatestEvents = _LatestService.GetLatestEvents();
-            Latest.LatestNews = _LatestService.GetLatestNews();
-            Latest.LatestTournament = _LatestService.GetLatestTournaments();
-            Latest.LatestVideos = _LatestService.GetLatestVideos();
-            Latest.NextMatches = _matchService.NextMatches(_tournamentService.GetLatestTornamentId());
-            Latest.LiveGames = _gameservice.GetAll();
-            List<PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
-            pet = _petService.GetPetOfTheWeek();
-            if (pet.Count != 0)
-            {
-                Latest.PetOfTheWeek = _petService.GetPetOfTheWeek();
-            }
-            else
-            {
+                Latest.LatestEvents = _LatestService.GetLatestEvents();
+                Latest.LatestNews = _LatestService.GetLatestNews();
+                Latest.LatestTournament = _LatestService.GetLatestTournaments();
+                Latest.LatestVideos = _LatestService.GetLatestVideos();
+                Latest.NextMatches = _matchService.NextMatches(_tournamentService.GetLatestTornamentId());
+                Latest.LiveGames = _gameservice.GetAll();
+                List<PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
+                pet = _petService.GetPetOfTheWeek();
+                if (pet.Count != 0)
+                {
+                    Latest.PetOfTheWeek = _petService.GetPetOfTheWeek();
+                }
+              else
+              {
                 DefaultPet defaultpet = new DefaultPet();
                 pet.Add(new PetOfTheWeekDto
                 {
@@ -62,7 +62,7 @@ namespace DailySports.Controllers
                     PetImage = defaultpet.Image
                 });
                 Latest.PetOfTheWeek = pet;
-            }
+              }
             return View(Latest);
         }
         public ActionResult Register()
@@ -97,21 +97,21 @@ namespace DailySports.Controllers
         {
             return View();
         }
-
+       
         public ActionResult Signin(UserDto user)
         {
             UserDto LoggedInUser = new UserDto();
             LoggedInUser = _userService.Login(user.Email, user.Password);
-            if (LoggedInUser != null && user.rememberme == true)
+            if (LoggedInUser !=null && user.rememberme==true)
             {
                 Session["LoggedInUser"] = LoggedInUser;
-
+               
                 HttpCookie cookie = new HttpCookie("LoggedInUser");
-                cookie.Values.Add("Email", user.Email);
+                cookie.Values.Add("Email",user.Email);
                 cookie.Values.Add("UserName", user.Name);
                 cookie.Expires = DateTime.Now.AddDays(20);
                 Response.Cookies.Add(cookie);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index","Home");
             }
             else if (LoggedInUser != null)
             {
@@ -133,30 +133,30 @@ namespace DailySports.Controllers
                 c.Expires = DateTime.Now.AddDays(-1);
                 Response.Cookies.Add(c);
             }
-
-            return RedirectToAction("Index", "Home");
+           
+            return RedirectToAction("Index","Home");
         }
         public ActionResult ForgetPassword()
         {
             return View();
         }
-
-        public ActionResult ChangePassword(string Email, string SecurityCode)
+        
+       public ActionResult ChangePassword(string Email,string SecurityCode)
         {
             UserDto newUser = new UserDto();
-            newUser = _userService.GetUser(Email, SecurityCode);
+            newUser = _userService.GetUser(Email,SecurityCode);
             if (newUser != null)
             {
                 return View("ResetPassword");
             }
             else
             {
-                ModelState.AddModelError("", "Invalid Information !! ");
+                ModelState.AddModelError("","Invalid Information !! ");
                 return View("ForgetPassword");
             }
         }
         public ActionResult ResetPassword() { return View(); }
-        public ActionResult SettingPassword(string Email, string Password)
+        public ActionResult SettingPassword(string Email,string Password)
         {
             bool result = _userService.ChangePassword(Email, Password);
             if (result == true)
@@ -167,7 +167,7 @@ namespace DailySports.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Something Went wrong Please try again later");
+                ModelState.AddModelError("","Something Went wrong Please try again later");
                 return View("ResetPassword");
             }
         }
