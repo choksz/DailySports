@@ -64,21 +64,18 @@
                                     <div class="tabs_content">
                                         <h4 class="f_bol ">GENERAL INFO</h4>
                                         <h5>@Model.Overview</h5>
-                                        <h5>@Model.Overview </h5>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="EVENT">
                                     <div class="tabs_content">
                                         <h4 class="f_bol">MAIN EVENT INFO</h4>
                                         <h5>@Model.MainEvent</h5>
-                                        <h5>@Model.MainEvent </h5>
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="QUALIFIERS">
                                     <div class="tabs_content">
                                         <h4 class="f_bol">QUALIFIERS INFO</h4>
                                         <h5>@Model.Qualifiers</h5>
-                                        <h5>@Model.Qualifiers </h5>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +88,6 @@
                                         </div>
                                         <div class="text_2">
                                             <h5>@Model.Format</h5>
-                                            <h5>@Model.Format</h5>
                                         </div>
                                     </div>
                                     <div class="tour_format_text">
@@ -99,8 +95,6 @@
                                             <h5>- @Model.Qualifiers - @Model.StartDate.ToLongDateString()</h5>
                                         </div>
                                         <div class="text_2">
-                                            <h5>@Model.Qualifiers.</h5>
-                                            <h5>@Model.Qualifiers.</h5>
                                             <h5>@Model.Qualifiers.</h5>
                                             <h5>The winner of each Regional Playoff Bracket will join the six directly invited teams in Seattle.</h5>
                                             <h5>Third-place teams will advance to the Wild Card round in Seattle.</h5>
@@ -150,25 +144,25 @@
                                 <h4 class="tour_matches_Sub main_head">MATCHES</h4>
                                 @foreach (var Match in Model.TournamentMatches)
                                 {
-                                <div class="tournament_stream">
-                                    <div class="tour_stream_box">
-                                        <h3>@Model.Title <span class="grey">@Model.Qualifiers - Semifinals</span></h3>
-                                        <div class="lower_matches float_left">
-                                            <h4 class="lower_m1 f_bol"><img src="~/images/BR-Flag-copy.png" alt=""> @Match.TeamAName</h4>
-                                            <h4 class="lower_m2 f_bol">VS.<img src="~/images/BR-Flag-copy.png" alt=""> @Match.TeamBName</h4>
-                                            <div class="btn-group" role="group">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">190511 viewers <i class="fa fa-angle-down"></i></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE &gt; 175951 viewers</li>
-                                                    <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE &gt; 175951 viewers</li>
-                                                </ul>
-                                                <h4 class="tour_time">@Match.Date.TimeOfDay</h4>
+                                    <div class="tournament_stream">
+                                        <div class="tour_stream_box">
+                                            <h3>@Model.Title <span class="grey">@Model.Qualifiers - Semifinals</span></h3>
+                                            <div class="lower_matches float_left">
+                                                <h4 class="lower_m1 f_bol"><img src="~/images/BR-Flag-copy.png" alt=""> @Match.TeamAName</h4>
+                                                <h4 class="lower_m2 f_bol">VS.<img src="~/images/BR-Flag-copy.png" alt=""> @Match.TeamBName</h4>
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">190511 viewers <i class="fa fa-angle-down"></i></button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE &gt; 175951 viewers</li>
+                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE &gt; 175951 viewers</li>
+                                                    </ul>
+                                                    <h4 class="tour_time">@Match.Date.TimeOfDay</h4>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
-                                
+
                             </div>
                             <div class="col-sm-12 float_left height_450">
                                 <h3 class="main_head">GALLERY</h3>
@@ -179,12 +173,12 @@
                                 <h3 class="col-sm-12">PRIZE POOL <span class="green pull-right">$13,000,000+</span></h3>
                                 @foreach (var prizepool in Model.TournamentPrizePool)
                                 {
-                                <div class="tour_prize_table_upper text-center">
-                                    <div class="col-sm-2 tables_col"><h4 class="f_bol">PLACE</h4></div>
-                                    <div class="col-sm-3 tables_col"><h4 class="f_bol">@prizepool.Prize $USD</h4></div>
-                                    <div class="col-sm-3 tables_col"><h4 class="f_bol">@prizepool.Level</h4></div>
-                                    <div class="col-sm-4 tables_col text-left team_last"><h4 class="f_bol">@prizepool.TeamName</h4></div>
-                                </div>
+                                    <div class="tour_prize_table_upper text-center">
+                                        <div class="col-sm-2 tables_col"><h4 class="f_bol">PLACE</h4></div>
+                                        <div class="col-sm-3 tables_col"><h4 class="f_bol">@prizepool.Prize $USD</h4></div>
+                                        <div class="col-sm-3 tables_col"><h4 class="f_bol">@prizepool.Level</h4></div>
+                                        <div class="col-sm-4 tables_col text-left team_last"><h4 class="f_bol">@prizepool.TeamName</h4></div>
+                                    </div>
                                 }
                             </div>
                             <div class="tour_teams float_left br-top">
@@ -251,32 +245,32 @@
                                 <div class="matches_box">
                                     @foreach (var match in Model.NextMatches)
                                     {
-                                    <div class="matches_con">
-                                        <div class="col-sm-1 matches_box_img pad-zero">
-                                            <img src="~/images/League.png" alt="#">
-                                        </div>
-                                        <div class="col-sm-11 matches_box_con pad-zero">
-                                            <div class="upper_matches">
-                                                <h5>@Model.Title <span>Americas Qualifier Semifinals</span></h5>
+                                        <div class="matches_con">
+                                            <div class="col-sm-1 matches_box_img pad-zero">
+                                                <img src="~/images/League.png" alt="#">
                                             </div>
-                                            <div class="lower_matches">
-                                                <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
-                                                <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamBName</h5>
-                                                <h5 class="lower_m3">@match.Date.ToLongDateString()</h5>
-                                                <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Watch >
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                    </ul>
+                                            <div class="col-sm-11 matches_box_con pad-zero">
+                                                <div class="upper_matches">
+                                                    <h5>@Model.Title <span>Americas Qualifier Semifinals</span></h5>
+                                                </div>
+                                                <div class="lower_matches">
+                                                    <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
+                                                    <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamBName</h5>
+                                                    <h5 class="lower_m3">@match.Date.ToLongDateString()</h5>
+                                                    <div class="btn-group" role="group">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            Watch >
+                                                        </button>
+                                                        <ul class="dropdown-menu">
+                                                            <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                            <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                     }
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -285,6 +279,6 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
