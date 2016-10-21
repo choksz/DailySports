@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace DailySports.DataLayer.Model
 {
-   public class Event
+    public class Event
     {
         [Key]
         public int Id { get; set; }
@@ -26,7 +26,15 @@ namespace DailySports.DataLayer.Model
         public string Country { get; set; }
         public string Region { get; set; }
         public string City { get; set; }
-        public string EventImage { get; set; }
+
+        private string ImageEvent;
+        public string EventImage
+        {
+            get
+         ;
+            set
+         ;
+        }
         public Nullable<DateTime> StartDate { get; set; }
         public Nullable<DateTime> EndDate { get; set; }
         public string Currency { get; set; }
@@ -36,6 +44,6 @@ namespace DailySports.DataLayer.Model
         [ForeignKey("ticketid")]
         public virtual Ticket ticket { get; set; }
         public int ticketid { get; set; }
-     
+
     }
 }

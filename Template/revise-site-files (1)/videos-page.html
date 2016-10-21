@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="#">
+    <title>Daily Esports Videos</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/hover-min.css" rel="stylesheet">
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="js/ie-emulation-modes-warning.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="videos_page">
+<div class="custom_nav navbar_bg">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html"><img src="images/Long-Logo.png" alt="#"> </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="hvr-underline-from-left"><a href="#">Latest</a></li>
+                    <li class="hvr-underline-from-left"><a href="news-page.html">News</a></li>
+                    <li class="hvr-underline-from-left"><a href="videos-page.html">Videos</a></li>
+                    <li class="hvr-underline-from-left"><a href="tournaments.html">Tournaments</a></li>
+                    <li class="hvr-underline-from-left"><a href="events-page.html">Events</a></li>
+                </ul>
+            </div>
+        </div><!--/.container-fluid -->
+    </nav>
+</div>
+<div class="basic_bg_image">
+<div class="container bg-inherit">
+    <div class="home_content">
+        <div class="content_bg_img"></div>
+        <div class="h_content">
+            <div class="basic_content">
+                <div class="post_page_header bg_light_black">
+                    <div class="col-sm-5 video_filter_bg">
+                        <div class="videos_filter float_left">
+                            <ul class="filters">
+                                <li data-filter="*" class="current"><a href="javascript:void(0)">All</a></li>
+                                <li data-filter=".highlights"><a href="">highlights</a></li>
+                                <li data-filter=".full"><a href="">full vods</a></li>
+                                <li data-filter=".fanmade"><a href="">fanmade</a></li>
+                                <li data-filter=".vlog"><a href="">vlogs</a></li>
+                                <li data-filter=".other-vids"><a href="">other</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 pad-zero">
+                        <div class="sb_search">
+                            <i class="fa fa-search"></i>
+                            <input type="text" class="form-control" placeholder="Search...">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 float_left br-bottom">
+                    <div class="video_banner_filter">
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".dota"><img src="images/dota.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".lol"><img src="images/lol.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".cs_go"><img src="images/cs_go.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".smite"><img src="images/smite_lg.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".starcraft"><img src="images/starcraft.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".hots"><img src="images/hots_lg.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".hearthstone"><img src="images/hearthstone_lg.png" alt="#"></a>
+                        </div>
+                        <div class="col-sm-3 hot_ban">
+                            <a href="#" class="filters_one" data-filter=".others"><img src="images/others.png" alt="#"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 float_left ">
+                    <h4 class="pl_10 main_head">THIS WEEK</h4>
+                    <div class="isotope float_left">
+                        <div class="col-sm-3 element-item video_small_box all highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all cs_go fanmade">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all fanmade">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all fanmade">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all fanmade">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all dota highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all hearthstone highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all vlog">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all vlog">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all starcraft highlights">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all vlog">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all other-vids">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 element-item video_small_box all dota other-vids">
+                            <div class="video_small_box_image">
+                                <img src="images/place_273.jpg" alt="#">
+                            </div>
+                            <div class="video_small_box_text">
+                                <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 float_left br-top">
+                    <h4 class="pl_10 main_head">LAST WEEK</h4>
+                    <div class="video_carousel" id="owl-demo">
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="video_small_box">
+                                <div class="video_small_box_image">
+                                    <img src="images/place_273.jpg" alt="#">
+                                </div>
+                                <div class="video_small_box_text">
+                                    <h4>Video Title Goes Here... Is the  title way too big tho? Maybe, maybe not.</h4>
+                                    <h5><span class="red">DailyEsports</span> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video_carousel_button">
+                        <button class="btn submit_e_btn">submit a video</button>
+                        <button class="btn re-prev"><i class="fa fa-caret-left"></i> PREV</button>
+                        <button class="btn re-next">NEXT <i class="fa fa-caret-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer_area">
+    <div class="container">
+        <div class="col-sm-1 pad-zero">
+            <img src="images/footer_logo.png" alt="#">
+        </div>
+        <div class="col-sm-3">
+            <h4>Daily eSports,<br>All Rights Reserved.</h4>
+        </div>
+        <div class="col-sm-2 text-center">
+            <h4>For business inquiries,<br> please contact us.</h4>
+        </div>
+        <div class="col-sm-6 pad-zero">
+            <div class="footer_socials">
+                <a href="#" class="hvr-float"><img src="images/facebook_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/twitter_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/youtube_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/Instagram_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/Twitch_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/steam_ico.png" alt=""></a>
+                <a href="#" class="hvr-float"><img src="images/Reddit_ico.png" alt=""></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="js/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/isotope.pkgd.min.js"></script>
+<script src="js/custom.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="js/ie10-viewport-bug-workaround.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var owl = $("#owl-demo");
+        owl.owlCarousel({
+            autoPlay: 4000, //Set AutoPlay to 3 seconds
+            items : 4,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,3],
+            pagination : false,
+            //Basic Speeds
+            slideSpeed : 2000
+        });
+        $(".re-next").click(function(){
+            owl.trigger('owl.next');
+        });
+        $(".re-prev").click(function(){
+            owl.trigger('owl.prev');
+        });
+    });
+    jQuery(window).load(function() {
+        // init Isotope
+        var $container = jQuery('.isotope').isotope({
+            itemSelector: '.element-item',
+            layoutMode: 'masonry',
+            resizable: false, // disable normal resizing
+            getSortData: {
+                name: '.name'
+            },
+            transformsEnabled: false
+        });
+        jQuery('.filters li').on('click',function(){
+            jQuery('.isotope').show();
+            jQuery('.filters .current').removeClass('current');
+            jQuery(this).addClass('current');
+            var filterValue = jQuery(this).attr('data-filter');
+            $container.isotope({ filter: filterValue });
+            return false;
+        });
+        /*
+        jQuery('.hot_ban').on('click',function(){
+            jQuery('.hot_ban .current').removeClass('current');
+            jQuery(this).find('a').addClass('current');
+            var filterValue = jQuery(this).find('a').attr('data-filter');
+            $container.isotope({ filter: filterValue });
+            return false;
+        });*/
+        jQuery('.hot_ban').on('click',function(){
+            //jQuery('.filters .current').removeClass('current');
+            if (jQuery(this).find('a').hasClass('current')){
+                jQuery('.hot_ban .current').removeClass('current');
+                jQuery('.isotope').animate({
+                    queue: false,
+                    duration: 3000
+                }).slideUp();
+            } else {
+                console.log('Class added');
+                jQuery('.isotope').show();
+                jQuery('.hot_ban .current').removeClass('current');
+                jQuery(this).find('a').addClass('current');
+                var filterValue = jQuery(this).find('a').attr('data-filter');
+                $container.isotope({ filter: filterValue });
+            }
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

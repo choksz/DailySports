@@ -20,6 +20,7 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult Index()
         {
             var events = db.Events.Include(e =>e.ticket);
+     
             return View(events.ToList());
         }
 
