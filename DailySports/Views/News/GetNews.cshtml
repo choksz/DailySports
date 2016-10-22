@@ -50,13 +50,7 @@
                         </div>
                         <div class="news_widget">
                             <div class="col-sm-12">
-                                <h2 class="blue_new">@Html.Raw(Model.Description.ToString().Substring(0,25))</h2>
-                                <button class="btn btn-default" data-toggle="collapse" data-target="#showmore" type="button">Show More</button>
-                                <div class="collapse" id="showmore">
-                                    @Html.Raw(Model.Description.ToString())
-                                    @Html.Raw(Model.Description.ToString())
-                                </div>
-                               
+                                @Html.Raw(Model.Description.ToString())
                                </div>
                             
                         </div>

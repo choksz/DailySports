@@ -62,7 +62,7 @@
                                     <div class="news_area bg-image" style="background-image: url('@news.NewsImage')">
                                         <div class="news_dota_ico"><img src="@news.Game.GameImage" alt="@news.Game.Name" class=""></div>
                                         <div class="news_title">
-                                            <a href="@Url.Action("GetNews","News")"><h3>@news.Title</h3></a>
+                                            <a href="@Url.Action("GetNews", "News", new { @id = news.Id })"><h3>@news.Title</h3></a>
                                         </div>
                                     </div>
                                 </div>
