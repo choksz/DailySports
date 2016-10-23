@@ -82,36 +82,37 @@
                                 </div>
                             }                          
                              <!-- Button -->
-                            <div class="col-sm-6">
-                                <div class="videos_btn_box">
-                                    <a href="@Url.Action("Index","News")" class="btn">More news</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="videos_btn_box">
-                                    <a href="@Url.Action("Index","Video")" class="btn">More videos</a>
-                                </div>
-                            </div>
                             <div class="col-sm-12">
-                                <div class="adds">
-                                    <h3>Add Space</h3>
+                                <div class="col-sm-6">
+                                    <div class="videos_btn_box">
+                                        <a href="@Url.Action("Index","News")" class="btn">More news</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="videos_btn_box">
+                                        <a href="@Url.Action("Index","Video")" class="btn">More videos</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="latest_tournaments">
-                        <h4 class="tournaments_title f_bol main_head">latest tournaments</h4>
-                        @foreach (var tournament in Model.LatestTournament)
-                        {
-                        <div class="tournament_box">
-                            <div class="col-sm-4 tournament_box_img pad-zero">
-                                <img src="@tournament.TournamentImage" alt="#">
-                            </div>
-                            
+                        <div class="col-sm-12">
+                            <h4 class="tournaments_title f_bol main_head">latest tournaments</h4>
+                            @foreach (var tournament in Model.LatestTournament)
+                            {
+                                <div class="tournament_box">
+                                    <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
+                                        <div class="tournament_box">
+                                            <div class="col-sm-4 tournament_box_img pad_zero" style="background-image:url('@tournament.TournamentImage')">
+                                                <h4>@tournament.Title</h4>
+                                            </div> 
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            <a href="@Url.Action("Index","Tournament")" class="btn more_tour_btn">more tournaments</a>
                         </div>
-                        }
-
-                        <a href="@Url.Action("Index","Tournament")" class="btn more_tour_btn">more tournaments</a>
                     </div>
                     <div class="latest_events">
                         <div class="col-sm-12">
@@ -147,11 +148,13 @@
                             <h4 class="f_bol main_head">ONGOING TOURNAMENTS</h4>
                             @foreach (var tournament in Model.OngoingTournaments)
                             {
-                            <div class="live_game_box bg-image" style="background-image: url('@tournament.TournamentImage')">
-                                <h4 class="live_upper">@tournament.Game.Name</h4>
-                                <h4 class="live_middle">@tournament.MainEvent</h4>
-                                <!--a href="game.LiveStreamURL" class="btn">watch now</a-->
-                            </div>
+                                <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
+                                    <div class="live_game_box bg-image" style="background-image: url('@tournament.TournamentImage')">
+                                        <h4 class="live_upper">@tournament.Game.Name</h4>
+                                        <h4 class="live_middle">@tournament.MainEvent</h4>
+                                        <!--a href="game.LiveStreamURL" class="btn">watch now</a-->
+                                    </div>
+                                </a>
                             }
                             
                         </div>
