@@ -15,7 +15,7 @@ namespace DailySports.ServiceLayer.Services
     {
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<News> _newsRepository;
-        public NewsService(IUnitOfWork unitOfWork,IGenericRepository<News> newsRepository)
+        public NewsService(IUnitOfWork unitOfWork, IGenericRepository<News> newsRepository)
         {
             _unitOfWork = unitOfWork;
             _newsRepository = newsRepository;
@@ -32,14 +32,23 @@ namespace DailySports.ServiceLayer.Services
             {
                 List<News> NewsList = _newsRepository.GetAll().ToList();
                 List<NewsDto> NewsDtoList = new List<NewsDto>();
-                foreach(var news in NewsList)
+                foreach (var news in NewsList)
                 {
-                    NewsDtoList.Add(new NewsDto {
-                    Id =news.Id,Title=news.Title,Description=news.Description,AuthorName=news.Author.Name,AuthorBigraphy=news.Author.Biography,Date=news.Date,NewsImage=news.NewsImage});
+                    NewsDtoList.Add(new NewsDto
+                    {
+                        Id = news.Id,
+                        Title = news.Title,
+                        Description = news.Description,
+                        CategoryId = news.CategoryId,
+                        AuthorName = news.Author.Name,
+                        AuthorBigraphy = news.Author.Biography,
+                        Date = news.Date,
+                        NewsImage = news.NewsImage
+                    });
                 }
                 return NewsDtoList;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -47,7 +56,7 @@ namespace DailySports.ServiceLayer.Services
 
         public NewsDto GetNews(int id)
         {
-           try
+            try
             {
                 News newNews = _newsRepository.FindBy(N => N.Id == id).FirstOrDefault();
                 NewsDto newsDto = new NewsDto();
@@ -60,7 +69,7 @@ namespace DailySports.ServiceLayer.Services
                 newsDto.NewsImage = newNews.NewsImage;
                 return newsDto;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -74,12 +83,20 @@ namespace DailySports.ServiceLayer.Services
                 List<NewsDto> NewsDtoList = new List<NewsDto>();
                 foreach (var news in NewsList)
                 {
-                    NewsDtoList.Add(new NewsDto { Id = news.Id, Title = news.Title, Description = news.Description, AuthorName = news.Author.Name, Date = news.Date, NewsImage = news.NewsImage });
+                    NewsDtoList.Add(new NewsDto
+                    {
+                        Id = news.Id,
+                        Title = news.Title,
+                        Description = news.Description,
+                        AuthorName = news.Author.Name,
+                        CategoryId = news.CategoryId,
+                        Date = news.Date,
+                        NewsImage = news.NewsImage
+                    });
                 }
-                return NewsDtoList;
-
+                return NewsDtoList; 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -98,6 +115,7 @@ namespace DailySports.ServiceLayer.Services
                         Id = LatestNews.Id,
                         Title = LatestNews.Title,
                         Description = LatestNews.Description,
+                        CategoryId = LatestNews.CategoryId,
                         AuthorName = LatestNews.Author.Name,
                         Date = LatestNews.Date,
                         NewsImage = LatestNews.NewsImage
@@ -105,7 +123,7 @@ namespace DailySports.ServiceLayer.Services
                 }
                 return newsDto;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
