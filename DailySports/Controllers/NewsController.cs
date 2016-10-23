@@ -15,7 +15,7 @@ namespace DailySports.Controllers
         private IPetService _petService;
         private IMatchService _matchService;
         private ITournementsService _tournamentService;
-        public NewsController(INewsService newsService,IPetService petService,IMatchService matchService,ITournementsService tournamentService)
+        public NewsController(INewsService newsService, IPetService petService, IMatchService matchService, ITournementsService tournamentService)
         {
             _newsService = newsService;
             _petService = petService;
@@ -53,7 +53,7 @@ namespace DailySports.Controllers
                     });
                     newsDtoList.PetOfTheDay = pet;
                 }
-                    return View(newsDtoList);
+                return View(newsDtoList);
             }
             else if (Response.Cookies["LoggedInUser"] != null)
             {
@@ -88,10 +88,10 @@ namespace DailySports.Controllers
             }
             else
             {
-                return RedirectToAction("Login","Home");
+                return RedirectToAction("Login", "Home");
             }
         }
-       
+
         public ActionResult GetNews(int id)
         {
             NewsDto news = new NewsDto();
@@ -152,11 +152,11 @@ namespace DailySports.Controllers
 
             if (newsList != null)
             {
-                return View("Index",newsList);
+                return View("Index", newsList);
             }
             else
             {
-                return RedirectToAction("Index","News");
+                return RedirectToAction("Index", "News");
             }
         }
     }

@@ -102,7 +102,7 @@
                                     </div>
                                     <div class="tour_format_text">
                                         <div class="text_1">
-                                            <h5>- @Model.MainEvent - August 8th - August 13th, 2016</h5>
+                                            <h5>- @Model.MainEvent - @string.Format("{0:MMMM dd}th ", @Model.StartDate) - @string.Format("{0:MMMM dd}th ", @Model.EndDate)  , @Model.EndDate.Year</h5>
                                         </div>
                                         <div class="text_2">
                                             <h5>Sixteen teams play in a double elimination format over six days.</h5>
@@ -112,33 +112,37 @@
                                 </div>
                             </div>
                             <div class="tour_latest">
-                                <div class="tournament_box">
-                                    <div class="col-sm-4 tournament_box_img pad-zero">
-                                        <img src="~/images/News-Image.jpg" alt="#">
+
+                                @foreach (var match in Model.MainEvent)
+                                {
+                                    <div class="tournament_box">
+                                        <div class="col-sm-4 tournament_box_img pad-zero">
+                                            <img src="~/images/News-Image.jpg" alt="#">
+                                        </div>
+                                        <div class="col-sm-8 tournament_box_text">
+                                            <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
+                                            <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-8 tournament_box_text">
-                                        <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
-                                        <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
+                                    <div class="tournament_box">
+                                        <div class="col-sm-4 tournament_box_img pad-zero">
+                                            <img src="~/images/News-Image.jpg" alt="#">
+                                        </div>
+                                        <div class="col-sm-8 tournament_box_text">
+                                            <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
+                                            <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="tournament_box">
-                                    <div class="col-sm-4 tournament_box_img pad-zero">
-                                        <img src="~/images/News-Image.jpg" alt="#">
+                                    <div class="tournament_box">
+                                        <div class="col-sm-4 tournament_box_img pad-zero">
+                                            <img src="~/images/News-Image.jpg" alt="#">
+                                        </div>
+                                        <div class="col-sm-8 tournament_box_text">
+                                            <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
+                                            <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-8 tournament_box_text">
-                                        <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
-                                        <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
-                                    </div>
-                                </div>
-                                <div class="tournament_box">
-                                    <div class="col-sm-4 tournament_box_img pad-zero">
-                                        <img src="~/images/News-Image.jpg" alt="#">
-                                    </div>
-                                    <div class="col-sm-8 tournament_box_text">
-                                        <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
-                                        <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
-                                    </div>
-                                </div>
+                                }
                             </div>
                             <div class="tour_matches">
                                 <h4 class="tour_matches_Sub main_head">MATCHES</h4>
@@ -162,7 +166,6 @@
                                         </div>
                                     </div>
                                 }
-
                             </div>
                             <div class="col-sm-12 float_left height_450">
                                 <h3 class="main_head">GALLERY</h3>
@@ -251,7 +254,7 @@
                                             </div>
                                             <div class="col-sm-11 matches_box_con pad-zero">
                                                 <div class="upper_matches">
-                                                    <h5>@Model.Title <span>Americas Qualifier Semifinals</span></h5>
+                                                    <h5>@Model.Title <span> @Model.Qualifiers </span></h5>
                                                 </div>
                                                 <div class="lower_matches">
                                                     <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
