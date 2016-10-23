@@ -144,21 +144,33 @@
                 <div class="col-sm-4 sidebar_col pad-zero br-top">
                     <div class="side_bar">
                         <div class="col-sm-12 live_games">
+                            <h4 class="f_bol main_head">ONGOING TOURNAMENTS</h4>
+                            @foreach (var tournament in Model.OngoingTournaments)
+                            {
+                            <div class="live_game_box bg-image" style="background-image: url('@tournament.TournamentImage')">
+                                <h4 class="live_upper">@tournament.Game.Name</h4>
+                                <h4 class="live_middle">@tournament.MainEvent</h4>
+                                <!--a href="game.LiveStreamURL" class="btn">watch now</a-->
+                            </div>
+                            }
+                            
+                        </div>
+                        <!--div class="col-sm-12 live_games">
                             <h4 class="f_bol main_head">LIVE GAMES</h4>
-                            @foreach (var game in Model.LiveGames)
+                            @*foreach (var game in Model.LiveGames)
                             {
                             <div class="live_game_box bg-image" style="background-image: url('@game.GameImage')">
                                 <h4 class="live_upper">@game.Name</h4>
                                 <h4 class="live_middle">GROUP STAGES - BO3</h4>
                                 <a href="@game.LiveStreamURL" class="btn">watch now</a>
                             </div>
-                            }
+                            }*@
                             
                         </div>
                         <div class="matches_sidebar float_left">
                             <h4 class="col-sm-12 f_bol main_head">NEXT MATCHES</h4>
                             <div class="matches_box">
-                                @foreach (var match in Model.NextMatches)
+                                @*foreach (var match in Model.NextMatches)
                                 {
                                 <div class="matches_con">
                                     <div class="col-sm-1 matches_box_img pad-zero">
@@ -184,10 +196,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                }
+                                }*@
                                 
                             </div>
-                        </div>
+                        </div-->
                         <div class="pet_day float_left">
                             <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
                             <div class="pet_of_day float_left">
