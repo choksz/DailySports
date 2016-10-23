@@ -103,22 +103,7 @@ namespace DailySports.ServiceLayer.Services
                 List<TournementsDto> LatestTournaments = new List<TournementsDto>();
                 foreach(var tournament in TournamentList)
                 {
-                    LatestTournaments.Add(new TournementsDto
-                    {
-                        Id=tournament.Id,
-                        Title=tournament.Title,
-                        Description=tournament.Description,
-                        Format=tournament.Format,
-                        MainEvent=tournament.MainEvent,
-                        GameId=tournament.GameId,
-                         Overview=tournament.Overview,
-                         Price=tournament.Price,
-                         Qualifiers=tournament.Qualifiers,
-                         StartDate=tournament.StartDate,
-                         EndDate=tournament.EndDate,
-                         URL=tournament.URL,
-                         TournamentImage=tournament.TournamentImage
-                    });
+                    LatestTournaments.Add(new TournementsDto(tournament));
                 }
                 return LatestTournaments;
             }
@@ -151,6 +136,24 @@ namespace DailySports.ServiceLayer.Services
             {
                 return null;
             }
+        }
+
+        public List<TournementsDto> GetOngoingTournaments()
+        {
+            List<TournementsDto> ongoingTournaments = new List<TournementsDto>();
+            try
+            {
+                DateTime today = DateTime.Today;
+                List<Tournaments> tournamentList = _tournamentsRepository.FindBy(T => T.StartDate <= today && T.EndDate >= today).ToList();
+                foreach (var tournament in tournamentList)
+                {
+                    ongoingTournaments.Add(new TournementsDto(tournament));
+                }
+            }
+            catch (Exception _)
+            {
+            }
+            return ongoingTournaments;
         }
     }
 }

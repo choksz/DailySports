@@ -46,13 +46,13 @@
                             <div class="filter2">
                                 <h4>Filter:</h4>
                                 <ul class="filters_one">
-                                    <li data-filter="*"><a href=""><img src="~/images/new_Hearthstone.png" alt="#"></a></li>
-                                    <li data-filter=".csgo"><a href=""><img src="~/images/CoD.png" alt="#"></a></li>
-                                    <li data-filter=".mw2"><a href=""><img src="~/images/CSGO.png" alt="#"></a></li>
-                                    <li data-filter=".bf3"><a href=""><img src="~/images/HotS.png" alt="#"></a></li>
-                                    <li data-filter=".css"><a href=""><img src="~/images/League.png" alt="#"></a></li>
-                                    <li data-filter=".le"><a href=""><img src="~/imges/newDota2.png" alt="#"></a></li>
-                                    <li data-filter=".sa"><a href=""><img src="~/images/Overwatch.png" alt="#"></a></li>
+                                    <li data-filter="*"><a href=""><img src="~/images/new_Hearthstone.png" alt="Hearthstone"></a></li>
+                                    <li data-filter=".csgo"><a href=""><img src="~/images/CoD.png" alt="Call of Duty"></a></li>
+                                    <li data-filter=".mw2"><a href=""><img src="~/images/CSGO.png" alt="Counter-Strike: Global Offensive"></a></li>
+                                    <li data-filter=".bf3"><a href=""><img src="~/images/HotS.png" alt="Heroes of the Storm"></a></li>
+                                    <li data-filter=".css"><a href=""><img src="~/images/League.png" alt="League of Legends"></a></li>
+                                    <li data-filter=".le"><a href=""><img src="~/imges/newDota2.png" alt="Dota 2"></a></li>
+                                    <li data-filter=".sa"><a href=""><img src="~/images/Overwatch.png" alt="Overwatch"></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -71,13 +71,13 @@
                                 <div class="tour_filter_box br-bottom">
                                     <div class="col-sm-3 pad-zero">
                                         <div class="tour_filter_box_image">
-                                            <img src="@Tournament.TournamentImage" alt="#">
+                                            <img src="@Tournament.TournamentImage" alt="@Tournament.Title">
                                         </div>
                                     </div>
                                     <div class="col-sm-9">
                                         <div class="tour_filter_box_content float_left">
                                             <div class="tour_filter_upper float_left">
-                                                <h3 class="pull-left"><img src="~/images/new_Hearthstone.png" alt="#">@Tournament.Title <span>@Tournament.StartDate.ToLongDateString()</span></h3>
+                                                <h3 class="pull-left"><img src="@Tournament.Game.GameImage" alt="@Tournament.Game.Name">@Tournament.Title <span>@Tournament.StartDate.ToLongDateString()</span></h3>
                                                 <h3 class="green pull-right">$@Tournament.Price+</h3>
                                             </div>
                                             <div class="tour_filter_lower float_left">

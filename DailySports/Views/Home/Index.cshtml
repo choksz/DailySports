@@ -57,17 +57,17 @@
                         <div class="latest_new_videos_box">
                             @foreach (var news in Model.LatestNews)
                             {
-                                <div class="col-sm-6 home_small_video_box">
-                                    <div class="home_small_box">
-                                        <div class="news_area bg-image" style="background-image: url('@news.NewsImage')">
-                                            <div class="news_dota_ico"><img src="@news.Game.GameImage" alt="@news.Game.Name" class=""></div>
-                                            <div class="news_title">
-                                                <a href="@Url.Action("GetNews", "News", new { id = news.Id })"><h3>@news.Title</h3></a>
-                                            </div>
+                            <div class="col-sm-6 home_small_video_box">
+                                <div class="home_small_box">
+                                    <div class="news_area bg-image" style="background-image: url('@news.NewsImage')">
+                                        <div class="news_dota_ico"><img src="@news.Game.GameImage" alt="@news.Game.Name" class=""></div>
+                                        <div class="news_title">
+                                            <a href="@Url.Action("GetNews", "News", new { @id = news.Id })"><h3>@news.Title</h3></a>
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            </div>
+                            } 
                             @foreach (var video in Model.LatestVideos)
                             {
                                 <div class="col-sm-6 home_small_video_box">
@@ -80,61 +80,62 @@
                                         </div>
                                     </div>
                                 </div>
-                            }
-                            <!-- Button -->
-                            <div class="col-sm-6">
-                                <div class="videos_btn_box">
-                                    <a href="@Url.Action("Index","News")" class="btn">More news</a>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="videos_btn_box">
-                                    <a href="@Url.Action("Index","Video")" class="btn">More videos</a>
-                                </div>
-                            </div>
+                            }                          
+                             <!-- Button -->
                             <div class="col-sm-12">
-                                <div class="adds">
-                                    <h3>Add Space</h3>
+                                <div class="col-sm-6">
+                                    <div class="videos_btn_box">
+                                        <a href="@Url.Action("Index","News")" class="btn">More news</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="videos_btn_box">
+                                        <a href="@Url.Action("Index","Video")" class="btn">More videos</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="latest_tournaments">
-                        <h4 class="tournaments_title f_bol main_head">latest tournaments</h4>
-                        @foreach (var tournament in Model.LatestTournament)
-                        {
-                            <div class="tournament_box">
-                                <div class="col-sm-4 tournament_box_img pad-zero">
-                                    <img src="@tournament.TournamentImage" alt="#">
+                        <div class="col-sm-12">
+                            <h4 class="tournaments_title f_bol main_head">latest tournaments</h4>
+                            @foreach (var tournament in Model.LatestTournament)
+                            {
+                                <div class="tournament_box">
+                                    <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
+                                        <div class="tournament_box">
+                                            <div class="col-sm-4 tournament_box_img pad_zero" style="background-image:url('@tournament.TournamentImage')">
+                                                <h4>@tournament.Title</h4>
+                                            </div> 
+                                        </div>
+                                    </a>
                                 </div>
-
-                            </div>
-                        }
-
-                        <a href="@Url.Action("Index","Tournament")" class="btn more_tour_btn">more tournaments</a>
+                            }
+                            <a href="@Url.Action("Index","Tournament")" class="btn more_tour_btn">more tournaments</a>
+                        </div>
                     </div>
                     <div class="latest_events">
                         <div class="col-sm-12">
                             <h4 class="latest_events_title f_bol main_head">LATEST EVENTS</h4>
                             @foreach (var Event in Model.LatestEvents)
                             {
-                                <div class="latest_event_box">
-                                    <a href="@Url.Action("GetEvent","Event",new {@id=Event.Id })">
-                                        <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-image:url('@Event.EventImage')">
-                                            <div class="event_details">
-                                                <div class="event_name">@Event.Title</div>
-                                                <div class="countdown">
-                                                    <div class="timing-titles"><span>@Event.StartDate.Value.Day</span><span>@Event.StartDate.Value.Hour</span><span>MINUTES</span><span>Seconds</span></div>
-                                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
-                                                </div>
-                                                <div class="event_city">@Event.Location</div>
+                            <div class="latest_event_box">
+                                <a href="@Url.Action("GetEvent","Event",new {@id=Event.Id })">
+                                    <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-image:url('@Event.EventImage')">
+                                        <div class="event_details">
+                                            <div class="event_name">@Event.Title</div>
+                                            <div class="countdown">
+                                                <div class="timing-titles"><span>@Event.StartDate.Value.Day</span><span>@Event.StartDate.Value.Hour</span><span>MINUTES</span><span>Seconds</span></div>
+                                                <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
                                             </div>
+                                            <div class="event_city">@Event.Location</div>
                                         </div>
-                                    </a>
-                                    <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
-                                        <h3><a>Buy tickets</a></h3>
                                     </div>
+                                </a>
+                                <div class="col-sm-3 event_buy pad-zero hvr-bounce-to-top">
+                                    <h3><a >Buy tickets</a></h3>
                                 </div>
+                            </div>
 
                             }
                             <a href="@Url.Action("Index","Event")" class="btn more_tour_btn">more events</a>
@@ -144,75 +145,89 @@
                 <div class="col-sm-4 sidebar_col pad-zero br-top">
                     <div class="side_bar">
                         <div class="col-sm-12 live_games">
-                            <h4 class="f_bol main_head">LIVE GAMES</h4>
-                            @foreach (var game in Model.LiveGames)
+                            <h4 class="f_bol main_head">ONGOING TOURNAMENTS</h4>
+                            @foreach (var tournament in Model.OngoingTournaments)
                             {
-                                <div class="live_game_box bg-image" style="background-image: url('@game.GameImage')">
-                                    <h4 class="live_upper">@game.Name</h4>
-                                    <h4 class="live_middle">GROUP STAGES - BO3</h4>
-                                    <a href="@game.LiveStreamURL" class="btn">watch now</a>
-                                </div>
+                                <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
+                                    <div class="live_game_box bg-image" style="background-image: url('@tournament.TournamentImage')">
+                                        <h4 class="live_upper">@tournament.Game.Name</h4>
+                                        <h4 class="live_middle">@tournament.MainEvent</h4>
+                                        <!--a href="game.LiveStreamURL" class="btn">watch now</a-->
+                                    </div>
+                                </a>
                             }
-
+                            
+                        </div>
+                        <!--div class="col-sm-12 live_games">
+                            <h4 class="f_bol main_head">LIVE GAMES</h4>
+                            @*foreach (var game in Model.LiveGames)
+                            {
+                            <div class="live_game_box bg-image" style="background-image: url('@game.GameImage')">
+                                <h4 class="live_upper">@game.Name</h4>
+                                <h4 class="live_middle">GROUP STAGES - BO3</h4>
+                                <a href="@game.LiveStreamURL" class="btn">watch now</a>
+                            </div>
+                            }*@
+                            
                         </div>
                         <div class="matches_sidebar float_left">
                             <h4 class="col-sm-12 f_bol main_head">NEXT MATCHES</h4>
                             <div class="matches_box">
-                                @foreach (var match in Model.NextMatches)
+                                @*foreach (var match in Model.NextMatches)
                                 {
-                                    <div class="matches_con">
-                                        <div class="col-sm-1 matches_box_img pad-zero">
-                                            <img src="~/images/Smash.png" alt="#">
+                                <div class="matches_con">
+                                    <div class="col-sm-1 matches_box_img pad-zero">
+                                        <img src="~/images/Smash.png" alt="#">
+                                    </div>
+                                    <div class="col-sm-11 matches_box_con pad-zero">
+                                        <div class="upper_matches">
+                                            <h5>@match.TournamentName  <span>Americas Qualifier Semifinals</span></h5>
                                         </div>
-                                        <div class="col-sm-11 matches_box_con pad-zero">
-                                            <div class="upper_matches">
-                                                <h5>@match.TournamentName  <span>Americas Qualifier Semifinals</span></h5>
-                                            </div>
-                                            <div class="lower_matches">
-                                                <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
-                                                <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamBName</h5>
-                                                <h5 class="lower_m3">@match.Date.ToLocalTime()</h5>
-                                                <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        Watch >
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                    </ul>
-                                                </div>
+                                        <div class="lower_matches">
+                                            <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
+                                            <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamBName</h5>
+                                            <h5 class="lower_m3">@match.Date.ToLocalTime()</h5>
+                                            <div class="btn-group" role="group">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    Watch >
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                    <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
-                                }
-
+                                </div>
+                                }*@
+                                
                             </div>
-                        </div>
+                        </div-->
                         <div class="pet_day float_left">
                             <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
                             <div class="pet_of_day float_left">
                                 @foreach (var pet in Model.PetOfTheWeek)
                                 {
-                                    <div class="bg-image pet_image" style="background-image:url('../images/@pet.PetImage')">
-                                        <div class="pet_day_heading"><h4>@pet.Title</h4></div>
-                                        <div class="pet_day_overlay">
-                                            <p>Name: @Html.Raw(pet.Description.ToString())</p>
+                                <div class="bg-image pet_image" style="background-image:url('../images/@pet.PetImage')">
+                                    <div class="pet_day_heading"><h4>@pet.Title</h4></div>
+                                    <div class="pet_day_overlay">
+                                        <p>Name: @Html.Raw(pet.Description.ToString())</p>
+                                        
+                                        @if (pet.Gender == true)
+                                        {
+                                            <p>Gender: Female</p>
 
-                                            @if (pet.Gender == true)
-                                            {
-                                                <p>Gender: Female</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Gender: Male</p>
 
-                                            }
-                                            else
-                                            {
-                                                <p>Gender: Male</p>
-
-                                            }
-                                            <p>Age: @pet.Age</p><p>Breed: Mixed</p>
-                                            <p>Fun Fact: @pet.FunFact </p>
-                                            <p>Owner: @pet.Owner </p>
-                                        </div>
+                                        }
+                                        <p>Age: @pet.Age</p><p>Breed: Mixed</p>
+                                        <p>Fun Fact: @pet.FunFact </p>
+                                        <p>Owner: @pet.Owner </p>
                                     </div>
+                                </div>
                                 }
                             </div>
                         </div>
@@ -227,5 +242,6 @@
         </div>
     </div>
 
-
+    
 </div>
+

@@ -316,7 +316,9 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
         $(document).ready(function () {
-            $('.datepicker').datepicker();
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/MM/YYYY'
+            });
             $('.txtEditor').ckeditor();
             if ($('#success').val()) {
                 displayMessage($('#success').val(), 'success');

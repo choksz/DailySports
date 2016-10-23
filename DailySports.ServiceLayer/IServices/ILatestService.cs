@@ -13,5 +13,6 @@ namespace DailySports.ServiceLayer.IServices
         List<NewsDto> GetLatestNews();
         List<VideoDto> GetLatestVideos();
         List<TournementsDto> GetLatestTournaments();
+        List<TournementsDto> GetOngoingTournaments();
     }
 }
