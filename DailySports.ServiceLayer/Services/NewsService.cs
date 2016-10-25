@@ -40,6 +40,7 @@ namespace DailySports.ServiceLayer.Services
                         Title = news.Title,
                         Description = news.Description,
                         CategoryId = news.CategoryId,
+                        CategoryName = news.category.Name,
                         AuthorName = news.Author.Name,
                         AuthorBigraphy = news.Author.Biography,
                         Date = news.Date,
@@ -94,7 +95,7 @@ namespace DailySports.ServiceLayer.Services
                         NewsImage = news.NewsImage
                     });
                 }
-                return NewsDtoList; 
+                return NewsDtoList;
             }
             catch (Exception ex)
             {
@@ -116,7 +117,9 @@ namespace DailySports.ServiceLayer.Services
                         Title = LatestNews.Title,
                         Description = LatestNews.Description,
                         CategoryId = LatestNews.CategoryId,
+                        CategoryName = LatestNews.category.Name,
                         AuthorName = LatestNews.Author.Name,
+                        AuthorBigraphy = LatestNews.Author.Biography,
                         Date = LatestNews.Date,
                         NewsImage = LatestNews.NewsImage
                     });
