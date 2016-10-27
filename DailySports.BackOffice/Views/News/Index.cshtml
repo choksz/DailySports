@@ -72,7 +72,7 @@
                                             @((item.Description.ToString().Length > 200) ? (item.Description.ToString().Substring(0, 200) + "...") : (item.Description.ToString()))
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.NewsImage)
+                                            <a href="@Globals.CDNContent(item.NewsImage)">Link</a>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Date)

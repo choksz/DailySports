@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700);
 html {
-    background: url("../images/Low-Poly-Website-Background.png") no-repeat 50% fixed;
+    background: url("http://cdn.dailyesports.tv/Low-Poly-Website-Background.png") no-repeat 50% fixed;
     background-size: cover;
     position: relative;
     width: 100%;
@@ -179,7 +179,7 @@ a:hover {
     background: transparent;
     border: transparent;
     margin-bottom: 0;
-    background-image: url("../images/header_bg.png");
+    background-image: url("http://cdn.dailyesports.tv/header_bg.png");
     background-size: cover;
     background-repeat: no-repeat;
     padding: 25px 0;
@@ -191,7 +191,7 @@ a:hover {
     z-index: 100;
 }
 .navbar_bg {
-    background-image: url("../images/header_bg.png");
+    background-image: url("http://cdn.dailyesports.tv/header_bg.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -509,7 +509,7 @@ a:hover {
     margin-bottom: 10px;
 }
 .footer_area {
-    background-image: url("../images/header_bg.png");
+    background-image: url("http://cdn.dailyesports.tv/header_bg.png");
     background-size: cover;
     float: left;
     width: 100%;
@@ -1523,8 +1523,8 @@ a:hover {
 
 /*Sign In page*/
 .signin_content{background: rgba(0, 0, 0, 0.28) none repeat scroll 0 0;width: 50%;margin:0 auto !important;height:400px}
-.UserName{background:url('../images/user-black.png') no-repeat rgba(0, 0, 0, 0.48)!important;height:50px;padding-left:50px;margin-top:30px;font-size:18px}
-.Password{background:url('../images/lock.png') no-repeat rgba(0, 0, 0, 0.48)!important;height:50px;padding-left:50px;margin-top:30px;font-size:18px }
+.UserName{background:url('http://cdn.dailyesports.tv/user-black.png') no-repeat rgba(0, 0, 0, 0.48)!important;height:50px;padding-left:50px;margin-top:30px;font-size:18px}
+.Password{background:url('http://cdn.dailyesports.tv/lock.png') no-repeat rgba(0, 0, 0, 0.48)!important;height:50px;padding-left:50px;margin-top:30px;font-size:18px }
 .loginFB{height:60px;background:linear-gradient(#093071,#051c42);border:none;font-size:18px;padding:1em;width:100%;border-radius:5px}
 .signInBtn{height:60px;background:linear-gradient(#07640e,#043b08);border:none;font-size:20px;padding:1em;width:100%;border-radius:5px}
 .RememberMe{height:20px;font-size:20px;padding:1em;margin-bottom:0}
@@ -1534,8 +1534,8 @@ a.GreyFont{font-size:18px}
 .OR{align-items: end;display: flex;height: 140px}
 .OR label{margin:0 auto;padding:0}
 .myCheckbox input {position: relative;display:none}
-.myCheckbox span {width: 105px;height: 30px;display: block;background: url("../images/checkbox.png") no-repeat left center;margin-top:0.5em}
-.myCheckbox input:checked + span {background: url("../images/checkedbox.png") no-repeat left center}
+.myCheckbox span {width: 105px;height: 30px;display: block;background: url("http://cdn.dailyesports.tv/checkbox.png") no-repeat left center;margin-top:0.5em}
+.myCheckbox input:checked + span {background: url("http://cdn.dailyesports.tv/checkedbox.png") no-repeat left center}
 .MargT30{margin-top:30px}
 .MargT20{margin-top:20px}
 

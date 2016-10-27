@@ -6,14 +6,6 @@
 <script type="text/javascript">var switchTo5x = true;</script>
 <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({ publisher: "854ea013-b4bc-4a7a-aab5-8e5c26e958e7", doNotHash: false, doNotCopy: false, hashAddressBar: false });</script>
-<script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1651609955149884";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
 <div class="basic_bg_image">
     <div class="container bg-inherit">
         <div class="home_content">
@@ -22,7 +14,7 @@
                 <div class="basic_content">
                     <div class="post_page_header">
                         <div class="col-sm-9 br-bottom">
-                            <h4 class="f_bol main_head"><img src="@Model.NewsImage" alt="@Model.Title"> @Model.Title</h4>
+                            <h4 class="f_bol main_head"><img src="@Globals.CDNContent(Model.NewsImage)" alt="@Model.Title"> @Model.Title</h4>
                         </div>
                         <div class="col-sm-3 pad-zero">
                             <div class="sb_search">
@@ -33,17 +25,16 @@
                     </div>
                     <div class="col-sm-8 pad-zero br-right">
                         <div class="news_post_area">
-                            <div class="news_post_area_img bg-image" style="background-image:url('@Model.NewsImage');background-size: 100%; ">
+                            <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.NewsImage)');background-size: 100%; ">
                                 <div class="news_post_content hvr-sweep-to-top">
                                     <div class="col-sm-2">
                                         <div class="news_post_subimg">
-                                            <a href="#"><img src="~/images/user.png" alt="#"></a>
+                                            <img src="@Globals.CDNContent(Model.Author.Image)" alt="#">
                                         </div>
                                     </div>
                                     <div class="col-sm-10">
-
-                                        <h4 class="f_bol">@Model.AuthorName<span class='st_facebook_large' displayText='Facebook'></span><span class='st_twitter_large' displayText='Tweet'></span><span class='st_googleplus_large' displayText='Google +'></span>  </h4>
-                                        <p>@Model.AuthorBigraphy</p>
+                                        <h4 class="f_bol">@Model.Author.Name<span class='st_facebook_large' displayText='Facebook'></span><span class='st_twitter_large' displayText='Tweet'></span><span class='st_googleplus_large' displayText='Google +'></span>  </h4>
+                                        <p>@Model.Author.Biography</p>
                                     </div>
                                 </div>
                             </div>
@@ -57,7 +48,7 @@
                         <div class="news_share_icons">
                             <div class="col-sm-12">
                                 <h4 class="f_bol">Share This:</h4>
-                                <div class="socials_btns">
+                                <div class="socials_btns pull-right">
                                     <span class='st_sharethis_large' displayText='ShareThis'></span>
                                     <span class='st_facebook_large' displayText='Facebook'></span>
                                     <span class='st_twitter_large' displayText='Tweet'></span>
@@ -69,8 +60,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="disqus_comment float_left height_200 text-center">
-                            <h2>Disqus Comments here</h2>
+                        <div class="disqus_comment float_left text-center">
+                            <h2>Discuss Comments here</h2>
                             <div class="fb-comments" data-numposts="5"></div>
                         </div>
                     </div>
@@ -114,7 +105,7 @@
                                 <div class="pet_of_day float_left">
                                     @foreach (var pet in Model.PetOfTheDate)
                                     {
-                                        <div class="bg-image pet_image" style="background-image:url('../../images/@pet.PetImage')">
+                                        <div class="bg-image pet_image" style="background-image:url('@Globals.CDNContent(pet.PetImage)')">
                                             <div class="pet_day_heading"><h4>@pet.Title</h4></div>
                                             <div class="pet_day_overlay">
                                                 <p>Name: @pet.Description</p>
@@ -148,5 +139,12 @@
             </div>
         </div>
     </div>
-
 </div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1651609955149884";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>

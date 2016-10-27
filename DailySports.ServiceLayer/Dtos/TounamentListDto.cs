@@ -10,6 +10,6 @@ namespace DailySports.ServiceLayer.Dtos
     {
         public List<TournementsDto> AllTournaments { get; set; }
         public List<TournementsDto> LatestTournament { get; set; }
-
+        public List<GameDto> AllGames { get; set; }
     }
 }

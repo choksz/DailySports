@@ -57,7 +57,7 @@
                                         @Html.DisplayFor(modelItem => item.Description)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.PetImage)
+                                        <a href="@Globals.CDNContent(item.PetImage)">Link</a>
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Age)

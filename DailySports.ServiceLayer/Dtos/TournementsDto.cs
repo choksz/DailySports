@@ -7,7 +7,7 @@ using DailySports.DataLayer.Model;
 
 namespace DailySports.ServiceLayer.Dtos
 {
-   public class TournementsDto
+    public class TournementsDto
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -28,7 +28,8 @@ namespace DailySports.ServiceLayer.Dtos
         public List<PrizePoolDto> TournamentPrizePool { get; set; }
         public List<GroupStagesDto> TournamentGroupStages { get; set; }
         public List<MatchDto> NextMatches { get; set; }
-        public TournementsDto() {}
+
+        public TournementsDto() { }
         public TournementsDto(Tournaments tournament)
         {
             Id = tournament.Id;
@@ -45,6 +46,22 @@ namespace DailySports.ServiceLayer.Dtos
             URL = tournament.URL;
             TournamentImage = tournament.TournamentImage;
             Game = new GameDto(tournament.Game);
+            TournamentMatches = new List<MatchDto>();
+            foreach (var match in tournament.Matches)
+            {
+                TournamentMatches.Add(new MatchDto(match));
+            }
+            TournamentPrizePool = new List<PrizePoolDto>();
+            foreach (var prize in tournament.PrizePool)
+            {
+                TournamentPrizePool.Add(new PrizePoolDto(prize));
+            }
+            TournamentGroupStages = new List<GroupStagesDto>();
+            foreach (var groupStage in tournament.GroupStages)
+            {
+                TournamentGroupStages.Add(new GroupStagesDto(groupStage));
+            }
+            NextMatches = new List<MatchDto>();
         }
     }
 }

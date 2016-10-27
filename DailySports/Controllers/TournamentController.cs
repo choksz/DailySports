@@ -12,10 +12,12 @@ namespace DailySports.Controllers
     {
         private ITournementsService _tournamentService;
         private IMatchService _matchService;
-        public TournamentController(ITournementsService tournamentService, IMatchService matchService)
+        private IGameService _gameService;
+        public TournamentController(ITournementsService tournamentService, IMatchService matchService, IGameService gameService)
         {
             _tournamentService = tournamentService;
             _matchService = matchService;
+            _gameService = gameService;
         }
         // GET: Tournament
 
@@ -27,8 +29,8 @@ namespace DailySports.Controllers
                 TounamentListDto newTournamentList = new TounamentListDto();
                 newTournamentList.AllTournaments = _tournamentService.GetAll();
                 newTournamentList.LatestTournament = _tournamentService.LatestTournements();
+                newTournamentList.AllGames = _gameService.GetAll();
                 if (newTournamentList.AllTournaments.Count != 0 && newTournamentList.LatestTournament != null)
-
                 {
                     return View(newTournamentList);
                 }
@@ -42,6 +44,7 @@ namespace DailySports.Controllers
                 TounamentListDto newTournamentList = new TounamentListDto();
                 newTournamentList.AllTournaments = _tournamentService.GetAll();
                 newTournamentList.LatestTournament = _tournamentService.LatestTournements();
+                newTournamentList.AllGames = _gameService.GetAll();
                 if (newTournamentList.AllTournaments.Count != 0 && newTournamentList.LatestTournament != null)
                 {
                     return View(newTournamentList);

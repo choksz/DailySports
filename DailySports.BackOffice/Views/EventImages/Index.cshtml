@@ -39,7 +39,7 @@
                                             @Html.DisplayFor(modelItem => item.Tag)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.File)
+                                            <a href="@Globals.CDNContent(item.File)">Link</a>
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

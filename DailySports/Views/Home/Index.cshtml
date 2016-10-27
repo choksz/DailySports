@@ -58,12 +58,15 @@
                             {
                             <div class="col-sm-6 home_small_video_box">
                                 <div class="home_small_box">
-                                    <div class="news_area bg-image" style="background-image: url('@Globals.CDNContent(news.NewsImage)')">
-                                        <div class="news_dota_ico"><img src="@Globals.CDNContent(news.Game.GameImage)" alt="@news.Game.Name" class=""></div>
-                                        <div class="news_title">
-                                            <a href="@Url.Action("GetNews", "News", new { @id = news.Id })"><h3>@news.Title</h3></a>
+                                    <a href="@Url.Action("GetNews", "News", new { @id = news.Id })">
+                                        <div class="news_area bg-image" style="background-image: url('@Globals.CDNContent(news.NewsImage)')">
+                                            <div class="news_dota_ico"><img src="@Globals.CDNContent(news.Game.GameImage)" alt="@news.Game.Name" class=""></div>
+                                            <div class="news_title">
+                                                <h3>@news.Title</h3>
+
+                                            </div>
                                         </div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                             } 
@@ -103,8 +106,14 @@
                                 <div class="tournament_box">
                                     <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
                                         <div class="tournament_box">
-                                            <div class="col-sm-4 tournament_box_img pad_zero" style="background-image:url('@Globals.CDNContent(tournament.TournamentImage)')">
-                                                <h4>@tournament.Title</h4>
+                                            <div class="tournament_box_img pad_zero" style="background-image:url('@Globals.CDNContent(tournament.TournamentImage)')">
+                                                <div class="tournaments_title">
+                                                    @tournament.Title
+                                                    <div class="pull-right">
+                                                        @tournament.StartDate.ToLongDateString() - @tournament.EndDate.ToLongDateString()
+                                                    </div>
+                                                </div>
+                                                <div class="tournament_details">@tournament.Overview</div>
                                             </div> 
                                         </div>
                                     </a>
