@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System;
+using DailySports.BackOffice.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -34,10 +36,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                petOfTheWeek.PetImage = path;
+                if (file != null)
+                {
+                    petOfTheWeek.PetImage = GoogleStorageService.Upload(file);
+                }
                 db.PetOfTheWeek.Add(petOfTheWeek);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -58,6 +60,7 @@ namespace DailySports.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.oldFileName = petOfTheWeek.PetImage;
             return View(petOfTheWeek);
         }
 
@@ -66,14 +69,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,PetImage,Age,Gender,FunFact,Owner,StartDate,EndDate")] PetOfTheWeek petOfTheWeek, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,PetImage,Age,Gender,FunFact,Owner,StartDate,EndDate")] PetOfTheWeek petOfTheWeek, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                petOfTheWeek.PetImage = path;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    petOfTheWeek.PetImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(petOfTheWeek).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -102,6 +109,7 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             PetOfTheWeek petOfTheWeek = db.PetOfTheWeek.Find(id);
+            GoogleStorageService.Delete(petOfTheWeek.PetImage);
             db.PetOfTheWeek.Remove(petOfTheWeek);
             try
             {

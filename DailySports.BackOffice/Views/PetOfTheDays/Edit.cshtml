@@ -22,7 +22,7 @@
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
-
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
@@ -42,8 +42,18 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.PetImage, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    <input class="form-control" type="file" name="file" />
-                                    @Html.ValidationMessageFor(model => model.PetImage, "", new { @class = "text-danger" })
+                                    @if (!@Model.PetImage.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.PetImage)">
+                                                <img src="@Globals.CDNContent(@Model.PetImage)" style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input class="form-control" type="file" name="file" />
+                                        @Html.ValidationMessageFor(model => model.PetImage, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
 
@@ -97,14 +107,9 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="submit" value="Edit" class="btn btn-success" />
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    @Html.ActionLink("Back to List", "Index")
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Save" class="btn btn-success pull-right" />
+                                    <input onclick="location.href='@Url.Action("Index","PetOfTheDays")'; return false;" type="button" value="Back" class="btn btn-danger" />
                                 </div>
                             </div>
                         </div>
@@ -112,5 +117,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </section>

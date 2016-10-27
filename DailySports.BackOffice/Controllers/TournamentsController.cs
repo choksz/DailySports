@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
+using DailySports.BackOffice.Utilities;
 using System.IO;
 
 namespace DailySports.BackOffice.Controllers
@@ -39,12 +40,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
-                var virtualpath = "backend/Attachments/Images/" + "" + fileName;
-
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                tournaments.TournamentImage = virtualpath;
+                if (file != null)
+                {
+                    tournaments.TournamentImage = GoogleStorageService.Upload(file);
+                }
                 db.Tournaments.Add(tournaments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -67,6 +66,7 @@ namespace DailySports.BackOffice.Controllers
                 return HttpNotFound();
             }
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name", tournaments.GameId);
+            ViewBag.oldFileName = tournaments.TournamentImage;
             return View(tournaments);
         }
 
@@ -75,10 +75,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Format,Overview,MainEvent,Qualifiers,Description,URL,StartDate,EndDate,Price,GameId")] Tournaments tournaments)
+        public ActionResult Edit([Bind(Include = "Id,Title,Format,Overview,MainEvent,Qualifiers,Description,URL,StartDate,EndDate,Price,GameId,TournamentsImage")] Tournaments tournaments, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    tournaments.TournamentImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(tournaments).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -108,6 +116,7 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Tournaments tournaments = db.Tournaments.Find(id);
+            GoogleStorageService.Delete(tournaments.TournamentImage);
             db.Tournaments.Remove(tournaments);
             try
             {

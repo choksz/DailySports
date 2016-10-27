@@ -14,14 +14,14 @@
                 </div>
                 <div class="box-body">
 
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Edit", "Tournaments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
-
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
@@ -79,6 +79,25 @@
                             </div>
 
                             <div class="form-group">
+                                @Html.LabelFor(model => model.TournamentImage, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @if (!@Model.TournamentImage.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.TournamentImage)">
+                                                <img src="@Globals.CDNContent(@Model.TournamentImage)" style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input class="form-control" name="file" type="file" />
+                                        @Html.ValidationMessageFor(model => model.TournamentImage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
                                     @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
@@ -111,14 +130,9 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="submit" value="Create" class="btn btn-success" />
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-12">
-                                    @Html.ActionLink("Back to List", "Index")
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Save" class="btn btn-success pull-right" />
+                                    <input onclick="location.href='@Url.Action("Index","Tournaments")'; return false;" type="button" value="Back" class="btn btn-danger" />
                                 </div>
                             </div>
                         </div>

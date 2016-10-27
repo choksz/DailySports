@@ -1251,6 +1251,7 @@
     <Content Include="ckeditor\samples\toolbarconfigurator\font\fontello.woff" />
     <Content Include="ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="ckeditor\skins\moono\readme.md" />
+    <Content Include="App_Code\Globals.cshtml" />
     <None Include="Properties\PublishProfiles\DailyeSports.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />

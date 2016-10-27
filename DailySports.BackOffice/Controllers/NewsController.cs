@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
+using DailySports.BackOffice.Utilities;
 using System.IO;
 
 namespace DailySports.BackOffice.Controllers
@@ -42,12 +43,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
-                var virtualpath = "backend/Attachments/Images/" + fileName;
-
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                news.NewsImage = virtualpath;
+                if (file != null)
+                {
+                    news.NewsImage = GoogleStorageService.Upload(file);
+                }
                 db.News.Add(news);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,6 +75,7 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name", news.CategoryId);
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name", news.GameId);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", news.TournamentId);
+            ViewBag.oldFileName = news.NewsImage;
             return View(news);
         }
 
@@ -84,15 +84,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,NewsImage,Date,Tag,AuthorId,CategoryId,GameId,status,TournamentId")] News news,HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,NewsImage,Date,Tag,AuthorId,CategoryId,GameId,status,TournamentId")] News news,HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
-                var virtualpath = "backend/Attachments/Images/" + fileName;
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                news.NewsImage = virtualpath;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    news.NewsImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(news).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -125,6 +128,7 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             News news = db.News.Find(id);
+            GoogleStorageService.Delete(news.NewsImage);
             db.News.Remove(news);
             try
             {

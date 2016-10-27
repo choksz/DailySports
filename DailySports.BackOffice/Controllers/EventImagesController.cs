@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
 using System.IO;
+using DailySports.BackOffice.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -29,18 +30,7 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.EventId = new SelectList(db.Events, "Id", "Title");
             return View();
         }
-        public string GetBaseUrl()
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
 
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
         // POST: EventImages/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -50,10 +40,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/EventImages"),fileName);
-                file.SaveAs(path);
-                eventImage.File = path;
+                if (file != null)
+                {
+                    eventImage.File = GoogleStorageService.Upload(file);
+                }
                 db.EventImages.Add(eventImage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -76,6 +66,7 @@ namespace DailySports.BackOffice.Controllers
                 return HttpNotFound();
             }
             ViewBag.EventId = new SelectList(db.Events, "Id", "Title", eventImage.EventId);
+            ViewBag.oldFileName = eventImage.File;
             return View(eventImage);
         }
 
@@ -84,14 +75,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Tag,File,EventId")] EventImage eventImage, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Tag,File,EventId")] EventImage eventImage, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/EventImages"), fileName);
-                file.SaveAs(path);
-                eventImage.File = path;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    eventImage.File = GoogleStorageService.Upload(file);
+                }
                 db.Entry(eventImage).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -121,6 +116,7 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             EventImage eventImage = db.EventImages.Find(id);
+            GoogleStorageService.Delete(eventImage.File);
             db.EventImages.Remove(eventImage);
             try
             {

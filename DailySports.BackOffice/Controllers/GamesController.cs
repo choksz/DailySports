@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
 using System.IO;
+using DailySports.BackOffice.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -37,11 +38,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
-                var virtualpath = "backend/Attachments/Games/" + fileName;
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Games"), fileName);
-                file.SaveAs(path);
-                game.GameImage = virtualpath;
+                if (file != null)
+                {
+                    game.GameImage = GoogleStorageService.Upload(file);
+                }
                 db.Games.Add(game);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -62,6 +62,7 @@ namespace DailySports.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.oldFileName = game.GameImage;
             return View(game);
         }
 
@@ -70,15 +71,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,GameImage")] Game game, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Name,GameImage")] Game game, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
-                var virtualpath = "backend/Attachments/Games/" + fileName;
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Games"), fileName);
-                file.SaveAs(path);
-                game.GameImage=virtualpath;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    game.GameImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(game).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -107,6 +111,7 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Game game = db.Games.Find(id);
+            GoogleStorageService.Delete(game.GameImage);
             db.Games.Remove(game);
             try
             {

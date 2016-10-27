@@ -18,9 +18,9 @@ namespace DailySports.BackOffice.Utilities
 {
     class GoogleStorageService
     {
-        private string bucketName = "cdn.dailyesports.tv";
+        private static string bucketName = "cdn.dailyesports.tv";
 
-        public void Delete(string fileName)
+        public static void Delete(string fileName)
         {
             try
             {
@@ -33,9 +33,11 @@ namespace DailySports.BackOffice.Utilities
             }
         }
 
-        public void Upload(HttpPostedFileBase file, string fileName)
+        public static string Upload(HttpPostedFileBase file)
         {
             StorageService storage = CreateStorageClient();
+
+            string fileName = DateTime.Now.ToString("ddMMyyyyhhmmssffff") + "_" + Path.GetFileName(file.FileName);
 
             var body = new Google.Apis.Storage.v1.Data.Object();
 
@@ -47,9 +49,11 @@ namespace DailySports.BackOffice.Utilities
                 contentType: file.ContentType,
                 body: body
             ).Upload();
+
+            return fileName;
         }
 
-        private StorageService CreateStorageClient()
+        private static StorageService CreateStorageClient()
         {
            try {
                 
