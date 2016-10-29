@@ -13,7 +13,7 @@ namespace DailySports.ServiceLayer.Dtos
         public string Name { get; set; }
         public int TeamId { get; set; }
         public string TeamName { get; set; }
-        public TeamDto Team { get; set; }
+        //public TeamDto Team { get; set; }
 
         public PlayerDto() { }
         public PlayerDto(Player player)
@@ -22,7 +22,7 @@ namespace DailySports.ServiceLayer.Dtos
             Name = player.Name;
             TeamId = player.team.Id;
             TeamName = player.team.Name;
-            Team = new TeamDto(player.team);
+            //Team = new TeamDto(player.team);
         }
     }
 }

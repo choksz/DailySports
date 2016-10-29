@@ -17,17 +17,17 @@ namespace DailySports.ServiceLayer.Services
     {
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<User> _userRepository;
-        
-        public UserService(IUnitOfWork unitOfWork,IGenericRepository<User> userRepository)
+
+        public UserService(IUnitOfWork unitOfWork, IGenericRepository<User> userRepository)
         {
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
-            
+
         }
 
-        public bool AddUser(UserDto user,HttpPostedFileBase file)
+        public bool AddUser(UserDto user, HttpPostedFileBase file)
         {
-           try
+            try
             {
                 User newUser = new User();
                 newUser.Name = user.Name;
@@ -35,17 +35,20 @@ namespace DailySports.ServiceLayer.Services
                 newUser.Email = user.Email;
                 newUser.Biography = user.Biography;
                 newUser.Phone = user.Phone;
-                var fileName = Path.GetFileName(file.FileName);
-                string generatedName = Guid.NewGuid().ToString() + fileName;
-                var path = Path.Combine(HttpContext.Current.Server.MapPath("~/Admin/Users"), generatedName);
-                newUser.Image = fileName;
-                file.SaveAs(path);
+                if (file != null)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    string generatedName = Guid.NewGuid().ToString() + fileName;
+                    var path = Path.Combine(HttpContext.Current.Server.MapPath("~/Admin/Users"), generatedName);
+                    newUser.Image = fileName;
+                    file.SaveAs(path);
+                }
                 newUser.Type = UserType.SiteUser;
                 newUser.SecurityCode = user.SecurityCode;
                 _userRepository.Add(newUser);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -60,7 +63,7 @@ namespace DailySports.ServiceLayer.Services
                 _userRepository.Update(user);
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -77,13 +80,13 @@ namespace DailySports.ServiceLayer.Services
             {
                 List<User> UsersList = _userRepository.GetAll().ToList();
                 List<UserDto> UserDtoList = new List<UserDto>();
-                foreach(var user in UsersList)
+                foreach (var user in UsersList)
                 {
-                    UserDtoList.Add(new UserDto {Id=user.Id,Name=user.Name,Email=user.Email,Password=user.Password });
+                    UserDtoList.Add(new UserDto { Id = user.Id, Name = user.Name, Email = user.Email, Password = user.Password });
                 }
                 return UserDtoList;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -97,14 +100,14 @@ namespace DailySports.ServiceLayer.Services
                 UserDto newUser = new UserDto();
                 newUser.Id = user.Id;
                 newUser.Name = user.Name;
-                newUser.Password = user.Name;
+                newUser.Password = user.Password;
                 newUser.Phone = user.Phone;
                 newUser.Image = user.Image;
                 newUser.Biography = user.Biography;
                 newUser.Email = user.Email;
                 return newUser;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -126,7 +129,7 @@ namespace DailySports.ServiceLayer.Services
                 user.Type = newUser.Type;
                 return user;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -140,10 +143,10 @@ namespace DailySports.ServiceLayer.Services
                 UserDto userDto = new UserDto();
                 userDto.Id = user.Id;
                 userDto.Name = user.Name;
-                
+
                 return userDto;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }

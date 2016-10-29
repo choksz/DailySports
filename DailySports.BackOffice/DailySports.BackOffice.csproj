@@ -1395,6 +1395,10 @@
       <Project>{d76894fd-bb36-4558-9da5-7fe63b513f8b}</Project>
       <Name>DailySports.DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DailySports.ServiceLayer\DailySports.ServiceLayer.csproj">
+      <Project>{53e015b1-8fbf-440a-ad04-428feda9026c}</Project>
+      <Name>DailySports.ServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

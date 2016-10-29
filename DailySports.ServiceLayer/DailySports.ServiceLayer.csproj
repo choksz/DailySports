@@ -152,6 +152,7 @@
     <Compile Include="Services\VideoService.cs" />
     <Compile Include="UnitOfWork\IUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="Utilities\Helper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -34,7 +34,6 @@ namespace DailySports.ServiceLayer.Dtos
             TournamentName = match.Tournament.Title;
             TeamA = new TeamDto(match.TeamA);
             TeamB = new TeamDto(match.TeamB);
-            Tournament = new TournementsDto(match.Tournament);
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
+using DailySports.ServiceLayer.Utilities;
 
 namespace DailySports.Controllers
 {
@@ -82,9 +83,11 @@ namespace DailySports.Controllers
             }
             else
             {
+                user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
                 bool result = _userService.AddUser(user, file);
                 if (result == true)
                 {
+                    Session["LoggedInUser"] = user;
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -102,7 +105,13 @@ namespace DailySports.Controllers
         public ActionResult Signin(UserDto user)
         {
             UserDto LoggedInUser = new UserDto();
-            LoggedInUser = _userService.Login(user.Email, user.Password);
+            var tempUser = _userService.GetUserByEmail(user.Email);
+            var flag = PasswordHelper.VerifyHash(user.Password, "SHA512", tempUser.Password);
+
+            if (tempUser != null && flag == true)
+            {
+                LoggedInUser = tempUser;
+            }
             if (LoggedInUser != null && user.rememberme == true)
             {
                 Session["LoggedInUser"] = LoggedInUser;
