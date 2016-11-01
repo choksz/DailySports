@@ -13,11 +13,13 @@ namespace DailySports.Controllers
         private ITournementsService _tournamentService;
         private IMatchService _matchService;
         private IGameService _gameService;
-        public TournamentController(ITournementsService tournamentService, IMatchService matchService, IGameService gameService)
+        private INewsService _newsService;
+        public TournamentController(ITournementsService tournamentService, IMatchService matchService, IGameService gameService, INewsService newsService)
         {
             _tournamentService = tournamentService;
             _matchService = matchService;
             _gameService = gameService;
+            _newsService = newsService;
         }
         // GET: Tournament
 
@@ -30,6 +32,7 @@ namespace DailySports.Controllers
                 newTournamentList.AllTournaments = _tournamentService.GetAll();
                 newTournamentList.LatestTournament = _tournamentService.LatestTournements();
                 newTournamentList.AllGames = _gameService.GetAll();
+                newTournamentList.AllNews = _newsService.GetAll();
                 if (newTournamentList.AllTournaments.Count != 0 && newTournamentList.LatestTournament != null)
                 {
                     return View(newTournamentList);
@@ -45,6 +48,7 @@ namespace DailySports.Controllers
                 newTournamentList.AllTournaments = _tournamentService.GetAll();
                 newTournamentList.LatestTournament = _tournamentService.LatestTournements();
                 newTournamentList.AllGames = _gameService.GetAll();
+                newTournamentList.AllNews = _newsService.GetAll();
                 if (newTournamentList.AllTournaments.Count != 0 && newTournamentList.LatestTournament != null)
                 {
                     return View(newTournamentList);
@@ -69,6 +73,7 @@ namespace DailySports.Controllers
             TournamentDto.NextMatches = _matchService.NextMatches(id);
             TournamentDto.TournamentPrizePool = _tournamentService.TournametPrizePool(id);
             TournamentDto.TournamentGroupStages = _tournamentService.TournamentGroupStages(id);
+            ViewBag.News = _newsService.GetAll();
             return View(TournamentDto);
         }
 
