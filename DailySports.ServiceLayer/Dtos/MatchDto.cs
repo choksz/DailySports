@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DailySports.DataLayer.Model;
 
 namespace DailySports.ServiceLayer.Dtos
 {
@@ -16,6 +17,23 @@ namespace DailySports.ServiceLayer.Dtos
         public string TeamBName { get; set; }
         public int TournamentId { get; set; }
         public string TournamentName { get; set; }
+        public TeamDto TeamA { get; set; }
+        public TeamDto TeamB { get; set; }
+        public TournementsDto Tournament { get; set; }
 
+        public MatchDto() { }
+        public MatchDto(Match match)
+        {
+            Id = match.Id;
+            Date = match.Date;
+            TeamAId = match.TeamAId;
+            TeamAName = match.TeamA.Name;
+            TeamBId = match.TeamBId;
+            TeamBName = match.TeamB.Name;
+            TournamentId = match.TournamentId;
+            TournamentName = match.Tournament.Title;
+            TeamA = new TeamDto(match.TeamA);
+            TeamB = new TeamDto(match.TeamB);
+        }
     }
 }

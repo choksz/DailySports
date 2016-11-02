@@ -13,16 +13,14 @@
                     <h3 class="box-title">Edit Event</h3>
                 </div>
                 <div class="box-body">
-                    @using (Html.BeginForm("Edit","Events",FormMethod.Post,new { @enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Edit", "Events", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
                         <div class="form-horizontal">
-                            <h4>Event</h4>
-                            <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
-
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
@@ -82,8 +80,18 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.EventImage, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    <input type="file" class="form-control" name="file" />
-                                    @Html.ValidationMessageFor(model => model.EventImage, "", new { @class = "text-danger" })
+                                    @if (!@Model.EventImage.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.EventImage)">
+                                                <img src="@Globals.CDNContent(@Model.EventImage)" style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input type="file" class="form-control" name="file" />
+                                        @Html.ValidationMessageFor(model => model.EventImage, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
 
@@ -128,14 +136,9 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-12">
-                                    <input type="submit" value="Edit" class="btn btn-primary" />
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-10">
-                                    @Html.ActionLink("Back to List", "Index")
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Save" class="btn btn-success pull-right" />
+                                    <input onclick="location.href='@Url.Action("Index","Events")'; return false;" type="button" value="Back" class="btn btn-danger" />
                                 </div>
                             </div>
                         </div>
@@ -143,7 +146,6 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
 </section>

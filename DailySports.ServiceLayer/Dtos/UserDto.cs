@@ -19,6 +19,17 @@ namespace DailySports.ServiceLayer.Dtos
         public UserType Type { get; set; }
         public string ConfirmPassWord { get; set; } 
         public bool rememberme { get; set; }
-       public string SecurityCode { get; set; }
+        public string SecurityCode { get; set; }
+
+        public UserDto() { }
+        public UserDto(User user)
+        {
+            Id = user.Id;
+            Name = user.Name;
+            Email = user.Email;
+            Biography = user.Biography;
+            Phone = user.Phone;
+            Image = user.Image;
+        }
     }
 }

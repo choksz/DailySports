@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
+using DailySports.BackOffice.Utilities;
 using System.IO;
 
 namespace DailySports.BackOffice.Controllers
@@ -29,18 +30,6 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
             return View();
         }
-        public string GetBaseUrl()
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
 
         // POST: Tournaments/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -51,12 +40,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Images/" + "" + fileName;
-
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                tournaments.TournamentImage = virtualpath;
+                if (file != null)
+                {
+                    tournaments.TournamentImage = GoogleStorageService.Upload(file);
+                }
                 db.Tournaments.Add(tournaments);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,6 +66,7 @@ namespace DailySports.BackOffice.Controllers
                 return HttpNotFound();
             }
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name", tournaments.GameId);
+            ViewBag.oldFileName = tournaments.TournamentImage;
             return View(tournaments);
         }
 
@@ -87,10 +75,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Format,Overview,MainEvent,Qualifiers,Description,URL,StartDate,EndDate,Price,GameId")] Tournaments tournaments)
+        public ActionResult Edit([Bind(Include = "Id,Title,Format,Overview,MainEvent,Qualifiers,Description,URL,StartDate,EndDate,Price,GameId,TournamentsImage")] Tournaments tournaments, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    tournaments.TournamentImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(tournaments).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -120,9 +116,18 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Tournaments tournaments = db.Tournaments.Find(id);
+            GoogleStorageService.Delete(tournaments.TournamentImage);
             db.Tournaments.Remove(tournaments);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(tournaments);
+            }
         }
 
         protected override void Dispose(bool disposing)

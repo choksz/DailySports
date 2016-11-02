@@ -15,7 +15,7 @@ namespace DailySports.ServiceLayer.Services
     {
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<News> _newsRepository;
-        public NewsService(IUnitOfWork unitOfWork,IGenericRepository<News> newsRepository)
+        public NewsService(IUnitOfWork unitOfWork, IGenericRepository<News> newsRepository)
         {
             _unitOfWork = unitOfWork;
             _newsRepository = newsRepository;
@@ -32,14 +32,13 @@ namespace DailySports.ServiceLayer.Services
             {
                 List<News> NewsList = _newsRepository.GetAll().ToList();
                 List<NewsDto> NewsDtoList = new List<NewsDto>();
-                foreach(var news in NewsList)
+                foreach (var news in NewsList)
                 {
-                    NewsDtoList.Add(new NewsDto {
-                    Id =news.Id,Title=news.Title,Description=news.Description,AuthorName=news.Author.Name,AuthorBigraphy=news.Author.Biography,Date=news.Date,NewsImage=news.NewsImage});
+                    NewsDtoList.Add(new NewsDto(news));
                 }
                 return NewsDtoList;
             }
-            catch(Exception ex)
+            catch (Exception _)
             {
                 return null;
             }
@@ -47,20 +46,13 @@ namespace DailySports.ServiceLayer.Services
 
         public NewsDto GetNews(int id)
         {
-           try
+            try
             {
                 News newNews = _newsRepository.FindBy(N => N.Id == id).FirstOrDefault();
-                NewsDto newsDto = new NewsDto();
-                newsDto.Id = newNews.Id;
-                newsDto.Title = newNews.Title;
-                newsDto.Description = newNews.Description;
-                newsDto.AuthorName = newNews.Author.Name;
-                newsDto.AuthorBigraphy = newNews.Author.Biography;
-                newsDto.Date = newNews.Date;
-                newsDto.NewsImage = newNews.NewsImage;
+                NewsDto newsDto = new NewsDto(newNews);
                 return newsDto;
             }
-            catch(Exception ex)
+            catch (Exception _)
             {
                 return null;
             }
@@ -74,12 +66,11 @@ namespace DailySports.ServiceLayer.Services
                 List<NewsDto> NewsDtoList = new List<NewsDto>();
                 foreach (var news in NewsList)
                 {
-                    NewsDtoList.Add(new NewsDto { Id = news.Id, Title = news.Title, Description = news.Description, AuthorName = news.Author.Name, Date = news.Date, NewsImage = news.NewsImage });
+                    NewsDtoList.Add(new NewsDto(news));
                 }
                 return NewsDtoList;
-
             }
-            catch(Exception ex)
+            catch (Exception _)
             {
                 return null;
             }
@@ -93,19 +84,11 @@ namespace DailySports.ServiceLayer.Services
                 List<NewsDto> newsDto = new List<NewsDto>();
                 foreach (var LatestNews in LatestNewsList)
                 {
-                    newsDto.Add(new NewsDto
-                    {
-                        Id = LatestNews.Id,
-                        Title = LatestNews.Title,
-                        Description = LatestNews.Description,
-                        AuthorName = LatestNews.Author.Name,
-                        Date = LatestNews.Date,
-                        NewsImage = LatestNews.NewsImage
-                    });
+                    newsDto.Add(new NewsDto(LatestNews));
                 }
                 return newsDto;
             }
-            catch(Exception ex)
+            catch (Exception _)
             {
                 return null;
             }

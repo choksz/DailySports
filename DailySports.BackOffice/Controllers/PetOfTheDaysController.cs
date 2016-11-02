@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using DailySports.DataLayer.Context;
+using DailySports.DataLayer.Model;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using DailySports.DataLayer.Context;
-using DailySports.DataLayer.Model;
-using System.IO;
+using System;
+using DailySports.BackOffice.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -16,98 +15,112 @@ namespace DailySports.BackOffice.Controllers
     {
         private DailySportsContext db = new DailySportsContext();
 
-        // GET: PetOfTheDays
+        // GET: PetOfTheWeeks
         public ActionResult Index()
         {
-            return View(db.PetOfTheDay.ToList());
+            return View(db.PetOfTheWeek.ToList());
         }
 
-        // GET: PetOfTheDays/Create
+        // GET: PetOfTheWeeks/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: PetOfTheDays/Create
+        // POST: PetOfTheWeeks/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Description,PetImage,Age,Gender,FunFact,Owner,Date")] PetOfTheWeek petOfTheDay,HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "Id,Title,Description,PetImage,Age,Gender,FunFact,Owner,StartDate,EndDate")] PetOfTheWeek petOfTheWeek, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                petOfTheDay.PetImage = path;
-                db.PetOfTheDay.Add(petOfTheDay);
+                if (file != null)
+                {
+                    petOfTheWeek.PetImage = GoogleStorageService.Upload(file);
+                }
+                db.PetOfTheWeek.Add(petOfTheWeek);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(petOfTheDay);
+            return View(petOfTheWeek);
         }
 
-        // GET: PetOfTheDays/Edit/5
+        // GET: PetOfTheWeek/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PetOfTheWeek petOfTheDay = db.PetOfTheDay.Find(id);
-            if (petOfTheDay == null)
+            PetOfTheWeek petOfTheWeek = db.PetOfTheWeek.Find(id);
+            if (petOfTheWeek == null)
             {
                 return HttpNotFound();
             }
-            return View(petOfTheDay);
+            ViewBag.oldFileName = petOfTheWeek.PetImage;
+            return View(petOfTheWeek);
         }
 
-        // POST: PetOfTheDays/Edit/5
+        // POST: PetOfTheWeek/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,PetImage,Age,Gender,FunFact,Owner,Date")] PetOfTheWeek petOfTheDay,HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,PetImage,Age,Gender,FunFact,Owner,StartDate,EndDate")] PetOfTheWeek petOfTheWeek, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                petOfTheDay.PetImage = path;
-                db.Entry(petOfTheDay).State = EntityState.Modified;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    petOfTheWeek.PetImage = GoogleStorageService.Upload(file);
+                }
+                db.Entry(petOfTheWeek).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(petOfTheDay);
+            return View(petOfTheWeek);
         }
 
-        // GET: PetOfTheDays/Delete/5
+        // GET: PetOfTheWeek/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PetOfTheWeek petOfTheDay = db.PetOfTheDay.Find(id);
-            if (petOfTheDay == null)
+            PetOfTheWeek petOfTheWeek = db.PetOfTheWeek.Find(id);
+            if (petOfTheWeek == null)
             {
                 return HttpNotFound();
             }
-            return View(petOfTheDay);
+            return View(petOfTheWeek);
         }
 
-        // POST: PetOfTheDays/Delete/5
+        // POST: PetOfTheWeek/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PetOfTheWeek petOfTheDay = db.PetOfTheDay.Find(id);
-            db.PetOfTheDay.Remove(petOfTheDay);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            PetOfTheWeek petOfTheWeek = db.PetOfTheWeek.Find(id);
+            GoogleStorageService.Delete(petOfTheWeek.PetImage);
+            db.PetOfTheWeek.Remove(petOfTheWeek);
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(petOfTheWeek);
+            }
         }
 
         protected override void Dispose(bool disposing)

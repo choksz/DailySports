@@ -110,8 +110,16 @@ namespace DailySports.BackOffice.Controllers
         {
             Match match = db.Matches.Find(id);
             db.Matches.Remove(match);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(match);
+            }
         }
 
         protected override void Dispose(bool disposing)

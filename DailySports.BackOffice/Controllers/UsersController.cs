@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
+using DailySports.ServiceLayer.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -36,6 +37,8 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
+                user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
+
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -56,6 +59,7 @@ namespace DailySports.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
+            user.Password = null;
             return View(user);
         }
 
@@ -68,6 +72,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (user.Password != null)
+                {
+                    user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
+                }
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -97,8 +105,16 @@ namespace DailySports.BackOffice.Controllers
         {
             User user = db.Users.Find(id);
             db.Users.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(user);
+            }
         }
 
         protected override void Dispose(bool disposing)

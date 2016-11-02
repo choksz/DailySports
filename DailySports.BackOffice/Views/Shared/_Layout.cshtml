@@ -109,7 +109,7 @@
                     <li><a href="@Url.Action("Index","Comments")">Comments</a></li>
                     <li><a href="@Url.Action("Index", "GroupStages")">Group Stages</a></li>
                     <li><a href="@Url.Action("Index", "Matches")">Matches</a></li>
-                    <li><a href="@Url.Action("Index", "PetOfTheDays")">Pet Of The Days</a></li>
+                    <li><a href="@Url.Action("Index", "PetOfTheDays")">Pet Of The Week</a></li>
                     <li><a href="@Url.Action("Index", "Players")">Players</a></li>
                     <li><a href="@Url.Action("Index", "Privilges")">Privilges</a></li>
                     <li><a href="@Url.Action("Index", "PrizePools")">PrizePools</a></li>
@@ -316,7 +316,9 @@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
         $(document).ready(function () {
-            $('.datepicker').datepicker();
+            $(".datepicker").datepicker({
+                dateFormat: 'dd/MM/YYYY'
+            });
             $('.txtEditor').ckeditor();
             if ($('#success').val()) {
                 displayMessage($('#success').val(), 'success');

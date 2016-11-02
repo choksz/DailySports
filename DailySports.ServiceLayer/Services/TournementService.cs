@@ -31,68 +31,36 @@ namespace DailySports.ServiceLayer.Services
 
         public List<TournementsDto> GetAll()
         {
+            List<TournementsDto> TournamentsDtosList = new List<TournementsDto>();
             try
             {
                 List<Tournaments> TounamentsList = _tournamentsRepository.GetAll().ToList();
-                List<TournementsDto> TournamentsDtoList = new List<TournementsDto>();
                 foreach(var Tournament in TounamentsList)
                 {
-                    TournamentsDtoList.Add(new TournementsDto
-                    {
-                        Id =Tournament.Id,
-                        Description=Tournament.Description,
-                        Title=Tournament.Title,
-                        Format=Tournament.Format,
-                        MainEvent=Tournament.MainEvent,
-                        Overview=Tournament.Overview,
-                        Qualifiers=Tournament.Qualifiers,
-                        EndDate=Tournament.EndDate,
-                        Price=Tournament.Price,
-                        StartDate=Tournament.StartDate,
-                        URL=Tournament.URL,
-                        GameId=Tournament.GameId,
-                        TournamentImage=Tournament.TournamentImage
-                    });
+                    TournamentsDtosList.Add(new TournementsDto(Tournament));
                 }
-                return TournamentsDtoList;
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
-                return null;
             }
+            return TournamentsDtosList;
         }
 
         public List<TournementsDto> GetGameTournements(int GameId)
         {
+            List<TournementsDto> TournamentsDtoList = new List<TournementsDto>();
             try
             {
                 List<Tournaments> TounamentsList = _tournamentsRepository.FindBy(T=>T.GameId==GameId).ToList();
-                List<TournementsDto> TournamentsDtoList = new List<TournementsDto>();
                 foreach (var Tournament in TounamentsList)
                 {
-                    TournamentsDtoList.Add(new TournementsDto
-                    {
-                        Id = Tournament.Id,
-                        Description = Tournament.Description,
-                        Title = Tournament.Title,
-                        Format = Tournament.Format,
-                        MainEvent = Tournament.MainEvent,
-                        Overview = Tournament.Overview,
-                        Qualifiers = Tournament.Qualifiers,
-                        EndDate = Tournament.EndDate,
-                        Price = Tournament.Price,
-                        StartDate = Tournament.StartDate,
-                        URL = Tournament.URL,
-                        GameId=Tournament.GameId,
-                        TournamentImage=Tournament.TournamentImage
-                    });
+                    TournamentsDtoList.Add(new TournementsDto(Tournament));
                 }
-                return TournamentsDtoList;
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
-                return null;
             }
+            return TournamentsDtoList;
         }
 
         public TournementsDto GetTournement(int Id)
@@ -100,24 +68,11 @@ namespace DailySports.ServiceLayer.Services
             try
             {
                 Tournaments tournament = _tournamentsRepository.FindBy(T => T.Id == Id).FirstOrDefault();
-                TournementsDto TournamentsDto = new TournementsDto();
-                TournamentsDto.Id = tournament.Id;
-                TournamentsDto.Title = tournament.Title;
-                TournamentsDto.Description = tournament.Description;
-                TournamentsDto.Format = tournament.Format;
-                TournamentsDto.MainEvent = tournament.MainEvent;
-                TournamentsDto.Overview = tournament.Overview;
-                TournamentsDto.Qualifiers = tournament.Qualifiers;
-                TournamentsDto.Price = tournament.Price;
-                TournamentsDto.StartDate = tournament.StartDate;
-                TournamentsDto.EndDate = tournament.EndDate;
-                TournamentsDto.GameId = tournament.GameId;
-                TournamentsDto.URL = tournament.URL;
-                TournamentsDto.TournamentImage = tournament.TournamentImage;
+                TournementsDto TournamentsDto = new TournementsDto(tournament);
                 return TournamentsDto;
 
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
                 return null;
             }
@@ -125,60 +80,46 @@ namespace DailySports.ServiceLayer.Services
 
         public List<TournementsDto> LatestTournements()
         {
-           try
+            List<TournementsDto> TournamentsDto = new List<TournementsDto>();
+            try
             {
                 List<Tournaments> tournamentList = _tournamentsRepository.GetAll().OrderBy(T => T.Id).Take(1).ToList();
-                List<TournementsDto> TournamentsDto = new List<TournementsDto>();
                 foreach(var tournament in tournamentList)
                 {
-                    TournamentsDto.Add(new TournementsDto { Id = tournament.Id,
-                        Title = tournament.Title,
-                        Description = tournament.Description,
-                        Format = tournament.Format,
-                        MainEvent = tournament.MainEvent,
-                        Overview = tournament.Overview,
-                        Qualifiers = tournament.Qualifiers,
-                        Price = tournament.Price,
-                        StartDate = tournament.StartDate,
-                        EndDate = tournament.EndDate,
-                        GameId = tournament.GameId,
-                        URL = tournament.URL,
-                        TournamentImage=tournament.TournamentImage
-                    });
+                    TournamentsDto.Add(new TournementsDto(tournament));
                 }
-               
-                return TournamentsDto;
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
                 return null;
             }
+            return TournamentsDto;
         }
 
         public List<PrizePoolDto> TournametPrizePool(int TournamentId)
         {
-           try
+            List<PrizePoolDto> prizepooldtolist = new List<PrizePoolDto>();
+            try
             {
                 List<PrizePool> PrizePoolList = _prizePoolRepository.FindBy(P => P.TournamentId == TournamentId).ToList();
-                List<PrizePoolDto> prizepooldtolist = new List<PrizePoolDto>();
                 foreach(var prizepool in PrizePoolList)
                 {
                     prizepooldtolist.Add(new PrizePoolDto {Id=prizepool.Id,Level=prizepool.Level, Prize=prizepool.Prize,TeamId=prizepool.TeamId,TeamName=prizepool.Team.Name });
                 }
-                return prizepooldtolist;
+                
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
-                return null;
             }
+            return prizepooldtolist;
         }
 
         public List<GroupStagesDto> TournamentGroupStages(int TournamentId)
         {
+            List<GroupStagesDto> groupStegesDtoList = new List<GroupStagesDto>();
             try
             {
                 List<GroupStages> groupStagesList = _groupStageRepository.FindBy(g => g.TournamentId == TournamentId).ToList();
-                List<GroupStagesDto> groupStegesDtoList = new List<GroupStagesDto>();
                 List<TeamDto> teamdtolist = new List<TeamDto>();
                 foreach (var groupstage in groupStagesList)
                 {
@@ -188,12 +129,12 @@ namespace DailySports.ServiceLayer.Services
                     }
                     groupStegesDtoList.Add(new GroupStagesDto {Id=groupstage.Id,TeamList=teamdtolist });
                 }
-                return groupStegesDtoList;
+                
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
-                return null;
             }
+            return groupStegesDtoList;
         }
 
         public int GetLatestTornamentId()
@@ -203,7 +144,7 @@ namespace DailySports.ServiceLayer.Services
                 Tournaments tournament = _tournamentsRepository.GetAll().OrderByDescending(T => T.Id).Take(1).FirstOrDefault();
                 return tournament.Id;
             }
-            catch(Exception ex)
+            catch(Exception _)
             {
                 return 0;
             }
