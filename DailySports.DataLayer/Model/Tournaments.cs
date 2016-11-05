@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace DailySports.DataLayer.Model
 {
-   public class Tournaments : DbContext
+   public class Tournaments
     {
         [Key]
         public int Id { get; set; }

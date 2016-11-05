@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DailySports.ServiceLayer.Dtos
 {
-  public  class TounamentListDto: DbContext
+  public  class TounamentListDto
     {
         public List<TournementsDto> AllTournaments { get; set; }
         public List<TournementsDto> LatestTournament { get; set; }

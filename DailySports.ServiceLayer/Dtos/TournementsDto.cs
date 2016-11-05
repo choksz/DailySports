@@ -7,7 +7,7 @@ using System.Data.Linq;
 using System.Data.Entity;
 namespace DailySports.ServiceLayer.Dtos
 {
-   public class TournementsDto : DbContext
+   public class TournementsDto 
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -30,7 +30,7 @@ namespace DailySports.ServiceLayer.Dtos
         public List<MatchDto> NextMatches { get; set; }
 
         public TournementsDto() { }
-        public TournementsDto(Tournaments tournament)
+        public TournementsDto(DataLayer.Model.Tournaments tournament)
         {
             Id = tournament.Id;
             Title = tournament.Title;

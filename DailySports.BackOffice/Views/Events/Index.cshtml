@@ -92,8 +92,8 @@
                                         <td>
                                             <ul class="enlarge">
                                                 <li>
-                                                    <img width="150px" height="100px" src="@item.EventImage.Replace("C:\\inetpub\\wwwroot","")" />
-                                                    <span><img src="@item.EventImage.Replace("C:\\inetpub\\wwwroot","")" alt="" /><br /> </span>
+                                                    <img width="150px" height="100px" src="@Globals.CDNContent(@Html.DisplayFor(modelItem => item.EventImage).ToString())" />
+                                                    <span><img src="@Globals.CDNContent(@Html.DisplayFor(modelItem => item.EventImage).ToString())" alt="" /><br /> </span>
                                                 </li>
                                             </ul>
                                         </td>

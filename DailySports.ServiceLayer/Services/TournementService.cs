@@ -13,13 +13,11 @@ namespace DailySports.ServiceLayer.Services
 {
     public class TournementService : ITournementsService
     {
-        Tournaments abc = new Tournaments();
-        TournementsDto abc2 = new TournementsDto();
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Tournaments> _tournamentsRepository;
         private IGenericRepository<PrizePool> _prizePoolRepository;
         private IGenericRepository<GroupStages> _groupStageRepository;
-        public TournementService(IUnitOfWork unitOfWok,IGenericRepository<PrizePool> prizePoolRepository,IGenericRepository<GroupStages> groupStageRepository,IGenericRepository<Tournaments> tournementsRepository)
+        public TournementService(IUnitOfWork unitOfWok, IGenericRepository<PrizePool> prizePoolRepository, IGenericRepository<GroupStages> groupStageRepository, IGenericRepository<Tournaments> tournementsRepository)
         {
             _tournamentsRepository = tournementsRepository;
             _unitOfWork = unitOfWok;
@@ -28,7 +26,6 @@ namespace DailySports.ServiceLayer.Services
         }
         public void Dispose()
         {
-             
             _unitOfWork.Dispose();
         }
 
@@ -36,33 +33,14 @@ namespace DailySports.ServiceLayer.Services
         {
             List<TournementsDto> TournamentsDtosList = new List<TournementsDto>();
             try
-            { 
+            {
                 List<Tournaments> TounamentsList = _tournamentsRepository.GetAll().ToList();
-                List<TournementsDto> TournamentsDtoList = new List<TournementsDto>();
-                using (Tournaments abcx = new Tournaments()) {
-                    foreach (var Tournament in TounamentsList)
-                    {
-                        TournamentsDtoList.Add(new TournementsDto
-                        {
-                            Id = Tournament.Id,
-                            Description = Tournament.Description,
-                            Title = Tournament.Title,
-                            Format = Tournament.Format,
-                            MainEvent = Tournament.MainEvent,
-                            Overview = Tournament.Overview,
-                            Qualifiers = Tournament.Qualifiers,
-                            EndDate = Tournament.EndDate,
-                            Price = Tournament.Price,
-                            StartDate = Tournament.StartDate,
-                            URL = Tournament.URL,
-                            GameId = Tournament.GameId,
-                            TournamentImage = Tournament.TournamentImage
-                        });
-                    }
+                foreach (var Tournament in TounamentsList)
+                {
+                    TournamentsDtosList.Add(new TournementsDto(Tournament));
                 }
-                return TournamentsDtoList;
             }
-            catch(Exception _)
+            catch (Exception _)
             {
             }
             return TournamentsDtosList;
@@ -73,13 +51,13 @@ namespace DailySports.ServiceLayer.Services
             List<TournementsDto> TournamentsDtoList = new List<TournementsDto>();
             try
             {
-                List<Tournaments> TounamentsList = _tournamentsRepository.FindBy(T=>T.GameId==GameId).ToList();
+                List<Tournaments> TounamentsList = _tournamentsRepository.FindBy(T => T.GameId == GameId).ToList();
                 foreach (var Tournament in TounamentsList)
                 {
                     TournamentsDtoList.Add(new TournementsDto(Tournament));
                 }
             }
-            catch(Exception _)
+            catch (Exception _)
             {
             }
             return TournamentsDtoList;
@@ -94,7 +72,7 @@ namespace DailySports.ServiceLayer.Services
                 return TournamentsDto;
 
             }
-            catch(Exception _)
+            catch (Exception _)
             {
                 return null;
             }
@@ -106,12 +84,12 @@ namespace DailySports.ServiceLayer.Services
             try
             {
                 List<Tournaments> tournamentList = _tournamentsRepository.GetAll().OrderBy(T => T.Id).Take(1).ToList();
-                foreach(var tournament in tournamentList)
+                foreach (var tournament in tournamentList)
                 {
                     TournamentsDto.Add(new TournementsDto(tournament));
                 }
             }
-            catch(Exception _)
+            catch (Exception _)
             {
                 return null;
             }
@@ -124,13 +102,13 @@ namespace DailySports.ServiceLayer.Services
             try
             {
                 List<PrizePool> PrizePoolList = _prizePoolRepository.FindBy(P => P.TournamentId == TournamentId).ToList();
-                foreach(var prizepool in PrizePoolList)
+                foreach (var prizepool in PrizePoolList)
                 {
-                    prizepooldtolist.Add(new PrizePoolDto {Id=prizepool.Id,Level=prizepool.Level, Prize=prizepool.Prize,TeamId=prizepool.TeamId,TeamName=prizepool.Team.Name });
+                    prizepooldtolist.Add(new PrizePoolDto { Id = prizepool.Id, Level = prizepool.Level, Prize = prizepool.Prize, TeamId = prizepool.TeamId, TeamName = prizepool.Team.Name });
                 }
-                
+
             }
-            catch(Exception _)
+            catch (Exception _)
             {
             }
             return prizepooldtolist;
@@ -149,11 +127,11 @@ namespace DailySports.ServiceLayer.Services
                     {
                         teamdtolist.Add(new TeamDto { Id = team.Id, Name = team.Name });
                     }
-                    groupStegesDtoList.Add(new GroupStagesDto {Id=groupstage.Id,TeamList=teamdtolist });
+                    groupStegesDtoList.Add(new GroupStagesDto { Id = groupstage.Id, TeamList = teamdtolist });
                 }
-                
+
             }
-            catch(Exception _)
+            catch (Exception _)
             {
             }
             return groupStegesDtoList;
@@ -166,11 +144,10 @@ namespace DailySports.ServiceLayer.Services
                 Tournaments tournament = _tournamentsRepository.GetAll().OrderByDescending(T => T.Id).Take(1).FirstOrDefault();
                 return tournament.Id;
             }
-            catch(Exception _)
+            catch (Exception _)
             {
                 return 0;
             }
         }
-        
     }
 }
