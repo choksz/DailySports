@@ -9,8 +9,9 @@
         <div class="tournament_upper">
             <div class="col-sm-6">
                 <div class="tournament_iframe">
-                    <div style="width:500px;height:300px">
-                        @Html.Raw(Model.URL)
+                    <div>
+                     <iframe src="@Html.Raw(Model.URL)" style="width:500px;height:300px" ></iframe>
+                        
                     </div>
                 </div>
             </div>

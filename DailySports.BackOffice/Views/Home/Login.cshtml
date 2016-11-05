@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<div id="login" class="">
+    <div class="modal-dialog" style="width: 300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Daily Esports Admin</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+                {
+                    <text>@Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <label for="username">User Name</label>
+                        <div class="input-group">
+                           
+                            <input name="username" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input name="password" class="form-control" type="password" />
+                    </div>
+                    @if (ViewBag.errormsg != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.errormsg</div>
+                    }
+                    <input type="submit" class="btn btn-primary" value="Login" />
+                    </text>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -32,7 +32,8 @@ namespace DailySports.ServiceLayer.Repositories.Core
         }
         public IQueryable<TEntity> GetAll()
         {
-            IQueryable<TEntity> query = this.DbContext.Set<TEntity>();
+            IQueryable<TEntity> query = this.DbContext.Set<TEntity>().AsNoTracking();
+            
             return query;
         }
         public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)

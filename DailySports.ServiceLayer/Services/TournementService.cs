@@ -13,6 +13,8 @@ namespace DailySports.ServiceLayer.Services
 {
     public class TournementService : ITournementsService
     {
+        Tournaments abc = new Tournaments();
+        TournementsDto abc2 = new TournementsDto();
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Tournaments> _tournamentsRepository;
         private IGenericRepository<PrizePool> _prizePoolRepository;
@@ -26,33 +28,36 @@ namespace DailySports.ServiceLayer.Services
         }
         public void Dispose()
         {
+             
             _unitOfWork.Dispose();
         }
 
         public List<TournementsDto> GetAll()
         {
             try
-            {
+            { 
                 List<Tournaments> TounamentsList = _tournamentsRepository.GetAll().ToList();
                 List<TournementsDto> TournamentsDtoList = new List<TournementsDto>();
-                foreach(var Tournament in TounamentsList)
-                {
-                    TournamentsDtoList.Add(new TournementsDto
+                using (Tournaments abcx = new Tournaments()) {
+                    foreach (var Tournament in TounamentsList)
                     {
-                        Id =Tournament.Id,
-                        Description=Tournament.Description,
-                        Title=Tournament.Title,
-                        Format=Tournament.Format,
-                        MainEvent=Tournament.MainEvent,
-                        Overview=Tournament.Overview,
-                        Qualifiers=Tournament.Qualifiers,
-                        EndDate=Tournament.EndDate,
-                        Price=Tournament.Price,
-                        StartDate=Tournament.StartDate,
-                        URL=Tournament.URL,
-                        GameId=Tournament.GameId,
-                        TournamentImage=Tournament.TournamentImage
-                    });
+                        TournamentsDtoList.Add(new TournementsDto
+                        {
+                            Id = Tournament.Id,
+                            Description = Tournament.Description,
+                            Title = Tournament.Title,
+                            Format = Tournament.Format,
+                            MainEvent = Tournament.MainEvent,
+                            Overview = Tournament.Overview,
+                            Qualifiers = Tournament.Qualifiers,
+                            EndDate = Tournament.EndDate,
+                            Price = Tournament.Price,
+                            StartDate = Tournament.StartDate,
+                            URL = Tournament.URL,
+                            GameId = Tournament.GameId,
+                            TournamentImage = Tournament.TournamentImage
+                        });
+                    }
                 }
                 return TournamentsDtoList;
             }
@@ -208,5 +213,6 @@ namespace DailySports.ServiceLayer.Services
                 return 0;
             }
         }
+        
     }
 }

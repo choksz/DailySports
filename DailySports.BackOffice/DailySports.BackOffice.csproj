@@ -525,23 +525,6 @@
     <Content Include="dist\js\pages\dashboard.js" />
     <Content Include="dist\js\pages\dashboard2.js" />
     <Content Include="dist\js\raphael-min.js" />
-    <Content Include="documentation\build\include\adminlte-options.html" />
-    <Content Include="documentation\build\include\advice.html" />
-    <Content Include="documentation\build\include\browsers.html" />
-    <Content Include="documentation\build\include\components.html" />
-    <Content Include="documentation\build\include\dependencies.html" />
-    <Content Include="documentation\build\include\download.html" />
-    <Content Include="documentation\build\include\faq.html" />
-    <Content Include="documentation\build\include\implementations.html" />
-    <Content Include="documentation\build\include\introduction.html" />
-    <Content Include="documentation\build\include\layout.html" />
-    <Content Include="documentation\build\include\license.html" />
-    <Content Include="documentation\build\include\plugins.html" />
-    <Content Include="documentation\build\include\upgrade.html" />
-    <Content Include="documentation\build\index.html" />
-    <Content Include="documentation\docs.js" />
-    <Content Include="documentation\index.html" />
-    <Content Include="documentation\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="pages\calendar.html" />
     <Content Include="pages\charts\chartjs.html" />
@@ -1092,90 +1075,6 @@
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="build\bootstrap-less\mixins.less" />
-    <Content Include="build\bootstrap-less\mixins\alerts.less" />
-    <Content Include="build\bootstrap-less\mixins\background-variant.less" />
-    <Content Include="build\bootstrap-less\mixins\border-radius.less" />
-    <Content Include="build\bootstrap-less\mixins\buttons.less" />
-    <Content Include="build\bootstrap-less\mixins\center-block.less" />
-    <Content Include="build\bootstrap-less\mixins\clearfix.less" />
-    <Content Include="build\bootstrap-less\mixins\forms.less" />
-    <Content Include="build\bootstrap-less\mixins\gradients.less" />
-    <Content Include="build\bootstrap-less\mixins\grid-framework.less" />
-    <Content Include="build\bootstrap-less\mixins\grid.less" />
-    <Content Include="build\bootstrap-less\mixins\hide-text.less" />
-    <Content Include="build\bootstrap-less\mixins\image.less" />
-    <Content Include="build\bootstrap-less\mixins\labels.less" />
-    <Content Include="build\bootstrap-less\mixins\list-group.less" />
-    <Content Include="build\bootstrap-less\mixins\nav-divider.less" />
-    <Content Include="build\bootstrap-less\mixins\nav-vertical-align.less" />
-    <Content Include="build\bootstrap-less\mixins\opacity.less" />
-    <Content Include="build\bootstrap-less\mixins\pagination.less" />
-    <Content Include="build\bootstrap-less\mixins\panels.less" />
-    <Content Include="build\bootstrap-less\mixins\progress-bar.less" />
-    <Content Include="build\bootstrap-less\mixins\reset-filter.less" />
-    <Content Include="build\bootstrap-less\mixins\reset-text.less" />
-    <Content Include="build\bootstrap-less\mixins\resize.less" />
-    <Content Include="build\bootstrap-less\mixins\responsive-visibility.less" />
-    <Content Include="build\bootstrap-less\mixins\size.less" />
-    <Content Include="build\bootstrap-less\mixins\tab-focus.less" />
-    <Content Include="build\bootstrap-less\mixins\table-row.less" />
-    <Content Include="build\bootstrap-less\mixins\text-emphasis.less" />
-    <Content Include="build\bootstrap-less\mixins\text-overflow.less" />
-    <Content Include="build\bootstrap-less\mixins\vendor-prefixes.less" />
-    <Content Include="build\bootstrap-less\variables.less" />
-    <Content Include="build\less\.csslintrc" />
-    <Content Include="build\less\404_500_errors.less" />
-    <Content Include="build\less\AdminLTE.less" />
-    <Content Include="build\less\alerts.less" />
-    <Content Include="build\less\bootstrap-social.less" />
-    <Content Include="build\less\boxes.less" />
-    <Content Include="build\less\buttons.less" />
-    <Content Include="build\less\callout.less" />
-    <Content Include="build\less\carousel.less" />
-    <Content Include="build\less\control-sidebar.less" />
-    <Content Include="build\less\core.less" />
-    <Content Include="build\less\direct-chat.less" />
-    <Content Include="build\less\dropdown.less" />
-    <Content Include="build\less\forms.less" />
-    <Content Include="build\less\fullcalendar.less" />
-    <Content Include="build\less\header.less" />
-    <Content Include="build\less\info-box.less" />
-    <Content Include="build\less\invoice.less" />
-    <Content Include="build\less\labels.less" />
-    <Content Include="build\less\lockscreen.less" />
-    <Content Include="build\less\login_and_register.less" />
-    <Content Include="build\less\mailbox.less" />
-    <Content Include="build\less\miscellaneous.less" />
-    <Content Include="build\less\mixins.less" />
-    <Content Include="build\less\modal.less" />
-    <Content Include="build\less\navs.less" />
-    <Content Include="build\less\print.less" />
-    <Content Include="build\less\products.less" />
-    <Content Include="build\less\profile.less" />
-    <Content Include="build\less\progress-bars.less" />
-    <Content Include="build\less\select2.less" />
-    <Content Include="build\less\sidebar-mini.less" />
-    <Content Include="build\less\sidebar.less" />
-    <Content Include="build\less\skins\skin-black-light.less" />
-    <Content Include="build\less\skins\skin-black.less" />
-    <Content Include="build\less\skins\skin-blue-light.less" />
-    <Content Include="build\less\skins\skin-blue.less" />
-    <Content Include="build\less\skins\skin-green-light.less" />
-    <Content Include="build\less\skins\skin-green.less" />
-    <Content Include="build\less\skins\skin-purple-light.less" />
-    <Content Include="build\less\skins\skin-purple.less" />
-    <Content Include="build\less\skins\skin-red-light.less" />
-    <Content Include="build\less\skins\skin-red.less" />
-    <Content Include="build\less\skins\skin-yellow-light.less" />
-    <Content Include="build\less\skins\skin-yellow.less" />
-    <Content Include="build\less\skins\_all-skins.less" />
-    <Content Include="build\less\small-box.less" />
-    <Content Include="build\less\social-widgets.less" />
-    <Content Include="build\less\table.less" />
-    <Content Include="build\less\timeline.less" />
-    <Content Include="build\less\users-list.less" />
-    <Content Include="build\less\variables.less" />
     <Content Include="plugins\datatables\extensions\ColReorder\Readme.md" />
     <Content Include="plugins\datatables\extensions\ColVis\Readme.md" />
     <Content Include="plugins\datatables\extensions\FixedColumns\Readme.md" />
@@ -1238,7 +1137,9 @@
     <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1340,6 +1241,7 @@
     <Content Include="Views\Videos\Delete.cshtml" />
     <Content Include="Views\Videos\Edit.cshtml" />
     <Content Include="Views\Videos\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Attachments\EventImages\" />
@@ -1372,7 +1274,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>11394</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
