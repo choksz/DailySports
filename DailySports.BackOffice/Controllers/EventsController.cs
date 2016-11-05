@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
 using System.IO;
+using DailySports.BackOffice.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -51,11 +52,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Events/" + "" + fileName;
-                var path=Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Events"), fileName);
-                file.SaveAs(path);
-                @event.EventImage = virtualpath;
+                if (file != null)
+                {
+                    @event.EventImage = GoogleStorageService.Upload(file);
+                }
                 db.Events.Add(@event);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -78,6 +78,7 @@ namespace DailySports.BackOffice.Controllers
                 return HttpNotFound();
             }
             ViewBag.ticketid = new SelectList(db.Tickets, "Id", "Notes", @event.ticketid);
+            ViewBag.oldFileName = @event.EventImage;
             return View(@event);
         }
 
@@ -86,14 +87,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Tag,Description,Location,Country,Region,City,EventImage,StartDate,EndDate,Currency,Price,ticketid")] Event @event,HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Title,Tag,Description,Location,Country,Region,City,EventImage,StartDate,EndDate,Currency,Price,ticketid")] Event @event,HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/EventImages"), fileName);
-                file.SaveAs(path);
-                @event.EventImage = path;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    @event.EventImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(@event).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -123,9 +128,18 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Event @event = db.Events.Find(id);
+            GoogleStorageService.Delete(@event.EventImage);
             db.Events.Remove(@event);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(@event);
+            }
         }
 
         protected override void Dispose(bool disposing)

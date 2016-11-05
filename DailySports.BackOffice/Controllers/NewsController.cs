@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
+using DailySports.BackOffice.Utilities;
 using System.IO;
 
 namespace DailySports.BackOffice.Controllers
@@ -32,18 +33,6 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
             return View();
         }
-        public string GetBaseUrl()
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
 
         // POST: News/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -54,12 +43,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Images/" + "" + fileName;
-
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                news.NewsImage = virtualpath;
+                if (file != null)
+                {
+                    news.NewsImage = GoogleStorageService.Upload(file);
+                }
                 db.News.Add(news);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -88,6 +75,7 @@ namespace DailySports.BackOffice.Controllers
             ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name", news.CategoryId);
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name", news.GameId);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", news.TournamentId);
+            ViewBag.oldFileName = news.NewsImage;
             return View(news);
         }
 
@@ -96,14 +84,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Title,Description,NewsImage,Date,Tag,AuthorId,CategoryId,GameId,status,TournamentId")] News news,HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Title,Description,NewsImage,Date,Tag,AuthorId,CategoryId,GameId,status,TournamentId")] News news,HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Images"), fileName);
-                file.SaveAs(path);
-                news.NewsImage = path;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    news.NewsImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(news).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -136,9 +128,18 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             News news = db.News.Find(id);
+            GoogleStorageService.Delete(news.NewsImage);
             db.News.Remove(news);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(news);
+            }
         }
 
         protected override void Dispose(bool disposing)

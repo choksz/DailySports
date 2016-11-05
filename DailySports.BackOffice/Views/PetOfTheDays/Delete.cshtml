@@ -1,4 +1,4 @@
-﻿@model DailySports.DataLayer.Model.PetOfTheDay
+﻿@model DailySports.DataLayer.Model.PetOfTheWeek
 
 @{
     ViewBag.Title = "Delete";
@@ -12,6 +12,7 @@
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
                 <div class="form-actions no-color">
                     <input type="submit" value="Delete" class="btn btn-danger" /> |
@@ -20,6 +21,4 @@
             }
         </div>
     </div>
-
-
 </section>

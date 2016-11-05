@@ -108,8 +108,16 @@ namespace DailySports.BackOffice.Controllers
         {
             NewsComments newsComments = db.NewsComments.Find(id);
             db.NewsComments.Remove(newsComments);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(newsComments);
+            }
         }
 
         protected override void Dispose(bool disposing)

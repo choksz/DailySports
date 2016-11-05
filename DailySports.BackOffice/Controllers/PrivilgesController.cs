@@ -96,8 +96,16 @@ namespace DailySports.BackOffice.Controllers
         {
             Privilge privilge = db.Privilge.Find(id);
             db.Privilge.Remove(privilge);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(privilge);
+            }
         }
 
         protected override void Dispose(bool disposing)

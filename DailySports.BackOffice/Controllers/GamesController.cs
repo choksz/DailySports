@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
 using System.IO;
+using DailySports.BackOffice.Utilities;
 
 namespace DailySports.BackOffice.Controllers
 {
@@ -27,18 +28,6 @@ namespace DailySports.BackOffice.Controllers
         {
             return View();
         }
-        public string GetBaseUrl()
-        {
-            var request = System.Web.HttpContext.Current.Request;
-            var appUrl = HttpRuntime.AppDomainAppVirtualPath;
-
-            if (appUrl != "/")
-                appUrl = "/" + appUrl;
-
-            var baseUrl = string.Format("{0}://{1}{2}", request.Url.Scheme, request.Url.Authority, appUrl);
-
-            return baseUrl;
-        }
 
         // POST: Games/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -49,11 +38,10 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Games/" + "" + fileName;
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Games"), fileName);
-                file.SaveAs(path);
-                game.GameImage = virtualpath;
+                if (file != null)
+                {
+                    game.GameImage = GoogleStorageService.Upload(file);
+                }
                 db.Games.Add(game);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -74,6 +62,7 @@ namespace DailySports.BackOffice.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.oldFileName = game.GameImage;
             return View(game);
         }
 
@@ -82,15 +71,18 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,GameImage")] Game game, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "Id,Name,GameImage")] Game game, HttpPostedFileBase file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var virtualpath = GetBaseUrl() + "" + "Attachments/Games/" + "" + fileName;
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Attachments/Games"), fileName);
-                file.SaveAs(path);
-                game.GameImage=virtualpath;
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    game.GameImage = GoogleStorageService.Upload(file);
+                }
                 db.Entry(game).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -119,9 +111,17 @@ namespace DailySports.BackOffice.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Game game = db.Games.Find(id);
+            GoogleStorageService.Delete(game.GameImage);
             db.Games.Remove(game);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            } catch (System.Data.Entity.Infrastructure.DbUpdateException e)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(game);
+            }
         }
 
         protected override void Dispose(bool disposing)

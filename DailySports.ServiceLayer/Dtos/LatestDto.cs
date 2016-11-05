@@ -15,5 +15,6 @@ namespace DailySports.ServiceLayer.Dtos
         public List<MatchDto> NextMatches { get; set; }
         public List<PetOfTheWeekDto> PetOfTheWeek { get; set; }
         public List<GameDto> LiveGames { get; set; }
+        public List<TournementsDto> OngoingTournaments { get; set; }
     }
 }

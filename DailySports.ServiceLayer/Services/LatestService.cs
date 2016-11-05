@@ -15,14 +15,16 @@ namespace DailySports.ServiceLayer.Services
     {
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Event> _eventRepository;
+        private IGenericRepository<Game> _gameRepository;
         private IGenericRepository<News> _newsRepository;
         private IGenericRepository<Tournaments> _tournamentsRepository;
         private IGenericRepository<Videos> _videoRepository;
-        public LatestService(IUnitOfWork unitOfWork,IGenericRepository<Event> eventRepository,IGenericRepository<News> newsRepository,IGenericRepository<Tournaments> tournamentsRepository,IGenericRepository<Videos> videoRepository)
+        public LatestService(IUnitOfWork unitOfWork,IGenericRepository<Event> eventRepository,IGenericRepository<News> newsRepository,IGenericRepository<Tournaments> tournamentsRepository,IGenericRepository<Videos> videoRepository, IGenericRepository<Game> gameRepository)
         {
             _unitOfWork = unitOfWork;
             _newsRepository = newsRepository;
             _eventRepository = eventRepository;
+            _gameRepository = gameRepository;
             _tournamentsRepository = tournamentsRepository;
             _videoRepository = videoRepository;
         }
@@ -64,8 +66,10 @@ namespace DailySports.ServiceLayer.Services
             {
                 List<News> NewsList = _newsRepository.GetAll().OrderByDescending(N => N.Id).Take(4).ToList();
                 List<NewsDto> LatestNews = new List<NewsDto>();
+                Dictionary<int, Game> games = _gameRepository.GetAll().ToDictionary(g => g.Id);
                 foreach(var news in NewsList)
                 {
+                    var game = games[news.GameId];
                     LatestNews.Add(new NewsDto
                     {
                         Title=news.Title,
@@ -73,7 +77,14 @@ namespace DailySports.ServiceLayer.Services
                         Id =news.Id,
                         AuthorName =news.Author.Name,
                         Date=news.Date,
-                        NewsImage=news.NewsImage
+                        NewsImage=news.NewsImage,
+                        Game = new GameDto
+                        {
+                            Id = game.Id,
+                            Name = game.Name,
+                            GameImage = game.GameImage,
+                            LiveStreamURL = game.LiveStreamUrl
+                        }
                     });
                 }
                 return LatestNews;
@@ -92,22 +103,7 @@ namespace DailySports.ServiceLayer.Services
                 List<TournementsDto> LatestTournaments = new List<TournementsDto>();
                 foreach(var tournament in TournamentList)
                 {
-                    LatestTournaments.Add(new TournementsDto
-                    {
-                        Id=tournament.Id,
-                        Title=tournament.Title,
-                        Description=tournament.Description,
-                        Format=tournament.Format,
-                        MainEvent=tournament.MainEvent,
-                        GameId=tournament.GameId,
-                         Overview=tournament.Overview,
-                         Price=tournament.Price,
-                         Qualifiers=tournament.Qualifiers,
-                         StartDate=tournament.StartDate,
-                         EndDate=tournament.EndDate,
-                         URL=tournament.URL,
-                         TournamentImage=tournament.TournamentImage
-                    });
+                    LatestTournaments.Add(new TournementsDto(tournament));
                 }
                 return LatestTournaments;
             }
@@ -140,6 +136,24 @@ namespace DailySports.ServiceLayer.Services
             {
                 return null;
             }
+        }
+
+        public List<TournementsDto> GetOngoingTournaments()
+        {
+            List<TournementsDto> ongoingTournaments = new List<TournementsDto>();
+            try
+            {
+                DateTime today = DateTime.Today;
+                List<Tournaments> tournamentList = _tournamentsRepository.FindBy(T => T.StartDate <= today && T.EndDate >= today).ToList();
+                foreach (var tournament in tournamentList)
+                {
+                    ongoingTournaments.Add(new TournementsDto(tournament));
+                }
+            }
+            catch (Exception _)
+            {
+            }
+            return ongoingTournaments;
         }
     }
 }

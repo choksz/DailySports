@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DailySports.DataLayer.Model;
 
 namespace DailySports.ServiceLayer.Dtos
 {
@@ -13,5 +14,17 @@ namespace DailySports.ServiceLayer.Dtos
         public int Level { get; set; }
         public int TeamId { get; set; }
         public string TeamName { get; set; }
+        public TeamDto Team { get; set; }
+
+        public PrizePoolDto() { }
+        public PrizePoolDto(PrizePool prizePool)
+        {
+            Id = prizePool.Id;
+            Prize = prizePool.Prize;
+            Level = prizePool.Level;
+            TeamId = prizePool.TeamId;
+            TeamName = prizePool.Team.Name;
+            Team = new TeamDto(prizePool.Team);
+        }
     }
 }

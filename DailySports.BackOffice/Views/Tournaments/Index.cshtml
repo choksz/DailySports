@@ -43,6 +43,9 @@
                                         @Html.DisplayNameFor(model => model.URL)
                                     </th>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.TournamentImage)
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.StartDate)
                                     </th>
                                     <th>
@@ -80,6 +83,9 @@
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.URL)
+                                        </td>
+                                        <td>
+                                            <a href="@Globals.CDNContent(item.TournamentImage)">Link</a>
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.StartDate)

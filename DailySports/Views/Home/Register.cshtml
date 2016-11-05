@@ -1,6 +1,4 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Register";
 }
 <script>
@@ -28,54 +26,46 @@
     });
 </script>
 
-        <div class="home_content">
-            <div class="register_content">
-                <div class="basic_content">
-                    <div class="col-sm-12 pad-zero">
+<div class="home_content">
+    <div class="register_content">
+        <div class="basic_content">
+            <div class="col-sm-12 pad-zero">
 
-                        @using (Html.BeginForm("AddUser", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-                        {
+                @using (Html.BeginForm("AddUser", "Home", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                {
+                    <div class="col-sm-12">
+                        <h3 class="text-center">REGISTER</h3>
+                        <div id="responseDiv" class="text-success"></div>
+                        @Html.ValidationSummary("", new { @class = "text-danger" })
 
-                            <div class="col-sm-12">
-                                <h3 class="text-center">REGISTER</h3>
-                                <div id="responseDiv" class="text-success"></div>
-                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                        <div class="form_fields br-top ">
 
-
-                                <div class="form_fields br-top ">
-             
-                                    <div class="col-md-6 ">
-                                        @Html.TextBox("Name", "", new { @class = "form-control MargT30", @placeholder = "Name" })
-                                        @Html.TextBox("Email", "", new { @class = "form-control", @type = "email", @placeholder = "Email" })
-                                        @Html.TextArea("Biography", "", new { @class = "form-control", @placeholder = "Biography" })
-                                        
-                                    </div>
-                                <div class="col-md-6">
-                                    @Html.TextBox("Phone", "", new { @class = "form-control MargT30", @placeholder = "Phone Number" })
-                                     @Html.TextBox("Password", "", new { @class = "form-control  ", @id = "password", @type = "Password", @placeholder = "Password" })
-                                      @Html.TextBox("ConfirmPassword", "", new { @class = "form-control ", @id = "confirmPassword", @type = "Password", @placeholder = "Confirm Password" })
-                                      @Html.TextBox("SecurityCode", "", new { @required = "required", @placeholder = "Security Code", @class = "form-control ", @type = "password" })
-
-
-                                  </div>
-                                                                   
-                              </div>
-                          
-                            <div class="col-md-12 ">
-                                <label class="upload">Upload a profile picture</label>
-                                <input type="file" name="file" id="file" class="browse" />
+                            <div class="col-md-6 ">
+                                @Html.TextBox("Name", "", new { @required = "required", @class = "form-control MargT30", @placeholder = "Name" })
+                                @Html.TextBox("Email", "", new { @required = "required", @class = "form-control", @type = "email", @placeholder = "Email" })
+                                @Html.TextArea("Biography", "", new { @class = "form-control", @placeholder = "Biography" })
                             </div>
-                            <div class="col-md-5 pad-zero MargT20">
-                                <button class="loginFB col-md-5">Log in with Facebook</button>
+                            <div class="col-md-6">
+                                @Html.TextBox("Phone", "", new { @class = "form-control MargT30", @placeholder = "Phone Number" })
+                                @Html.TextBox("Password", "", new { @required = "required", @class = "form-control  ", @id = "password", @type = "Password", @placeholder = "Password" })
+                                @Html.TextBox("ConfirmPassword", "", new { @required = "required", @class = "form-control ", @id = "confirmPassword", @type = "Password", @placeholder = "Confirm Password" })
+                                @Html.TextBox("SecurityCode", "", new { @required = "required", @placeholder = "Security Code", @class = "form-control ", @type = "password" })
                             </div>
-                            <div class="col-md-5 pad-zero MargT20 pull-right">
-                                <button class="RegisterBtn col-md-5">REGISTER</button>
-                            </div>
-                                </div>
-                        }
+                        </div>
+                        <div class="col-md-12 ">
+                            <label class="upload">Upload a profile picture</label>
+                            <input type="file" name="file" id="file" class="browse" />
+                        </div>
+                        <div class="col-md-5 pad-zero MargT20">
+                            <button class="loginFB col-md-5">Log in with Facebook</button>
+                        </div>
+                        <div class="col-md-5 pad-zero MargT20 pull-right">
+                            <button class="RegisterBtn col-md-5">REGISTER</button>
+                        </div>
                     </div>
-
-                </div>
+                }
             </div>
+
         </div>
-   
+    </div>
+</div>
