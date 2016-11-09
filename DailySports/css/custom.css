@@ -1457,6 +1457,7 @@ a:hover {
 .news_widget {
     float: left;
     width: 100%;
+    overflow-y:scroll;
 }
 #carousel-example-generic {
     height: 530px;

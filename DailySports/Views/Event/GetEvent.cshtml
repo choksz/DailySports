@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-sm-8 pad-zero br-right">
                         <div class="news_post_area">
-                            <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.EventImage)')">
+                            <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.EventImage)');background-size: 100%;">
                                 <div class="counter_left event_post_counter">
                                     <div class="countdown">
                                         <div class="timing-titles"><span>@Model.StartDate.Value.Day</span><span>@Model.StartDate.Value.Month</span><span>@Model.StartDate.Value.Year</span></div>
@@ -52,8 +52,8 @@
                         </div>
                         <div class="news_widget height_450">
                             <div class="col-sm-12">
-                                <h3>@Model.StartDate.Value.Date.ToLongDateString()-@Model.Location</h3><br>
-                                <h4> @Html.Raw(Model.Description.ToString())</h4>
+                                <h3>@Model.StartDate.Value.ToLongDateString()-@Model.Location</h3><br>
+                                <h4> @Html.Raw(Model.Description.ToString()) </h4>
                             </div>
                         </div>
                         <div class="news_widget br-top float_left">
