@@ -34,7 +34,6 @@ namespace DailySports.ServiceLayer.Services
                 newUser.Password = user.Password;
                 newUser.Email = user.Email;
                 newUser.Biography = user.Biography;
-                newUser.Phone = user.Phone;
                 if (file != null)
                 {
                     var fileName = Path.GetFileName(file.FileName);
@@ -101,7 +100,6 @@ namespace DailySports.ServiceLayer.Services
                 newUser.Id = user.Id;
                 newUser.Name = user.Name;
                 newUser.Password = user.Password;
-                newUser.Phone = user.Phone;
                 newUser.Image = user.Image;
                 newUser.Biography = user.Biography;
                 newUser.Email = user.Email;
@@ -125,7 +123,6 @@ namespace DailySports.ServiceLayer.Services
                 user.Biography = newUser.Biography;
                 user.Image = newUser.Image;
                 user.Password = newUser.Password;
-                user.Phone = newUser.Phone;
                 user.Type = newUser.Type;
                 return user;
             }
@@ -143,7 +140,6 @@ namespace DailySports.ServiceLayer.Services
                 UserDto userDto = new UserDto();
                 userDto.Id = user.Id;
                 userDto.Name = user.Name;
-
                 return userDto;
             }
             catch (Exception ex)

@@ -18,7 +18,6 @@ namespace DailySports.DataLayer.Model
         public string Password { get; set; }
         
         public string Biography { get; set; }
-        public long Phone { get; set; }
         public string Image { get; set; }
         public UserType Type { get; set; }
         public string SecurityCode { get; set; }

@@ -14,7 +14,6 @@ namespace DailySports.ServiceLayer.Dtos
         public string Password { get; set;}
         public string Email { get; set; } 
         public string Biography { get; set; }
-        public long Phone { get; set; }
         public string Image { get; set; }
         public UserType Type { get; set; }
         public string ConfirmPassWord { get; set; } 
@@ -28,7 +27,6 @@ namespace DailySports.ServiceLayer.Dtos
             Name = user.Name;
             Email = user.Email;
             Biography = user.Biography;
-            Phone = user.Phone;
             Image = user.Image;
         }
     }

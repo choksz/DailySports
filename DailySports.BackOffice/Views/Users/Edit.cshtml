@@ -14,14 +14,14 @@
                 </div>
                 <div class="box-body">
 
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Edit", "Users", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
-
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
@@ -55,18 +55,21 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                    @if (!@Model.Image.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.Image)">
+                                                >
+                                                <img src="@Globals.CDNContent(@Model.Image)" sty style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input class="form-control" type="file" name="file" />
+                                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
 
@@ -89,9 +92,9 @@
                             <div class="form-group">
                                 <div class="col-md-12 ">
                                     <input type="submit" value="Save" class="btn btn-success pull-right" />
-                                    <input onclick="location.href='@Url.Action("Index","Users")'; return false; type="button" value="Back" class="btn btn-danger" />
+                                    <input onclick="location.href='@Url.Action("Index", "Users")'; return false; type="button" value="Back" class="btn btn-danger" />
                                 </div>
-                            </div> 
+                            </div>
                         </div>
                     }
                 </div>
