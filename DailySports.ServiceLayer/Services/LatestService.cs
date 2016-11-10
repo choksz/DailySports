@@ -19,7 +19,7 @@ namespace DailySports.ServiceLayer.Services
         private IGenericRepository<News> _newsRepository;
         private IGenericRepository<Tournaments> _tournamentsRepository;
         private IGenericRepository<Videos> _videoRepository;
-        public LatestService(IUnitOfWork unitOfWork,IGenericRepository<Event> eventRepository,IGenericRepository<News> newsRepository,IGenericRepository<Tournaments> tournamentsRepository,IGenericRepository<Videos> videoRepository, IGenericRepository<Game> gameRepository)
+        public LatestService(IUnitOfWork unitOfWork, IGenericRepository<Event> eventRepository, IGenericRepository<News> newsRepository, IGenericRepository<Tournaments> tournamentsRepository, IGenericRepository<Videos> videoRepository, IGenericRepository<Game> gameRepository)
         {
             _unitOfWork = unitOfWork;
             _newsRepository = newsRepository;
@@ -35,49 +35,49 @@ namespace DailySports.ServiceLayer.Services
 
         public List<EventDto> GetLatestEvents()
         {
+            List<EventDto> LatestEvents = new List<EventDto>();
             try
             {
                 List<Event> eventList = _eventRepository.GetAll().OrderByDescending(E => E.StartDate).Take(4).ToList();
-                List<EventDto> LatestEvents = new List<EventDto>();
-                foreach(var Event in eventList)
+                foreach (var Event in eventList)
                 {
                     LatestEvents.Add(new EventDto
                     {
                         Id = Event.Id,
                         Title = Event.Title,
-                        Description=Event.Description,
-                        Location=Event.Location,
-                        EventImage= Event.EventImage,
-                        StartDate=Event.StartDate,
-                        EndDate=Event.EndDate
-                     });
+                        Description = Event.Description,
+                        Location = Event.Location,
+                        EventImage = Event.EventImage,
+                        StartDate = Event.StartDate,
+                        EndDate = Event.EndDate
+                    });
                 }
-                return LatestEvents;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return null;
+
             }
+            return LatestEvents;
         }
 
         public List<NewsDto> GetLatestNews()
         {
+            List<NewsDto> LatestNews = new List<NewsDto>();
             try
             {
                 List<News> NewsList = _newsRepository.GetAll().OrderByDescending(N => N.Id).Take(4).ToList();
-                List<NewsDto> LatestNews = new List<NewsDto>();
                 Dictionary<int, Game> games = _gameRepository.GetAll().ToDictionary(g => g.Id);
-                foreach(var news in NewsList)
+                foreach (var news in NewsList)
                 {
                     var game = games[news.GameId];
                     LatestNews.Add(new NewsDto
                     {
-                        Title=news.Title,
-                        Description=news.Description,
-                        Id =news.Id,
-                        AuthorName =news.Author.Name,
-                        Date=news.Date,
-                        NewsImage=news.NewsImage,
+                        Title = news.Title,
+                        Description = news.Description,
+                        Id = news.Id,
+                        AuthorName = news.Author.Name,
+                        Date = news.Date,
+                        NewsImage = news.NewsImage,
                         Game = new GameDto
                         {
                             Id = game.Id,
@@ -87,55 +87,53 @@ namespace DailySports.ServiceLayer.Services
                         }
                     });
                 }
-                return LatestNews;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return null;
             }
+
+            return LatestNews;
         }
 
         public List<TournementsDto> GetLatestTournaments()
         {
+            List<TournementsDto> LatestTournaments = new List<TournementsDto>();
             try
             {
                 List<Tournaments> TournamentList = _tournamentsRepository.GetAll().OrderByDescending(T => T.StartDate).Take(4).ToList();
-                List<TournementsDto> LatestTournaments = new List<TournementsDto>();
-                foreach(var tournament in TournamentList)
+                foreach (var tournament in TournamentList)
                 {
                     LatestTournaments.Add(new TournementsDto(tournament));
                 }
-                return LatestTournaments;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return null;
             }
+            return LatestTournaments;
         }
 
         public List<VideoDto> GetLatestVideos()
         {
+            List<VideoDto> LatestVideos = new List<VideoDto>();
             try
             {
                 List<Videos> VideoList = _videoRepository.GetAll().OrderByDescending(V => V.Date).Take(4).ToList();
-                List<VideoDto> LatestVideos = new List<VideoDto>();
-                foreach(var video in VideoList)
+                foreach (var video in VideoList)
                 {
                     LatestVideos.Add(new VideoDto
                     {
-                        Id=video.Id,
-                        Title=video.Title,
-                        Description=video.Description,
-                        GameId=video.GameId,
-                        URL=video.Url
+                        Id = video.Id,
+                        Title = video.Title,
+                        Description = video.Description,
+                        GameId = video.GameId,
+                        URL = video.Url
                     });
                 }
-                return LatestVideos;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                return null;
             }
+            return LatestVideos;
         }
 
         public List<TournementsDto> GetOngoingTournaments()
