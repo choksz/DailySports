@@ -119,7 +119,7 @@
                                         <div class="col-sm-4 tournament_box_img pad-zero" style="background-size: 100% 100%;background-image: url('@Globals.CDNContent(News.NewsImage)')"> 
                                         </div>
                                         <div class="col-sm-8 tournament_box_text">
-                                            @Html.Raw(@News.Description)
+                                            @Html.Raw(HttpUtility.HtmlDecode(News.Description))
                                             <h4 class="t_sub_heading grey">Posted by <span class="red"> @News.Author.Name </span>, @News.Date @Html.ActionLink("read more", "GetNews", "News", new { Id = News.Id }, "href")</h4>
                                         </div>
                                     </div>

@@ -41,7 +41,7 @@
                         </div>
                         <div class="news_widget">
                             <div class="col-sm-12">
-                                @Html.Raw(Model.Description.ToString())
+                                @Html.Raw(HttpUtility.HtmlDecode(Model.Description.ToString()))
                             </div>
 
                         </div>

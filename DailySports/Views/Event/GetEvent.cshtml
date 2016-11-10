@@ -53,7 +53,7 @@
                         <div class="news_widget height_450">
                             <div class="col-sm-12">
                                 <h3>@Model.StartDate.Value.ToLongDateString()-@Model.Location</h3><br>
-                                <h4> @Html.Raw(Model.Description.ToString()) </h4>
+                                <h4> @Html.Raw(HttpUtility.HtmlDecode(Model.Description.ToString())) </h4>
                             </div>
                         </div>
                         <div class="news_widget br-top float_left">
