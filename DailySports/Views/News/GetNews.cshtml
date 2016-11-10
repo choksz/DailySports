@@ -14,7 +14,7 @@
                 <div class="basic_content">
                     <div class="post_page_header">
                         <div class="col-sm-9 br-bottom">
-                            <h4 class="f_bol main_head"><img src="@Globals.CDNContent(Model.NewsImage)" alt="@Model.Title"> @Model.Title</h4>
+                            <h4 class="f_bol main_head"> @Model.Title</h4>
                         </div>
                         <div class="col-sm-3 pad-zero">
                             <div class="sb_search">
@@ -109,15 +109,7 @@
                                             <div class="pet_day_heading"><h4>@pet.Title</h4></div>
                                             <div class="pet_day_overlay">
                                                 <p>Name: @pet.Description</p>
-                                                @if (pet.Gender == true)
-                                                {
-                                                    <p>Gender: Female</p>
-                                                }
-                                                else
-                                                {
-                                                    <p>Gender: Male</p>
-
-                                                }
+                                                <p>Gender: @pet.Gender</p>
                                                 <p>Age: @pet.Age</p><p>Breed: Mixed</p>
                                                 <p>Fun Fact: @pet.FunFact </p>
                                                 <p>Owner: @pet.Owner </p>

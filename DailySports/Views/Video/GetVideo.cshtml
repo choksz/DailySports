@@ -110,17 +110,7 @@
                                             <div class="pet_day_heading"><h4>@pet.Title</h4></div>
                                             <div class="pet_day_overlay">
                                                 <p>Name: @Html.Raw(pet.Description.ToString())</p>
-
-                                                @if (pet.Gender == true)
-                                                {
-                                                    <p>Gender: Female</p>
-
-                                                }
-                                                else
-                                                {
-                                                    <p>Gender: Male</p>
-
-                                                }
+                                                <p>Gender: @pet.Gender</p>
                                                 <p>Age: @pet.Age</p><p>Breed: Mixed</p>
                                                 <p>Fun Fact: @pet.FunFact </p>
                                                 <p>Owner: @pet.Owner </p>
@@ -137,4 +127,3 @@
     </div>
 
 </div>
-
