@@ -37,13 +37,20 @@ namespace DailySports.BackOffice.Controllers
         {
             if (ModelState.IsValid)
             {
+              
                 user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
-
+                var checkIfExist =  db.Users.Select(x => x.Name.ToString().ToLower() == user.Name.ToString().ToLower()).FirstOrDefault();
+                if (checkIfExist)
+                {
+                    return Json(new{ Success = "false",Error="User already exists in DB" });
+                }
+                else { 
+                user.Name.ToString().ToLower();
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
+                }                
             }
-
             return View(user);
         }
 
