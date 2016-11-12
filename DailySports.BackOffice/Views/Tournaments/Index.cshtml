@@ -67,10 +67,10 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Format)
+                                            @(item.Format.ToString().Length > 200 ? (item.Format.ToString().Substring(0, 200) + "...") : (item.Format.ToString()))
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Overview)
+                                            @(item.Overview.ToString().Length > 200 ? (item.Overview.ToString().Substring(0, 200) + "...") : (item.Overview.ToString()))
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.MainEvent)
@@ -79,7 +79,7 @@
                                             @Html.DisplayFor(modelItem => item.Qualifiers)
                                         </td>
                                         <td>
-                                            @Html.Raw(item.Description.ToString())
+                                            @(item.Description.ToString().Length > 200 ? (item.Description.ToString().Substring(0, 200) + "...") : (item.Description.ToString()))
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.URL)

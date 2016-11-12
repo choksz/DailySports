@@ -116,8 +116,7 @@
                                 @foreach (var News in ViewBag.News)
                                 {
                                     <div class="tournament_box">
-                                        <div class="col-sm-4 tournament_box_img pad-zero">
-                                            <img src="@News.NewsImage" alt="#">
+                                        <div class="col-sm-4 tournament_box_img pad-zero" style="background-size: 100% 100%;background-image: url('@Globals.CDNContent(News.NewsImage)')"> 
                                         </div>
                                         <div class="col-sm-8 tournament_box_text">
                                             @Html.Raw(@News.Description)
