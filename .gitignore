@@ -38,7 +38,7 @@ bld/
 # Visual Studio 2015 cache/options directory
 .vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
-#wwwroot/
+wwwroot/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -215,7 +215,7 @@ orleans.codegen.cs
 
 # Since there are multiple workflows, uncomment next line to ignore bower_components
 # (https://github.com/github/gitignore/pull/1529#issuecomment-104372622)
-#bower_components/
+bower_components/
 
 # RIA/Silverlight projects
 Generated_Code/
@@ -283,3 +283,4 @@ __pycache__/
 
 # Cake - Uncomment if you are using it
 # tools/
+

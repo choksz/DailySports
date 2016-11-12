@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{09B572A6-89A0-4D42-84A6-05704556DC17}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B4F86401-CE63-4B9A-9C86-A6D6C1AE11FB}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DailySports", "src\DailySports\DailySports.xproj", "{1EFDD53A-1A4F-4FCE-BA09-7B5C11E9ADCF}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DailySports.Backend", "src\DailySports.Backend\DailySports.Backend.xproj", "{45EF369E-A81F-4907-BB6D-1A6B250C6CE4}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DailySports.DataLayer", "src\DailySports.DataLayer\DailySports.DataLayer.xproj", "{5A0DE219-E640-45FD-88C1-99D41D016AF0}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "DailySports.ServiceLayer", "src\DailySports.ServiceLayer\DailySports.ServiceLayer.xproj", "{79FA8EAD-AF13-41C9-99CD-03591BBD3F34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1EFDD53A-1A4F-4FCE-BA09-7B5C11E9ADCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFDD53A-1A4F-4FCE-BA09-7B5C11E9ADCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFDD53A-1A4F-4FCE-BA09-7B5C11E9ADCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFDD53A-1A4F-4FCE-BA09-7B5C11E9ADCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45EF369E-A81F-4907-BB6D-1A6B250C6CE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45EF369E-A81F-4907-BB6D-1A6B250C6CE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45EF369E-A81F-4907-BB6D-1A6B250C6CE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45EF369E-A81F-4907-BB6D-1A6B250C6CE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0DE219-E640-45FD-88C1-99D41D016AF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0DE219-E640-45FD-88C1-99D41D016AF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0DE219-E640-45FD-88C1-99D41D016AF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0DE219-E640-45FD-88C1-99D41D016AF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79FA8EAD-AF13-41C9-99CD-03591BBD3F34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79FA8EAD-AF13-41C9-99CD-03591BBD3F34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79FA8EAD-AF13-41C9-99CD-03591BBD3F34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79FA8EAD-AF13-41C9-99CD-03591BBD3F34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1EFDD53A-1A4F-4FCE-BA09-7B5C11E9ADCF} = {09B572A6-89A0-4D42-84A6-05704556DC17}
+		{45EF369E-A81F-4907-BB6D-1A6B250C6CE4} = {09B572A6-89A0-4D42-84A6-05704556DC17}
+		{5A0DE219-E640-45FD-88C1-99D41D016AF0} = {09B572A6-89A0-4D42-84A6-05704556DC17}
+		{79FA8EAD-AF13-41C9-99CD-03591BBD3F34} = {09B572A6-89A0-4D42-84A6-05704556DC17}
+	EndGlobalSection
+EndGlobal

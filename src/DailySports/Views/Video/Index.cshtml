@@ -1,0 +1,177 @@
+﻿@model  DailySports.ServiceLayer.Dtos.VideoList
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(document).ready(function() {
+        var owl = $("#owl-demo");
+        owl.owlCarousel({
+            autoPlay: 4000, //Set AutoPlay to 3 seconds
+            items : 4,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,3],
+            pagination : false,
+            //Basic Speeds
+            slideSpeed : 2000
+        });
+        $(".re-next").click(function(){
+            owl.trigger('owl.next');
+        });
+        $(".re-prev").click(function(){
+            owl.trigger('owl.prev');
+        });
+    });
+    jQuery(window).load(function() {
+        // init Isotope
+        var $container = jQuery('.isotope').isotope({
+            itemSelector: '.element-item',
+            layoutMode: 'masonry',
+            resizable: false, // disable normal resizing
+            getSortData: {
+                name: '.name'
+            },
+            transformsEnabled: false
+        });
+        jQuery('.filters li').on('click',function(){
+            jQuery('.isotope').show();
+            jQuery('.filters .current').removeClass('current');
+            jQuery(this).addClass('current');
+            var filterValue = jQuery(this).attr('data-filter');
+            $container.isotope({ filter: filterValue });
+            return false;
+        });
+        /*
+        jQuery('.hot_ban').on('click',function(){
+            jQuery('.hot_ban .current').removeClass('current');
+            jQuery(this).find('a').addClass('current');
+            var filterValue = jQuery(this).find('a').attr('data-filter');
+            $container.isotope({ filter: filterValue });
+            return false;
+        });*/
+        jQuery('.hot_ban').on('click',function(){
+            //jQuery('.filters .current').removeClass('current');
+            if (jQuery(this).find('a').hasClass('current')){
+                jQuery('.hot_ban .current').removeClass('current');
+                jQuery('.isotope').animate({
+                    queue: false,
+                    duration: 3000
+                }).slideUp();
+            } else {
+                console.log('Class added');
+                jQuery('.isotope').show();
+                jQuery('.hot_ban .current').removeClass('current');
+                jQuery(this).find('a').addClass('current');
+                var filterValue = jQuery(this).find('a').attr('data-filter');
+                $container.isotope({ filter: filterValue });
+            }
+            return false;
+        });
+    });
+</script>
+
+<div class="basic_bg_image">
+    <div class="container bg-inherit">
+        <div class="home_content">
+            <div class="content_bg_img"></div>
+            <div class="h_content">
+                <div class="basic_content">
+                    <div class="post_page_header bg_light_black">
+                        <div class="col-sm-5 video_filter_bg">
+                            <div class="videos_filter float_left">
+                                <ul class="filters">
+                                    <li data-filter="*" class="current"><a href="javascript:void(0)">All</a></li>
+                                    @foreach (var category in Model.Categories)
+                                    {
+                                        <li data-filter=".highlights"><a href= "@Url.Action("CategoryVideos",new {@id=category.Id})" >@category.Name</a></li>
+
+                                    }
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-7 pad-zero">
+                            <div class="sb_search">
+                                <i class="fa fa-search"></i>
+                                <input type="text" class="form-control" placeholder="Search...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 float_left br-bottom">
+                        <div class="video_banner_filter">
+                            @foreach (var game in Model.Games)
+                            {
+                                <div class="col-sm-3 hot_ban">
+                                    <a href="@Url.Action("GetVideoGames",new {@id=game.Id })" class="filters_one" data-filter=".dota"><img src="@game.GameImage" alt="#" width="200"></a>
+                                </div>
+                            }
+                            
+                            
+                        </div>
+                    </div>
+                    <div class="col-sm-12 float_left ">
+                        <h4 class="pl_10 main_head">THIS WEEK</h4>
+                        <div class="isotope float_left">
+
+                            @foreach (var video in Model.ThisWeekVideos)
+                            {
+                                <div class="col-sm-3 element-item video_small_box all cs_go fanmade">
+                                    <div class="video_small_box_image">
+                                    </div>
+                                    <div style="width:270px;height:150px">
+                                    @Html.Raw(video.URL)
+                                    </div>
+                                   
+                                    <div class="video_small_box_text">
+                                        <h4><a href="@Url.Action("GetVideo","Video",new {@id=video.Id })">@video.Title</a></h4>
+                                        <h5> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                    </div>
+                                    </div>
+                            }
+                        </div>
+                    </div>
+
+                    </div>
+                    <div class="col-sm-12 float_left br-top">
+                        <h4 class="pl_10 main_head">LAST WEEK</h4>
+                        <div class="video_carousel" id="owl-demo">
+                            @if (Model.LastWeekVideos == null)
+                            {
+                                <h1>No Videos To show</h1>
+                            }
+                            else
+                            {
+
+
+                            foreach (var video in Model.LastWeekVideos)
+                            {
+                            <div class="item">
+                                <div class="video_small_box">
+                                    <div class="video_small_box_image">
+                                        <img src="~/images/place_273.jpg" alt="#">
+                                    </div>
+                                    <div class="video_small_box_text">
+                                        <h4><a href="@Url.Action("GetVideo", "Video", new { @id = video.Id })">@video.Title</a></h4>
+                                        <h5> 16,616 views - 1 day ago <span class="r_like"><i class="fa fa-heart"></i>134</span></h5>
+                                    </div>
+                                </div>
+                            </div>
+
+                                }
+                                <div class="video_carousel_button">
+
+                                    <button class="btn re-prev"><i class="fa fa-caret-left"></i> PREV</button>
+                                    <button class="btn re-next">NEXT <i class="fa fa-caret-right"></i></button>
+                                </div>
+                            }
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+

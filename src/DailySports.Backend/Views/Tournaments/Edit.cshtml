@@ -1,0 +1,146 @@
+﻿@model DailySports.DataLayer.Model.Tournaments
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-22">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Edit Tournament</h3>
+                </div>
+                <div class="box-body">
+
+                    @using (Html.BeginForm("Edit", "Tournaments", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Format, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Format, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Overview, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Overview, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Overview, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MainEvent, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.MainEvent, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MainEvent, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Qualifiers, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Qualifiers, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Qualifiers, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "textarea", @style = "width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TournamentImage, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @if (!@Model.TournamentImage.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.TournamentImage)">
+                                                <img src="@Globals.CDNContent(@Model.TournamentImage)" style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input class="form-control" name="file" type="file" />
+                                        @Html.ValidationMessageFor(model => model.TournamentImage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GameId, "GameId", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.DropDownList("GameId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.GameId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Save" class="btn btn-success pull-right" />
+                                    <input onclick="location.href='@Url.Action("Index","Tournaments")'; return false;" type="button" value="Back" class="btn btn-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>

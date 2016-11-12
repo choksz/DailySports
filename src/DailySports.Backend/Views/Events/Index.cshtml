@@ -1,0 +1,127 @@
+﻿@model IEnumerable<DailySports.DataLayer.Model.Event>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Events List</h3>
+                </div>
+                <div class="box-body">
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th>
+                                        Ticket
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Tag)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Location)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Country)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Region)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.City)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EventImage)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.StartDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.EndDate)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Currency)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </th>
+                                    <th></th>
+                                </tr>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ticket.Notes)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tag)
+                                        </td>
+                                        <td>
+                                            @Html.Raw(item.Description.ToString())
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Location)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Country)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Region)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.City)
+                                        </td>
+                                        <td>
+                                            <a href="@Globals.CDNContent(item.EventImage)">Link</a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.StartDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EndDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Currency)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Price)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                                        </td>
+                                    </tr>
+                                }
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            @Html.ActionLink("Create New", "Create")
+            <a href="@Url.Action("Preview","Events")" class="btn btn-success">Preview</a>
+
+        </div>
+    </div>
+
+</section>

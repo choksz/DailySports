@@ -1,0 +1,120 @@
+﻿@model DailySports.DataLayer.Model.PetOfTheWeek
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Edit Pet Of Day</h3>
+                </div>
+                <div class="box-body">
+
+
+                    @using (Html.BeginForm("Edit", "PetOfTheDays", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = " txtEditor form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PetImage, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @if (!@Model.PetImage.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.PetImage)">
+                                                <img src="@Globals.CDNContent(@Model.PetImage)" style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input class="form-control" type="file" name="file" />
+                                        @Html.ValidationMessageFor(model => model.PetImage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Gender)
+                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.FunFact, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.FunFact, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.FunFact, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Owner, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Owner, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Owner, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Save" class="btn btn-success pull-right" />
+                                    <input onclick="location.href='@Url.Action("Index","PetOfTheDays")'; return false;" type="button" value="Back" class="btn btn-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+</section>

@@ -1,0 +1,69 @@
+﻿@model DailySports.DataLayer.Model.Game
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Edit Game</h3>
+                </div>
+                <div class="box-body">
+                    @using (Html.BeginForm("Edit", "Games", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GameImage, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @if (!@Model.GameImage.IsEmpty())
+                                    {
+                                        <div class="">
+                                            <a href="@Globals.CDNContent(@Model.GameImage)">
+                                                <img src="@Globals.CDNContent(@Model.GameImage)" style="width:300px;" />
+                                            </a>
+                                        </div>
+                                    }
+                                    <div>
+                                        <input class="form-control" name="file" type="file" />
+                                        @Html.ValidationMessageFor(model => model.GameImage, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.LiveStreamUrl, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.EditorFor(model => model.LiveStreamUrl, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.ValidationMessageFor(model => model.LiveStreamUrl, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12 ">
+                                    <input type="submit" value="Save" class="btn btn-success pull-right" />
+                                    <input onclick="location.href='@Url.Action("Index","Games")'; return false;" type="button" value="Back" class="btn btn-danger" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
+</section>

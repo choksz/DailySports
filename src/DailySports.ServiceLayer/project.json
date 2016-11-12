@@ -1,0 +1,21 @@
+﻿{
+  "dependencies": {
+    "DailySports.DataLayer": {
+      "version": "1.0.0-*",
+      "target": "project"
+    },
+    "Microsoft.AspNetCore.Http": "1.0.0-rc1-final",
+    "NETStandard.Library": "1.6.0",
+    "Microsoft.EntityFrameworkCore": "1.0.1",
+    "Microsoft.EntityFrameworkCore.Tools": {
+      "type": "build",
+      "version": "1.0.0-preview3-final"
+    }
+  },
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+  "version": "1.0.0-*"
+}
