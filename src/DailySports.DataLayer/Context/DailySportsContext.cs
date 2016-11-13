@@ -13,7 +13,7 @@ namespace DailySports.DataLayer.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("Host=104.197.193.197;User ID=dailysports;Password=dailysports;Database=dailysports"); 
+            optionsBuilder.UseNpgsql("Host=104.155.185.35;User ID=dailysports;Password=dailysports;Database=dailysports"); 
         }
 
         /*

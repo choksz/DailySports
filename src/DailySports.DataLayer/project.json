@@ -8,8 +8,8 @@
       "type": "build",
       "version": "1.0.0-preview3-final"
     },
-    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.2",
-    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.2"
+    "Npgsql.EntityFrameworkCore.PostgreSQL": "1.0.1",
+    "Npgsql.EntityFrameworkCore.PostgreSQL.Design": "1.0.1"
   },
 
   "tools": {
