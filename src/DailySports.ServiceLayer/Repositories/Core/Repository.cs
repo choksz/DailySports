@@ -40,7 +40,7 @@ namespace DailySports.ServiceLayer.Repositories.Core
         }
         public TEntity Find(int id)
         {
-            return Entities.Find(id);
+            return Entities.Find<TEntity>(id);
         }
 
         public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate)

@@ -42,6 +42,9 @@ namespace DailySports.Backend
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
+            services.AddDbContext<DbContext>(options =>
+                options.UseNpgsql("Host=104.155.185.35;User ID=dailysports;Password=dailysports;Database=dailysports"));
+
             services.AddMvc();
 
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -58,6 +61,7 @@ namespace DailySports.Backend
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<ILatestService, LatestService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

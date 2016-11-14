@@ -15,8 +15,6 @@ namespace DailySports.Backend.Controllers
     {
         private DailySportsContext db = new DailySportsContext(new DbContextOptions<DailySportsContext>());
 
-
-
         // GET: News
         public IActionResult Index()
         {

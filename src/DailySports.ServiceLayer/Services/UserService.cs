@@ -6,7 +6,6 @@ using DailySports.ServiceLayer.Dtos;
 using DailySports.DataLayer.Model;
 using DailySports.ServiceLayer.UnitOfWork;
 using DailySports.ServiceLayer.Repositories.Core;
-using System.IO;
 using Microsoft.AspNetCore.Http;
 
 namespace DailySports.ServiceLayer.Services

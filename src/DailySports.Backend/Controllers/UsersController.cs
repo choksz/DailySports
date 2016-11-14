@@ -1,7 +1,9 @@
-﻿using DailySports.DataLayer.Context;
+﻿using DailySports.Backend.Utilities;
+using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
 using DailySports.ServiceLayer.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -29,17 +31,20 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Email,Password,Biography,Type,SecurityCode")] User user)
+        public IActionResult Create([Bind("Id,Name,Email,Password,Biography,Type,SecurityCode")] User user, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                //user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
-
+                user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
+                if (file != null)
+                {
+                    user.Image = GoogleStorageService.Upload(file);
+                }
                 db.Users.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            ViewBag.oldFileName = user.Image;
             return View(user);
         }
 
@@ -64,14 +69,22 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Name,Email,Password,Biography,Type,SecurityCode")] User user)
+        public IActionResult Edit([Bind("Id,Name,Email,Password,Biography,Type,SecurityCode")] User user, IFormFile file, string oldFileName)
         {
             if (ModelState.IsValid)
             {
-                //if (user.Password != null)
-                //{
-                    //user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
-                //}
+                if (user.Password != null)
+                {
+                    user.Password = PasswordHelper.ComputeHash(user.Password, "SHA512", null);
+                }
+                if (file != null)
+                {
+                    if (oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    user.Image = GoogleStorageService.Upload(file);
+                }
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -100,6 +113,7 @@ namespace DailySports.BackOffice.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             User user = db.Users.Find(id);
+            GoogleStorageService.Delete(user.Image);
             db.Users.Remove(user);
             try
             {

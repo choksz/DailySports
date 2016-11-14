@@ -80,7 +80,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.EventImage, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @if (!@Model.EventImage.IsEmpty())
+                                    @if (!String.IsNullOrEmpty(Model.EventImage))
                                     {
                                         <div class="">
                                             <a href="@Globals.CDNContent(@Model.EventImage)">
