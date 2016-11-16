@@ -81,7 +81,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.TournamentImage, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @if (!@Model.TournamentImage.IsEmpty())
+                                    @if (!String.IsNullOrEmpty(Model.TournamentImage))
                                     {
                                         <div class="">
                                             <a href="@Globals.CDNContent(@Model.TournamentImage)">

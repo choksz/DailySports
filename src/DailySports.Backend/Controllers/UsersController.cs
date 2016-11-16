@@ -31,7 +31,7 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Email,Password,Biography,Type,SecurityCode")] User user, IFormFile file)
+        public IActionResult Create(User user, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +44,6 @@ namespace DailySports.BackOffice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.oldFileName = user.Image;
             return View(user);
         }
 
@@ -60,6 +59,7 @@ namespace DailySports.BackOffice.Controllers
             {
                 return NotFound();
             }
+            ViewBag.oldFileName = user.Image;
             user.Password = null;
             return View(user);
         }
@@ -69,8 +69,9 @@ namespace DailySports.BackOffice.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Name,Email,Password,Biography,Type,SecurityCode")] User user, IFormFile file, string oldFileName)
+        public IActionResult Edit(User user, IFormFile file, string oldFileName)
         {
+            user.Image = oldFileName;
             if (ModelState.IsValid)
             {
                 if (user.Password != null)
@@ -79,7 +80,7 @@ namespace DailySports.BackOffice.Controllers
                 }
                 if (file != null)
                 {
-                    if (oldFileName.Length > 0)
+                    if (oldFileName != null && oldFileName.Length > 0)
                     {
                         GoogleStorageService.Delete(oldFileName);
                     }
@@ -89,6 +90,7 @@ namespace DailySports.BackOffice.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.oldFileName = user.Image;
             return View(user);
         }
 

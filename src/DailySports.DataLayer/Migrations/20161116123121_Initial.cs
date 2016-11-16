@@ -296,6 +296,7 @@ namespace DailySports.DataLayer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGeneratedOnAdd", true),
                     GroupStageId = table.Column<int>(nullable: false),
+                    Logo = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

@@ -37,7 +37,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Title,Description,NewsImage,Date,Tag,AuthorId,CategoryId,GameId,status,TournamentId")] News news,IFormFile file)
+        public IActionResult Create(News news,IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -82,13 +82,14 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Title,Description,NewsImage,Date,Tag,AuthorId,CategoryId,GameId,status,TournamentId")] News news,IFormFile file, string oldFileName)
+        public IActionResult Edit(News news,IFormFile file, string oldFileName)
         {
+            news.NewsImage = oldFileName;
             if (ModelState.IsValid)
             {
                 if (file != null)
                 {
-                    if (oldFileName.Length > 0)
+                    if (oldFileName != null && oldFileName.Length > 0)
                     {
                         GoogleStorageService.Delete(oldFileName);
                     }
@@ -98,6 +99,7 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.oldFileName = news.NewsImage;
             ViewBag.AuthorId = new SelectList(db.Users, "Id", "Name", news.AuthorId);
             ViewBag.CategoryId = new SelectList(db.Category, "Id", "Name", news.CategoryId);
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name", news.GameId);

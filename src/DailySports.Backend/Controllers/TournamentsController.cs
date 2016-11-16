@@ -36,7 +36,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Title,Format,Overview,MainEvent,Qualifiers,Description,URL,StartDate,EndDate,Price,GameId")] Tournaments tournaments, IFormFile file)
+        public IActionResult Create(Tournaments tournaments, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -75,13 +75,14 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Title,Format,Overview,MainEvent,Qualifiers,Description,URL,StartDate,EndDate,Price,GameId,TournamentsImage")] Tournaments tournaments, IFormFile file, string oldFileName)
+        public IActionResult Edit(Tournaments tournaments, IFormFile file, string oldFileName)
         {
+            tournaments.TournamentImage = oldFileName;
             if (ModelState.IsValid)
             {
                 if (file != null)
                 {
-                    if (oldFileName.Length > 0)
+                    if (oldFileName != null && oldFileName.Length > 0)
                     {
                         GoogleStorageService.Delete(oldFileName);
                     }
@@ -91,6 +92,7 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.oldFileName = tournaments.TournamentImage;
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name", tournaments.GameId);
             return View(tournaments);
         }

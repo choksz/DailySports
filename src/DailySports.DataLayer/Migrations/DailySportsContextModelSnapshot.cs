@@ -327,6 +327,8 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<int>("GroupStageId");
 
+                    b.Property<string>("Logo");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");

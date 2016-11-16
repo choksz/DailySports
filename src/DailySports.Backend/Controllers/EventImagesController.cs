@@ -36,7 +36,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Tag,File,EventId")] EventImage eventImage, IFormFile file)
+        public IActionResult Create(EventImage eventImage, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -75,13 +75,14 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Tag,File,EventId")] EventImage eventImage, IFormFile file, string oldFileName)
+        public IActionResult Edit(EventImage eventImage, IFormFile file, string oldFileName)
         {
+            eventImage.File = oldFileName;
             if (ModelState.IsValid)
             {
                 if (file != null)
                 {
-                    if (oldFileName.Length > 0)
+                    if (oldFileName != null &&  oldFileName.Length > 0)
                     {
                         GoogleStorageService.Delete(oldFileName);
                     }
@@ -91,6 +92,7 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.oldFileName = eventImage.File;
             ViewBag.EventId = new SelectList(db.Events, "Id", "Title", eventImage.EventId);
             return View(eventImage);
         }

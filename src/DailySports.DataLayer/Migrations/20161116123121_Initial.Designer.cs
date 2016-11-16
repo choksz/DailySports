@@ -8,7 +8,7 @@ using DailySports.DataLayer.Context;
 namespace DailySports.DataLayer.Migrations
 {
     [DbContext(typeof(DailySportsContext))]
-    [Migration("20161113214910_Initial")]
+    [Migration("20161116123121_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -327,6 +327,8 @@ namespace DailySports.DataLayer.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("GroupStageId");
+
+                    b.Property<string>("Logo");
 
                     b.Property<string>("Name");
 

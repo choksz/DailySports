@@ -36,7 +36,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Title,Tag,Description,Location,Country,Region,City,EventImage,StartDate,EndDate,Currency,Price,ticketid")] Event @event,IFormFile file)
+        public IActionResult Create(Event @event,IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -75,13 +75,14 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Title,Tag,Description,Location,Country,Region,City,EventImage,StartDate,EndDate,Currency,Price,ticketid")] Event @event,IFormFile file, string oldFileName)
+        public IActionResult Edit(Event @event,IFormFile file, string oldFileName)
         {
+            @event.EventImage = oldFileName;
             if (ModelState.IsValid)
             {
                 if (file != null)
                 {
-                    if (oldFileName.Length > 0)
+                    if (oldFileName != null && oldFileName.Length > 0)
                     {
                         GoogleStorageService.Delete(oldFileName);
                     }
@@ -91,6 +92,7 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.oldFileName = @event.EventImage;
             ViewBag.ticketid = new SelectList(db.Tickets, "Id", "Notes", @event.ticketid);
             return View(@event);
         }
