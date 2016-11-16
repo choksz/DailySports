@@ -6,6 +6,7 @@ using DailySports.ServiceLayer.Dtos;
 using DailySports.ServiceLayer.UnitOfWork;
 using DailySports.ServiceLayer.Repositories.Core;
 using DailySports.DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailySports.ServiceLayer.Services
 {
@@ -17,7 +18,6 @@ namespace DailySports.ServiceLayer.Services
         {
             _unitOfWork = unitOfWork;
             _newsRepository = newsRepository;
-
         }
         public void Dispose()
         {
@@ -36,7 +36,7 @@ namespace DailySports.ServiceLayer.Services
                     NewsDtoList.Add(new NewsDto(news));
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             { }
             return NewsDtoList;
         }
@@ -45,11 +45,11 @@ namespace DailySports.ServiceLayer.Services
         {
             try
             {
-                News newNews = _newsRepository.FindBy(N => N.Id == id).FirstOrDefault();
+                News newNews = _newsRepository.FindBy(N => N.Id == id).Include(n => n.Author).Include(n => n.category).Include(n => n.game).Include(n => n.Tournament).FirstOrDefault();
                 NewsDto newsDto = new NewsDto(newNews);
                 return newsDto;
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 return null;
             }
@@ -66,7 +66,7 @@ namespace DailySports.ServiceLayer.Services
                     NewsDtoList.Add(new NewsDto(news));
                 }
             }
-            catch (Exception _)
+            catch (Exception)
             {}
             return NewsDtoList;
         }
@@ -83,7 +83,7 @@ namespace DailySports.ServiceLayer.Services
                     newsDto.Add(new NewsDto(LatestNews));
                 }
             }
-            catch (Exception _)
+            catch (Exception)
             { }
             return newsDto;
         }

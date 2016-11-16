@@ -20,7 +20,7 @@ namespace DailySports.Controllers
         public IActionResult Index()
         {
             ModelState.Clear();
-            if (true/*Session["LoggedInUser"] != null*/)
+            if (false/*Session["LoggedInUser"] != null*/)
             {
                 TounamentListDto newTournamentList = new TounamentListDto();
                 newTournamentList.AllTournaments = _tournamentService.GetAll();
@@ -41,15 +41,7 @@ namespace DailySports.Controllers
                 newTournamentList.AllTournaments = _tournamentService.GetAll();
                 newTournamentList.LatestTournament = _tournamentService.LatestTournements();
                 newTournamentList.AllGames = _gameService.GetAll();
-                if (newTournamentList.AllTournaments.Count != 0 && newTournamentList.LatestTournament != null)
-                {
-                    return View(newTournamentList);
-                }
-                else
-                {
-                    //ModelState.AddModelError("","No Data to display");
-                    return View(newTournamentList);
-                }
+                return View(newTournamentList);
             }
             else
             {

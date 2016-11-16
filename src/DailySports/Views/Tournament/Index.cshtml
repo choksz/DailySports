@@ -19,7 +19,7 @@
                 <div class="col-sm-6 pad-right-zero">
                     <div class="upper_tournament_add bg-image" style="background-image:url('@latest.TournamentImage')">
                         <div class="upper_tournament_add_layer">
-                            <h3>@latest.Title <span class="grey">@latest.StartDate.ToLongDateString()</span> - <span class="grey">@latest.EndDate.ToLongDateString()</span> <span class="pull-right green">$@latest.Price+</span></h3>
+                            <h3>@latest.Title <span class="grey">@latest.StartDate.ToString("D")</span> - <span class="grey">@latest.EndDate.ToString("D")</span> <span class="pull-right green">$@latest.Price+</span></h3>
                             <p>@Html.Raw(latest.Description.ToString())</p>
                             <p>@latest.Overview</p>
                             <a href="@Url.Action("GetTournament", new { @id = latest.Id })" class="pull-right grey">Read more</a>
@@ -75,7 +75,7 @@
                                         <div class="col-sm-9">
                                             <div class="tour_filter_box_content float_left">
                                                 <div class="tour_filter_upper float_left">
-                                                    <h3 class="pull-left"><img src="@Globals.CDNContent(Tournament.Game.GameImage)" alt="@Tournament.Game.Name">@Tournament.Title <span>@Tournament.StartDate.ToLongDateString()</span> - <span>@Tournament.EndDate.ToLongDateString()</span></h3>
+                                                    <h3 class="pull-left"><img src="@Globals.CDNContent(Tournament.Game.GameImage)" alt="@Tournament.Game.Name">@Tournament.Title <span>@Tournament.StartDate.ToString("D")</span> - <span>@Tournament.EndDate.ToString("D")</span></h3>
                                                     <h3 class="green pull-right">$@Tournament.Price+</h3>
                                                 </div>
                                                 <div class="tour_filter_lower float_left">

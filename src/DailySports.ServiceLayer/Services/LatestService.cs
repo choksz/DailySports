@@ -6,6 +6,7 @@ using DailySports.ServiceLayer.Dtos;
 using DailySports.ServiceLayer.UnitOfWork;
 using DailySports.ServiceLayer.Repositories.Core;
 using DailySports.DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailySports.ServiceLayer.Services
 {
@@ -62,27 +63,16 @@ namespace DailySports.ServiceLayer.Services
             List<NewsDto> LatestNews = new List<NewsDto>();
             try
             {
-                List<News> NewsList = _newsRepository.GetAll().OrderByDescending(N => N.Id).Take(4).ToList();
+                List<News> NewsList = _newsRepository.GetAll().
+                    Include(n => n.Author).
+                    Include(n => n.category).
+                    Include(n => n.game).
+                    Include(n => n.Tournament).OrderByDescending(N => N.Id).Take(4).ToList();
                 Dictionary<int, Game> games = _gameRepository.GetAll().ToDictionary(g => g.Id);
                 foreach(var news in NewsList)
                 {
                     var game = games[news.GameId];
-                    LatestNews.Add(new NewsDto
-                    {
-                        Title=news.Title,
-                        Description=news.Description,
-                        Id =news.Id,
-                        AuthorName =news.Author.Name,
-                        Date=news.Date,
-                        NewsImage=news.NewsImage,
-                        Game = new GameDto
-                        {
-                            Id = game.Id,
-                            Name = game.Name,
-                            GameImage = game.GameImage,
-                            LiveStreamURL = game.LiveStreamUrl
-                        }
-                    });
+                    LatestNews.Add(new NewsDto(news));
                 }
                 return LatestNews;
             }
@@ -96,8 +86,11 @@ namespace DailySports.ServiceLayer.Services
             List<TournementsDto> LatestTournaments = new List<TournementsDto>();
             try
             {
-                List<Tournaments> TournamentList = _tournamentsRepository.GetAll().OrderByDescending(T => T.StartDate).Take(4).ToList();
-                
+                List<Tournaments> TournamentList = _tournamentsRepository.GetAll().OrderByDescending(T => T.StartDate).Take(4).Include(t => t.Game).
+                    Include(t => t.PrizePool).
+                    Include(t => t.Matches).
+                    Include(t => t.News).
+                    Include(t => t.Videos).ToList();
                 foreach(var tournament in TournamentList)
                 {
                     LatestTournaments.Add(new TournementsDto(tournament));

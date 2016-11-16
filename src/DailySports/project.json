@@ -3,11 +3,11 @@
 
   "dependencies": {
     "DailySports.DataLayer": {
-      "version": "1.0.0-*",
+      "version": "1.0.0",
       "target": "project"
     },
     "DailySports.ServiceLayer": {
-      "version": "1.0.0-*",
+      "version": "1.0.0",
       "target": "project"
     },
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",

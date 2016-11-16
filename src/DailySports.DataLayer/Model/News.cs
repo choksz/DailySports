@@ -20,20 +20,20 @@ namespace DailySports.DataLayer.Model
 
         public int AuthorId { get; set; }
         [ForeignKey("AuthorId")]
-        public virtual User Author { get; set; }
+        public User Author { get; set; }
 
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public virtual Category category { get; set; }
+        public Category category { get; set; }
 
         public int GameId { get; set; }
         [ForeignKey ("GameId")]
-        public virtual Game game { get; set; }
+        public Game game { get; set; }
         
         public Status status { get; set; }
 
         public int TournamentId { get; set; }
         [ForeignKey("TournamentId")]
-        public virtual Tournaments Tournament { get; set; }
+        public Tournaments Tournament { get; set; }
     }
 }

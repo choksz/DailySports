@@ -1,7 +1,7 @@
 ﻿{
   "dependencies": {
     "DailySports.DataLayer": {
-      "version": "1.0.0-*",
+      "version": "1.0.0",
       "target": "project"
     },
     "Microsoft.AspNetCore.Http": "1.0.0",

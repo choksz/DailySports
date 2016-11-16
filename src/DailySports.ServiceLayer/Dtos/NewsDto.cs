@@ -18,12 +18,24 @@ namespace DailySports.ServiceLayer.Dtos
         public string CategoryName { get; set; }
         public GameDto Game { get; set; }
         public List<PetOfTheWeekDto> PetOfTheDate { get; set; }
-        public List<MatchDto> NextMatches { get; set; }
+        //public List<MatchDto> NextMatches { get; set; }
 
         public NewsDto() { }
 
         public NewsDto(News news)
-        {
+        {/*
+            Id = news.Id;
+            Title = news.Title;
+            Description = news.Description;
+            CategoryId = news.CategoryId;
+            CategoryName = (news.category != null) ? news.category.Name : null;
+            AuthorName = (news.Author != null) ? news.Author.Name : null;
+            AuthorBigraphy = (news.Author != null) ? news.Author.Biography : null;
+            Date = news.Date;
+            NewsImage = news.NewsImage;
+            Game = (news.game != null) ? new GameDto(news.game) : null;
+            Author = (news.Author != null) ? new UserDto(news.Author) : null;
+            */
             Id = news.Id;
             Title = news.Title;
             Description = news.Description;

@@ -84,7 +84,7 @@
                                     <h4 class="f_bol main_head">FORMAT</h4>
                                     <div class="tour_format_text">
                                         <div class="text_1">
-                                            <h5>- @Model.Format - @Model.StartDate.ToLongDateString()</h5>
+                                            <h5>- @Model.Format - @Model.StartDate.ToString("D")</h5>
                                         </div>
                                         <div class="text_2">
                                             <h5>@Model.Format</h5>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="tour_format_text">
                                         <div class="text_1">
-                                            <h5>- @Model.Qualifiers - @Model.StartDate.ToLongDateString()</h5>
+                                            <h5>- @Model.Qualifiers - @Model.StartDate.ToString("D")</h5>
                                         </div>
                                         <div class="text_2">
                                             <h5>@Model.Qualifiers.</h5>
@@ -241,7 +241,7 @@
                                                 <div class="lower_matches">
                                                     <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
                                                     <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamBName</h5>
-                                                    <h5 class="lower_m3">@match.Date.ToLongDateString()</h5>
+                                                    <h5 class="lower_m3">@match.Date.ToString("D")</h5>
                                                     <div class="btn-group" role="group">
                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                             Watch >

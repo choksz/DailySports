@@ -44,19 +44,25 @@ namespace DailySports.ServiceLayer.Dtos
             TournamentImage = tournament.TournamentImage;
             Game = new GameDto(tournament.Game);
             TournamentMatches = new List<MatchDto>();
-            foreach (var match in tournament.Matches)
-            {
-                TournamentMatches.Add(new MatchDto(match));
+            if (tournament.Matches != null) {
+                foreach (var match in tournament.Matches)
+                {
+                    TournamentMatches.Add(new MatchDto(match));
+                }
             }
             TournamentPrizePool = new List<PrizePoolDto>();
-            foreach (var prize in tournament.PrizePool)
-            {
-                TournamentPrizePool.Add(new PrizePoolDto(prize));
+            if (tournament.PrizePool != null) {
+                foreach (var prize in tournament.PrizePool)
+                {
+                    TournamentPrizePool.Add(new PrizePoolDto(prize));
+                }
             }
             TournamentGroupStages = new List<GroupStagesDto>();
-            foreach (var groupStage in tournament.GroupStages)
-            {
-                TournamentGroupStages.Add(new GroupStagesDto(groupStage));
+            if (tournament.GroupStages != null) {
+                foreach (var groupStage in tournament.GroupStages)
+                {
+                    TournamentGroupStages.Add(new GroupStagesDto(groupStage));
+                }
             }
             NextMatches = new List<MatchDto>();
         }
