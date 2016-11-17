@@ -65,6 +65,8 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<string>("EventImage");
 
+                    b.Property<int>("GameId");
+
                     b.Property<string>("Location");
 
                     b.Property<decimal>("Price");
@@ -82,6 +84,8 @@ namespace DailySports.DataLayer.Migrations
                     b.Property<int>("ticketid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("ticketid");
 
@@ -525,6 +529,10 @@ namespace DailySports.DataLayer.Migrations
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Event", b =>
                 {
+                    b.HasOne("DailySports.DataLayer.Model.Game", "game")
+                        .WithMany()
+                        .HasForeignKey("GameId");
+
                     b.HasOne("DailySports.DataLayer.Model.Ticket", "ticket")
                         .WithMany()
                         .HasForeignKey("ticketid");
