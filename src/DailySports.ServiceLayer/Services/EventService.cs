@@ -61,6 +61,7 @@ namespace DailySports.ServiceLayer.Services
             try
             {
                 Event newEvent = _eventRepository.FindBy(E => E.Id == id).
+                    Include(e => e.Game).
                     Include(e => e.Images).
                     Include(e => e.ticket).FirstOrDefault();
                 EventDto newEventDto = new EventDto();
@@ -75,6 +76,7 @@ namespace DailySports.ServiceLayer.Services
                 newEventDto.Currency = newEvent.Currency;
                 newEventDto.Price = newEvent.Price;
                 newEventDto.Tickets =int.Parse( newEvent.ticket.Quantity.ToString());
+                newEventDto.Game = new GameDto(newEvent.Game);
                 if (newEvent.Images != null)
                 {
                     foreach (var image in newEvent.Images)

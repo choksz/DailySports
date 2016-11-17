@@ -29,7 +29,11 @@ namespace DailySports.ServiceLayer.Services
             List<NewsDto> NewsDtoList = new List<NewsDto>();
             try
             {
-                List<News> NewsList = _newsRepository.GetAll().ToList();
+                List<News> NewsList = _newsRepository.GetAll().
+                    Include(n => n.Author).
+                    Include(n => n.category).
+                    Include(n => n.game).
+                    Include(n => n.Tournament).ToList();
                 
                 foreach (var news in NewsList)
                 {
@@ -45,7 +49,12 @@ namespace DailySports.ServiceLayer.Services
         {
             try
             {
-                News newNews = _newsRepository.FindBy(N => N.Id == id).Include(n => n.Author).Include(n => n.category).Include(n => n.game).Include(n => n.Tournament).FirstOrDefault();
+                News newNews = _newsRepository.FindBy(N => N.Id == id).
+                    Include(n => n.Author).
+                    Include(n => n.category).
+                    Include(n => n.game).
+                    Include(n => n.Tournament).
+                    FirstOrDefault();
                 NewsDto newsDto = new NewsDto(newNews);
                 return newsDto;
             }

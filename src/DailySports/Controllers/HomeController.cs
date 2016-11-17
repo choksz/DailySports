@@ -176,5 +176,19 @@ namespace DailySports.Controllers
             }
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult Hiring()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
     }
 }

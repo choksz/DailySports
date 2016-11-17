@@ -28,6 +28,7 @@ namespace DailySports.Backend.Controllers
         public IActionResult Create()
         {
             ViewBag.ticketid = new SelectList(db.Tickets, "Id", "Notes");
+            ViewBag.gameid = new SelectList(db.Games, "Id", "Name");
             return View(new Event());
         }
         
@@ -48,8 +49,8 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             ViewBag.ticketid = new SelectList(db.Tickets, "Id", "Notes", @event.ticketid);
+            ViewBag.gameid = new SelectList(db.Games, "Id", "Name", @event.GameId);
             return View(@event);
         }
 
@@ -66,6 +67,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.ticketid = new SelectList(db.Tickets, "Id", "Notes", @event.ticketid);
+            ViewBag.gameid = new SelectList(db.Games, "Id", "Name", @event.GameId);
             ViewBag.oldFileName = @event.EventImage;
             return View(@event);
         }
@@ -94,6 +96,7 @@ namespace DailySports.Backend.Controllers
             }
             ViewBag.oldFileName = @event.EventImage;
             ViewBag.ticketid = new SelectList(db.Tickets, "Id", "Notes", @event.ticketid);
+            ViewBag.gameid = new SelectList(db.Games, "Id", "Name", @event.GameId);
             return View(@event);
         }
 

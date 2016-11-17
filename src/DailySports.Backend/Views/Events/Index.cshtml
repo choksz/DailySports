@@ -30,6 +30,9 @@
                                         @Html.DisplayNameFor(model => model.Description)
                                     </th>
                                     <th>
+                                        @Html.DisplayNameFor(model => model.Game)
+                                    </th>
+                                    <th>
                                         @Html.DisplayNameFor(model => model.Location)
                                     </th>
                                     <th>
@@ -73,7 +76,9 @@
                                         </td>
                                         <td>
                                             @Html.Raw(item.Description.ToString())
-
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Game.Name)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Location)

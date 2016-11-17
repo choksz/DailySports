@@ -6,6 +6,7 @@ using DailySports.ServiceLayer.Dtos;
 using DailySports.ServiceLayer.UnitOfWork;
 using DailySports.ServiceLayer.Repositories.Core;
 using DailySports.DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailySports.ServiceLayer.Services
 {
@@ -44,7 +45,7 @@ namespace DailySports.ServiceLayer.Services
                
                 return matchDto;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return null;
             }
@@ -54,15 +55,28 @@ namespace DailySports.ServiceLayer.Services
         {
             try
             {
-                List<Match> MatchesList = _matchRepository.FindBy(M => M.TournamentId == TournamentId).ToList();
+                List<Match> MatchesList = _matchRepository.FindBy(M => M.TournamentId == TournamentId).
+                    Include(m => m.TeamA).
+                    Include(m => m.TeamB).
+                    Include(m => m.Tournament).
+                    ToList();
                 List<MatchDto> MatchDtoList = new List<MatchDto>();
                 foreach(var Match in MatchesList)
                 {
-                    MatchDtoList.Add(new MatchDto {Id=Match.Id,Date=Match.Date,TeamAId=Match.TeamAId,TeamAName=Match.TeamA.Name,TeamBId=Match.TeamBId,TeamBName=Match.TeamB.Name,TournamentId=Match.TournamentId,TournamentName=Match.Tournament.Title });
+                    MatchDtoList.Add(new MatchDto {
+                        Id =Match.Id,
+                        Date =Match.Date,
+                        TeamAId =Match.TeamAId,
+                        TeamAName =Match.TeamA.Name,
+                        TeamBId =Match.TeamBId,
+                        TeamBName =Match.TeamB.Name,
+                        TournamentId =Match.TournamentId,
+                        TournamentName =Match.Tournament.Title }
+                    );
                 }
                 return MatchDtoList;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return null;
             }
@@ -72,7 +86,10 @@ namespace DailySports.ServiceLayer.Services
         {
             try
             {
-                List<Match> NextMatchsList = _matchRepository.FindBy(M => M.Date >= DateTime.Today && M.TournamentId==TournamentId).ToList();
+                List<Match> NextMatchsList = _matchRepository.FindBy(M => M.Date >= DateTime.Today && M.TournamentId==TournamentId).
+                    Include(m => m.TeamA).
+                    Include(m => m.TeamB).
+                    Include(m => m.Tournament).ToList();
                 List<MatchDto> MatchDtoList = new List<MatchDto>();
                 foreach(var Match in NextMatchsList)
                 {
@@ -80,7 +97,7 @@ namespace DailySports.ServiceLayer.Services
                 }
                 return MatchDtoList;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return null;
             }

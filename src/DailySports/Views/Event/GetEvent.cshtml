@@ -24,7 +24,7 @@
                 <div class="basic_content">
                     <div class="post_page_header height_40">
                         <div class="col-sm-9">
-                            <h4 class="main_head"><img src="" alt="#">@Model.Title</h4>
+                            <h4 class="main_head"><img src="@Globals.CDNContent(Model.Game.GameImage)" alt="#">@Model.Title</h4>
                         </div>
                         <div class="col-sm-3 pad-zero">
                             <div class="sb_search">
@@ -36,56 +36,105 @@
                     <div class="col-sm-8 pad-zero br-right">
                         <div class="news_post_area">
                             <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.EventImage)')">
+                                @*<div class="counter_left event_post_counter">
+                                        <div class="countdown">
+                                            <div class="timing-titles"><span>@Model.StartDate.Value.Day</span><span>@Model.StartDate.Value.Month</span><span>@Model.StartDate.Value.Year</span></div>
+                                            <div class="times"><span>07</span><span>15</span><span>29</span><span>44</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="counter_right event_post_counter">
+                                        <div class="countdown count_curreny">
+                                            <div class="timing-titles col-md-4">
+                                                <div class="col-md-1">CURRENCY</div><div class="col-md-1">PRICE</div><div class="col-md-1">LEFT</div><div class="col-md-1">TICKET</div>
+                                            </div>
+                                            <div class="times"><span>@Model.Currency</span><span>@Model.Price</span><span>@Model.Tickets</span><span>BUY</span></div>
+                                        </div>
+                                    </div>*@
                                 <div class="counter_left event_post_counter">
                                     <div class="countdown">
-                                        <div class="timing-titles"><span>@Model.StartDate.Value.Day</span><span>@Model.StartDate.Value.Month</span><span>@Model.StartDate.Value.Year</span></div>
-                                        <div class="times"><span>07</span><span>15</span><span>29</span><span>44</span></div>
+                                        <div class="times">
+                                            <div style="float: left; width: 33%">
+                                                @Model.StartDate.Value.Day
+                                            </div>
+                                            <div style="float: left; width: 33%">
+                                                @Model.StartDate.Value.Month
+                                            </div>
+                                            <div style="float: left; width: 33%">
+                                                @Model.StartDate.Value.Year
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="counter_right event_post_counter">
-                                    <div class="countdown count_curreny">
-                                        <div class="timing-titles"><span>CURRENCY </span><span>PRICE</span><span>LEFT</span><span>TICKET</span></div>
-                                        <div class="times"><span>@Model.Currency</span><span>@Model.Price</span><span>@Model.Tickets</span><span>BUY</span></div>
+                                    <div class="countdown count_currency text-center">
+                                        <div class="timing-titles" style="display:unset">
+                                            <div class="pull-left" style="width: 25%">
+                                                CURRENCY
+                                            </div>
+                                            <div class="pull-left" style="width: 25%">
+                                                PRICE
+                                            </div>
+                                            <div class="pull-left" style="width: 25%">
+                                                LEFT
+                                            </div>
+                                            <div class="pull-left" style="width: 25%">
+                                                TICKET
+                                            </div>
+                                        </div>
+                                        <div class="times">
+                                            <div class="pull-left" style="width: 25%">
+                                                @Model.Currency
+                                            </div>
+                                            <div class="pull-left" style="width: 25%">
+                                                @Model.Price
+                                            </div>
+                                            <div class="pull-left" style="width: 25%">
+                                                @Model.Tickets
+                                            </div>
+                                            <div class="pull-left" style="width: 25%">
+                                                BUY
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="news_widget height_450">
-                            <div class="col-sm-12">
-                                <h3>@Model.StartDate.Value.Date.ToString("D")-@Model.Location</h3><br>
-                                <h4> @Html.Raw(Model.Description.ToString())</h4>
+                            <div class="news_widget height_450">
+                                <div class="col-sm-12">
+                                    <h3>@Model.StartDate.Value.Date.ToString("D")-@Model.Location</h3><br>
+                                    <h4> @Html.Raw(Model.Description.ToString())</h4>
+                                </div>
                             </div>
-                        </div>
-                        <div class="news_widget br-top float_left">
-                            <div class="col-sm-12">
-                                <h3>EVENT GALLERY</h3><br>
-                                @foreach (var image in Model.EventImages)
-                                {
+                            <div class="news_widget br-top float_left">
+                                <div class="col-sm-12">
+                                    <h3>EVENT GALLERY</h3><br>
+                                    @foreach (var image in Model.EventImages)
+                                    {
                                 <!-- change this to gallery -->
-                                    <div class="col-sm-9 latest_event_img pad-zero bg-image">
-                                        <img src="@Globals.CDNContent(image.File)" alt="#" />
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                        <div class="news_share_icons">
-                            <div class="col-sm-12">
-                                <h4 class="f_bol">Share This:</h4>
-                                <div class="socials_btns pull-right">
-                                    <span class='st_sharethis_large' displayText='ShareThis'></span>
-                                    <span class='st_facebook_large' displayText='Facebook'></span>
-                                    <span class='st_twitter_large' displayText='Tweet'></span>
-                                    <span class='st_googleplus_large' displayText='Google +'></span>
-                                    <span class='st_linkedin_large' displayText='LinkedIn'></span>
-                                    <span class='st_pinterest_large' displayText='Pinterest'></span>
-                                    <span class='st_email_large' displayText='Email'></span>
-
+                                        <div class="col-sm-9 latest_event_img pad-zero">
+                                            <img src="@Globals.CDNContent(image.File)" alt="#" />
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                        </div>
-                        <div class="disqus_comment float_left text-center">
-                            <h2>Discus Comments here</h2>
-                            <div class="fb-comments" data-numposts="5"></div>
+                            <div class="news_share_icons">
+                                <div class="col-sm-12">
+                                    <h4 class="f_bol">Share This:</h4>
+                                    <div class="socials_btns pull-right">
+                                        <span class='st_sharethis_large' displayText='ShareThis'></span>
+                                        <span class='st_facebook_large' displayText='Facebook'></span>
+                                        <span class='st_twitter_large' displayText='Tweet'></span>
+                                        <span class='st_googleplus_large' displayText='Google +'></span>
+                                        <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                                        <span class='st_pinterest_large' displayText='Pinterest'></span>
+                                        <span class='st_email_large' displayText='Email'></span>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="disqus_comment float_left text-center">
+                                <h2>Discus Comments here</h2>
+                                <div class="fb-comments" data-numposts="5"></div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4 pad-zero">

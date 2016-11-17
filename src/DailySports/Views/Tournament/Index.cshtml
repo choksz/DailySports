@@ -45,10 +45,10 @@
                     <div class="col-sm-5">
                         <div class="filter2">
                             <h4>Filter:</h4>
-                            <ul class="filters_one">
+                            <ul id="game-filter" class="filters_one">
                                 @foreach (var game in Model.AllGames)
                                 {
-                                    <li data-filter="@game.Id"><a href=""><img src="@Globals.CDNContent(game.GameImage)" /></a></li>
+                                    <li><a href="#" data-filter="@game.Id"><img src="@Globals.CDNContent(game.GameImage)" /></a></li>
                                 }
                             </ul>
                         </div>
@@ -56,7 +56,7 @@
                     <div class="col-sm-3 pad-zero">
                         <div class="sb_search">
                             <i class="fa fa-search"></i>
-                            <input type="text" class="form-control" placeholder="Search...">
+                            <input id="tournament-search" type="text" class="form-control" placeholder="Search...">
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     <div class="isotope">
                         @foreach (var Tournament in Model.AllTournaments)
                         {
-                            <div class="tour_filter_layout element-item dota bf3 tour">
+                            <div class="tour_filter_layout element-item dota bf3 tour" data-filter="@Tournament.GameId">
                                 <a href="@Url.Action("GetTournament",new { @id=Tournament.Id })">
                                     <div class="tour_filter_box br-bottom">
                                         <div class="col-sm-3 pad-zero">
@@ -141,3 +141,22 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+        var tournaments = $('.element-item');
+
+        $("#game-filter li a").click(function (event) {
+            event.preventDefault();
+            tournaments.show();
+            var gameId = $(this).data('filter');
+            ($('.tour_filter_layout').filter('[data-filter!="' + gameId + '"]')).hide();
+        });
+
+        $("#tournament-search").bind("keyup", function () {
+            var search = $(this).val().toLowerCase();
+            tournaments.show();
+            tournaments.filter(function () {
+                return ($(this).text().toLowerCase().indexOf(search) == -1);
+            }).hide();
+        });
+</script>

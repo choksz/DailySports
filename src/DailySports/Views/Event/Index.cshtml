@@ -46,7 +46,7 @@
                                 <a href="#" class="filters_one" data-filter=".lol"><img src="@Globals.CDNContent("lol.png")" alt="#"></a>
                             </div>
                             <div class="col-sm-3 hot_ban">
-                                <a href="#" class="filters_one" data-filter=".cs_go"><img src="@Globals.CDNContent("cs_go.png")" alt="#"></a>
+                                <a href="#" class="filters_one" data-filter=".csgo"><img src="@Globals.CDNContent("cs_go.png")" alt="#"></a>
                             </div>
                             <div class="col-sm-3 hot_ban">
                                 <a href="#" class="filters_one" data-filter=".smite"><img src="@Globals.CDNContent("smite_lg.png")" alt="#"></a>
@@ -76,7 +76,7 @@
                                                     <div class="latest_event_box">
 
                                                         <a href="@Url.Action("GetEvent",new { @id=Event.Id })">
-                                                            <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-image:url('@Event.EventImage')">
+                                                            <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-size:contain; background-image:url('@Globals.CDNContent(Event.EventImage)'); background-repeat: no-repeat">
                                                                 <div class="event_details">
                                                                     <div class="event_name">@Event.Title</div>
                                                                     <div class="countdown">

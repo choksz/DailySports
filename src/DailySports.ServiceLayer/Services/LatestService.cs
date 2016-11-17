@@ -37,7 +37,7 @@ namespace DailySports.ServiceLayer.Services
             List<EventDto> LatestEvents = new List<EventDto>();
             try
             {
-                List<Event> eventList = _eventRepository.GetAll().OrderByDescending(E => E.StartDate).Take(4).ToList();
+                List<Event> eventList = _eventRepository.GetAll().OrderByDescending(E => E.StartDate).Take(4).Include(e => e.Game).ToList();
                 foreach(var Event in eventList)
                 {
                     LatestEvents.Add(new EventDto

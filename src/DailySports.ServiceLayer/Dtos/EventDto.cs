@@ -13,11 +13,11 @@ namespace DailySports.ServiceLayer.Dtos
         public string Currency { get; set; }
         public decimal Price { get; set; }
         public int Tickets { get; set; }
-
+        public GameDto Game { get; set; }
         public Nullable<DateTime> StartDate { get; set; }
         public Nullable<DateTime> EndDate { get; set; }
-       public List<EventImageDto> EventImages { get; set; }
-       public List<PetOfTheWeekDto> petOfTheDay { get; set; }
+        public List<EventImageDto> EventImages { get; set; }
+        public List<PetOfTheWeekDto> petOfTheDay { get; set; }
         public List<MatchDto> NextMatches { get; set; }
     }
 }
