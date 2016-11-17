@@ -8,12 +8,14 @@ namespace DailySports.ServiceLayer.Dtos
         public int Id { get; set;}
         public string Name { get; set; }
         public List<PlayerDto> Player { get; set; }
+        public string Logo { get; set; }
 
         public TeamDto() { }
         public TeamDto(Team team)
         {
             Id = team.Id;
             Name = team.Name;
+            Logo = team.Logo;
             Player = new List<PlayerDto>();
             foreach (Player p in team.Players) {
                 Player.Add(new PlayerDto(p));

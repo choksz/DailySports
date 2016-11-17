@@ -15,9 +15,7 @@ namespace DailySports.ServiceLayer.Services
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Match> _matchRepository;
 
-       
-
-        public MatchService(IUnitOfWork unitOfWork,IGenericRepository<Match> matchRepository)
+        public MatchService(IUnitOfWork unitOfWork, IGenericRepository<Match> matchRepository)
         {
             _matchRepository = matchRepository;
             _unitOfWork = unitOfWork;
@@ -42,10 +40,10 @@ namespace DailySports.ServiceLayer.Services
                 matchDto.TeamBName = match.TeamB.Name;
                 matchDto.TournamentId = match.TournamentId;
                 matchDto.TournamentName = match.Tournament.Title;
-               
+
                 return matchDto;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return null;
             }
@@ -53,54 +51,79 @@ namespace DailySports.ServiceLayer.Services
 
         public List<MatchDto> TournamentMatches(int TournamentId)
         {
+            List<MatchDto> MatchDtoList = new List<MatchDto>();
             try
             {
                 List<Match> MatchesList = _matchRepository.FindBy(M => M.TournamentId == TournamentId).
                     Include(m => m.TeamA).
+                        ThenInclude(t => t.GroupStage).
                     Include(m => m.TeamB).
+                        ThenInclude(t => t.GroupStage).
                     Include(m => m.Tournament).
                     ToList();
-                List<MatchDto> MatchDtoList = new List<MatchDto>();
-                foreach(var Match in MatchesList)
+                foreach (var Match in MatchesList)
                 {
-                    MatchDtoList.Add(new MatchDto {
-                        Id =Match.Id,
-                        Date =Match.Date,
-                        TeamAId =Match.TeamAId,
-                        TeamAName =Match.TeamA.Name,
-                        TeamBId =Match.TeamBId,
-                        TeamBName =Match.TeamB.Name,
-                        TournamentId =Match.TournamentId,
-                        TournamentName =Match.Tournament.Title }
+                    MatchDtoList.Add(new MatchDto
+                    {
+                        Id = Match.Id,
+                        Date = Match.Date,
+                        TeamAId = Match.TeamAId,
+                        TeamAName = Match.TeamA.Name,
+                        TeamBId = Match.TeamBId,
+                        TeamBName = Match.TeamB.Name,
+                        TournamentId = Match.TournamentId,
+                        TournamentName = Match.Tournament.Title,
+                        TeamA = new TeamDto
+                        {
+                            Id = Match.TeamA.Id,
+                            Name = Match.TeamA.Name,
+                            Logo = Match.TeamA.Logo
+                        },
+                        TeamB = new TeamDto
+                        {
+                            Id = Match.TeamB.Id,
+                            Name = Match.TeamB.Name,
+                            Logo = Match.TeamB.Logo
+                        }
+                    }
                     );
                 }
-                return MatchDtoList;
             }
-            catch(Exception)
-            {
-                return null;
-            }
+            catch (Exception)
+            { }
+            return MatchDtoList;
         }
 
         public List<MatchDto> NextMatches(int TournamentId)
         {
+            List<MatchDto> MatchDtoList = new List<MatchDto>();
             try
             {
-                List<Match> NextMatchsList = _matchRepository.FindBy(M => M.Date >= DateTime.Today && M.TournamentId==TournamentId).
+                List<Match> NextMatchsList = _matchRepository.FindBy(M => M.Date >= DateTime.Today && M.TournamentId == TournamentId).
                     Include(m => m.TeamA).
                     Include(m => m.TeamB).
                     Include(m => m.Tournament).ToList();
-                List<MatchDto> MatchDtoList = new List<MatchDto>();
-                foreach(var Match in NextMatchsList)
+                foreach (var Match in NextMatchsList)
                 {
-                    MatchDtoList.Add(new MatchDto {Id=Match.Id,Date=Match.Date,TeamAId=Match.TeamAId,TeamAName=Match.TeamA.Name,TeamBId=Match.TeamBId,TeamBName=Match.TeamB.Name,TournamentId=Match.TournamentId,TournamentName=Match.Tournament.Title });
+                    MatchDtoList.Add(new MatchDto
+                        {
+                            Id = Match.Id,
+                            Date = Match.Date,
+                            TeamAId = Match.TeamAId,
+                            TeamAName = Match.TeamA.Name,
+                            TeamBId = Match.TeamBId,
+                            TeamBName = Match.TeamB.Name,
+                            TournamentId = Match.TournamentId,
+                            TournamentName =
+                            Match.Tournament.Title
+                        }
+                    );
                 }
-                return MatchDtoList;
+                
             }
-            catch(Exception)
-            {
-                return null;
-            }
+            catch (Exception)
+            { }
+            return MatchDtoList;
         }
     }
 }

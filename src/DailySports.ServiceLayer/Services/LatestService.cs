@@ -86,14 +86,19 @@ namespace DailySports.ServiceLayer.Services
             List<TournementsDto> LatestTournaments = new List<TournementsDto>();
             try
             {
-                List<Tournaments> TournamentList = _tournamentsRepository.GetAll().OrderByDescending(T => T.StartDate).Take(4).Include(t => t.Game).
-                    Include(t => t.PrizePool).
-                    Include(t => t.Matches).
-                    Include(t => t.News).
-                    Include(t => t.Videos).ToList();
+                List<Tournaments> TournamentList = _tournamentsRepository.GetAll().OrderByDescending(T => T.StartDate).Take(4).ToList();
                 foreach(var tournament in TournamentList)
                 {
-                    LatestTournaments.Add(new TournementsDto(tournament));
+                    LatestTournaments.Add(new TournementsDto
+                        {
+                            Id = tournament.Id,
+                            Title = tournament.Title,
+                            Overview = tournament.Overview,
+                            TournamentImage = tournament.TournamentImage,
+                            StartDate = tournament.StartDate,
+                            EndDate = tournament.EndDate
+                        }
+                    );
                 }
                 return LatestTournaments;
             }
@@ -132,10 +137,19 @@ namespace DailySports.ServiceLayer.Services
             try
             {
                 DateTime today = DateTime.Today;
-                List<Tournaments> tournamentList = _tournamentsRepository.FindBy(T => T.StartDate <= today && T.EndDate >= today).ToList();
+                List<Tournaments> tournamentList = _tournamentsRepository.FindBy(T => T.StartDate <= today && T.EndDate >= today).
+                    Include(t => t.Game).
+                    ToList();
                 foreach (var tournament in tournamentList)
                 {
-                    ongoingTournaments.Add(new TournementsDto(tournament));
+                    ongoingTournaments.Add(new TournementsDto
+                        {
+                            Id = tournament.Id,
+                            Game = new GameDto(tournament.Game),
+                            Title = tournament.Title,
+                            TournamentImage = tournament.TournamentImage
+                        }
+                    );
                 }
             }
             catch (Exception)

@@ -10,7 +10,7 @@
             <div class="col-sm-6">
                 <div class="tournament_iframe">
                     <div style="width:500px;height:300px">
-                        <iframe width="100%" height="100%" src="@Model.URL" frameborder="0" allowfullscreen=""></iframe>
+                        @*<iframe width="100%" height="100%" src="@Model.URL" frameborder="0" allowfullscreen=""></iframe>*@
                     </div>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                                     <h4 class="f_bol main_head">FORMAT</h4>
                                     <div class="tour_format_text">
                                         <div class="text_1">
-                                            <h5>- @Model.Format - @Model.StartDate.ToString("D")</h5>
+                                            <h5>- @Model.Format - @Model.StartDate.ToString("d")</h5>
                                         </div>
                                         <div class="text_2">
                                             <h5>@Model.Format</h5>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="tour_format_text">
                                         <div class="text_1">
-                                            <h5>- @Model.Qualifiers - @Model.StartDate.ToString("D")</h5>
+                                            <h5>- @Model.Qualifiers - @Model.StartDate.ToString("d")</h5>
                                         </div>
                                         <div class="text_2">
                                             <h5>@Model.Qualifiers.</h5>
@@ -134,8 +134,8 @@
                                         <div class="tour_stream_box">
                                             <h3>@Model.Title <span class="grey">@Model.Qualifiers - Semifinals</span></h3>
                                             <div class="lower_matches float_left">
-                                                <h4 class="lower_m1 f_bol"><img src="~/images/BR-Flag-copy.png" alt=""> @Match.TeamAName</h4>
-                                                <h4 class="lower_m2 f_bol">VS.<img src="~/images/BR-Flag-copy.png" alt=""> @Match.TeamBName</h4>
+                                                <h4 class="lower_m1 f_bol"><img src="@Globals.CDNContent(Match.TeamA.Logo)" alt=""> @Match.TeamAName</h4>
+                                                <h4 class="lower_m2 f_bol">VS.<img src="@Globals.CDNContent(Match.TeamB.Logo)" alt=""> @Match.TeamBName</h4>
                                                 <div class="btn-group" role="group">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">190511 viewers <i class="fa fa-angle-down"></i></button>
                                                     <ul class="dropdown-menu">
