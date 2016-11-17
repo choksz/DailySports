@@ -13,8 +13,6 @@ namespace DailySports.Backend.Controllers
     {
         private DailySportsContext db = new DailySportsContext(new DbContextOptions<DailySportsContext>());
 
-
-
         // GET: Tickets
         public IActionResult Index()
         {
@@ -25,7 +23,7 @@ namespace DailySports.Backend.Controllers
         public IActionResult Create()
         {
             ViewBag.TicketId = new SelectList(db.TicketTypes, "Id", "Name");
-            return View(new TicketsController());
+            return View(new Ticket());
         }
 
         // POST: Tickets/Create
@@ -33,7 +31,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Price,Notes,Quantity,TicketId")] Ticket ticket)
+        public IActionResult Create(Ticket ticket)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Price,Notes,Quantity,TicketId")] Ticket ticket)
+        public IActionResult Edit(Ticket ticket)
         {
             if (ModelState.IsValid)
             {

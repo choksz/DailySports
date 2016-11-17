@@ -6,6 +6,7 @@ using DailySports.ServiceLayer.Dtos;
 using DailySports.ServiceLayer.UnitOfWork;
 using DailySports.ServiceLayer.Repositories.Core;
 using DailySports.DataLayer.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DailySports.ServiceLayer.Services
 {
@@ -25,17 +26,16 @@ namespace DailySports.ServiceLayer.Services
 
         public List<EventDto> GetAll()
         {
+            List<EventDto> EventDtoList = new List<EventDto>();
             try
             {
-                List<Event> EventList = _eventRepository.GetAll().ToList();
-                List<EventDto> EventDtoList = new List<EventDto>();
+                List<Event> EventList = _eventRepository.GetAll().Include(e => e.Images).ToList();
                 List<EventImageDto> eventImagesList = new List<EventImageDto>();
                 foreach(var Event in EventList)
                 {
-                    
                     foreach (var image in Event.Images)
                     {
-                        eventImagesList.Add(new EventImageDto {Id=image.Id,File=image.File,EventId=image.EventId,Tag=image.Tag });
+                        eventImagesList.Add(new EventImageDto { Id=image.Id,File=image.File, EventId=image.EventId, Tag=image.Tag });
                     }
                     EventDtoList.Add(new EventDto
                     {
@@ -49,20 +49,20 @@ namespace DailySports.ServiceLayer.Services
                         EventImages=eventImagesList
 
                     });
-                }
-                return EventDtoList;
+                } 
             }
-            catch(Exception ex)
-            {
-                return null;
-            }
+            catch(Exception)
+            { }
+            return EventDtoList;
         }
 
         public EventDto GetEvent(int id)
         {
             try
             {
-                Event newEvent = _eventRepository.FindBy(E => E.Id == id).FirstOrDefault();
+                Event newEvent = _eventRepository.FindBy(E => E.Id == id).
+                    Include(e => e.Images).
+                    Include(e => e.ticket).FirstOrDefault();
                 EventDto newEventDto = new EventDto();
                 List<EventImageDto> ImageList = new List<EventImageDto>();
                 newEventDto.Id = newEvent.Id;
@@ -75,11 +75,7 @@ namespace DailySports.ServiceLayer.Services
                 newEventDto.Currency = newEvent.Currency;
                 newEventDto.Price = newEvent.Price;
                 newEventDto.Tickets =int.Parse( newEvent.ticket.Quantity.ToString());
-                if (newEvent.Images== null || newEvent.Images.Count == 0)
-                {
-                    newEventDto.EventImages = null;
-                }
-                else
+                if (newEvent.Images != null)
                 {
                     foreach (var image in newEvent.Images)
                     {
@@ -88,16 +84,13 @@ namespace DailySports.ServiceLayer.Services
                         eventImage.Tag = image.Tag;
                         eventImage.File = image.File;
                         eventImage.EventId = image.EventId;
-                        ImageList.Add(eventImage);
-                      
+                        ImageList.Add(eventImage);    
                     }
                 }
                 newEventDto.EventImages = ImageList;
                 return newEventDto;
-
-
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 return null;
             }

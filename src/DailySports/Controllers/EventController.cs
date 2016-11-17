@@ -49,8 +49,7 @@ namespace DailySports.Controllers
         {
             EventDto newEventDto = new EventDto();
             newEventDto = _eventService.GetEvent(id);
-            newEventDto.NextMatches = _matchService.NextMatches(_tournamentService.GetLatestTornamentId());
-            
+            newEventDto.NextMatches = new List<MatchDto>();//_matchService.NextMatches(_tournamentService.GetLatestTornamentId());
             List< PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
             pet = _petService.GetPetOfTheWeek();
             if(pet.Count !=0)
@@ -74,8 +73,6 @@ namespace DailySports.Controllers
                 });
                 newEventDto.petOfTheDay = pet;
             }
-
-
             return View(newEventDto);
         }
         public IActionResult Search(string Search)
@@ -88,7 +85,6 @@ namespace DailySports.Controllers
             else
             {
                 return RedirectToAction("Index","Event");
-
             }
         }
     }
