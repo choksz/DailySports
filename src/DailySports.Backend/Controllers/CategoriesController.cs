@@ -31,7 +31,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name")] Category category)
+        public IActionResult Create(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -63,7 +63,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Name")] Category category)
+        public IActionResult Edit(Category category)
         {
             if (ModelState.IsValid)
             {
@@ -73,7 +73,7 @@ namespace DailySports.Backend.Controllers
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-                catch (Exception e)
+                catch (Exception)
                 { //there may be foreign key to this object
                     ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
                     return View(category);

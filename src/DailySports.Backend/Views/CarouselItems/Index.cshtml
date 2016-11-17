@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DailySports.DataLayer.Model.Game>
+﻿@model IEnumerable<DailySports.DataLayer.Model.CarouselItem>
 
 @{
     ViewBag.Title = "Index";
@@ -10,7 +10,7 @@
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Games List</h3>
+                    <h3 class="box-title">Carousel Items List</h3>
                 </div>
                 <div class="box-body">
                     <div class="box-body table-responsive no-padding">
@@ -18,13 +18,13 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Name)
+                                        @Html.DisplayNameFor(model => model.Id)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.GameImage)
+                                        @Html.DisplayNameFor(model => model.Image)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.LiveStreamUrl)
+                                        @Html.DisplayNameFor(model => model.Text)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -33,13 +33,13 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            @Html.DisplayFor(modelItem => item.Id)
                                         </td>
                                         <td>
-                                            <a href="@Globals.CDNContent(item.GameImage)">Link</a>
+                                            <a href="@Globals.CDNContent(item.Image)">Link</a>
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.LiveStreamUrl)
+                                            @Html.DisplayFor(modelItem => item.Text)
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

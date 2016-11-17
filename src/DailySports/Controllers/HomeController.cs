@@ -17,7 +17,15 @@ namespace DailySports.Controllers
         private ITournementsService _tournamentService;
         private IPetService _petService;
         private IGameService _gameservice;
-        public HomeController(ILatestService LatestService, IGameService gameService, IPetService petService, IMatchService matchService, ITournementsService tournamentService, IUserService userService)
+        private ICarouselService _carouselservice;
+
+        public HomeController(ILatestService LatestService, 
+                                IGameService gameService, 
+                                IPetService petService, 
+                                IMatchService matchService, 
+                                ITournementsService tournamentService, 
+                                IUserService userService,
+                                ICarouselService carouselService)
         {
             _LatestService = LatestService;
             _userService = userService;
@@ -25,6 +33,7 @@ namespace DailySports.Controllers
             _tournamentService = tournamentService;
             _petService = petService;
             _gameservice = gameService;
+            _carouselservice = carouselService;
         }
 
         public IActionResult Index()
@@ -37,6 +46,7 @@ namespace DailySports.Controllers
             Latest.NextMatches = _matchService.NextMatches(_tournamentService.GetLatestTornamentId());
             Latest.LiveGames = _gameservice.GetAll();
             Latest.OngoingTournaments = _LatestService.GetOngoingTournaments();
+            Latest.CarouselItems = _carouselservice.GetAll();
             List<PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
             pet = _petService.GetPetOfTheWeek();
             if (pet.Count != 0)
