@@ -14,6 +14,7 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="@Globals.CDNContent("css/custom.css")" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     @*
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
@@ -92,7 +93,7 @@
                 <h4>Daily eSports,<br>All Rights Reserved.</h4>
             </div>
             <div class="col-sm-2 text-center">
-                <h4>For business inquiries,<br> please contact us.</h4>
+                <h4><a href="@Url.Action("About","Home")">About</a> | <a href="@Url.Action("Hiring","Home")">Hiring</a> | <a href="@Url.Action("Contact","Home")">Contact</a></h4>
             </div>
             <div class="col-sm-6 pad-zero">
                 <div class="footer_socials">
@@ -108,7 +109,6 @@
         </div>
     </div>
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript">
         jQuery(document).on('click', '.indi_active', function (e) {
