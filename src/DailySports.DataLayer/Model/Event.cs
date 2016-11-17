@@ -32,10 +32,6 @@ namespace DailySports.DataLayer.Model
         [ForeignKey("ticketid")]
         public virtual Ticket ticket { get; set; }
         public int ticketid { get; set; }
-
-        public virtual Game game { get; set; }
-        [ForeignKey("GameId")]
-        public int GameId { get; set; }
      
     }
 }

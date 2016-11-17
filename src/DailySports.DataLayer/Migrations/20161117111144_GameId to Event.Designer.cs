@@ -8,9 +8,10 @@ using DailySports.DataLayer.Context;
 namespace DailySports.DataLayer.Migrations
 {
     [DbContext(typeof(DailySportsContext))]
-    partial class DailySportsContextModelSnapshot : ModelSnapshot
+    [Migration("20161117111144_GameId to Event")]
+    partial class GameIdtoEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1");
@@ -65,6 +66,8 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<string>("EventImage");
 
+                    b.Property<int>("GameId");
+
                     b.Property<string>("Location");
 
                     b.Property<decimal>("Price");
@@ -82,6 +85,8 @@ namespace DailySports.DataLayer.Migrations
                     b.Property<int>("ticketid");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GameId");
 
                     b.HasIndex("ticketid");
 
@@ -525,6 +530,10 @@ namespace DailySports.DataLayer.Migrations
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Event", b =>
                 {
+                    b.HasOne("DailySports.DataLayer.Model.Game", "game")
+                        .WithMany()
+                        .HasForeignKey("GameId");
+
                     b.HasOne("DailySports.DataLayer.Model.Ticket", "ticket")
                         .WithMany()
                         .HasForeignKey("ticketid");
