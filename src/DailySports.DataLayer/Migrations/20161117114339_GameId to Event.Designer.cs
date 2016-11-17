@@ -8,7 +8,7 @@ using DailySports.DataLayer.Context;
 namespace DailySports.DataLayer.Migrations
 {
     [DbContext(typeof(DailySportsContext))]
-    [Migration("20161117111144_GameId to Event")]
+    [Migration("20161117114339_GameId to Event")]
     partial class GameIdtoEvent
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -530,7 +530,7 @@ namespace DailySports.DataLayer.Migrations
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Event", b =>
                 {
-                    b.HasOne("DailySports.DataLayer.Model.Game", "game")
+                    b.HasOne("DailySports.DataLayer.Model.Game", "Game")
                         .WithMany()
                         .HasForeignKey("GameId");
 
