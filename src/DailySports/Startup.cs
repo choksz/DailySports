@@ -60,6 +60,7 @@ namespace DailySports
             services.AddTransient<IPlayerService, PlayerService>();
             services.AddTransient<ILatestService, LatestService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ICarouselService, CarouselService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

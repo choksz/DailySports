@@ -8,9 +8,19 @@
         <div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel">
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
-                @foreach (var item in Model.CarouselItems)
+                @for (var i = 0; i < Model.CarouselItems.Count; i++)
                 {
-                    <div class="item">
+                    var item = Model.CarouselItems[i];
+                    var cls = "";
+                    if (i == 0)
+                    {
+                        cls = "item active";
+                    }
+                    else
+                    {
+                        cls = "item";
+                    }
+                    <div class="@cls">
                         <img src="@Globals.CDNContent(item.Image)" alt="#">
                         <div class="carousel-caption">
                             <div class="home_upper_heading">
@@ -19,37 +29,23 @@
                         </div>
                     </div>
                 }
-                <div class="item active">
-                    <img src="@Globals.CDNContent("Slider-Manila.png")" alt="#">
-                    <div class="carousel-caption">
-                        <div class="home_upper_heading">
-                            <h5>CHECK OUT THE LATEST NEWS AND LIVE<br> COVERAGE FOR THE MANILA MAJOR</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="@Globals.CDNContent("Slider-TI6-Event.png")" alt="#">
-                    <div class="carousel-caption">
-                        <div class="home_upper_heading">
-                            <h5>Loreum ipsum is dummy data CHECK <br> OUT THE LATEST NEWS AND LIVE</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="@Globals.CDNContent("Slider-DES.png")" alt="#">
-                    <div class="carousel-caption">
-                        <div class="home_upper_heading">
-                            <h5>Loreum ipsum is dummy data CHECK <br> OUT THE LATEST NEWS AND LIVE</h5>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="custom_carousel_indi">
                 <!-- Indicators -->
                 <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="indi_active active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1" class="indi_active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2" class="indi_active"></li>
+                    @foreach (var i in Enumerable.Range(0, Model.CarouselItems.Count))
+                    {
+                        var cls = "";
+                        if (i == 0)
+                        {
+                            cls = "indi_active active";
+                        }
+                        else
+                        {
+                            cls = "indi_active";
+                        }
+                        <li data-target="#carousel-example-generic" data-slide-to="@i" class="@cls"></li>
+                    }
                 </ol>
             </div>
         </div>
@@ -61,8 +57,8 @@
                 <div class="col-sm-8 layout_col pad-zero br-right">
                     <div class="latest_new_videos">
                         <div class="heading">
-                            <h4 class="col-sm-6 f_bol main_head">latest news</h4>
-                            <h4 class="col-sm-6 f_bol main_head">Latest videos</h4>
+                            <h4 class="col-sm-12 f_bol main_head">latest news</h4>
+                            <!--h4 class="col-sm-6 f_bol main_head">Latest videos</h4-->
                         </div>
                         <div class="latest_new_videos_box">
                             @foreach (var news in Model.LatestNews)
@@ -81,31 +77,32 @@
                                     </div>
                                 </div>
                             }
-                            @foreach (var video in Model.LatestVideos)
-                            {
-                                <div class="col-sm-6 home_small_video_box">
-                                    <div class="home_small_box">
-                                        <div class="news_area bg-image" style="background-image: url('@video.URL')">
-                                            <div class="news_dota_ico"><img src="~/images/CoD.png" alt="#" class=""></div>
-                                            <div class="news_title">
-                                                <a href="@Url.Action("GetVideo","Video",new {@id=video.Id })"><h3>@video.Title</h3></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
+                            @*foreach (var video in Model.LatestVideos)
+    {
+        <div class="col-sm-6 home_small_video_box">
+            <div class="home_small_box">
+                <div class="news_area bg-image" style="background-image: url('@video.URL')">
+                    <div class="news_dota_ico"><img src="~/images/CoD.png" alt="#" class=""></div>
+                    <div class="news_title">
+                        <a href="@Url.Action("GetVideo","Video",new {@id=video.Id })"><h3>@video.Title</h3></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+                            *@
                             <!-- Button -->
                             <div class="col-sm-12">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="videos_btn_box">
                                         <a href="@Url.Action("Index","News")" class="btn">More news</a>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                @*<div class="col-sm-6">
                                     <div class="videos_btn_box">
                                         <a href="@Url.Action("Index","Video")" class="btn">More videos</a>
                                     </div>
-                                </div>
+                                </div>*@
                             </div>
                         </div>
                     </div>
@@ -175,8 +172,8 @@
                                     </div>
                                 </a>
                             }
-
                         </div>
+
                         <!--div class="col-sm-12 live_games">
                             <h4 class="f_bol main_head">LIVE GAMES</h4>
                             @*foreach (var game in Model.LiveGames)
@@ -225,6 +222,7 @@
                         <div class="pet_day float_left">
                             <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
                             <div class="pet_of_day float_left">
+
                                 @foreach (var pet in Model.PetOfTheWeek)
                                 {
                                     <div class="bg-image pet_image" style="background-image:url('@Globals.CDNContent(pet.PetImage)')">
@@ -260,6 +258,4 @@
             </div>
         </div>
     </div>
-
-
 </div>
