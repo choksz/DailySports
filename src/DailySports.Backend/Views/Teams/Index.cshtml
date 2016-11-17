@@ -23,6 +23,9 @@
                                     <th>
                                         @Html.DisplayNameFor(model => model.Name)
                                     </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Logo)
+                                    </th>
                                     <th></th>
                                 </tr>
 
@@ -34,6 +37,9 @@
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            <a href="@Globals.CDNContent(item.Logo)">Link</a>
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

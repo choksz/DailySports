@@ -1,6 +1,8 @@
-﻿using DailySports.DataLayer.Context;
+﻿using DailySports.Backend.Utilities;
+using DailySports.DataLayer.Context;
 using DailySports.DataLayer.Model;
 using DailySports.ServiceLayer.Utilities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -34,10 +36,14 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,GroupStageId")] Team team)
+        public IActionResult Create(Team team, IFormFile file)
         {
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    team.Logo = GoogleStorageService.Upload(file);
+                }
                 db.Teams.Add(team);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -60,6 +66,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.GroupStageId = new SelectList(db.GroupStages, "Id", "Id", team.GroupStageId);
+            ViewBag.oldFileName = team.Logo;
             return View(team);
         }
 
@@ -68,15 +75,25 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Name,GroupStageId")] Team team)
+        public IActionResult Edit(Team team, IFormFile file, string oldFileName)
         {
+            team.Logo = oldFileName;
             if (ModelState.IsValid)
             {
+                if (file != null)
+                {
+                    if (oldFileName != null && oldFileName.Length > 0)
+                    {
+                        GoogleStorageService.Delete(oldFileName);
+                    }
+                    team.Logo = GoogleStorageService.Upload(file);
+                }
                 db.Entry(team).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             ViewBag.GroupStageId = new SelectList(db.GroupStages, "Id", "Id", team.GroupStageId);
+            ViewBag.oldFileName = team.Logo;
             return View(team);
         }
 
@@ -101,6 +118,7 @@ namespace DailySports.Backend.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Team team = db.Teams.Find(id);
+            GoogleStorageService.Delete(team.Logo);
             db.Teams.Remove(team);
             try
             {

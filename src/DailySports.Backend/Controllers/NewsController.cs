@@ -37,7 +37,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(News news,IFormFile file)
+        public IActionResult Create(News news, IFormFile file)
         {
             if (ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(News news,IFormFile file, string oldFileName)
+        public IActionResult Edit(News news, IFormFile file, string oldFileName)
         {
             news.NewsImage = oldFileName;
             if (ModelState.IsValid)

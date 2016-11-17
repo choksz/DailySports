@@ -15,7 +15,7 @@
                 </div>
                 <div class="box-body">
 
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create", "Teams", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
@@ -30,6 +30,14 @@
                             </div>
 
                             <div class="form-group">
+                                @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    <input class="form-control" name="file" type="file" />
+                                    @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.GroupStageId, "GroupStageId", htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
                                     @Html.DropDownList("GroupStageId", null, htmlAttributes: new { @class = "form-control" })
@@ -40,7 +48,6 @@
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <input type="submit" value="Create" class="btn btn-success" />
-
                                 </div>
                             </div>
                             <div class="form-group">

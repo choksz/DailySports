@@ -25,20 +25,19 @@ namespace DailySports.ServiceLayer.Services
 
         public List<CategoryDto> GetAll()
         {
+            List<CategoryDto> CategoryDtoList = new List<CategoryDto>();
             try
             {
                 List<Category> CategoryList = _categoryRepository.GetAll().ToList();
-                List<CategoryDto> CategoryDtoList = new List<CategoryDto>();
                 foreach(var category in CategoryList)
                 {
                     CategoryDtoList.Add(new CategoryDto {Id=category.Id,Name=category.Name });
                 }
                 return CategoryDtoList;
             }
-            catch(Exception ex)
-            {
-                return null;
-            }
+            catch(Exception)
+            { }
+            return CategoryDtoList;
         }
     }
 }
