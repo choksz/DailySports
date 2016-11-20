@@ -13,7 +13,7 @@
                     <h3 class="box-title">Create Pet Of Day</h3>
                 </div>
                 <div class="box-body">
-                    @using (Html.BeginForm("Create","PetOfTheDays",FormMethod.Post,new { @enctype = "multipart/form-data" }))
+                    @using (Html.BeginForm("Create", "PetOfTheDays", FormMethod.Post, new { @enctype = "multipart/form-data" }))
                     {
                         @Html.AntiForgeryToken()
 
@@ -54,10 +54,8 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    <div class="checkbox">
-                                        @Html.EditorFor(model => model.Gender)
-                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
-                                    </div>
+                                    @Html.DropDownListFor(model => model.Gender, Globals.ToSelectList(Model.Gender), htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
