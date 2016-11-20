@@ -65,8 +65,8 @@
                             {
                                 <div class="col-sm-6 home_small_video_box">
                                     <div class="home_small_box">
-                                        <a href="@Url.Action("GetNews", "News", new { @id = news.Id })">
-                                            <div class="news_area bg-image" style="background-image: url('@Globals.CDNContent(news.NewsImage)'); background-size: 368px 260px;">
+                                        <a href="@Url.Action("GetNews", "News", new { id = news.Id })">
+                                            <div class="news_area bg-image" style="background-image: url('@Globals.CDNContent(news.NewsImage)'); background-size: 368px 260px;background-repeat: no-repeat;">
                                                 <div class="news_dota_ico"><img src="@Globals.CDNContent(news.Game.GameImage)" alt="@news.Game.Name" class=""></div>
                                                 <div class="news_title">
                                                     <h3>@news.Title</h3>
@@ -113,7 +113,7 @@
                                 <div class="tournament_box">
                                     <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
                                         <div class="tournament_box">
-                                            <div class="tournament_box_img pad_zero" style="background-image:url('@Globals.CDNContent(tournament.TournamentImage)')">
+                                            <div class="tournament_box_img pad_zero" style="background-size: 100% 100%;background-repeat: no-repeat;background-image:url('@Globals.CDNContent(tournament.TournamentImage)')">
                                                 <div class="tournaments_title">
                                                     @tournament.Title
                                                     <div class="pull-right">
@@ -136,7 +136,7 @@
                             {
                                 <div class="latest_event_box">
                                     <a href="@Url.Action("GetEvent","Event",new { @id=Event.Id })">
-                                        <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-image:url('@Globals.CDNContent(Event.EventImage)')">
+                                        <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-size: 100% 100%;background-image:url('@Globals.CDNContent(Event.EventImage)')">
                                             <div class="event_details">
                                                 <div class="event_name">@Event.Title</div>
                                                 <div class="countdown">
@@ -230,17 +230,7 @@
                                         <div class="pet_day_heading"><h4>@pet.Title</h4></div>
                                         <div class="pet_day_overlay">
                                             <p>Name: @Html.Raw(pet.Description.ToString())</p>
-
-                                            @if (pet.Gender == true)
-                                            {
-                                                <p>Gender: Female</p>
-
-                                            }
-                                            else
-                                            {
-                                                <p>Gender: Male</p>
-
-                                            }
+                                            <p>Gender: @pet.Gender</p>
                                             <p>Age: @pet.Age</p><p>Breed: Mixed</p>
                                             <p>Fun Fact: @pet.FunFact </p>
                                             <p>Owner: @pet.Owner </p>

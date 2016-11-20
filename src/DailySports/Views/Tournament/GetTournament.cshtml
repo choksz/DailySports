@@ -113,15 +113,19 @@
                             </div>
                             <div class="tour_latest">
 
-                                @foreach (var match in Model.TournamentMatches)
+                                +                                @foreach (var News in ViewBag.News)
                                 {
                                     <div class="tournament_box">
                                         <div class="col-sm-4 tournament_box_img pad-zero">
-                                            <img src="~/images/News-Image.jpg" alt="#">
+                                            <img src="@News.NewsImage" alt="#">
                                         </div>
                                         <div class="col-sm-8 tournament_box_text">
-                                            <h4 class="t_heading">Holding world’s largest eSport prize pool for 5 years in a row, breaking the record every year,<br> The International is back! Aiming to beat last year’s prize pool of $18,429,613, Valve <br>is presenting Dota 2...	 </h4>
-                                            <h4 class="t_sub_heading grey">Posted by <span class="red">DailyEsports </span>, 26/06/2016 <a href="#" class="pull-right grey">read more</a></h4>
+                                            @Html.Raw(@News.Description)
+
+                                            <h4 class="t_sub_heading grey">
+                                                Posted by <span class="red"> @News.Author.Name </span>
+                                                , @News.Date @Html.ActionLink("read more", "GetNews", "News", new { Id = News.Id }, "href")
+                                            </h4>
                                         </div>
                                     </div>
                                 }
