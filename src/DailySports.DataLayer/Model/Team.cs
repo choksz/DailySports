@@ -9,11 +9,16 @@ namespace DailySports.DataLayer.Model
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        
         public string Logo { get; set; }
-        [ForeignKey("GroupStageId")]
-        public virtual GroupStages GroupStage { get; set; }
-        public int GroupStageId { get; set; }
+
         public virtual ICollection<Player> Players { get; set; }
+
+        [ForeignKey("GameId")]
+        public virtual Game Game { get; set; }
+        public int GameId { get; set; }
+
+        [ForeignKey("CountryId")]
+        public virtual Country Country { get; set; }
+        public int CountryCode { get; set; }
     }
 }

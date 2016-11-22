@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DailySports.DataLayer.Model
@@ -7,14 +8,10 @@ namespace DailySports.DataLayer.Model
     {
         [Key]
         public int Id { get; set; }
-        public int Prize { get; set; }
-        public int Level { get; set; }
-        [ForeignKey("TeamId")]
-        public virtual Team Team { get; set; }
-        public int TeamId { get; set; }
+        public virtual ICollection<PlaceEntry> Distribution { get; set; }
+
         [ForeignKey("TournamentId")]
         public virtual Tournaments Tournament { get; set; }
         public int TournamentId { get; set; }
-
     }
 }

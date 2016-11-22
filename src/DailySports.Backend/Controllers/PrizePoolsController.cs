@@ -13,19 +13,16 @@ namespace DailySports.Backend.Controllers
     {
         private DailySportsContext db = new DailySportsContext(new DbContextOptions<DailySportsContext>());
 
-
-
         // GET: PrizePools
         public IActionResult Index()
         {
-            var prizePools = db.PrizePools.Include(p => p.Team).Include(p => p.Tournament);
+            var prizePools = db.PrizePools.Include(p => p.Tournament);
             return View(prizePools.ToList());
         }
 
         // GET: PrizePools/Create
         public IActionResult Create()
         {
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
             return View(new PrizePool());
         }
@@ -35,7 +32,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Prize,Level,TeamId,TournamentId")] PrizePool prizePool)
+        public IActionResult Create(PrizePool prizePool)
         {
             if (ModelState.IsValid)
             {
@@ -44,7 +41,6 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", prizePool.TeamId);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", prizePool.TournamentId);
             return View(prizePool);
         }
@@ -61,7 +57,6 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", prizePool.TeamId);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", prizePool.TournamentId);
             return View(prizePool);
         }
@@ -71,7 +66,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Prize,Level,TeamId,TournamentId")] PrizePool prizePool)
+        public IActionResult Edit(PrizePool prizePool)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +74,6 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", prizePool.TeamId);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", prizePool.TournamentId);
             return View(prizePool);
         }

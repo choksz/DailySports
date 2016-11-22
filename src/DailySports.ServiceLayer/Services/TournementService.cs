@@ -15,12 +15,15 @@ namespace DailySports.ServiceLayer.Services
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Tournaments> _tournamentsRepository;
         private IGenericRepository<PrizePool> _prizePoolRepository;
-        private IGenericRepository<GroupStages> _groupStageRepository;
-        public TournementService(IUnitOfWork unitOfWok, IGenericRepository<PrizePool> prizePoolRepository, IGenericRepository<GroupStages> groupStageRepository, IGenericRepository<Tournaments> tournementsRepository)
+        private IGenericRepository<Stage> _stagesRepository;
+        public TournementService(IUnitOfWork unitOfWok,
+                                IGenericRepository<PrizePool> prizePoolRepository,
+                                IGenericRepository<Stage> stagesRepository,
+                                IGenericRepository<Tournaments> tournementsRepository)
         {
             _tournamentsRepository = tournementsRepository;
             _unitOfWork = unitOfWok;
-            _groupStageRepository = groupStageRepository;
+            _stagesRepository = stagesRepository;
             _prizePoolRepository = prizePoolRepository;
         }
         public void Dispose()
@@ -36,24 +39,7 @@ namespace DailySports.ServiceLayer.Services
                 List<Tournaments> TounamentsList = _tournamentsRepository.GetAll().Include(t => t.Game).ToList();
                 foreach (var Tournament in TounamentsList)
                 {
-                    TournamentsDtosList.Add(new TournementsDto
-                    {
-                        Id = Tournament.Id,
-                        Title = Tournament.Title,
-                        Description = Tournament.Description,
-                        Format = Tournament.Format,
-                        MainEvent = Tournament.MainEvent,
-                        GameId = Tournament.GameId,
-                        Game = new GameDto(Tournament.Game),
-                        Overview = Tournament.Overview,
-                        TournamentImage = Tournament.TournamentImage,
-                        StartDate = Tournament.StartDate,
-                        EndDate = Tournament.EndDate,
-                        URL = Tournament.URL,
-                        Price = Tournament.Price,
-                        Qualifiers = Tournament.Qualifiers
-                    }
-                    );
+                    TournamentsDtosList.Add(new TournementsDto(Tournament));
                 }
             }
             catch (Exception)
@@ -69,9 +55,8 @@ namespace DailySports.ServiceLayer.Services
                 List<Tournaments> TounamentsList = _tournamentsRepository.FindBy(T => T.GameId == GameId).
                     Include(t => t.Game).
                     Include(t => t.PrizePool).
-                    Include(t => t.Matches).
                     Include(t => t.News).
-                    Include(t => t.Videos).ToList();
+                    ToList();
                 foreach (var Tournament in TounamentsList)
                 {
                     TournamentsDtoList.Add(new TournementsDto(Tournament));
@@ -89,58 +74,14 @@ namespace DailySports.ServiceLayer.Services
                 Tournaments tournament = _tournamentsRepository.FindBy(T => T.Id == Id).
                     Include(t => t.Game).
                     Include(t => t.PrizePool).
-                    Include(t => t.Matches).
-                        ThenInclude(m => m.TeamA).
-                    Include(t => t.Matches).
-                        ThenInclude(m => m.TeamB).
                     Include(t => t.News).
-                    Include(t => t.Videos).
-                    Include(t => t.GroupStages).FirstOrDefault();
-                TournementsDto TournamentsDto = new TournementsDto
-                {
-                    Id = tournament.Id,
-                    Title = tournament.Title,
-                    Description = tournament.Description,
-                    Format = tournament.Format,
-                    MainEvent = tournament.MainEvent,
-                    GameId = tournament.GameId,
-                    Overview = tournament.Overview,
-                    Price = tournament.Price,
-                    Qualifiers = tournament.Qualifiers,
-                    StartDate = tournament.StartDate,
-                    EndDate = tournament.EndDate,
-                    URL = tournament.URL,
-                    TournamentImage = tournament.TournamentImage,
-                    Game = new GameDto(tournament.Game),
-                    TournamentMatches = new List<MatchDto>(),
-                    TournamentPrizePool = new List<PrizePoolDto>(),
-                    TournamentGroupStages = new List<GroupStagesDto>(),
-                    NextMatches = new List<MatchDto>()
-                    /*if (tournament.Matches != null)
-                    {
-                        foreach (var match in tournament.Matches)
-                        {
-                            TournamentMatches.Add(new MatchDto(match));
-                        }
-                    }
-
-                    if (tournament.PrizePool != null)
-                    {
-                        foreach (var prize in tournament.PrizePool)
-                        {
-                            TournamentPrizePool.Add(new PrizePoolDto(prize));
-                        }
-                    }
-
-                    if (tournament.GroupStages != null)
-                    {
-                        foreach (var groupStage in tournament.GroupStages)
-                        {
-                            TournamentGroupStages.Add(new GroupStagesDto(groupStage));
-                        }
-                    }*/
-
-                };
+                    Include(t => t.Stages).
+                        ThenInclude(s => s.Matches).
+                    Include(t => t.Stages).
+                        ThenInclude(s => s.TeamList).
+                    Include(t => t.Streams).
+                    FirstOrDefault();
+                TournementsDto TournamentsDto = new TournementsDto(tournament);
                 return TournamentsDto;
 
             }
@@ -158,24 +99,7 @@ namespace DailySports.ServiceLayer.Services
                 List<Tournaments> tournamentList = _tournamentsRepository.GetAll().OrderBy(T => T.Id).Take(1).ToList();
                 foreach (var Tournament in tournamentList)
                 {
-                    TournamentsDto.Add(new TournementsDto
-                    {
-                        Id = Tournament.Id,
-                        Title = Tournament.Title,
-                        Description = Tournament.Description,
-                        Format = Tournament.Format,
-                        MainEvent = Tournament.MainEvent,
-                        GameId = Tournament.GameId,
-                        Game = new GameDto(Tournament.Game),
-                        Overview = Tournament.Overview,
-                        TournamentImage = Tournament.TournamentImage,
-                        StartDate = Tournament.StartDate,
-                        EndDate = Tournament.EndDate,
-                        URL = Tournament.URL,
-                        Price = Tournament.Price,
-                        Qualifiers = Tournament.Qualifiers
-                    }
-                    );
+                    TournamentsDto.Add(new TournementsDto(Tournament));
                 }
             }
             catch (Exception)
@@ -183,6 +107,7 @@ namespace DailySports.ServiceLayer.Services
             return TournamentsDto;
         }
 
+        /*
         public List<PrizePoolDto> TournametPrizePool(int TournamentId)
         {
             List<PrizePoolDto> prizepooldtolist = new List<PrizePoolDto>();
@@ -199,27 +124,26 @@ namespace DailySports.ServiceLayer.Services
             { }
             return prizepooldtolist;
         }
+        */
 
-        public List<GroupStagesDto> TournamentGroupStages(int TournamentId)
+        public List<StageDto> TournamentStages(int TournamentId)
         {
-            List<GroupStagesDto> groupStegesDtoList = new List<GroupStagesDto>();
+            List<StageDto> stagesDtoList = new List<StageDto>();
             try
             {
-                List<GroupStages> groupStagesList = _groupStageRepository.FindBy(g => g.TournamentId == TournamentId).ToList();
-                List<TeamDto> teamdtolist = new List<TeamDto>();
-                foreach (var groupstage in groupStagesList)
+                List<Stage> stagesList = _stagesRepository.FindBy(g => g.TournamentId == TournamentId).
+                    Include(s => s.TeamList).
+                        ThenInclude(l => l.Teams).
+                    ToList();
+                foreach (var stage in stagesList)
                 {
-                    foreach (var team in groupstage.Team)
-                    {
-                        teamdtolist.Add(new TeamDto { Id = team.Id, Name = team.Name });
-                    }
-                    groupStegesDtoList.Add(new GroupStagesDto { Id = groupstage.Id, TeamList = teamdtolist });
+                    stagesDtoList.Add(new StageDto(stage));
                 }
 
             }
             catch (Exception)
             { }
-            return groupStegesDtoList;
+            return stagesDtoList;
         }
 
         public int GetLatestTornamentId()

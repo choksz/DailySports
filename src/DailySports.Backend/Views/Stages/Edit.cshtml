@@ -1,16 +1,15 @@
-﻿@model DailySports.DataLayer.Model.Player
+﻿@model DailySports.DataLayer.Model.Stage
 
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <section class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit Player</h3>
+                    <h3 class="box-title">Edit Group Stages</h3>
                 </div>
                 <div class="box-body">
 
@@ -19,6 +18,8 @@
                         @Html.AntiForgeryToken()
 
                         <div class="form-horizontal">
+                            <h4>GroupStages</h4>
+                            <hr />
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
 
@@ -31,42 +32,34 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Nick, htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Nick, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Nick, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Age, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Role, htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.TeamId, "TeamId", htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.DropDownList("TeamId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.TeamId, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.CountryCode, "CountryCode", htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.DropDownList("CountryCode", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                                @Html.LabelFor(model => model.TournamentId, "TournamentId", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.DropDownList("TournamentId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.TournamentId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -85,4 +78,3 @@
 
 
 </section>
-

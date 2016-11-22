@@ -18,14 +18,15 @@ namespace DailySports.Backend.Controllers
         // GET: Teams
         public IActionResult Index()
         {
-            var teams = db.Teams.Include(t => t.GroupStage);
+            var teams = db.Teams.Include(t => t.Game).Include(t => t.Country);
             return View(teams.ToList());
         }
 
         // GET: Teams/Create
         public IActionResult Create()
         {
-            ViewBag.GroupStageId = new SelectList(db.GroupStages, "Id", "Id");
+            ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
             return View(new Team());
         }
 
@@ -47,7 +48,8 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GroupStageId = new SelectList(db.GroupStages, "Id", "Id", team.GroupStageId);
+            ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
             return View(team);
         }
 
@@ -63,7 +65,8 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            ViewBag.GroupStageId = new SelectList(db.GroupStages, "Id", "Id", team.GroupStageId);
+            ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
             ViewBag.oldFileName = team.Logo;
             return View(team);
         }
@@ -90,7 +93,8 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GroupStageId = new SelectList(db.GroupStages, "Id", "Id", team.GroupStageId);
+            ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
             ViewBag.oldFileName = team.Logo;
             return View(team);
         }

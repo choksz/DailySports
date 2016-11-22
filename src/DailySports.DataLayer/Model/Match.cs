@@ -8,13 +8,18 @@ namespace DailySports.DataLayer.Model
     {
         [Key]
         public int Id { get; set; }
+        public int ScoreA { get; set; }
+        public int ScoreB { get; set; }
         public DateTime Date { get; set; }
-        [ForeignKey("TournamentId")]
-        public virtual Tournaments Tournament { get; set; }
-        public int TournamentId { get; set; }
+
+        [ForeignKey("StageId")]
+        public virtual Stage Stage { get; set; }
+        public int StageId { get; set; }
+
         [ForeignKey("TeamAId")]
         public virtual Team TeamA { get; set; }
         public int TeamAId { get; set; }
+
         [ForeignKey("TeamBId")]
         public virtual Team TeamB { get; set; }
         public int TeamBId { get; set; }

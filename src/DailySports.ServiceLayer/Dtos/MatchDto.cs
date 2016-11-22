@@ -6,30 +6,36 @@ namespace DailySports.ServiceLayer.Dtos
     public  class MatchDto
     {
         public int Id { get; set; }
+        public int ScoreA { get; set; }
+        public int ScoreB { get; set; }
         public DateTime Date { get; set; }
+
+        public int StageId { get; set; }
+        public StageDto Stage { get; set; }
+
         public int TeamAId { get; set; }
-        public string TeamAName { get; set; }
-        public int TeamBId { get; set; }
-        public string TeamBName { get; set; }
-        public int TournamentId { get; set; }
-        public string TournamentName { get; set; }
         public TeamDto TeamA { get; set; }
+
+        public int TeamBId { get; set; }
         public TeamDto TeamB { get; set; }
-        public TournementsDto Tournament { get; set; }
 
         public MatchDto() { }
         public MatchDto(Match match)
         {
             Id = match.Id;
+            ScoreA = match.ScoreA;
+            ScoreB = match.ScoreB;
             Date = match.Date;
+
+            StageId = match.StageId;
+            Stage = (match.Stage != null) ? new StageDto(match.Stage) : null;
+
             TeamAId = match.TeamAId;
-            TeamAName = match.TeamA.Name;
+            TeamA = (match.TeamA != null) ? new TeamDto(match.TeamA) : null;
+
             TeamBId = match.TeamBId;
-            TeamBName = match.TeamB.Name;
-            TournamentId = match.TournamentId;
-            TournamentName = match.Tournament.Title;
-            TeamA = new TeamDto(match.TeamA);
-            TeamB = new TeamDto(match.TeamB);
+            TeamB = (match.TeamB != null) ? new TeamDto(match.TeamB) : null;
+            
         }
     }
 }

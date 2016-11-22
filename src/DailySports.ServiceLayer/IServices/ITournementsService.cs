@@ -10,8 +10,8 @@ namespace DailySports.ServiceLayer.IServices
         List<TournementsDto> GetGameTournements(int GameId);
         TournementsDto GetTournement(int Id);
         List<TournementsDto> LatestTournements();
-        List<PrizePoolDto> TournametPrizePool(int TournamentId);
-        List<GroupStagesDto> TournamentGroupStages(int TournamentId);
+        //List<PrizePoolDto> TournametPrizePool(int TournamentId);
+        List<StageDto> TournamentStages(int TournamentId);
         int GetLatestTornamentId();
     }
 }

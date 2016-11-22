@@ -13,7 +13,7 @@ namespace DailySports.ServiceLayer.Services
     {
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Player> _playerRepository;
-        public PlayerService(IUnitOfWork unitOfWork,IGenericRepository<Player> playerRepository)
+        public PlayerService(IUnitOfWork unitOfWork, IGenericRepository<Player> playerRepository)
         {
             _playerRepository = playerRepository;
             _unitOfWork = unitOfWork;
@@ -25,21 +25,21 @@ namespace DailySports.ServiceLayer.Services
 
         public List<PlayerDto> GetTeamPlayers(int TeamId)
         {
+            List<PlayerDto> PlayerDtoList = new List<PlayerDto>();
             try
             {
                 List<Player> PlayersList = _playerRepository.FindBy(P => P.TeamId == TeamId).ToList();
-                List<PlayerDto> PlayerDtoList = new List<PlayerDto>();
+                
                 foreach(var Player in PlayersList)
                 {
-                    PlayerDtoList.Add(new PlayerDto {Id=Player.Id,Name=Player.Name,TeamId=Player.TeamId,TeamName=Player.team.Name });
+                    PlayerDtoList.Add(new PlayerDto(Player));
                 }
-                return PlayerDtoList;
+                
 
             }
-            catch(Exception ex)
-            {
-                return null;
-            }
+            catch(Exception)
+            { }
+            return PlayerDtoList;
         }
     }
 }

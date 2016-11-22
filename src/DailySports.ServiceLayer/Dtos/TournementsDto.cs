@@ -8,63 +8,67 @@ namespace DailySports.ServiceLayer.Dtos
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Format { get; set; }
         public string Overview { get; set; }
-        public string MainEvent { get; set; }
-        public string Qualifiers { get; set; }
-        public string Description { get; set; }
         public string URL { get; set; }
+        public string Venue { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public decimal Price { get; set; }
-        public int GameId { get; set; }
-
-        public GameDto Game { get; set; }
         public string TournamentImage { get; set; }
-        public List<MatchDto> TournamentMatches { get; set; }
-        public List<PrizePoolDto> TournamentPrizePool { get; set; }
-        public List<GroupStagesDto> TournamentGroupStages { get; set; }
-        public List<MatchDto> NextMatches { get; set; }
+
+        public int PrizePoolId { get; set; }
+        public PrizePoolDto PrizePool { get; set; }
+        
+        public int GameId { get; set; }
+        public GameDto Game { get; set; }
+        
+        public List<NewsDto> News { get; set; }
+        
+        public List<StageDto> Stages { get; set; }
+        public List<StreamDto> Streams { get; set; }
 
         public TournementsDto() { }
         public TournementsDto(Tournaments tournament)
         {
             Id = tournament.Id;
             Title = tournament.Title;
-            Description = tournament.Description;
-            Format = tournament.Format;
-            MainEvent = tournament.MainEvent;
-            GameId = tournament.GameId;
             Overview = tournament.Overview;
-            Price = tournament.Price;
-            Qualifiers = tournament.Qualifiers;
+            URL = tournament.URL;
+            Venue = tournament.Venue;
             StartDate = tournament.StartDate;
             EndDate = tournament.EndDate;
-            URL = tournament.URL;
             TournamentImage = tournament.TournamentImage;
-            Game = new GameDto(tournament.Game);
-            TournamentMatches = new List<MatchDto>();
-            if (tournament.Matches != null) {
-                foreach (var match in tournament.Matches)
+
+            PrizePoolId = tournament.PrizePoolId;
+            PrizePool = (tournament.PrizePool != null) ? new PrizePoolDto(tournament.PrizePool) : null;
+
+            GameId = tournament.GameId;
+            Game = (tournament.Game != null) ? new GameDto(tournament.Game) : null;
+
+            News = new List<NewsDto>();
+            if (tournament.News != null) {
+                foreach (var news in tournament.News)
                 {
-                    TournamentMatches.Add(new MatchDto(match));
+                    News.Add(new NewsDto(news));
                 }
             }
-            TournamentPrizePool = new List<PrizePoolDto>();
-            if (tournament.PrizePool != null) {
-                foreach (var prize in tournament.PrizePool)
+
+            Stages = new List<StageDto>();
+            if (tournament.Stages != null)
+            {
+                foreach (var stage in tournament.Stages)
                 {
-                    TournamentPrizePool.Add(new PrizePoolDto(prize));
+                    Stages.Add(new StageDto(stage));
                 }
             }
-            TournamentGroupStages = new List<GroupStagesDto>();
-            if (tournament.GroupStages != null) {
-                foreach (var groupStage in tournament.GroupStages)
+
+            Streams = new List<StreamDto>();
+            if (tournament.Streams != null)
+            {
+                foreach (var stream in tournament.Streams)
                 {
-                    TournamentGroupStages.Add(new GroupStagesDto(groupStage));
+                    Streams.Add(new StreamDto(stream));
                 }
             }
-            NextMatches = new List<MatchDto>();
         }
     }
 }

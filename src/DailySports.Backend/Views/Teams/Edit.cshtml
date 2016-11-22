@@ -22,6 +22,7 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.Id)
                             @Html.Hidden("oldFileName", (object)ViewBag.oldFileName)
+
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
@@ -49,10 +50,18 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.GroupStageId, "GroupStageId", htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.LabelFor(model => model.GameId, "GameId", htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.DropDownList("GroupStageId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.GroupStageId, "", new { @class = "text-danger" })
+                                    @Html.DropDownList("GameId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.GameId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CountryCode, "CountryCode", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.DropDownList("CountryCode", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 

@@ -1,16 +1,15 @@
-﻿@model IEnumerable<DailySports.DataLayer.Model.Player>
+﻿@model IEnumerable<DailySports.DataLayer.Model.PlaceEntry>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <section class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Players List</h3>
+                    <h3 class="box-title">Place Entries List</h3>
                 </div>
                 <div class="box-body">
                     <div class="box-body table-responsive no-padding">
@@ -18,61 +17,51 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        Team Name
+                                        @Html.DisplayNameFor(model => model.Id)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Name)
+                                        Place From
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Nick)
+                                        Place To
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Age)
+                                        @Html.DisplayNameFor(model => model.Amount)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Role)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Notes)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Country.Code)
+                                        Tournament Title
                                     </th>
                                     <th></th>
                                 </tr>
-
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Team.Name)
+                                            @Html.DisplayFor(modelItem => item.Id)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Name)
+                                            @Html.DisplayFor(modelItem => item.From)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Nick)
+                                            @Html.DisplayFor(modelItem => item.To)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Age)
+                                            @Html.DisplayFor(modelItem => item.Amount)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Role)
+                                            @Html.DisplayFor(modelItem => item.PrizePool.Tournament.Title)
                                         </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Notes)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Country.Code)
-                                        </td>
+                                       
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                         </td>
                                     </tr>
                                 }
-
+                            </tbody>
                         </table>
+                  
+                            
 
                     </div>
                 </div>
@@ -82,7 +71,7 @@
     <div class="row">
         <div class="col-md-12">
             @Html.ActionLink("Create New", "Create")
+            </div>
         </div>
-    </div>
 
 </section>

@@ -18,16 +18,10 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                       Team Name
+                                        Id
                                     </th>
                                     <th>
                                         Tournament
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Prize)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Level)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -36,16 +30,10 @@
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Team.Name)
+                                            @Html.DisplayFor(modelItem => item.Id)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Tournament.Title)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Prize)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Level)
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

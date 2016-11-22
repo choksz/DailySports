@@ -50,9 +50,12 @@ namespace DailySports.DataLayer.Context
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<CarouselItem> CarouselItems { get; set; }
         public virtual DbSet<PetOfTheWeek> PetOfTheWeek { get; set; }
+        public virtual DbSet<PlaceEntry> PlaceEntries { get; set; }
+        public virtual DbSet<Stage> Stages { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<TeamList> TeamLists { get; set; }
 
-        public virtual DbSet<GroupStages> GroupStages { get; set; }
-        
         public DbSet<Game> Games { get; set; }
 
         public DbSet<User> Users { get; set; }

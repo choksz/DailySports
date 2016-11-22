@@ -1,19 +1,18 @@
-﻿@model DailySports.DataLayer.Model.PrizePool
-
+﻿@model DailySports.DataLayer.Model.TeamList
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <section class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit PrizePool</h3>
+                    <h3 class="box-title">Edit Place Entry</h3>
                 </div>
                 <div class="box-body">
-
                     @using (Html.BeginForm())
                     {
                         @Html.AntiForgeryToken()
@@ -23,12 +22,27 @@
                             @Html.HiddenFor(model => model.Id)
 
                             <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 @Html.LabelFor(model => model.TournamentId, "TournamentId", htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
                                     @Html.DropDownList("TournamentId", null, htmlAttributes: new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.TournamentId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-md-12 ">
                                     <input type="submit" value="Save" class="btn btn-success pull-right" />

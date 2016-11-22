@@ -14,10 +14,14 @@ namespace DailySports.ServiceLayer.Services
     {
         private IUnitOfWork _unitOfWork;
         private IGenericRepository<Match> _matchRepository;
+        private IGenericRepository<Stage> _stagesRepository;
 
-        public MatchService(IUnitOfWork unitOfWork, IGenericRepository<Match> matchRepository)
+        public MatchService(IUnitOfWork unitOfWork,
+                            IGenericRepository<Match> matchRepository,
+                            IGenericRepository<Stage> stagesRepository)
         {
             _matchRepository = matchRepository;
+            _stagesRepository = stagesRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -30,17 +34,14 @@ namespace DailySports.ServiceLayer.Services
         {
             try
             {
-                Match match = _matchRepository.FindBy(M => M.Id == matchId).FirstOrDefault();
-                MatchDto matchDto = new MatchDto();
-                matchDto.Id = match.Id;
-                matchDto.Date = match.Date;
-                matchDto.TeamAId = match.TeamAId;
-                matchDto.TeamAName = match.TeamA.Name;
-                matchDto.TeamBId = match.TeamBId;
-                matchDto.TeamBName = match.TeamB.Name;
-                matchDto.TournamentId = match.TournamentId;
-                matchDto.TournamentName = match.Tournament.Title;
-
+                Match match = _matchRepository.FindBy(M => M.Id == matchId).
+                    Include(m => m.Stage).
+                    Include(m => m.TeamA).
+                        ThenInclude(t => t.Country).
+                    Include(m => m.TeamB).
+                        ThenInclude(t => t.Country).
+                    FirstOrDefault();
+                MatchDto matchDto = new MatchDto(match);
                 return matchDto;
             }
             catch (Exception)
@@ -54,40 +55,25 @@ namespace DailySports.ServiceLayer.Services
             List<MatchDto> MatchDtoList = new List<MatchDto>();
             try
             {
-                List<Match> MatchesList = _matchRepository.FindBy(M => M.TournamentId == TournamentId).
-                    Include(m => m.TeamA).
-                        ThenInclude(t => t.GroupStage).
-                    Include(m => m.TeamB).
-                        ThenInclude(t => t.GroupStage).
-                    Include(m => m.Tournament).
-                    ToList();
+                /*
+                List<ICollection<Match>> Matches = _stagesRepository.FindBy(s => s.TournamentId == TournamentId).Select(s => s.Matches).ToList();
+                List<int> matchesIds = new List<int>();
+                foreach(Stage s in Stages) {
+                    foreach (Match m in s.Matches)
+                    {
+                        matchesIds.Add(m.Id);
+                    }
+                }
+                List<Match> MatchesList = new List<Match>();
+                foreach (int id in matchesIds)
+                {
+                    Match match = _matchRepository.FindBy(m => m.Id == id).FirstOrDefault();
+                }
                 foreach (var Match in MatchesList)
                 {
-                    MatchDtoList.Add(new MatchDto
-                    {
-                        Id = Match.Id,
-                        Date = Match.Date,
-                        TeamAId = Match.TeamAId,
-                        TeamAName = Match.TeamA.Name,
-                        TeamBId = Match.TeamBId,
-                        TeamBName = Match.TeamB.Name,
-                        TournamentId = Match.TournamentId,
-                        TournamentName = Match.Tournament.Title,
-                        TeamA = new TeamDto
-                        {
-                            Id = Match.TeamA.Id,
-                            Name = Match.TeamA.Name,
-                            Logo = Match.TeamA.Logo
-                        },
-                        TeamB = new TeamDto
-                        {
-                            Id = Match.TeamB.Id,
-                            Name = Match.TeamB.Name,
-                            Logo = Match.TeamB.Logo
-                        }
-                    }
-                    );
+                    MatchDtoList.Add(new MatchDto(Match));
                 }
+                */
             }
             catch (Exception)
             { }
@@ -99,27 +85,20 @@ namespace DailySports.ServiceLayer.Services
             List<MatchDto> MatchDtoList = new List<MatchDto>();
             try
             {
+                /*
+                List<Stage> Stages = _stagesRepository.FindBy(s => s.TournamentId == TournamentId).
+                    Include(s => s.Matches).
+                    ToList();
+                List<int> matchesIds = new List<int>();
                 List<Match> NextMatchsList = _matchRepository.FindBy(M => M.Date >= DateTime.Today && M.TournamentId == TournamentId).
                     Include(m => m.TeamA).
                     Include(m => m.TeamB).
-                    Include(m => m.Tournament).ToList();
+                    ToList();
                 foreach (var Match in NextMatchsList)
                 {
-                    MatchDtoList.Add(new MatchDto
-                        {
-                            Id = Match.Id,
-                            Date = Match.Date,
-                            TeamAId = Match.TeamAId,
-                            TeamAName = Match.TeamA.Name,
-                            TeamBId = Match.TeamBId,
-                            TeamBName = Match.TeamB.Name,
-                            TournamentId = Match.TournamentId,
-                            TournamentName =
-                            Match.Tournament.Title
-                        }
-                    );
+                    MatchDtoList.Add(new MatchDto(Match));
                 }
-                
+                */
             }
             catch (Exception)
             { }

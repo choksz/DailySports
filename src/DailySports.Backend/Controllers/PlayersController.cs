@@ -18,7 +18,7 @@ namespace DailySports.Backend.Controllers
         // GET: Players
         public IActionResult Index()
         {
-            var players = db.Players.Include(p => p.team);
+            var players = db.Players.Include(p => p.Team).Include(p => p.Country);
             return View(players.ToList());
         }
 
@@ -26,6 +26,7 @@ namespace DailySports.Backend.Controllers
         public IActionResult Create()
         {
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
             return View(new Player());
         }
 
@@ -34,7 +35,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Name,Age,TeamId")] Player player)
+        public IActionResult Create(Player player)
         {
             if (ModelState.IsValid)
             {
@@ -44,6 +45,7 @@ namespace DailySports.Backend.Controllers
             }
 
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", player.TeamId);
+            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
             return View(player);
         }
 
@@ -60,6 +62,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", player.TeamId);
+            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
             return View(player);
         }
 
@@ -68,7 +71,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Name,Age,TeamId")] Player player)
+        public IActionResult Edit(Player player)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +80,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", player.TeamId);
+            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
             return View(player);
         }
 

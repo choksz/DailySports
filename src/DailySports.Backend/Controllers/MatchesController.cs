@@ -18,7 +18,7 @@ namespace DailySports.Backend.Controllers
         // GET: Matches
         public IActionResult Index()
         {
-            var matches = db.Matches.Include(m => m.TeamA).Include(m => m.TeamB).Include(m => m.Tournament);
+            var matches = db.Matches.Include(m => m.TeamA).Include(m => m.TeamB);
             return View(matches.ToList());
         }
 
@@ -27,7 +27,7 @@ namespace DailySports.Backend.Controllers
         {
             ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
+            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
             return View(new Match());
         }
 
@@ -36,7 +36,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,Date,TournamentId,TeamAId,TeamBId")] Match match)
+        public IActionResult Create(Match match)
         {
             if (ModelState.IsValid)
             {
@@ -45,9 +45,9 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name", match.TeamAId);
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name", match.TeamBId);
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", match.TournamentId);
+            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
             return View(match);
         }
 
@@ -63,9 +63,9 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name", match.TeamAId);
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name", match.TeamBId);
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", match.TournamentId);
+            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
             return View(match);
         }
 
@@ -74,7 +74,7 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Date,TournamentId,TeamAId,TeamBId")] Match match)
+        public IActionResult Edit(Match match)
         {
             if (ModelState.IsValid)
             {
@@ -82,9 +82,9 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name", match.TeamAId);
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name", match.TeamBId);
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", match.TournamentId);
+            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
+            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
             return View(match);
         }
 

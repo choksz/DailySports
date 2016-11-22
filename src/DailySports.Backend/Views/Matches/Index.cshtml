@@ -19,16 +19,22 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                       Team A
+                                        Team A
+                                    </th>
+                                    <th>
+                                        Score A
+                                    </th>
+                                    <th>
+                                        Score B
                                     </th>
                                     <th>
                                         Team B
                                     </th>
                                     <th>
-                                       Tournament
+                                        @Html.DisplayNameFor(model => model.Date)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Date)
+                                        @Html.DisplayNameFor(model => model.StageId)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -40,13 +46,19 @@
                                             @Html.DisplayFor(modelItem => item.TeamA.Name)
                                         </td>
                                         <td>
+                                            @Html.DisplayFor(modelItem => item.ScoreA)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ScoreB)
+                                        </td>
+                                        <td>
                                             @Html.DisplayFor(modelItem => item.TeamB.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Tournament.Title)
+                                            @Html.DisplayFor(modelItem => item.Date)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Date)
+                                            @Html.DisplayFor(modelItem => item.StageId)
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

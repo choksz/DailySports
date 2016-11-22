@@ -12,8 +12,6 @@ namespace DailySports.Backend.Controllers
     {
         private DailySportsContext db = new DailySportsContext(new DbContextOptions<DailySportsContext>());
 
-
-
         // GET: Categories
         public ActionResult Index()
         {
@@ -68,16 +66,8 @@ namespace DailySports.Backend.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = EntityState.Modified;
-                try
-                {
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-                catch (Exception)
-                { //there may be foreign key to this object
-                    ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
-                    return View(category);
-                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View(category);
         }
@@ -103,8 +93,16 @@ namespace DailySports.Backend.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             Category category = db.Category.Find(id);
-            db.Category.Remove(category);
-            db.SaveChanges();
+            try
+            {
+                db.Category.Remove(category);
+                db.SaveChanges();
+            }
+            catch (Exception)
+            { //there may be foreign key to this object
+                ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
+                return View(category);
+            }
             return RedirectToAction("Index");
         }
 
