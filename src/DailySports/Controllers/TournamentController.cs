@@ -55,10 +55,12 @@ namespace DailySports.Controllers
         {
             TournementsDto TournamentDto = new TournementsDto();
             TournamentDto = _tournamentService.GetTournement(id);
+            /*
             TournamentDto.TournamentMatches = _matchService.TournamentMatches(id);
             TournamentDto.NextMatches = _matchService.NextMatches(id);
             TournamentDto.TournamentPrizePool = _tournamentService.TournametPrizePool(id);
             TournamentDto.TournamentGroupStages = _tournamentService.TournamentGroupStages(id);
+            */
             ViewBag.News = _newsService.GetAll();
             return View(TournamentDto);
         }
