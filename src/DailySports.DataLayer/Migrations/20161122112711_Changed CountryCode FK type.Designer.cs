@@ -8,9 +8,10 @@ using DailySports.DataLayer.Context;
 namespace DailySports.DataLayer.Migrations
 {
     [DbContext(typeof(DailySportsContext))]
-    partial class DailySportsContextModelSnapshot : ModelSnapshot
+    [Migration("20161122112711_Changed CountryCode FK type")]
+    partial class ChangedCountryCodeFKtype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1");

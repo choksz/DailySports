@@ -8,9 +8,10 @@ using DailySports.DataLayer.Context;
 namespace DailySports.DataLayer.Migrations
 {
     [DbContext(typeof(DailySportsContext))]
-    partial class DailySportsContextModelSnapshot : ModelSnapshot
+    [Migration("20161122095639_Removed FK from Tournament")]
+    partial class RemovedFKfromTournament
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1");
@@ -329,7 +330,7 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<int>("Age");
 
-                    b.Property<string>("CountryCode");
+                    b.Property<int>("CountryCode");
 
                     b.Property<string>("CountryId");
 
@@ -392,7 +393,7 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<int?>("TeamListId");
+                    b.Property<int>("TeamListId");
 
                     b.Property<int>("TournamentId");
 
@@ -434,7 +435,7 @@ namespace DailySports.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CountryCode");
+                    b.Property<int>("CountryCode");
 
                     b.Property<string>("CountryId");
 

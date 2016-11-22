@@ -18,9 +18,7 @@ namespace DailySports.DataLayer.Model
         public DateTime EndDate { get; set; }
         public string TournamentImage { get; set; }
 
-        [ForeignKey("PrizePoolId")]
         public virtual PrizePool PrizePool { get; set; }
-        public int PrizePoolId { get; set; }
 
         [ForeignKey("GameId")]
         public virtual Game Game { get; set; }

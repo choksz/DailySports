@@ -38,7 +38,6 @@ namespace DailySports.ServiceLayer.Dtos
             EndDate = tournament.EndDate;
             TournamentImage = tournament.TournamentImage;
 
-            PrizePoolId = tournament.PrizePoolId;
             PrizePool = (tournament.PrizePool != null) ? new PrizePoolDto(tournament.PrizePool) : null;
 
             GameId = tournament.GameId;

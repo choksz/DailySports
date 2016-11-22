@@ -19,6 +19,6 @@ namespace DailySports.DataLayer.Model
 
         [ForeignKey("CountryId")]
         public virtual Country Country { get; set; }
-        public int CountryCode { get; set; }
+        public string CountryCode { get; set; }
     }
 }

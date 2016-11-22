@@ -25,22 +25,13 @@
                                         @Html.DisplayNameFor(model => model.Title)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Format)
-                                    </th>
-                                    <th>
                                         @Html.DisplayNameFor(model => model.Overview)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.MainEvent)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Qualifiers)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Description)
-                                    </th>
-                                    <th>
                                         @Html.DisplayNameFor(model => model.URL)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Venue)
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.TournamentImage)
@@ -50,9 +41,6 @@
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.EndDate)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(model => model.Price)
                                     </th>
                                     <th></th>
                                 </tr>
@@ -67,34 +55,22 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @(item.Format.ToString().Length > 200 ? (item.Format.ToString().Substring(0, 200) + "...") : (item.Format.ToString()))
-                                        </td>
-                                        <td>
                                             @(item.Overview.ToString().Length > 200 ? (item.Overview.ToString().Substring(0, 200) + "...") : (item.Overview.ToString()))
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.MainEvent)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Qualifiers)
-                                        </td>
-                                        <td>
-                                            @(item.Description.ToString().Length > 200 ? (item.Description.ToString().Substring(0, 200) + "...") : (item.Description.ToString()))
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.URL)
+                                            <a href="@item.URL">Link</a>
                                         </td>
                                         <td>
                                             <a href="@Globals.CDNContent(item.TournamentImage)">Link</a>
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Venue)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.StartDate)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.EndDate)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.Price)
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

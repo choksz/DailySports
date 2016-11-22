@@ -16,7 +16,7 @@ namespace DailySports.Backend.Controllers
         // GET: PlaceEntry
         public ActionResult Index()
         {
-            return View(db.PlaceEntries.ToList());
+            return View(db.PlaceEntries.Include(e => e.PrizePool).ThenInclude(p => p.Tournament).ToList());
         }
 
         // GET: PlaceEntry/Create

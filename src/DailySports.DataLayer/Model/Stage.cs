@@ -16,9 +16,7 @@ namespace DailySports.DataLayer.Model
 
         public virtual ICollection<Match> Matches { get; set; }
 
-        [ForeignKey("TeamListId")]
         public virtual TeamList TeamList { get; set; }
-        public int TeamListId { get; set; }
 
         [ForeignKey("TournamentId")]
         public virtual Tournaments Tournament { get; set; }

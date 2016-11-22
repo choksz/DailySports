@@ -20,6 +20,15 @@
 
                         <div class="form-horizontal">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GameId, "GameId", htmlAttributes: new { @class = "control-label col-md-1" })
+                                <div class="col-md-11">
+                                    @Html.DropDownList("GameId", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.GameId, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
@@ -29,42 +38,10 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Format, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Format, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Format, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 @Html.LabelFor(model => model.Overview, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Overview, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.TextAreaFor(model => model.Overview, new { @class = "textarea", @style = "width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" })
                                     @Html.ValidationMessageFor(model => model.Overview, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.MainEvent, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.MainEvent, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.MainEvent, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Qualifiers, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Qualifiers, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Qualifiers, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "textarea", @style = "width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" })
-                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -75,11 +52,12 @@
                                     @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                @Html.LabelFor(model => model.TournamentImage, htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.LabelFor(model => model.Venue, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    <input class="form-control" name="file" type="file" />
-                                    @Html.ValidationMessageFor(model => model.TournamentImage, "", new { @class = "text-danger" })
+                                    @Html.EditorFor(model => model.Venue, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Venue, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -100,18 +78,10 @@
                             </div>
 
                             <div class="form-group">
-                                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-1" })
+                                @Html.LabelFor(model => model.TournamentImage, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                @Html.LabelFor(model => model.GameId, "GameId", htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.DropDownList("GameId", null, htmlAttributes: new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.GameId, "", new { @class = "text-danger" })
+                                    <input class="form-control" name="file" type="file" />
+                                    @Html.ValidationMessageFor(model => model.TournamentImage, "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
@@ -120,6 +90,7 @@
                                     <input type="submit" value="Create" class="btn btn-success" />
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     @Html.ActionLink("Back to List", "Index")
