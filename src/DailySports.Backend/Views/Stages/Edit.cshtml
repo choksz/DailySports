@@ -64,9 +64,21 @@
                             </div>
 
                             <div class="form-group">
+                                <div class="col-md-1">
+                                    <label class="control-label">Teams</label>
+                                </div>
+                                <div class="col-md-11">
+                                    @foreach (var entry in ViewBag.Teams)
+                                    {
+                                        <div class="col-md-3">@Html.CheckBox("SelectedTeams", new { id = entry.Key }) @entry.Value.Name </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <div class="col-md-12 ">
                                     <input type="submit" value="Save" class="btn btn-success pull-right" />
-                                    <input onclick="location.href='@Url.Action("Index","News")'; return false;" type="button" value="Back" class="btn btn-danger" />
+                                    <input onclick="location.href='@Url.Action("Index","Stages")'; return false;" type="button" value="Back" class="btn btn-danger" />
                                 </div>
                             </div>
                         </div>

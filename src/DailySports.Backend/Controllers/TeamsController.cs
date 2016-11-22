@@ -26,7 +26,7 @@ namespace DailySports.Backend.Controllers
         public IActionResult Create()
         {
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
-            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
             return View(new Team());
         }
 
@@ -49,7 +49,7 @@ namespace DailySports.Backend.Controllers
             }
 
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
-            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
             return View(team);
         }
 
@@ -66,7 +66,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
-            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
             ViewBag.oldFileName = team.Logo;
             return View(team);
         }
@@ -94,7 +94,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
-            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Code");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
             ViewBag.oldFileName = team.Logo;
             return View(team);
         }

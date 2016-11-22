@@ -15,14 +15,6 @@ namespace DailySports.DataLayer.Context
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseNpgsql("Host=104.155.185.35;User ID=dailysports;Password=dailysports;Database=dailysports"); 
         }
-
-        /*
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        }
-        */
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,8 +25,9 @@ namespace DailySports.DataLayer.Context
                     x.DeleteBehavior = DeleteBehavior.Restrict;
                 }
             }
+            modelBuilder.Entity<StageTeam>().HasKey(table => new {table.TeamId, table.StageId});
         }
-
+        
         public virtual DbSet<TicketType> TicketTypes { get; set; }
         public virtual DbSet<Event> Events { get; set; }
         public virtual DbSet<Videos> Videos { get; set; }
@@ -54,7 +47,7 @@ namespace DailySports.DataLayer.Context
         public virtual DbSet<Stage> Stages { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<TeamList> TeamLists { get; set; }
+        public virtual DbSet<StageTeam> StageTeams { get; set; }
 
         public DbSet<Game> Games { get; set; }
 

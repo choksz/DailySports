@@ -133,7 +133,7 @@ namespace DailySports.ServiceLayer.Services
             {
                 List<Stage> stagesList = _stagesRepository.FindBy(g => g.TournamentId == TournamentId).
                     Include(s => s.TeamList).
-                        ThenInclude(l => l.Teams).
+                        ThenInclude(l => l.Team).
                     ToList();
                 foreach (var stage in stagesList)
                 {

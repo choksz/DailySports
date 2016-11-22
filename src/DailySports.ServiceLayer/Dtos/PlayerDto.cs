@@ -14,7 +14,7 @@ namespace DailySports.ServiceLayer.Dtos
         public int TeamId { get; set; }
         public TeamDto Team { get; set; }
 
-        public int CountryCode { get; set; }
+        public string CountryCode { get; set; }
         public CountryDto Country { get; set; }
 
         public PlayerDto() { }

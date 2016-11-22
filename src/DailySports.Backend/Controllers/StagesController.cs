@@ -6,12 +6,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
 
 namespace DailySports.Backend.Controllers
 {
     public class StagesController : Controller
     {
         private DailySportsContext db = new DailySportsContext(new DbContextOptions<DailySportsContext>());
+        private readonly ILogger<StagesController> _logger;
+
+        public StagesController(ILogger<StagesController> logger)
+        {
+            _logger = logger;
+        }
 
         // GET: stages
         public IActionResult Index()
@@ -23,6 +31,7 @@ namespace DailySports.Backend.Controllers
         // GET: stages/Create
         public IActionResult Create()
         {
+            ViewBag.Teams = db.Teams.ToDictionary(x => x.Id);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
             return View(new Stage());
         }
@@ -32,17 +41,17 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Stage stages)
+        public IActionResult Create(Stage stage)
         {
             if (ModelState.IsValid)
             {
-                db.Stages.Add(stages);
+                db.Stages.Add(stage);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stages.TournamentId);
-            return View(stages);
+            ViewBag.Teams = db.Teams.ToDictionary(x => x.Id);
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stage.TournamentId);
+            return View(stage);
         }
 
         // GET: stages/Edit/5
@@ -57,6 +66,7 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Teams = db.Teams.ToDictionary(x => x.Id);
             ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stages.TournamentId);
             return View(stages);
         }
@@ -66,16 +76,17 @@ namespace DailySports.Backend.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Stage stages)
+        public IActionResult Edit(Stage stage, IEnumerable<int> SelectedTeams)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(stages).State = EntityState.Modified;
+                db.Entry(stage).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stages.TournamentId);
-            return View(stages);
+            ViewBag.Teams = db.Teams.ToDictionary(x => x.Id);
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stage.TournamentId);
+            return View(stage);
         }
 
         // GET: stages/Delete/5
@@ -85,12 +96,12 @@ namespace DailySports.Backend.Controllers
             {
                 return BadRequest();
             }
-            Stage stages = db.Stages.Find(id);
-            if (stages == null)
+            Stage stage = db.Stages.Find(id);
+            if (stage == null)
             {
                 return NotFound();
             }
-            return View(stages);
+            return View(stage);
         }
 
         // POST: stages/Delete/5
@@ -98,8 +109,8 @@ namespace DailySports.Backend.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            Stage stages = db.Stages.Find(id);
-            db.Stages.Remove(stages);
+            Stage stage = db.Stages.Find(id);
+            db.Stages.Remove(stage);
             try
             {
                 db.SaveChanges();
@@ -108,7 +119,7 @@ namespace DailySports.Backend.Controllers
             catch (Exception e)
             { //there may be foreign key to this object
                 ModelState.AddModelError("", "Can't delete this object. Check if other objects don't have foreign key to this.");
-                return View(stages);
+                return View(stage);
             }
         }
 

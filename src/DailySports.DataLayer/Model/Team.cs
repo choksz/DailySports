@@ -13,11 +13,13 @@ namespace DailySports.DataLayer.Model
 
         public virtual ICollection<Player> Players { get; set; }
 
+        public virtual ICollection<StageTeam> Stages { get; set; }
+
         [ForeignKey("GameId")]
         public virtual Game Game { get; set; }
         public int GameId { get; set; }
 
-        [ForeignKey("CountryId")]
+        [ForeignKey("CountryCode")]
         public virtual Country Country { get; set; }
         public string CountryCode { get; set; }
     }

@@ -60,6 +60,17 @@
                                     @Html.ValidationMessageFor(model => model.TournamentId, "", new { @class = "text-danger" })
                                 </div>
                             </div>
+                            
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    Teams
+                                </div>
+                                @foreach (var entry in ViewBag.Teams)
+                                {
+                                    <div class="col-md-3">@Html.CheckBox("CheckedTeams", new { id = entry.Key }) @entry.Value.Name </div>
+                                }
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <input type="submit" value="Create" class="btn btn-success" />
