@@ -21,6 +21,9 @@
                                         Id
                                     </th>
                                     <th>
+                                        Amount
+                                    </th>
+                                    <th>
                                         Tournament
                                     </th>
                                     <th></th>
@@ -31,6 +34,9 @@
                                     <tr>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Id)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Amount)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Tournament.Title)

@@ -4,12 +4,17 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DailySports.DataLayer.Model
 {
-    public class PrizePool
+    /*
+        Used for modelling Many-To-Many Relationship
+    */
+    public class TeamList
     {
         [Key]
         public int Id { get; set; }
-        public string Amount { get; set; }
-        public virtual ICollection<PlaceEntry> Distribution { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public virtual ICollection<Team> Teams { get; set; }
 
         [ForeignKey("TournamentId")]
         public virtual Tournaments Tournament { get; set; }

@@ -11,42 +11,25 @@ namespace DailySports.ServiceLayer.Dtos
         public string Description { get; set; }
         public DateTime Date { get; set; }
         public UserDto Author { get; set; }
-        public string AuthorName { get; set; }
-        public string AuthorBigraphy { get; set; }
         public string NewsImage { get; set; }
         public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public CategoryDto Category { get; set; }
         public GameDto Game { get; set; }
         public List<PetOfTheWeekDto> PetOfTheDate { get; set; }
-        //public List<MatchDto> NextMatches { get; set; }
 
         public NewsDto() { }
 
         public NewsDto(News news)
-        {/*
+        {
             Id = news.Id;
             Title = news.Title;
             Description = news.Description;
             CategoryId = news.CategoryId;
-            CategoryName = (news.category != null) ? news.category.Name : null;
-            AuthorName = (news.Author != null) ? news.Author.Name : null;
-            AuthorBigraphy = (news.Author != null) ? news.Author.Biography : null;
+            Category= (news.category != null) ? new CategoryDto(news.category) : null;
             Date = news.Date;
             NewsImage = news.NewsImage;
             Game = (news.game != null) ? new GameDto(news.game) : null;
             Author = (news.Author != null) ? new UserDto(news.Author) : null;
-            */
-            Id = news.Id;
-            Title = news.Title;
-            Description = news.Description;
-            CategoryId = news.CategoryId;
-            CategoryName = news.category.Name;
-            AuthorName = news.Author.Name;
-            AuthorBigraphy = news.Author.Biography;
-            Date = news.Date;
-            NewsImage = news.NewsImage;
-            Game = new GameDto(news.game);
-            Author = new UserDto(news.Author);
         }
     }
 }

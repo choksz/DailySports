@@ -120,7 +120,9 @@
                                                         @tournament.StartDate.ToString("d") - @tournament.EndDate.ToString("d")
                                                     </div>
                                                 </div>
-                                                <div class="tournament_details">@tournament.Overview</div>
+                                                <div class="tournament_details" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    @Html.Raw(tournament.Overview)
+                                                </div>
                                             </div>
                                         </div>
                                     </a>

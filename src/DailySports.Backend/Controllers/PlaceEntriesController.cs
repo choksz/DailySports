@@ -22,6 +22,7 @@ namespace DailySports.Backend.Controllers
         // GET: PlaceEntry/Create
         public ActionResult Create()
         {
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
             return View(new PlaceEntry());
         }
@@ -37,6 +38,7 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
             return View(entry);
         }
@@ -53,6 +55,7 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
             return View(entry);
         }
@@ -68,6 +71,7 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
             ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
             return View(entry);
         }

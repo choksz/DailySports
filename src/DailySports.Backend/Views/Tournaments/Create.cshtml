@@ -63,17 +63,27 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class='input-group date' id='StartDate'>
+                                        <input type='text' class="form-control" name="StartDate" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                                    @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class='input-group date' id='EndDate'>
+                                        <input type='text' class="form-control" name="EndDate" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
 
@@ -102,5 +112,20 @@
             </div>
         </div>
     </div>
-
 </section>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(function () {
+            $('#StartDate').datetimepicker();
+            $('#EndDate').datetimepicker({
+                useCurrent: false //Important! See issue #1075
+            });
+            $("#StartDate").on("dp.change", function (e) {
+                $('#EndDate').data("DateTimePicker").minDate(e.date);
+            });
+            $("#EndDate").on("dp.change", function (e) {
+                $('#StartDate').data("DateTimePicker").maxDate(e.date);
+            });
+        })
+    });
+</script>

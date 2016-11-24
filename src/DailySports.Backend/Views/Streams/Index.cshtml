@@ -1,15 +1,16 @@
-﻿@model IEnumerable<DailySports.DataLayer.Model.PlaceEntry>
+﻿@model IEnumerable<DailySports.DataLayer.Model.Stream>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <section class="content">
     <div class="row">
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Place Entries List</h3>
+                    <h3 class="box-title">Streams List</h3>
                 </div>
                 <div class="box-body">
                     <div class="box-body table-responsive no-padding">
@@ -17,45 +18,49 @@
                             <tbody>
                                 <tr>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Id)
+                                        @Html.DisplayNameFor(model => model.Name)
                                     </th>
                                     <th>
-                                        Place
+                                        @Html.DisplayNameFor(model => model.URL)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.Amount)
+                                        @Html.DisplayNameFor(model => model.LanguageCode)
                                     </th>
                                     <th>
-                                        Tournament Title
+                                        @Html.DisplayNameFor(model => model.Main)
+                                    </th>
+                                    <th>
+                                        Tournament Name
                                     </th>
                                     <th></th>
                                 </tr>
+
                                 @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Id)
+                                            @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Place)
+                                           <a href="@item.URL">Link</a>
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Amount)
+                                            @Html.DisplayFor(modelItem => item.LanguageCode)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.PrizePool.Tournament.Title)
+                                            @Html.DisplayFor(modelItem => item.Main)
                                         </td>
-                                       
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Tournament.Title)
+                                        </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                                             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                         </td>
                                     </tr>
                                 }
-                            </tbody>
+
                         </table>
-                  
-                            
 
                     </div>
                 </div>
@@ -65,7 +70,6 @@
     <div class="row">
         <div class="col-md-12">
             @Html.ActionLink("Create New", "Create")
-            </div>
         </div>
-
+    </div>
 </section>

@@ -25,7 +25,7 @@ namespace DailySports.DataLayer.Context
                     x.DeleteBehavior = DeleteBehavior.Restrict;
                 }
             }
-            modelBuilder.Entity<StageTeam>().HasKey(table => new {table.TeamId, table.StageId});
+            modelBuilder.Entity<TeamListTeam>().HasKey(table => new {table.TeamId, table.TeamListId});
         }
         
         public virtual DbSet<TicketType> TicketTypes { get; set; }
@@ -47,7 +47,9 @@ namespace DailySports.DataLayer.Context
         public virtual DbSet<Stage> Stages { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<StageTeam> StageTeams { get; set; }
+        public virtual DbSet<TeamListTeam> TeamListTeams { get; set; }
+        public virtual DbSet<TeamList> TeamLists { get; set; }
+        public virtual DbSet<Stream> Streams { get; set; }
 
         public DbSet<Game> Games { get; set; }
 

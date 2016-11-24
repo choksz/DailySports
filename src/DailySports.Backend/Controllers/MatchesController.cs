@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DailySports.Backend.Controllers
@@ -13,8 +14,6 @@ namespace DailySports.Backend.Controllers
     {
         private DailySportsContext db = new DailySportsContext(new DbContextOptions<DailySportsContext>());
 
-
-
         // GET: Matches
         public IActionResult Index()
         {
@@ -22,12 +21,46 @@ namespace DailySports.Backend.Controllers
             return View(matches.ToList());
         }
 
+        private SelectList GetStageSelectList()
+        {
+            var list = db.Stages.
+                Join(db.Tournaments, st => st.TournamentId, t => t.Id, (st, t) => new { stage = st, tour = t }).
+                Select(x => new { x.stage.Id, x.tour.Title, x.stage.Name }).ToList();
+            var items = new List<SelectListItem>();
+            foreach (var x in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = x.Title + " - " + x.Name,
+                    Value = x.Id.ToString()
+                });
+            }
+            return new SelectList(items, "Value", "Text");
+        }
+
+        private SelectList GetTeamSelectList()
+        {
+            var list = db.Teams.Join(db.Games, t => t.GameId, g => g.Id, (t, g) => new { team = t, game = g }).
+                Select(x => new { Id = x.team.Id, Team = x.team.Name, Game = x.game.Name }).ToList();
+            var items = new List<SelectListItem>();
+            foreach (var x in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = x.Team + " (" + x.Game + ")",
+                    Value = x.Id.ToString()
+                });
+            }
+            return new SelectList(items, "Value", "Text");
+        }
+
         // GET: Matches/Create
         public IActionResult Create()
         {
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
+            var Teams = GetTeamSelectList();
+            ViewBag.TeamAId = Teams;
+            ViewBag.TeamBId = Teams;
+            ViewBag.StageId = GetStageSelectList();
             return View(new Match());
         }
 
@@ -45,9 +78,10 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
+            var Teams = GetTeamSelectList();
+            ViewBag.TeamAId = Teams;
+            ViewBag.TeamBId = Teams;
+            ViewBag.StageId = GetStageSelectList();
             return View(match);
         }
 
@@ -63,9 +97,10 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
+            var Teams = GetTeamSelectList();
+            ViewBag.TeamAId = Teams;
+            ViewBag.TeamBId = Teams;
+            ViewBag.StageId = GetStageSelectList();
             return View(match);
         }
 
@@ -82,9 +117,10 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TeamAId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.TeamBId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.StageId = new SelectList(db.Stages, "Id", "Name");
+            var Teams = GetTeamSelectList();
+            ViewBag.TeamAId = Teams;
+            ViewBag.TeamBId = Teams;
+            ViewBag.StageId = GetStageSelectList();
             return View(match);
         }
 

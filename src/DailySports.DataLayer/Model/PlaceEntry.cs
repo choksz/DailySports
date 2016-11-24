@@ -7,9 +7,12 @@ namespace DailySports.DataLayer.Model
     {
         [Key]
         public int Id { get; set; }
-        public int From { get; set; }
-        public int To { get; set; }
-        public double Amount { get; set; }
+        public int Place { get; set; }
+        public string Amount { get; set; }
+
+        [ForeignKey("TeamId")]
+        public virtual Team Team { get; set; }
+        public int TeamId { get; set; }
 
         [ForeignKey("PrizePoolId")]
         public virtual PrizePool PrizePool { get; set; }

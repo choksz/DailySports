@@ -11,7 +11,7 @@ namespace DailySports.ServiceLayer.IServices
         TournementsDto GetTournement(int Id);
         List<TournementsDto> LatestTournements();
         //List<PrizePoolDto> TournametPrizePool(int TournamentId);
-        List<StageDto> TournamentStages(int TournamentId);
+        //List<StageDto> TournamentStages(int TournamentId);
         int GetLatestTornamentId();
     }
 }

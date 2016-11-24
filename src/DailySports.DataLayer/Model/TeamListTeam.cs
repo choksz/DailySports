@@ -6,11 +6,11 @@ namespace DailySports.DataLayer.Model
     /*
         Used for modelling Many-To-Many Relationship
     */
-    public class StageTeam
+    public class TeamListTeam
     {
-        [ForeignKey("StageId")]
-        public virtual Stage Stage { get; set; }
-        public int StageId { get; set; }
+        [ForeignKey("TeamListId")]
+        public virtual TeamList TeamList { get; set; }
+        public int TeamListId { get; set; }
 
         [ForeignKey("TeamId")]
         public virtual Team Team { get; set; }

@@ -22,9 +22,9 @@ namespace DailySports.ServiceLayer.Dtos
         public GameDto Game { get; set; }
         
         public List<NewsDto> News { get; set; }
-        
         public List<StageDto> Stages { get; set; }
         public List<StreamDto> Streams { get; set; }
+        public List<TeamListDto> TeamLists { get; set; }
 
         public TournementsDto() { }
         public TournementsDto(Tournaments tournament)
@@ -66,6 +66,15 @@ namespace DailySports.ServiceLayer.Dtos
                 foreach (var stream in tournament.Streams)
                 {
                     Streams.Add(new StreamDto(stream));
+                }
+            }
+
+            TeamLists = new List<TeamListDto>();
+            if (tournament.TeamLists != null)
+            {
+                foreach (var tl in tournament.TeamLists)
+                {
+                    TeamLists.Add(new TeamListDto(tl));
                 }
             }
         }

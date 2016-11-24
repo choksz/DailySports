@@ -10,7 +10,14 @@
             <div class="col-sm-6">
                 <div class="tournament_iframe">
                     <div style="width:500px;height:300px">
-                        @*<iframe width="100%" height="100%" src="@Model.URL" frameborder="0" allowfullscreen=""></iframe>*@
+                        @{
+                            var mainStream = 0;
+                            while (mainStream < Model.Streams.Count && !Model.Streams[mainStream].Main)
+                            {
+                                mainStream++;
+                            }
+                            <iframe width="100%" height="100%" src="@Model.Streams[mainStream].URL" frameborder="0" allowfullscreen></iframe>
+                        }
                     </div>
                 </div>
             </div>
@@ -26,10 +33,11 @@
                             </div>
                         </div>
                         <div class="col-sm-10 pad-zero">
-                            <h5>BeyondTheSummit</h5>
-                            <h5><i class="fa fa-eye"></i>11,881</h5>
+                            <h5>@Model.Title</h5>
+                            TODO: Info from Twitch API
+                            <!--h5><i class="fa fa-eye"></i>11,881</h5-->
                         </div>
-                        <p class="col-sm-12">LIVE: Following Veggies in NA open quals </p>
+                        <p class="col-sm-12">@Model.Streams[mainStream].Name</p>
                     </div>
                     <div class="featured_stream_bottom">
                         <button class="btn">open stream</button>
@@ -45,9 +53,7 @@
                     <div class="post_page_header tour_small_header light_black_bg height_40">
                         <div class="col-sm-9 h_100_per pad-zero tour_search_header">
                             <ul class="filters nav nav-tabs tour_post_tabs" role="tablist">
-                                <li role="presentation" class="active current"><a href="#OVERVIEW" aria-controls="OVERVIEW" role="tab" data-toggle="tab">OVERVIEW</a></li>
-                                <li role="presentation"><a href="#EVENT" aria-controls="EVENT" role="tab" data-toggle="tab">MAIN EVENT</a></li>
-                                <li role="presentation"><a href="#QUALIFIERS" aria-controls="QUALIFIERS" role="tab" data-toggle="tab">QUALIFIERS</a></li>
+                                <li role="presentation" class="current active"><a href="#Overview" aria-controls="Overview" role="tab" data-toggle="tab">Overview</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-3 pad-zero">
@@ -60,98 +66,81 @@
                     <div class="tournament_details">
                         <div class="col-sm-8 pad-zero br-right">
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="OVERVIEW">
+                                <div role="tabpanel" class="tab-pane active fade in" id="Overview">
                                     <div class="tabs_content">
-                                        <h4 class="f_bol ">GENERAL INFO</h4>
-                                        <h5>@Model.Overview</h5>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="EVENT">
-                                    <div class="tabs_content">
-                                        <h4 class="f_bol">MAIN EVENT INFO</h4>
-                                        <h5>@Model.MainEvent</h5>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="QUALIFIERS">
-                                    <div class="tabs_content">
-                                        <h4 class="f_bol">QUALIFIERS INFO</h4>
-                                        <h5>@Model.Qualifiers</h5>
+                                        @Html.Raw(Model.Overview)
                                     </div>
                                 </div>
                             </div>
                             <div class="tour_format">
                                 <div class="col-sm-12">
                                     <h4 class="f_bol main_head">FORMAT</h4>
-                                    <div class="tour_format_text">
-                                        <div class="text_1">
-                                            <h5>- @Model.Format - @Model.StartDate.ToString("d")</h5>
+                                    @foreach (var stage in Model.Stages.OrderBy(x => x.StartDate))
+                                    {
+                                        <div class="tour_format_text">
+                                            <div class="text_1">
+                                                <h5>- @stage.Name - @stage.StartDate.ToString("d") - @stage.EndDate.ToString("d")</h5>
+                                            </div>
+                                            <div class="text_2">
+                                                @Html.Raw(stage.Description)
+                                            </div>
                                         </div>
-                                        <div class="text_2">
-                                            <h5>@Model.Format</h5>
-                                        </div>
-                                    </div>
-                                    <div class="tour_format_text">
-                                        <div class="text_1">
-                                            <h5>- @Model.Qualifiers - @Model.StartDate.ToString("d")</h5>
-                                        </div>
-                                        <div class="text_2">
-                                            <h5>@Model.Qualifiers.</h5>
-                                            <h5>The winner of each Regional Playoff Bracket will join the six directly invited teams in Seattle.</h5>
-                                            <h5>Third-place teams will advance to the Wild Card round in Seattle.</h5>
-                                        </div>
-                                    </div>
-                                    <div class="tour_format_text">
-                                        <div class="text_1">
-                                            <h5>- @Model.MainEvent - @string.Format("{0:MMMM dd}th ", @Model.StartDate) - @string.Format("{0:MMMM dd}th ", @Model.EndDate)  , @Model.EndDate.Year</h5>
-                                        </div>
-                                        <div class="text_2">
-                                            <h5>Sixteen teams play in a double elimination format over six days.</h5>
-                                            <h5>Eight teams begin in the upper bracket, eight in the lower bracket.</h5>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                             <div class="tour_latest">
-
-                                +                                @foreach (var News in ViewBag.News)
+                                @foreach (var news in Model.News)
                                 {
                                     <div class="tournament_box">
                                         <div class="col-sm-4 tournament_box_img pad-zero">
-                                            <img src="@News.NewsImage" alt="#">
+                                            <img src="@Globals.CDNContent(news.NewsImage)" alt="#">
                                         </div>
                                         <div class="col-sm-8 tournament_box_text">
-                                            @Html.Raw(@News.Description)
-
+                                            <h3>@news.Title</h3>
                                             <h4 class="t_sub_heading grey">
-                                                Posted by <span class="red"> @News.Author.Name </span>
-                                                , @News.Date @Html.ActionLink("read more", "GetNews", "News", new { Id = News.Id }, "href")
+                                                Posted by <span class="red"> @news.Author.Name </span>
+                                                , @news.Date.ToString("d")
                                             </h4>
+                                            @Html.ActionLink("read more", "GetNews", "News", new { Id = news.Id }, "href")
                                         </div>
                                     </div>
                                 }
                             </div>
                             <div class="tour_matches">
                                 <h4 class="tour_matches_Sub main_head">MATCHES</h4>
-                                @foreach (var Match in Model.TournamentMatches)
-                                {
-                                    <div class="tournament_stream">
-                                        <div class="tour_stream_box">
-                                            <h3>@Model.Title <span class="grey">@Model.Qualifiers - Semifinals</span></h3>
-                                            <div class="lower_matches float_left">
-                                                <h4 class="lower_m1 f_bol"><img src="@Globals.CDNContent(Match.TeamA.Logo)" alt=""> @Match.TeamAName</h4>
-                                                <h4 class="lower_m2 f_bol">VS.<img src="@Globals.CDNContent(Match.TeamB.Logo)" alt=""> @Match.TeamBName</h4>
-                                                <div class="btn-group" role="group">
-                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">190511 viewers <i class="fa fa-angle-down"></i></button>
-                                                    <ul class="dropdown-menu">
-                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE &gt; 175951 viewers</li>
-                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE &gt; 175951 viewers</li>
-                                                    </ul>
-                                                    <h4 class="tour_time">@Match.Date.TimeOfDay</h4>
+                                <div class="tournament_stream">
+                                    @foreach (var stage in Model.Stages)
+                                    {
+                                        <h3>@stage.Name</h3>
+                                        foreach (var match in stage.Matches)
+                                        {
+                                            <div class="lower_matches float_left col-sm-12 text-center">
+                                                <div class="col-sm-4">
+                                                    <div class="col-xs-4">
+                                                        <img src="@Globals.CDNContent(match.TeamA.Logo)" alt="">
+                                                    </div>
+                                                    <div class="col-xs-8">
+                                                        <h4 class="lower_m1 f_bol">@match.TeamA.Name</h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-1 text-center">
+                                                    <h4 class="lower_m1 f_bol">VS.</h4>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="col-xs-8">
+                                                        <h4 class="lower_m2 f_bol">@match.TeamB.Name</h4>
+                                                    </div>
+                                                    <div class="col-xs-4">
+                                                        <img src="@Globals.CDNContent(match.TeamB.Logo)" alt="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <h4 class="tour_time">@match.Date.ToString(@"HH:mm MM\/dd\/yyyy")</h4>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                }
+                                        }
+                                    }
+                                </div>
                             </div>
                             <div class="col-sm-12 float_left height_450">
                                 <h3 class="main_head">GALLERY</h3>
@@ -159,112 +148,100 @@
                         </div>
                         <div class="col-sm-4 pad-zero">
                             <div class="tour_prize_pool">
-                                <h3 class="col-sm-12">PRIZE POOL <span class="green pull-right">$13,000,000+</span></h3>
-                                @foreach (var prizepool in Model.TournamentPrizePool)
+                                <h3 class="col-sm-12">PRIZE POOL <span class="green pull-right">@Model.PrizePool.Amount+</span></h3>
+                                @for (int i = 0; i < Model.PrizePool.Distribution.Count; i++)
                                 {
+                                    var entry = Model.PrizePool.Distribution[i];
                                     <div class="tour_prize_table_upper text-center">
-                                        <div class="col-sm-2 tables_col"><h4 class="f_bol">PLACE</h4></div>
-                                        <div class="col-sm-3 tables_col"><h4 class="f_bol">@prizepool.Prize $USD</h4></div>
-                                        <div class="col-sm-3 tables_col"><h4 class="f_bol">@prizepool.Level</h4></div>
-                                        <div class="col-sm-4 tables_col text-left team_last"><h4 class="f_bol">@prizepool.TeamName</h4></div>
+                                        @if (i == 0 || Model.PrizePool.Distribution[i - 1].Place != entry.Place)
+                                        {
+                                            <div class="col-sm-2 tables_col"><h5 class="f_bol">@entry.Place</h5></div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-sm-2 tables_col"></div>
+                                        }
+                                        <div class="col-sm-3 tables_col"><h5 class="f_bol">@entry.Amount</h5></div>
+                                        <div class="col-sm-4 col-sm-offset-3 tables_col text-left team_last"><h5 class="f_bol">@entry.Team.Name</h5></div>
                                     </div>
                                 }
                             </div>
                             <div class="tour_teams float_left br-top">
-                                <div class="col-sm-12">
-                                    <h3>THE TEAMS</h3>
-                                    <h4 class="f_bol tour_team_sub">INVITED -</h4>
-                                    <div class="tour_team_logo">
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/Team-Secret-Logos.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/Team-Secret-Logos.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/Team-Secret-Logos.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/Team-Secret-Logos.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/Team-Secret-Logos.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/Team-Secret-Logos.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                    </div>
-                                    <h4 class="f_bol tour_team_sub">QUALIFIED -</h4>
-                                    <div class="tour_team_logo">
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/DES-Small-Logo-Black.png" alt="#">
-                                            <h4>TEAM SECRET</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/DES-Small-Logo-Black.png" alt="#">
-                                            <h4>TBA</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/DES-Small-Logo-Black.png" alt="#">
-                                            <h4>TBA</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/DES-Small-Logo-Black.png" alt="#">
-                                            <h4>TBA</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/DES-Small-Logo-Black.png" alt="#">
-                                            <h4>TBA</h4>
-                                        </div>
-                                        <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                            <img src="~/images/DES-Small-Logo-Black.png" alt="#">
-                                            <h4>TBA</h4>
-                                        </div>
-                                    </div>
+                                <h3 class="col-sm-12">URL</h3>
+                                <div class="tour_prize_table_upper text-center">
+                                    <h4><a href="@Model.URL">Official Website</a></h4>
                                 </div>
                             </div>
-                            <div class="matches_sidebar float_left br-top">
-                                <h4 class="col-sm-12 f_bol main_head">NEXT MATCHES</h4>
-                                <div class="matches_box">
-                                    @foreach (var match in Model.NextMatches)
+                            <div class="tour_teams float_left br-top">
+                                <h3 class="col-sm-12">Venue/Address</h3>
+                                <div class="tour_prize_table_upper text-center">
+                                    <h4>@Model.Venue</h4>
+                                </div>
+                            </div>
+                            <div class="tour_teams float_left br-top">
+                                <h3 class="col-sm-12">Streams</h3>
+                                <div class="tour_prize_table_upper text-center">
+                                    @foreach (var stream in Model.Streams)
                                     {
-                                        <div class="matches_con">
-                                            <div class="col-sm-1 matches_box_img pad-zero">
-                                                <img src="~/images/League.png" alt="#">
-                                            </div>
-                                            <div class="col-sm-11 matches_box_con pad-zero">
-                                                <div class="upper_matches">
-                                                    <h5>@Model.Title <span> @Model.Qualifiers </span></h5>
-                                                </div>
-                                                <div class="lower_matches">
-                                                    <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamAName</h5>
-                                                    <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> @match.TeamBName</h5>
-                                                    <h5 class="lower_m3">@match.Date.ToString("D")</h5>
-                                                    <div class="btn-group" role="group">
-                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                            Watch >
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                            <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                            <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <h4>
+                                            <a href="@stream.URL">@stream.Name</a>
+                                        </h4>
                                     }
                                 </div>
                             </div>
+                            <div class="tour_teams float_left br-top">
+                                <div class="col-sm-12">
+                                    <h3>THE TEAMS</h3>
+                                    @foreach (var tl in Model.TeamLists)
+                                    {
+                                        <h4 class="f_bol tour_team_sub col-sm-12">@tl.Name</h4>
+                                        foreach (var team in tl.Teams)
+                                        {
+                                            <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
+                                                <img src="@Globals.CDNContent(team.Logo)" alt="#">
+                                                <h4>@team.Name</h4>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            @*<div class="matches_sidebar float_left br-top">
+                                <h4 class="col-sm-12 f_bol main_head">NEXT MATCHES</h4>
+                                <div class="matches_box">
+                                    @*foreach (var match in Model.NextMatches)
+                                    {
+                                    <div class="matches_con">
+                                        <div class="col-sm-1 matches_box_img pad-zero">
+                                            <img src="~/images/League.png" alt="#">
+                                        </div>
+                                        <div class="col-sm-11 matches_box_con pad-zero">
+                                            <div class="upper_matches">
+                                                <h5>Model.Title <span> Model.Qualifiers </span></h5>
+                                            </div>
+                                            <div class="lower_matches">
+                                                <h5 class="lower_m1"><img src="~/images/BR-Flag-copy.png" alt=""> match.TeamAName</h5>
+                                                <h5 class="lower_m2">VS <img src="~/images/BR-Flag-copy.png" alt=""> match.TeamBName</h5>
+                                                <h5 class="lower_m3">match.Date.ToString("D")</h5>
+                                                <div class="btn-group" role="group">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Watch >
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                        <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    }
+                                </div>
+                            *@
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

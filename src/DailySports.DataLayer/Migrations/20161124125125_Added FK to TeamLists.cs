@@ -4,26 +4,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DailySports.DataLayer.Migrations
 {
-    public partial class GameIdtoEvent : Migration
+    public partial class AddedFKtoTeamLists : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "GameId",
-                table: "Events",
+                name: "TournamentId",
+                table: "TeamLists",
                 nullable: false,
                 defaultValue: 0);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Events_GameId",
-                table: "Events",
-                column: "GameId");
+                name: "IX_TeamLists_TournamentId",
+                table: "TeamLists",
+                column: "TournamentId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Events_Games_GameId",
-                table: "Events",
-                column: "GameId",
-                principalTable: "Games",
+                name: "FK_TeamLists_Tournaments_TournamentId",
+                table: "TeamLists",
+                column: "TournamentId",
+                principalTable: "Tournaments",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Restrict);
         }
@@ -31,16 +31,16 @@ namespace DailySports.DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Events_Games_GameId",
-                table: "Events");
+                name: "FK_TeamLists_Tournaments_TournamentId",
+                table: "TeamLists");
 
             migrationBuilder.DropIndex(
-                name: "IX_Events_GameId",
-                table: "Events");
+                name: "IX_TeamLists_TournamentId",
+                table: "TeamLists");
 
             migrationBuilder.DropColumn(
-                name: "GameId",
-                table: "Events");
+                name: "TournamentId",
+                table: "TeamLists");
         }
     }
 }

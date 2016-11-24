@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.ScoreA, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.ScoreA, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.EditorFor(model => model.ScoreA, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.ScoreA, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -40,7 +40,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.ScoreB, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.EditorFor(model => model.ScoreB, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                                    @Html.EditorFor(model => model.ScoreB, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.ScoreB, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -55,9 +55,14 @@
 
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-1" })
-                                <div class="col-md-11">
-                                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                <div class="col-md-4">
+                                    <div class='input-group date' id='Date'>
+                                        <input type='text' class="form-control" name="Date"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                                    </div>
                                 </div>
                             </div>
 
@@ -86,6 +91,11 @@
             </div>
         </div>
     </div>
-
-
 </section>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(function () {
+            $('#Date').datetimepicker();
+        })
+    });
+</script>

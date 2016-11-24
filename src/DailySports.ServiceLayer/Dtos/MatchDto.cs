@@ -28,7 +28,6 @@ namespace DailySports.ServiceLayer.Dtos
             Date = match.Date;
 
             StageId = match.StageId;
-            Stage = (match.Stage != null) ? new StageDto(match.Stage) : null;
 
             TeamAId = match.TeamAId;
             TeamA = (match.TeamA != null) ? new TeamDto(match.TeamA) : null;

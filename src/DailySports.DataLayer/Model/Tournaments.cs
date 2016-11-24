@@ -27,5 +27,6 @@ namespace DailySports.DataLayer.Model
         public virtual ICollection<News> News { get; set; }
         public virtual ICollection<Stage> Stages { get; set; }
         public virtual ICollection<Stream> Streams { get; set; }
+        public virtual ICollection<TeamList> TeamLists { get; set; }
     }
 }

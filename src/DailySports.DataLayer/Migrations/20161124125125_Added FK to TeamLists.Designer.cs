@@ -8,8 +8,8 @@ using DailySports.DataLayer.Context;
 namespace DailySports.DataLayer.Migrations
 {
     [DbContext(typeof(DailySportsContext))]
-    [Migration("20161117212039_CarouselItems")]
-    partial class CarouselItems
+    [Migration("20161124125125_Added FK to TeamLists")]
+    partial class AddedFKtoTeamLists
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,6 +60,19 @@ namespace DailySports.DataLayer.Migrations
                     b.HasIndex("VideosId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.Country", b =>
+                {
+                    b.Property<string>("Code");
+
+                    b.Property<string>("Flag");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Code");
+
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Event", b =>
@@ -162,18 +175,17 @@ namespace DailySports.DataLayer.Migrations
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("DailySports.DataLayer.Model.GroupStages", b =>
+            modelBuilder.Entity("DailySports.DataLayer.Model.Language", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Code");
 
-                    b.Property<int>("TournamentId");
+                    b.Property<string>("Flag");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Name");
 
-                    b.HasIndex("TournamentId");
+                    b.HasKey("Code");
 
-                    b.ToTable("GroupStages");
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Match", b =>
@@ -183,19 +195,23 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<int>("ScoreA");
+
+                    b.Property<int>("ScoreB");
+
+                    b.Property<int>("StageId");
+
                     b.Property<int>("TeamAId");
 
                     b.Property<int>("TeamBId");
 
-                    b.Property<int>("TournamentId");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("StageId");
 
                     b.HasIndex("TeamAId");
 
                     b.HasIndex("TeamBId");
-
-                    b.HasIndex("TournamentId");
 
                     b.ToTable("Matches");
                 });
@@ -272,7 +288,7 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<string>("FunFact");
 
-                    b.Property<bool>("Gender");
+                    b.Property<int>("Gender");
 
                     b.Property<string>("Owner");
 
@@ -287,6 +303,28 @@ namespace DailySports.DataLayer.Migrations
                     b.ToTable("PetOfTheWeek");
                 });
 
+            modelBuilder.Entity("DailySports.DataLayer.Model.PlaceEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Amount");
+
+                    b.Property<int>("Place");
+
+                    b.Property<int>("PrizePoolId");
+
+                    b.Property<int>("TeamId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrizePoolId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("PlaceEntries");
+                });
+
             modelBuilder.Entity("DailySports.DataLayer.Model.Player", b =>
                 {
                     b.Property<int>("Id")
@@ -294,11 +332,23 @@ namespace DailySports.DataLayer.Migrations
 
                     b.Property<int>("Age");
 
+                    b.Property<string>("CountryCode");
+
+                    b.Property<string>("CountryId");
+
                     b.Property<string>("Name");
+
+                    b.Property<string>("Nick");
+
+                    b.Property<string>("Notes");
+
+                    b.Property<string>("Role");
 
                     b.Property<int>("TeamId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CountryId");
 
                     b.HasIndex("TeamId");
 
@@ -322,21 +372,62 @@ namespace DailySports.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Level");
-
-                    b.Property<int>("Prize");
-
-                    b.Property<int>("TeamId");
+                    b.Property<string>("Amount");
 
                     b.Property<int>("TournamentId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TeamId");
+                    b.HasIndex("TournamentId")
+                        .IsUnique();
+
+                    b.ToTable("PrizePools");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.Stage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("EndDate");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("TournamentId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("TournamentId");
 
-                    b.ToTable("PrizePools");
+                    b.ToTable("Stages");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.Stream", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("LanguageCode");
+
+                    b.Property<bool>("Main");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("TournamentId");
+
+                    b.Property<string>("URL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LanguageCode");
+
+                    b.HasIndex("TournamentId");
+
+                    b.ToTable("Streams");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Team", b =>
@@ -344,17 +435,58 @@ namespace DailySports.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("GroupStageId");
+                    b.Property<string>("CountryCode");
+
+                    b.Property<int>("GameId");
 
                     b.Property<string>("Logo");
 
                     b.Property<string>("Name");
 
+                    b.Property<int?>("TeamListId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupStageId");
+                    b.HasIndex("CountryCode");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("TeamListId");
 
                     b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.TeamList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("TournamentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TournamentId");
+
+                    b.ToTable("TeamLists");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.TeamListTeam", b =>
+                {
+                    b.Property<int>("TeamId");
+
+                    b.Property<int>("TournamentId");
+
+                    b.HasKey("TeamId", "TournamentId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TournamentId");
+
+                    b.ToTable("TeamListTeams");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.TeamMatches", b =>
@@ -412,38 +544,22 @@ namespace DailySports.DataLayer.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Description")
-                        .IsRequired();
-
                     b.Property<DateTime>("EndDate");
-
-                    b.Property<string>("Format")
-                        .IsRequired();
 
                     b.Property<int>("GameId");
 
-                    b.Property<string>("MainEvent")
-                        .IsRequired();
-
-                    b.Property<string>("Overview")
-                        .IsRequired();
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<string>("Qualifiers")
-                        .IsRequired();
+                    b.Property<string>("Overview");
 
                     b.Property<DateTime>("StartDate");
 
-                    b.Property<string>("Stream");
-
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasAnnotation("MaxLength", 50);
 
                     b.Property<string>("TournamentImage");
 
                     b.Property<string>("URL");
+
+                    b.Property<string>("Venue");
 
                     b.HasKey("Id");
 
@@ -571,15 +687,12 @@ namespace DailySports.DataLayer.Migrations
                         .HasForeignKey("EventId");
                 });
 
-            modelBuilder.Entity("DailySports.DataLayer.Model.GroupStages", b =>
-                {
-                    b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
-                        .WithMany("GroupStages")
-                        .HasForeignKey("TournamentId");
-                });
-
             modelBuilder.Entity("DailySports.DataLayer.Model.Match", b =>
                 {
+                    b.HasOne("DailySports.DataLayer.Model.Stage", "Stage")
+                        .WithMany("Matches")
+                        .HasForeignKey("StageId");
+
                     b.HasOne("DailySports.DataLayer.Model.Team", "TeamA")
                         .WithMany()
                         .HasForeignKey("TeamAId");
@@ -587,10 +700,6 @@ namespace DailySports.DataLayer.Migrations
                     b.HasOne("DailySports.DataLayer.Model.Team", "TeamB")
                         .WithMany()
                         .HasForeignKey("TeamBId");
-
-                    b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
-                        .WithMany("Matches")
-                        .HasForeignKey("TournamentId");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.News", b =>
@@ -623,29 +732,84 @@ namespace DailySports.DataLayer.Migrations
                         .HasForeignKey("NewsId");
                 });
 
+            modelBuilder.Entity("DailySports.DataLayer.Model.PlaceEntry", b =>
+                {
+                    b.HasOne("DailySports.DataLayer.Model.PrizePool", "PrizePool")
+                        .WithMany("Distribution")
+                        .HasForeignKey("PrizePoolId");
+
+                    b.HasOne("DailySports.DataLayer.Model.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId");
+                });
+
             modelBuilder.Entity("DailySports.DataLayer.Model.Player", b =>
                 {
-                    b.HasOne("DailySports.DataLayer.Model.Team", "team")
+                    b.HasOne("DailySports.DataLayer.Model.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+
+                    b.HasOne("DailySports.DataLayer.Model.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.PrizePool", b =>
                 {
-                    b.HasOne("DailySports.DataLayer.Model.Team", "Team")
+                    b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
+                        .WithOne("PrizePool")
+                        .HasForeignKey("DailySports.DataLayer.Model.PrizePool", "TournamentId");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.Stage", b =>
+                {
+                    b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
+                        .WithMany("Stages")
+                        .HasForeignKey("TournamentId");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.Stream", b =>
+                {
+                    b.HasOne("DailySports.DataLayer.Model.Language", "Language")
                         .WithMany()
-                        .HasForeignKey("TeamId");
+                        .HasForeignKey("LanguageCode");
 
                     b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
-                        .WithMany("PrizePool")
+                        .WithMany("Streams")
                         .HasForeignKey("TournamentId");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.Team", b =>
                 {
-                    b.HasOne("DailySports.DataLayer.Model.GroupStages", "GroupStage")
-                        .WithMany("Team")
-                        .HasForeignKey("GroupStageId");
+                    b.HasOne("DailySports.DataLayer.Model.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryCode");
+
+                    b.HasOne("DailySports.DataLayer.Model.Game", "Game")
+                        .WithMany()
+                        .HasForeignKey("GameId");
+
+                    b.HasOne("DailySports.DataLayer.Model.TeamList")
+                        .WithMany("Teams")
+                        .HasForeignKey("TeamListId");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.TeamList", b =>
+                {
+                    b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
+                        .WithMany()
+                        .HasForeignKey("TournamentId");
+                });
+
+            modelBuilder.Entity("DailySports.DataLayer.Model.TeamListTeam", b =>
+                {
+                    b.HasOne("DailySports.DataLayer.Model.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId");
+
+                    b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
+                        .WithMany("TeamLists")
+                        .HasForeignKey("TournamentId");
                 });
 
             modelBuilder.Entity("DailySports.DataLayer.Model.TeamMatches", b =>
@@ -695,7 +859,7 @@ namespace DailySports.DataLayer.Migrations
                         .HasForeignKey("GameId");
 
                     b.HasOne("DailySports.DataLayer.Model.Tournaments", "Tournament")
-                        .WithMany("Videos")
+                        .WithMany()
                         .HasForeignKey("TournamentId");
                 });
         }

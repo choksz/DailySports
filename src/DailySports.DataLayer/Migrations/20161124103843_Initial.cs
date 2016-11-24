@@ -9,6 +9,20 @@ namespace DailySports.DataLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "CarouselItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    Image = table.Column<string>(nullable: true),
+                    Text = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CarouselItems", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Category",
                 columns: table => new
                 {
@@ -19,6 +33,19 @@ namespace DailySports.DataLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Category", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Countries",
+                columns: table => new
+                {
+                    Code = table.Column<string>(nullable: false),
+                    Flag = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Countries", x => x.Code);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,6 +64,19 @@ namespace DailySports.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Languages",
+                columns: table => new
+                {
+                    Code = table.Column<string>(nullable: false),
+                    Flag = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Languages", x => x.Code);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PetOfTheWeek",
                 columns: table => new
                 {
@@ -46,7 +86,7 @@ namespace DailySports.DataLayer.Migrations
                     Description = table.Column<string>(nullable: true),
                     EndDate = table.Column<DateTime>(nullable: false),
                     FunFact = table.Column<string>(nullable: true),
-                    Gender = table.Column<bool>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
                     Owner = table.Column<string>(nullable: true),
                     PetImage = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
@@ -103,24 +143,47 @@ namespace DailySports.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    CountryCode = table.Column<string>(nullable: true),
+                    GameId = table.Column<int>(nullable: false),
+                    Logo = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teams_Countries_CountryCode",
+                        column: x => x.CountryCode,
+                        principalTable: "Countries",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Teams_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tournaments",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    Description = table.Column<string>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    Format = table.Column<string>(nullable: false),
                     GameId = table.Column<int>(nullable: false),
-                    MainEvent = table.Column<string>(nullable: false),
-                    Overview = table.Column<string>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    Qualifiers = table.Column<string>(nullable: false),
+                    Overview = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    Stream = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Title = table.Column<string>(maxLength: 50, nullable: true),
                     TournamentImage = table.Column<string>(nullable: true),
-                    URL = table.Column<string>(nullable: true)
+                    URL = table.Column<string>(nullable: true),
+                    Venue = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -156,20 +219,33 @@ namespace DailySports.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GroupStages",
+                name: "Players",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    TournamentId = table.Column<int>(nullable: false)
+                    Age = table.Column<int>(nullable: false),
+                    CountryCode = table.Column<string>(nullable: true),
+                    CountryId = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Nick = table.Column<string>(nullable: true),
+                    Notes = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
+                    TeamId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GroupStages", x => x.Id);
+                    table.PrimaryKey("PK_Players", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_GroupStages_Tournaments_TournamentId",
-                        column: x => x.TournamentId,
-                        principalTable: "Tournaments",
+                        name: "FK_Players_Countries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "Countries",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Players_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -214,6 +290,78 @@ namespace DailySports.DataLayer.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_News_Tournaments_TournamentId",
+                        column: x => x.TournamentId,
+                        principalTable: "Tournaments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PrizePools",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    Amount = table.Column<string>(nullable: true),
+                    TournamentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PrizePools", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PrizePools_Tournaments_TournamentId",
+                        column: x => x.TournamentId,
+                        principalTable: "Tournaments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    Description = table.Column<string>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    TournamentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stages_Tournaments_TournamentId",
+                        column: x => x.TournamentId,
+                        principalTable: "Tournaments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Streams",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    LanguageCode = table.Column<string>(nullable: true),
+                    Main = table.Column<bool>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    TournamentId = table.Column<int>(nullable: false),
+                    URL = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Streams", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Streams_Languages_LanguageCode",
+                        column: x => x.LanguageCode,
+                        principalTable: "Languages",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Streams_Tournaments_TournamentId",
                         column: x => x.TournamentId,
                         principalTable: "Tournaments",
                         principalColumn: "Id",
@@ -270,6 +418,7 @@ namespace DailySports.DataLayer.Migrations
                     Description = table.Column<string>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: true),
                     EventImage = table.Column<string>(nullable: true),
+                    GameId = table.Column<int>(nullable: false),
                     Location = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
                     Region = table.Column<string>(nullable: true),
@@ -282,6 +431,12 @@ namespace DailySports.DataLayer.Migrations
                 {
                     table.PrimaryKey("PK_Events", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Events_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Events_Tickets_ticketid",
                         column: x => x.ticketid,
                         principalTable: "Tickets",
@@ -290,22 +445,89 @@ namespace DailySports.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Teams",
+                name: "PlaceEntries",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    GroupStageId = table.Column<int>(nullable: false),
-                    Logo = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true)
+                    Amount = table.Column<string>(nullable: true),
+                    Place = table.Column<int>(nullable: false),
+                    PrizePoolId = table.Column<int>(nullable: false),
+                    TeamId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.PrimaryKey("PK_PlaceEntries", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teams_GroupStages_GroupStageId",
-                        column: x => x.GroupStageId,
-                        principalTable: "GroupStages",
+                        name: "FK_PlaceEntries_PrizePools_PrizePoolId",
+                        column: x => x.PrizePoolId,
+                        principalTable: "PrizePools",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_PlaceEntries_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Matches",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    ScoreA = table.Column<int>(nullable: false),
+                    ScoreB = table.Column<int>(nullable: false),
+                    StageId = table.Column<int>(nullable: false),
+                    TeamAId = table.Column<int>(nullable: false),
+                    TeamBId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Matches", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Matches_Stages_StageId",
+                        column: x => x.StageId,
+                        principalTable: "Stages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Matches_Teams_TeamAId",
+                        column: x => x.TeamAId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Matches_Teams_TeamBId",
+                        column: x => x.TeamBId,
+                        principalTable: "Teams",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StageTeams",
+                columns: table => new
+                {
+                    TeamId = table.Column<int>(nullable: false),
+                    StageId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StageTeams", x => new { x.TeamId, x.StageId });
+                    table.ForeignKey(
+                        name: "FK_StageTeams_Stages_StageId",
+                        column: x => x.StageId,
+                        principalTable: "Stages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StageTeams_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -359,84 +581,27 @@ namespace DailySports.DataLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Matches",
+                name: "TeamMatches",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    Date = table.Column<DateTime>(nullable: false),
-                    TeamAId = table.Column<int>(nullable: false),
-                    TeamBId = table.Column<int>(nullable: false),
-                    TournamentId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Matches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Matches_Teams_TeamAId",
-                        column: x => x.TeamAId,
-                        principalTable: "Teams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Matches_Teams_TeamBId",
-                        column: x => x.TeamBId,
-                        principalTable: "Teams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Matches_Tournaments_TournamentId",
-                        column: x => x.TournamentId,
-                        principalTable: "Tournaments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Players",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    Age = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    MatchId = table.Column<int>(nullable: false),
                     TeamId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.PrimaryKey("PK_TeamMatches", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Players_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PrizePools",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    Level = table.Column<int>(nullable: false),
-                    Prize = table.Column<int>(nullable: false),
-                    TeamId = table.Column<int>(nullable: false),
-                    TournamentId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PrizePools", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PrizePools_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
+                        name: "FK_TeamMatches_Matches_MatchId",
+                        column: x => x.MatchId,
+                        principalTable: "Matches",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PrizePools_Tournaments_TournamentId",
-                        column: x => x.TournamentId,
-                        principalTable: "Tournaments",
+                        name: "FK_TeamMatches_Teams_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Teams",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -519,32 +684,6 @@ namespace DailySports.DataLayer.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "TeamMatches",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGeneratedOnAdd", true),
-                    MatchId = table.Column<int>(nullable: false),
-                    TeamId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TeamMatches", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TeamMatches_Matches_MatchId",
-                        column: x => x.MatchId,
-                        principalTable: "Matches",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_TeamMatches_Teams_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Teams",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_UserId",
                 table: "Comments",
@@ -554,6 +693,11 @@ namespace DailySports.DataLayer.Migrations
                 name: "IX_Comments_VideosId",
                 table: "Comments",
                 column: "VideosId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Events_GameId",
+                table: "Events",
+                column: "GameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Events_ticketid",
@@ -576,9 +720,9 @@ namespace DailySports.DataLayer.Migrations
                 column: "EventId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GroupStages_TournamentId",
-                table: "GroupStages",
-                column: "TournamentId");
+                name: "IX_Matches_StageId",
+                table: "Matches",
+                column: "StageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Matches_TeamAId",
@@ -589,11 +733,6 @@ namespace DailySports.DataLayer.Migrations
                 name: "IX_Matches_TeamBId",
                 table: "Matches",
                 column: "TeamBId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Matches_TournamentId",
-                table: "Matches",
-                column: "TournamentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_News_AuthorId",
@@ -626,24 +765,65 @@ namespace DailySports.DataLayer.Migrations
                 column: "NewsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_PlaceEntries_PrizePoolId",
+                table: "PlaceEntries",
+                column: "PrizePoolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PlaceEntries_TeamId",
+                table: "PlaceEntries",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Players_CountryId",
+                table: "Players",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Players_TeamId",
                 table: "Players",
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PrizePools_TeamId",
-                table: "PrizePools",
-                column: "TeamId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_PrizePools_TournamentId",
                 table: "PrizePools",
+                column: "TournamentId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stages_TournamentId",
+                table: "Stages",
                 column: "TournamentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teams_GroupStageId",
+                name: "IX_StageTeams_StageId",
+                table: "StageTeams",
+                column: "StageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StageTeams_TeamId",
+                table: "StageTeams",
+                column: "TeamId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Streams_LanguageCode",
+                table: "Streams",
+                column: "LanguageCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Streams_TournamentId",
+                table: "Streams",
+                column: "TournamentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_CountryCode",
                 table: "Teams",
-                column: "GroupStageId");
+                column: "CountryCode");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teams_GameId",
+                table: "Teams",
+                column: "GameId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TeamMatches_MatchId",
@@ -694,6 +874,9 @@ namespace DailySports.DataLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CarouselItems");
+
+            migrationBuilder.DropTable(
                 name: "EventComments");
 
             migrationBuilder.DropTable(
@@ -706,13 +889,19 @@ namespace DailySports.DataLayer.Migrations
                 name: "PetOfTheWeek");
 
             migrationBuilder.DropTable(
+                name: "PlaceEntries");
+
+            migrationBuilder.DropTable(
                 name: "Players");
 
             migrationBuilder.DropTable(
                 name: "Privilge");
 
             migrationBuilder.DropTable(
-                name: "PrizePools");
+                name: "StageTeams");
+
+            migrationBuilder.DropTable(
+                name: "Streams");
 
             migrationBuilder.DropTable(
                 name: "TeamMatches");
@@ -727,6 +916,12 @@ namespace DailySports.DataLayer.Migrations
                 name: "News");
 
             migrationBuilder.DropTable(
+                name: "PrizePools");
+
+            migrationBuilder.DropTable(
+                name: "Languages");
+
+            migrationBuilder.DropTable(
                 name: "Matches");
 
             migrationBuilder.DropTable(
@@ -734,6 +929,9 @@ namespace DailySports.DataLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tickets");
+
+            migrationBuilder.DropTable(
+                name: "Stages");
 
             migrationBuilder.DropTable(
                 name: "Teams");
@@ -748,7 +946,7 @@ namespace DailySports.DataLayer.Migrations
                 name: "TicketTypes");
 
             migrationBuilder.DropTable(
-                name: "GroupStages");
+                name: "Countries");
 
             migrationBuilder.DropTable(
                 name: "Category");

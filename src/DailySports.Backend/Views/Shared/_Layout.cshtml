@@ -24,14 +24,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="@Globals.CDNContent("js/jquery-jvectormap-1.2.2.min.js")">
+    <!-- DateTime Picker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" />
     <!-- Date Picker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css">
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css"-->
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css">
+    <!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.css"-->
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.min.css">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.css">
+
+    <!-- jQuery 2.2.3 -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -93,31 +98,32 @@
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu">
                     <li class="header">MAIN NAVIGATION</li>
-                    
                     <li><a href="@Url.Action("Index", "CarouselItems")">Carousel</a></li>
                     <li><a href="@Url.Action("Index", "Categories")">Categories</a></li>
-                    <li><a href="@Url.Action("Index", "Comments")">Comments</a></li>
-                    <li><a href="@Url.Action("Index", "EventComments")">Event Comments</a></li>
+                    @*<li><a href="@Url.Action("Index", "Comments")">Comments</a></li>*@
+                    @*<li><a href="@Url.Action("Index", "EventComments")">Event Comments</a></li>*@
                     <li><a href="@Url.Action("Index", "EventImages")">Event Images</a></li>
                     <li><a href="@Url.Action("Index", "Events")">Events</a></li>
                     <li><a href="@Url.Action("Index", "Games")">Games</a></li>
                     <li><a href="@Url.Action("Index", "Matches")">Matches</a></li>
                     <li><a href="@Url.Action("Index", "News")">News</a></li>
-                    <li><a href="@Url.Action("Index", "NewsComments")">News Comments</a></li>
+                    @*<li><a href="@Url.Action("Index", "NewsComments")">News Comments</a></li>*@
                     <li><a href="@Url.Action("Index", "PetOfTheDays")">Pet Of The Week</a></li>
                     <li><a href="@Url.Action("Index", "PlaceEntries")">Place Entries</a></li>
                     <li><a href="@Url.Action("Index", "Players")">Players</a></li>
                     <li><a href="@Url.Action("Index", "Privilges")">Privileges</a></li>
                     <li><a href="@Url.Action("Index", "PrizePools")">Prize Pools</a></li>
                     <li><a href="@Url.Action("Index", "Stages")">Stages</a></li>
-                    <li><a href="@Url.Action("Index", "TeamMatches")">Team Matches</a></li>
+                    <li><a href="@Url.Action("Index", "Streams")">Streams</a></li>
+                    @*<li><a href="@Url.Action("Index", "TeamMatches")">Team Matches</a></li>*@
                     <li><a href="@Url.Action("Index", "Teams")">Teams</a></li>
+                    <li><a href="@Url.Action("Index", "TeamLists")">Team Lists</a></li>
                     <li><a href="@Url.Action("Index", "Tickets")">Tickets</a></li>
                     <li><a href="@Url.Action("Index", "TicketTypes")">Ticket Types</a></li>
                     <li><a href="@Url.Action("Index", "Tournaments")">Tournaments</a></li>
                     <li><a href="@Url.Action("Index", "Users")">Users</a></li>
-                    <li><a href="@Url.Action("Index", "VideoComments")">Video Comments</a></li>
-                    <li><a href="@Url.Action("Index", "Videos")">Videos</a></li>
+                    @*<li><a href="@Url.Action("Index", "VideoComments")">Video Comments</a></li>*@
+                    @*<li><a href="@Url.Action("Index", "Videos")">Videos</a></li>*@
                 </ul>
             </section>
             <!-- /.sidebar -->
@@ -305,17 +311,17 @@
         <div class="control-sidebar-bg"></div>
     </div>
     <!-- ./wrapper -->
-    <!-- jQuery 2.2.3 -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button);
         $(document).ready(function () {
+            /*
             $(".datepicker").datepicker({
                 dateFormat: 'dd/MM/YYYY'
             });
+            */
             $('.txtEditor').ckeditor();
             if ($('#success').val()) {
                 displayMessage($('#success').val(), 'success');
@@ -364,9 +370,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Knob/1.2.13/jquery.knob.min.js"></script>
     <!-- daterangepicker -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.24/daterangepicker.min.js"></script-->
     <!-- datepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+    <!--script-- src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></!--script-->
     <!-- Bootstrap WYSIHTML5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-wysiwyg/0.3.3/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Slimscroll -->
