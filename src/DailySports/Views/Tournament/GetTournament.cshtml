@@ -12,7 +12,7 @@
                     <div style="width:500px;height:300px">
                         @{
                             var mainStream = 0;
-                            while (mainStream < Model.Streams.Count && !Model.Streams[mainStream].Main)
+                            while (Model.Streams != null && mainStream < Model.Streams.Count && !Model.Streams[mainStream].Main)
                             {
                                 mainStream++;
                             }
@@ -37,7 +37,7 @@
                             TODO: Info from Twitch API
                             <!--h5><i class="fa fa-eye"></i>11,881</h5-->
                         </div>
-                        <p class="col-sm-12">@Model.Streams[mainStream].Name</p>
+                        <p class="col-sm-12">Model.Streams[mainStream].Name</p>
                     </div>
                     <div class="featured_stream_bottom">
                         <button class="btn">open stream</button>

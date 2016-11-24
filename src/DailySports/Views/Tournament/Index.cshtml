@@ -75,7 +75,16 @@
                                             <div class="tour_filter_box_content float_left">
                                                 <div class="tour_filter_upper float_left">
                                                     <h3 class="pull-left"><img src="@Globals.CDNContent(Tournament.Game.GameImage)" alt="@Tournament.Game.Name">@Tournament.Title <span>@Tournament.StartDate.ToString("D")</span> - <span>@Tournament.EndDate.ToString("D")</span></h3>
-                                                    <h3 class="green pull-right">$@Tournament.PrizePool.Amount+</h3>
+                                                    @{
+                                                            var prizePool = "";
+                                                            if (Tournament.PrizePool != null)
+                                                            {
+                                                                prizePool = Tournament.PrizePool.Amount;
+                                                            } else {
+                                                                prizePool = "0";
+                                                            }
+                                                            <h3 class="green pull-right">$@prizePool+</h3>
+                                                        }
                                                 </div>
                                                 <div class="tour_filter_lower float_left">
                                                     <div class="col-sm-9 pad-zero" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
