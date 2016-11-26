@@ -61,46 +61,13 @@
                         </div>
                         <div class="disqus_comment float_left text-center">
                             <h2>Discuss Comments here</h2>
-                            <div class="fb-comments" width="100%" data-numposts="5"></div>
+                            <div class="fb-comments" width="100%" data-numposts="5" data-colorscheme="light"
+></div>
                         </div>
                     </div>
                     <div class="col-sm-4 pad-zero">
                         <div class="side_bar float_left">
-                            <div class="matches_sidebar float_left">
-                                @*
-                                    <h4 class="col-sm-12 f_bol main_head">NEXT MATCHES</h4>
-                                    <div class="matches_box">
-
-                                        @foreach (var match in Model.NextMatches)
-                                        {
-                                            <div class="matches_con">
-                                                <div class="col-sm-1 matches_box_img pad-zero">
-                                                    <img src="~/images/Overwatch.png" alt="#">
-                                                </div>
-                                                <div class="col-sm-11 matches_box_con pad-zero">
-                                                    <div class="upper_matches">
-                                                        <h5>@match.TournamentName <span>Americas Qualifier Semifinals</span></h5>
-                                                    </div>
-                                                    <div class="lower_matches">
-                                                        <h5 class="lower_m1"><img src="images/BR-Flag-copy.png" alt="">@match.TeamAName </h5>
-                                                        <h5 class="lower_m2">VS <img src="images/BR-Flag-copy.png" alt="">@match.TeamBName</h5>
-                                                        <h5 class="lower_m3">@match.Date.ToLocalTime()</h5>
-                                                        <div class="btn-group" role="group">
-                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                Watch >
-                                                            </button>
-                                                            <ul class="dropdown-menu">
-                                                                <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                                <li><img src="~/images/BR-Flag-copy.png">ChannelName <i class="fa fa-circle"></i> LIVE > 175951 viewers</li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-
-                                    </div>
-                                *@
+                            <div class="matches_sidebar float_left">                              
                             </div>
                             <div class="pet_day float_left">
                                 <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
@@ -141,4 +108,7 @@
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1651609955149884";
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    }(document, 'script', 'facebook-jssdk'));
+
+
+</script>
