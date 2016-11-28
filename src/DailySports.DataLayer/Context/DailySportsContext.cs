@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.PlatformAbstractions;
+using DailySports.DataLayer.Utilities;
 
 namespace DailySports.DataLayer.Context
 {
@@ -9,11 +10,11 @@ namespace DailySports.DataLayer.Context
     {
         public DailySportsContext(DbContextOptions<DailySportsContext> options) : base(options)
         { }
-            
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseNpgsql("Host=104.155.185.35;User ID=dailysports;Password=dailysports;Database=dailysports"); 
+            optionsBuilder.UseNpgsql(AppSettings.CONNECTION_STRING); 
         }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)

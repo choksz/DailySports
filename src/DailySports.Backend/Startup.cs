@@ -10,6 +10,7 @@ using DailySports.ServiceLayer.Repositories.Core;
 using DailySports.DataLayer.Context;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DailySports.Backend
 {
     public class Startup
@@ -41,9 +42,6 @@ namespace DailySports.Backend
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-
-            services.AddDbContext<DbContext>(options =>
-                options.UseNpgsql("Host=104.155.185.35;User ID=dailysports;Password=dailysports;Database=dailysports"));
 
             services.AddMvc();
 
