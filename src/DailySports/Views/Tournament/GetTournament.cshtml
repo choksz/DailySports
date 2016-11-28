@@ -9,14 +9,16 @@
         <div class="tournament_upper">
             <div class="col-sm-6">
                 <div class="tournament_iframe">
-                    <div style="width:500px;height:300px">
+                    <div style="width:500px;height:300px">L
                         @{
-                            var mainStream = 0;
-                            while (Model.Streams != null && mainStream < Model.Streams.Count && !Model.Streams[mainStream].Main)
-                            {
-                                mainStream++;
+                            if (Model.Streams.Any()) {
+                                var mainStream = 0;
+                                while (mainStream < Model.Streams.Count && !Model.Streams[mainStream].Main)
+                                {
+                                    mainStream++;
+                                }
+                                <iframe width="100%" height="100%" src="@Model.Streams[mainStream].URL" frameborder="0" allowfullscreen></iframe>
                             }
-                            <iframe width="100%" height="100%" src="@Model.Streams[mainStream].URL" frameborder="0" allowfullscreen></iframe>
                         }
                     </div>
                 </div>
