@@ -28,7 +28,7 @@ namespace DailySports.Backend.Controllers
         public IActionResult Create()
         {
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
             return View(new Player());
         }
 
@@ -47,7 +47,7 @@ namespace DailySports.Backend.Controllers
             }
 
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", player.TeamId);
-            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name", player.CountryCode);
             return View(player);
         }
 
@@ -64,7 +64,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", player.TeamId);
-            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name", player.CountryCode);
             return View(player);
         }
 
@@ -82,7 +82,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", player.TeamId);
-            ViewBag.CountryId = new SelectList(db.Countries, "Code", "Name");
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name", player.CountryCode);
             return View(player);
         }
 

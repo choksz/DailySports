@@ -41,8 +41,8 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
-            ViewBag.LanguageCode = new SelectList(db.Languages, "Code", "Name");
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stream.TournamentId);
+            ViewBag.LanguageCode = new SelectList(db.Languages, "Code", "Name", stream.LanguageCode);
             return View(stream);
         }
 
@@ -58,8 +58,8 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
-            ViewBag.LanguageCode = new SelectList(db.Languages, "Code", "Name");
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stream.TournamentId);
+            ViewBag.LanguageCode = new SelectList(db.Languages, "Code", "Name", stream.LanguageCode);
             return View(stream);
         }
 
@@ -76,8 +76,8 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title");
-            ViewBag.LanguageCode = new SelectList(db.Languages, "Code", "Name");
+            ViewBag.TournamentId = new SelectList(db.Tournaments, "Id", "Title", stream.TournamentId);
+            ViewBag.LanguageCode = new SelectList(db.Languages, "Code", "Name", stream.LanguageCode);
             return View(stream);
         }
 
