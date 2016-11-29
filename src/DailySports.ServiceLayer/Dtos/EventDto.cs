@@ -17,7 +17,7 @@ namespace DailySports.ServiceLayer.Dtos
         public Nullable<DateTime> StartDate { get; set; }
         public Nullable<DateTime> EndDate { get; set; }
         public List<EventImageDto> EventImages { get; set; }
-        public List<PetOfTheWeekDto> petOfTheDay { get; set; }
+        public PetOfTheWeekDto PetOfTheWeekDto { get; set; }
         public List<MatchDto> NextMatches { get; set; }
     }
 }

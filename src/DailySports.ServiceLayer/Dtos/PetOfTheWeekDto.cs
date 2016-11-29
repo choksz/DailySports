@@ -15,5 +15,21 @@ namespace DailySports.ServiceLayer.Dtos
         public int Age { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+
+        public PetOfTheWeekDto() { }
+
+        public PetOfTheWeekDto(PetOfTheWeek pet)
+        {
+            Id = pet.Id;
+            Title = pet.Title;
+            Description = pet.Description;
+            PetImage = pet.PetImage;
+            Gender = pet.Gender;
+            Owner = pet.Owner;
+            FunFact = pet.FunFact;
+            Age = pet.Age;
+            StartDate = pet.StartDate;
+            EndDate = pet.EndDate;
+        }
     }
 }

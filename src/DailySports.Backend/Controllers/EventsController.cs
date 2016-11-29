@@ -20,7 +20,9 @@ namespace DailySports.Backend.Controllers
         // GET: Events
         public IActionResult Index()
         {
-            var events = db.Events.Include(e =>e.ticket);
+            var events = db.Events.
+                Include(e => e.ticket).
+                Include(e => e.Game);
             return View(events.ToList());
         }
 

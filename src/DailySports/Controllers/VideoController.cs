@@ -75,28 +75,8 @@ namespace DailySports.Controllers
         {
             VideoDto newVideo = new VideoDto();
             newVideo = _videoService.GetVideo(id);
-            List<PetOfTheWeekDto> pets = new List<PetOfTheWeekDto>();
-            pets = _petService.GetPetOfTheWeek();
-            if(pets.Count != 0)
-            {
-                newVideo.petOfTheDay = pets;
-            }
-            else
-            {
-                DefaultPet defaultpet = new DefaultPet();
-                pets.Add(new PetOfTheWeekDto
-                {
-                    Id = defaultpet.Id,
-                    Title = defaultpet.Name,
-                    Age = defaultpet.Age,
-                    Description = defaultpet.Description,
-                    FunFact = defaultpet.FunFact,
-                    Gender = defaultpet.Gender,
-                    Owner = defaultpet.Owner,
-                    PetImage = defaultpet.Image
-                });
-                newVideo.petOfTheDay = pets;
-            }
+            PetOfTheWeekDto pet = _petService.GetPetOfTheWeek();
+            newVideo.PetOfTheWeek = pet;
             newVideo.NextMatches = _matchService.NextMatches(newVideo.TournamentID);
             return View(newVideo);
         }

@@ -15,7 +15,7 @@ namespace DailySports.ServiceLayer.Dtos
         public int CategoryId { get; set; }
         public CategoryDto Category { get; set; }
         public GameDto Game { get; set; }
-        public List<PetOfTheWeekDto> PetOfTheDate { get; set; }
+        public PetOfTheWeekDto PetOfTheWeek { get; set; }
 
         public NewsDto() { }
 

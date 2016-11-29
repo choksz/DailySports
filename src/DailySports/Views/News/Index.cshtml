@@ -113,23 +113,15 @@
                         <div class="pet_day float_left">
                             <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
                             <div class="pet_of_day float_left">
-                                @foreach (var pet in Model.PetOfTheDay)
+                                @if (Model.PetOfTheWeek != null)
                                 {
-                                    <div class="bg-image pet_image" style="background-image:url('@Globals.CDNContent(pet.PetImage)')">
+                                    var pet = Model.PetOfTheWeek;
+                                    <div class="bg-image pet_image" style="background-image: url('@Globals.CDNContent(pet.PetImage)');">
                                         <div class="pet_day_heading"><h4>@pet.Title</h4></div>
                                         <div class="pet_day_overlay">
                                             <p>Name: @Html.Raw(pet.Description.ToString())</p>
-                                            @if (pet.Gender == DailySports.DataLayer.Model.Gender.Female)
-                                            {
-                                                <p>Gender: Female</p>
-
-                                            }
-                                            else
-                                            {
-                                                <p>Gender: Male</p>
-
-                                            }
-                                            <p>Age: @pet.Age</p><p>Breed: Mixed</p>
+                                            <p>Gender: @pet.Gender</p>
+                                            <p>Age: @pet.Age</p>
                                             <p>Fun Fact: @pet.FunFact </p>
                                             <p>Owner: @pet.Owner </p>
                                         </div>

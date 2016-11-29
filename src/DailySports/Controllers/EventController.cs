@@ -2,7 +2,6 @@
 using DailySports.ServiceLayer.IServices;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using DailySports.Models;
 
 namespace DailySports.Controllers
 {
@@ -50,29 +49,8 @@ namespace DailySports.Controllers
             EventDto newEventDto = new EventDto();
             newEventDto = _eventService.GetEvent(id);
             newEventDto.NextMatches = new List<MatchDto>();//_matchService.NextMatches(_tournamentService.GetLatestTornamentId());
-            List< PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
-            pet = _petService.GetPetOfTheWeek();
-            if(pet.Count !=0)
-            {
-                newEventDto.petOfTheDay = pet;
-
-            }
-            else
-            {
-                DefaultPet defaultpet = new DefaultPet();
-                pet.Add(new PetOfTheWeekDto
-                {
-                    Id = defaultpet.Id,
-                    Title = defaultpet.Name,
-                    Age = defaultpet.Age,
-                    Description = defaultpet.Description,
-                    FunFact = defaultpet.FunFact,
-                    Gender = defaultpet.Gender,
-                    Owner = defaultpet.Owner,
-                    PetImage = defaultpet.Image
-                });
-                newEventDto.petOfTheDay = pet;
-            }
+            PetOfTheWeekDto pet = _petService.GetPetOfTheWeek();
+            newEventDto.PetOfTheWeekDto = pet;
             return View(newEventDto);
         }
         public IActionResult Search(string Search)

@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-1" })
                                 <div class="col-md-11">
-                                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = " txtEditor form-control" } })
+                                    @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "textarea", @style = "width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" })
                                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                     {
                                         <div class="">
                                             <a href="@Globals.CDNContent(@Model.PetImage)">
-                                                <img src="@Globals.CDNContent(@Model.PetImage)" style="width:300px;" />
+                                                <img src="@Globals.CDNContent(@Model.PetImage)" style="max-width:300px;" />
                                             </a>
                                         </div>
                                     }

@@ -10,7 +10,7 @@ namespace DailySports.ServiceLayer.Dtos
       
         public string URL { get; set; }
         public int GameId { get; set; }
-        public List<PetOfTheWeekDto> petOfTheDay { get; set; }
+        public PetOfTheWeekDto PetOfTheWeek { get; set; }
         public List<MatchDto> NextMatches { get; set; }
         public int TournamentID { get; set; }
         

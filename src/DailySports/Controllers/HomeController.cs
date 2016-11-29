@@ -47,28 +47,8 @@ namespace DailySports.Controllers
             Latest.LiveGames = _gameservice.GetAll();
             Latest.OngoingTournaments = _LatestService.GetOngoingTournaments();
             Latest.CarouselItems = _carouselservice.GetAll();
-            List<PetOfTheWeekDto> pet = new List<PetOfTheWeekDto>();
-            pet = _petService.GetPetOfTheWeek();
-            if (pet.Count != 0)
-            {
-                Latest.PetOfTheWeek = _petService.GetPetOfTheWeek();
-            }
-            else
-            {
-                DefaultPet defaultpet = new DefaultPet();
-                pet.Add(new PetOfTheWeekDto
-                {
-                    Id = defaultpet.Id,
-                    Title = defaultpet.Name,
-                    Age = defaultpet.Age,
-                    Description = defaultpet.Description,
-                    FunFact = defaultpet.FunFact,
-                    Gender = defaultpet.Gender,
-                    Owner = defaultpet.Owner,
-                    PetImage = defaultpet.Image
-                });
-                Latest.PetOfTheWeek = pet;
-            }
+            PetOfTheWeekDto pet = _petService.GetPetOfTheWeek();
+            Latest.PetOfTheWeek = pet;
             return View(Latest);
         }
         public IActionResult Register()

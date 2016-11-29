@@ -1,7 +1,7 @@
 ﻿@model DailySports.ServiceLayer.Dtos.NewsDto
 @{
-    ViewBag.Title = "GetNews";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewBag.Title = "GetNews";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript">var switchTo5x = true;</script>
 <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
@@ -62,7 +62,7 @@
                         <div class="disqus_comment float_left text-center">
                             <h2>Discuss Comments here</h2>
                             <div class="fb-comments" width="100%" data-numposts="5" data-colorscheme="light"
-></div>
+                            ></div>
                         </div>
                     </div>
                     <div class="col-sm-4 pad-zero">
@@ -72,27 +72,27 @@
                             <div class="pet_day float_left">
                                 <h4 class="f_bol col-sm-12 main_head">PET OF THE WEEK</h4>
                                 <div class="pet_of_day float_left">
-                                    @foreach (var pet in Model.PetOfTheDate)
+                                    @if (Model.PetOfTheWeek != null)
                                     {
-                                        <div class="bg-image pet_image" style="background-image:url('@Globals.CDNContent(pet.PetImage)')">
-                                            <div class="pet_day_heading"><h4>@pet.Title</h4></div>
-                                            <div class="pet_day_overlay">
-                                                <p>Name: @pet.Description</p>
-                                                <p>Gender: @pet.Gender</p>
-                                                <p>Age: @pet.Age</p><p>Breed: Mixed</p>
-                                                <p>Fun Fact: @pet.FunFact </p>
-                                                <p>Owner: @pet.Owner </p>
-                                            </div>
+                                    var pet = Model.PetOfTheWeek;
+                                    <div class="bg-image pet_image" style="background-image: url('@Globals.CDNContent(pet.PetImage)');">
+                                        <div class="pet_day_heading"><h4>@pet.Title</h4></div>
+                                        <div class="pet_day_overlay">
+                                            <p>Name: @Html.Raw(pet.Description.ToString())</p>
+                                            <p>Gender: @pet.Gender</p>
+                                            <p>Age: @pet.Age</p>
+                                            <p>Fun Fact: @pet.FunFact </p>
+                                            <p>Owner: @pet.Owner </p>
                                         </div>
-                                    }
-                                </div>
+                                    </div>
+                                }
                             </div>
-                            <div class="float_left">
-                                <h4 class="f_bol col-sm-12 main_head">#DAILYESPORTS</h4>
-                                <div class="twitter_widget col-sm-12">
-                                    <a data-height="500" class="twitter-timeline" href="https://twitter.com/DailyEsportsTv">National Park Tweets - Curated tweets by TwitterDev</a>
-                                    <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-                                </div>
+                        </div>
+                        <div class="float_left">
+                            <h4 class="f_bol col-sm-12 main_head">#DAILYESPORTS</h4>
+                            <div class="twitter_widget col-sm-12">
+                                <a data-height="500" class="twitter-timeline" href="https://twitter.com/DailyEsportsTv">National Park Tweets - Curated tweets by TwitterDev</a>
+                                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
                             </div>
                         </div>
                     </div>
@@ -101,14 +101,15 @@
         </div>
     </div>
 </div>
+</div>
 <script>
-    (function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1651609955149884";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=1651609955149884";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
 
 </script>
