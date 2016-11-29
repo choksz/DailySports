@@ -15,8 +15,8 @@
                 </div>
                 <div class="box-body">
                     <div class="box-body table-responsive no-padding">
-                        <table class="table table-hover">
-                            <tbody>
+                        <table id="table" class="table table-hover tablesorter">
+                            <thead>
                                 <tr>
                                     <th>
                                         Game Name
@@ -44,7 +44,8 @@
                                     </th>
                                     <th></th>
                                 </tr>
-
+                            </thead>
+                            <tbody>
                                 @foreach (var item in Model)
                                 {
                                     <tr>
@@ -96,3 +97,10 @@
     </div>
 
 </section>
+<script type="text/javascript">
+$(document).ready(function() 
+    { 
+        $("#table").tablesorter(); 
+    } 
+); 
+</script>
