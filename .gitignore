@@ -284,3 +284,4 @@ __pycache__/
 # Cake - Uncomment if you are using it
 # tools/
 
+src/DailySports.DataLayer/Utilities/AppSettings.cs

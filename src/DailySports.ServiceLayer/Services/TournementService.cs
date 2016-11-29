@@ -111,6 +111,7 @@ namespace DailySports.ServiceLayer.Services
                     Include(t => t.Streams).
                         ThenInclude(s => s.Language).
                     FirstOrDefault();
+                tournament.PrizePool.Distribution = tournament.PrizePool.Distribution.OrderBy(d => d.Place).ToList();
                 for (int i = 0; i < tournament.TeamLists.Count; i++)
                 {
                     tournament.TeamLists.ElementAt(i).Teams = GetTeams(tournament.TeamLists.ElementAt(i).Id);
