@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using DailySports.DataLayer.Model;
 using DailySports.ServiceLayer.Utilities;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace DailySports.Backend.Controllers
 {
@@ -16,14 +17,37 @@ namespace DailySports.Backend.Controllers
         // GET: PlaceEntry
         public ActionResult Index()
         {
-            return View(db.PlaceEntries.Include(e => e.PrizePool).ThenInclude(p => p.Tournament).ToList());
+            var placeEntries = db.PlaceEntries.
+                Include(e => e.PrizePool).
+                    ThenInclude(p => p.Tournament).
+                Include(e => e.Team).
+                ToList();
+            return View(placeEntries);
+        }
+
+        private SelectList GetPrizePoolSelectList()
+        {
+            var list = db.PrizePools.
+                Join(db.Tournaments, p => p.TournamentId, t => t.Id, (p, t) => new { prizePool = p, tour = t }).
+                Select(x => new { x.prizePool.Id, x.tour.Title }).ToList();
+            var items = new List<SelectListItem>();
+            foreach (var x in list)
+            {
+                items.Add(new SelectListItem
+                {
+                    Text = x.Title,
+                    Value = x.Id.ToString()
+                });
+            }
+            return new SelectList(items, "Value", "Text");
         }
 
         // GET: PlaceEntry/Create
         public ActionResult Create()
         {
+
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
+            ViewBag.PrizePoolId = GetPrizePoolSelectList();
             return View(new PlaceEntry());
         }
 
@@ -39,7 +63,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
+            ViewBag.PrizePoolId = GetPrizePoolSelectList();
             return View(entry);
         }
 
@@ -56,7 +80,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
+            ViewBag.PrizePoolId = GetPrizePoolSelectList();
             return View(entry);
         }
 
@@ -72,7 +96,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.PrizePoolId = new SelectList(db.PrizePools, "Id", "Id");
+            ViewBag.PrizePoolId = GetPrizePoolSelectList();
             return View(entry);
         }
 

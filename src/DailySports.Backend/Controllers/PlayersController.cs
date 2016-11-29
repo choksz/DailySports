@@ -18,7 +18,9 @@ namespace DailySports.Backend.Controllers
         // GET: Players
         public IActionResult Index()
         {
-            var players = db.Players.Include(p => p.Team).Include(p => p.Country);
+            var players = db.Players.
+                Include(p => p.Team).
+                Include(p => p.Country);
             return View(players.ToList());
         }
 
