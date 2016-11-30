@@ -1,5 +1,5 @@
-﻿@model IEnumerable<DailySports.DataLayer.Model.News>
-
+﻿@model IEnumerable<News>
+@using System.Text.RegularExpressions;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,16 +18,16 @@
                             <thead>
                                 <tr>
                                     <th>
-                                      Author
+                                        Author
                                     </th>
                                     <th>
-                                       Category
+                                        Category
                                     </th>
                                     <th>
                                         Game
                                     </th>
                                     <th>
-                                      Tournament
+                                        Tournament
                                     </th>
                                     <th>
                                         @Html.DisplayNameFor(model => model.Title)
@@ -70,7 +70,7 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @((item.Description.ToString().Length > 200) ? (item.Description.ToString().Substring(0, 200) + "...") : (item.Description.ToString()))
+                                            @String.Format("{0} ....", Regex.Replace(item.Description, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, 200))
                                         </td>
                                         <td>
                                             <a href="@Globals.CDNContent(item.NewsImage)">Link</a>
@@ -108,9 +108,8 @@
 
 </section>
 <script type="text/javascript">
-$(document).ready(function() 
-    { 
-        $("#table").tablesorter(); 
-    } 
-); 
+    $(document).ready(function () {
+        $("#table").tablesorter();
+    }
+    );
 </script>
