@@ -70,7 +70,7 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @String.Format("{0} ....", Regex.Replace(item.Description, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, 200))
+                                            @String.Format("{0} {1}", Regex.Replace(item.Description, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, item.Description.Length > 200 ? 200 : item.Description.Length), item.Description.Length > 200 ? "...." : string.Empty)
                                         </td>
                                         <td>
                                             <a href="@Globals.CDNContent(item.NewsImage)">Link</a>

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<DailySports.DataLayer.Model.TeamList>
+﻿@model IEnumerable<TeamList>
+@using System.Text.RegularExpressions;
 
 @{
     ViewBag.Title = "Index";
@@ -43,7 +44,7 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Description)
+                                            @String.Format("{0} {1}", Regex.Replace(item.Description, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, item.Description.Length > 200 ? 200 : item.Description.Length), item.Description.Length > 200 ? "...." : string.Empty)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Tournament.Title)
@@ -68,9 +69,8 @@
 
 </section>
 <script type="text/javascript">
-$(document).ready(function() 
-    { 
-        $("#table").tablesorter(); 
-    } 
-); 
+    $(document).ready(function () {
+        $("#table").tablesorter();
+    }
+    );
 </script>

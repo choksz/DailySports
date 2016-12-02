@@ -1,5 +1,5 @@
-﻿@model IEnumerable<DailySports.DataLayer.Model.Tournaments>
-
+﻿@model IEnumerable<Tournaments>
+@using System.Text.RegularExpressions;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -56,7 +56,7 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @(item.Overview.ToString().Length > 200 ? (item.Overview.ToString().Substring(0, 200) + "...") : (item.Overview.ToString()))
+                                            @String.Format("{0} {1}", Regex.Replace(item.Overview, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, item.Overview.Length > 200 ? 200 : item.Overview.Length), item.Overview.Length > 200 ? "...." : string.Empty)
                                         </td>
                                         <td>
                                             <a href="@item.URL">Link</a>
@@ -78,9 +78,7 @@
                                             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                                         </td>
                                     </tr>
-                                }
-
-
+                                } 
                         </table>
 
                     </div>
@@ -94,13 +92,11 @@
             <a href="@Url.Action("Preview","Tournaments")" class="btn btn-success">Preview</a>
 
         </div>
-    </div>
-
+    </div> 
 </section>
 <script type="text/javascript">
-$(document).ready(function() 
-    { 
-        $("#table").tablesorter(); 
-    } 
-); 
+    $(document).ready(function () {
+        $("#table").tablesorter();
+    }
+    );
 </script>
