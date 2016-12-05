@@ -34,7 +34,7 @@
                                         @Html.DisplayNameFor(model => model.Date)
                                     </th>
                                     <th>
-                                        @Html.DisplayNameFor(model => model.StageId)
+                                        Tournament - Stage
                                     </th>
                                     <th></th>
                                 </tr>
@@ -59,7 +59,7 @@
                                             @Html.DisplayFor(modelItem => item.Date)
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.StageId)
+                                            @item.Stage.Tournament.Title - @item.Stage.Name
                                         </td>
                                         <td>
                                             @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

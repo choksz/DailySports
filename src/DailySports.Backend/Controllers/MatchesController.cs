@@ -17,7 +17,11 @@ namespace DailySports.Backend.Controllers
         // GET: Matches
         public IActionResult Index()
         {
-            var matches = db.Matches.Include(m => m.TeamA).Include(m => m.TeamB);
+            var matches = db.Matches.
+                Include(m => m.TeamA).
+                Include(m => m.TeamB).
+                Include(m => m.Stage).
+                ThenInclude(s => s.Tournament);
             return View(matches.ToList());
         }
 
