@@ -113,7 +113,7 @@
                                 <div class="tournament_box">
                                     <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
                                         <div class="tournament_box">
-                                            <div class="tournament_box_img pad_zero" style="background-size: 100% 100%;background-repeat: no-repeat;background-image:url('@Globals.CDNContent(tournament.TournamentImage)')">
+                                            <div class="tournament_box_img pad_zero" style="background-size: cover; background-repeat: no-repeat;background-image:url('@Globals.CDNContent(tournament.TournamentImage)'); background-repeat:no-repeat; background-position: center center;">
                                                 <div class="tournaments_title">
                                                     @tournament.Title
                                                     <div class="pull-right">
@@ -166,7 +166,7 @@
                             @foreach (var tournament in Model.OngoingTournaments)
                             {
                                 <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
-                                    <div class="live_game_box bg-image" style="background-image: url('@Globals.CDNContent(tournament.TournamentImage)')">
+                                    <div class="live_game_box bg-image" style="background-image: url('@Globals.CDNContent(tournament.TournamentImage)'); background-repeat:no-repeat; background-position: center center;">
                                         <div class="news_dota_ico">
                                             <img src="@Globals.CDNContent(tournament.Game.GameImage)" />
                                         </div>
