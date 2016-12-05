@@ -131,12 +131,21 @@ namespace DailySports.Backend.Controllers
             return View(teamList);
         }
 
+        private ICollection<TeamListTeam> GetTeamListTeams(int id)
+        {
+            return db.TeamListTeams.Where(l => l.TeamListId == id).ToList();
+        }
+
         // POST: teamLists/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             TeamList teamList = db.TeamLists.Find(id);
+            var tlt = GetTeamListTeams(id);
+            foreach (var tl in tlt) {
+                db.TeamListTeams.Remove(tl);
+            }
             db.TeamLists.Remove(teamList);
             try
             {

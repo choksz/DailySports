@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace DailySports.Backend.Controllers
 {
@@ -93,12 +94,21 @@ namespace DailySports.Backend.Controllers
             return View(prizePool);
         }
 
+        private ICollection<PlaceEntry> GetPlaceEntries(int id)
+        {
+            return db.PlaceEntries.Where(e => e.PrizePoolId == id).ToList();
+        }
+
         // POST: PrizePools/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
             PrizePool prizePool = db.PrizePools.Find(id);
+            var placeEntries = GetPlaceEntries(id);
+            foreach (var e in placeEntries) {
+                db.PlaceEntries.Remove(e);
+            }
             db.PrizePools.Remove(prizePool);
             try
             {
