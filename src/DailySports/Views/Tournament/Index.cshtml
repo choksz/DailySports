@@ -19,7 +19,13 @@
                 <div class="col-sm-6 pad-right-zero">
                     <div class="upper_tournament_add bg-image" style="background-image:url('@latest.TournamentImage')">
                         <div class="upper_tournament_add_layer">
-                            <h3>@latest.Title <span class="grey">@latest.StartDate.ToString("D")</span> - <span class="grey">@latest.EndDate.ToString("D")</span> <span class="pull-right green">$@latest.PrizePool.Amount+</span></h3>
+                            @{
+                                var prizePool = "0";
+                                if (latest.PrizePool != null) {
+                                    prizePool = latest.PrizePool.Amount;
+                                }
+                            }
+                            <h3>@latest.Title <span class="grey">@latest.StartDate.ToString("D")</span> - <span class="grey">@latest.EndDate.ToString("D")</span> <span class="pull-right green">$@prizePool+</span></h3>
                             <p>@Html.Raw(latest.Overview))</p>
                             <a href="@Url.Action("GetTournament", new { @id = latest.Id })" class="pull-right grey">Read more</a>
                         </div>
