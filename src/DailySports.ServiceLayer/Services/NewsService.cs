@@ -29,7 +29,7 @@ namespace DailySports.ServiceLayer.Services
             List<NewsDto> NewsDtoList = new List<NewsDto>();
             try
             {
-                List<News> NewsList = _newsRepository.GetAll().
+                List<News> NewsList = _newsRepository.FindBy(n => n.status == Status.Publish).
                     Include(n => n.Author).
                     Include(n => n.category).
                     Include(n => n.game).
@@ -69,7 +69,7 @@ namespace DailySports.ServiceLayer.Services
             List<NewsDto> NewsDtoList = new List<NewsDto>();
             try
             {
-                List<News> NewsList = _newsRepository.FindBy(N => N.Title.Contains(Name)).ToList(); 
+                List<News> NewsList = _newsRepository.FindBy(n => n.Title.Contains(Name) && n.status == Status.Publish).ToList(); 
                 foreach (var news in NewsList)
                 {
                     NewsDtoList.Add(new NewsDto(news));
@@ -85,7 +85,7 @@ namespace DailySports.ServiceLayer.Services
             List<NewsDto> newsDto = new List<NewsDto>();
             try
             {
-                List<News> LatestNewsList = _newsRepository.GetAll().OrderBy(N => N.Id).Take(1).ToList();
+                List<News> LatestNewsList = _newsRepository.FindBy(n => n.status == Status.Publish).OrderBy(N => N.Id).Take(1).ToList();
                 
                 foreach (var LatestNews in LatestNewsList)
                 {
