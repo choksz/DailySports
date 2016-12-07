@@ -56,7 +56,10 @@
                                             @Html.DisplayFor(modelItem => item.Title)
                                         </td>
                                         <td>
-                                            @String.Format("{0} {1}", Regex.Replace(item.Overview, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, item.Overview.Length > 200 ? 200 : item.Overview.Length), item.Overview.Length > 200 ? "...." : string.Empty)
+                                            @{
+                                                var rawText = Regex.Replace(item.Overview, "<(.|\\n)*?>", String.Empty);
+                                            }
+                                            @String.Format("{0} {1}", rawText.Substring(0, rawText.Length > 200 ? 200 : rawText.Length), rawText.Length > 200 ? "...." : string.Empty)
                                         </td>
                                         <td>
                                             <a href="@item.URL">Link</a>
