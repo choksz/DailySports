@@ -57,7 +57,7 @@
                                         </td>
                                         <td>
                                             @{
-                                                var rawText = Regex.Replace(item.Overview, "<(.|\\n)*?>", String.Empty);
+                                                var rawText = (item.Overview != null) ? Regex.Replace(item.Overview, "<(.|\\n)*?>", String.Empty) : "";
                                             }
                                             @String.Format("{0} {1}", rawText.Substring(0, rawText.Length > 200 ? 200 : rawText.Length), rawText.Length > 200 ? "...." : string.Empty)
                                         </td>
