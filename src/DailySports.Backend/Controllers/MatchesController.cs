@@ -102,9 +102,9 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             var Teams = GetTeamSelectList();
-            ViewBag.TeamAId = Teams;
-            ViewBag.TeamBId = Teams;
-            ViewBag.StageId = GetStageSelectList();
+            ViewBag.TeamAId = new SelectList(Teams, match.TeamAId);
+            ViewBag.TeamBId = new SelectList(Teams, match.TeamBId);;
+            ViewBag.StageId = new SelectList(GetStageSelectList(), match.StageId);
             return View(match);
         }
 
@@ -122,9 +122,9 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             var Teams = GetTeamSelectList();
-            ViewBag.TeamAId = Teams;
-            ViewBag.TeamBId = Teams;
-            ViewBag.StageId = GetStageSelectList();
+            ViewBag.TeamAId = new SelectList(Teams, match.TeamAId);
+            ViewBag.TeamBId = new SelectList(Teams, match.TeamBId);;
+            ViewBag.StageId = new SelectList(GetStageSelectList(), match.StageId);
             return View(match);
         }
 
