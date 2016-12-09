@@ -25,7 +25,7 @@ namespace DailySports.Backend.Controllers
             return View(placeEntries);
         }
 
-        private SelectList GetPrizePoolSelectList()
+        private SelectList GetPrizePoolSelectList(int? prizePoolId)
         {
             var list = db.PrizePools.
                 Join(db.Tournaments, p => p.TournamentId, t => t.Id, (p, t) => new { prizePool = p, tour = t }).
@@ -39,7 +39,7 @@ namespace DailySports.Backend.Controllers
                     Value = x.Id.ToString()
                 });
             }
-            return new SelectList(items, "Value", "Text");
+            return (prizePoolId.HasValue) ? new SelectList(items, "Value", "Text", prizePoolId.Value) : new SelectList(items, "Value", "Text");
         }
 
         // GET: PlaceEntry/Create
@@ -47,7 +47,7 @@ namespace DailySports.Backend.Controllers
         {
 
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.PrizePoolId = GetPrizePoolSelectList();
+            ViewBag.PrizePoolId = GetPrizePoolSelectList(null);
             return View(new PlaceEntry());
         }
 
@@ -63,7 +63,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name");
-            ViewBag.PrizePoolId = GetPrizePoolSelectList();
+            ViewBag.PrizePoolId = GetPrizePoolSelectList(null);
             return View(entry);
         }
 
@@ -80,7 +80,7 @@ namespace DailySports.Backend.Controllers
                 return NotFound();
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", entry.TeamId);
-            ViewBag.PrizePoolId = new SelectList(GetPrizePoolSelectList(), entry.PrizePoolId);
+            ViewBag.PrizePoolId = GetPrizePoolSelectList(entry.PrizePoolId);
             return View(entry);
         }
 
@@ -96,7 +96,7 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TeamId = new SelectList(db.Teams, "Id", "Name", entry.TeamId);
-            ViewBag.PrizePoolId = new SelectList(GetPrizePoolSelectList(), entry.PrizePoolId);
+            ViewBag.PrizePoolId = GetPrizePoolSelectList(entry.PrizePoolId);
             return View(entry);
         }
 
