@@ -131,7 +131,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-1 text-center">
-                                                    <h4 class="lower_m1 f_bol">VS.</h4>
+                                                    <h4 class="lower_m1 f_bol">@match.ScoreA : @match.ScoreB</h4>
                                                 </div>
                                                 <div class="col-sm-4">
                                                     <div class="col-xs-8">
@@ -203,14 +203,34 @@
                                     <h3>THE TEAMS</h3>
                                     @foreach (var tl in Model.TeamLists)
                                     {
-                                        <h4 class="f_bol tour_team_sub col-sm-12">@tl.Name</h4>
-                                        foreach (var team in tl.Teams)
-                                        {
-                                            <div class="col-sm-3 col-xs-6 tour_team_logo_box text-center">
-                                                <img src="@Globals.CDNContent(team.Logo)" alt="#">
-                                                <h4>@team.Name</h4>
+                                        <div class="col-sm-12 text-center">
+                                            <div class="col-sm-12 text-center">
+                                                <h4 class="f_bol tour_team_sub col-sm-12">@tl.Name</h4>
                                             </div>
-                                        }
+                                            <div class="col-sm-12">
+                                                @for (var i = 0; i < tl.Teams.Count; i++)
+                                                {
+                                                    var team = tl.Teams[i];
+                                                    @if (i % 4 == 0) {
+                                                        @:<div class="row">
+                                                    }
+                                                    <text>
+                                                    <div class="col-sm-3 text-center">
+                                                        <div class="tour_team_logo_box" style="height: 40px; display: table-cell; vertical-align: middle;">
+                                                            <img src="@Globals.CDNContent(team.Logo)" alt="#">
+                                                        </div>
+                                                        <div class="" style="word-wrap: normal">
+                                                            @team.Name
+                                                        </div>
+                                                    </div>
+                                                    </text>
+                                                     @if (i % 4 == 3) {
+                                                        @:</div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        
                                     }
                                 </div>
                             </div>

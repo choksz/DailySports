@@ -84,6 +84,7 @@ namespace DailySports.ServiceLayer.Services
                     Include(x => x.Team).
                         ThenInclude(x => x.Country).
                     Select(x => x.Team).
+                    OrderBy(x => x.Name).
                     ToList();
             } catch (Exception)
             { }
