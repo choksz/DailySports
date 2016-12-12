@@ -14,7 +14,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                 <div class="basic_content">
                     <div class="post_page_header">
                         <div class="col-sm-9 br-bottom">
-                            <h4 class="f_bol main_head"> @Model.Title</h4>
+                            <h4 class="f_bol main_head"><img src="@Globals.CDNContent(Model.Game.GameImage)"> @Model.Title</h4>
                         </div>
                         <div class="col-sm-3 pad-zero">
                             <div class="sb_search">
@@ -25,7 +25,7 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                     </div>
                     <div class="col-sm-8 pad-zero br-right">
                         <div class="news_post_area">
-                            <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.NewsImage)');background-size: 100%; ">
+                            <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.NewsImage)');background-size: 100%; background-repeat: no-repeat; background;">
                                 <div class="news_post_content hvr-sweep-to-top">
                                     <div class="col-sm-2">
                                         <div class="news_post_subimg">
