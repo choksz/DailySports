@@ -10,6 +10,7 @@ using DailySports.ServiceLayer.Repositories.Core;
 using DailySports.DataLayer.Context;
 
 using Microsoft.EntityFrameworkCore;
+using DailySports.Helpers;
 
 namespace DailySports
 {
@@ -61,6 +62,7 @@ namespace DailySports
             services.AddTransient<ILatestService, LatestService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<ICarouselService, CarouselService>();
+            services.AddScoped<UrlEncode>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -108,7 +108,7 @@
                                                 Posted by <span class="red"> @news.Author.Name </span>
                                                 , @news.Date.ToString("d")
                                             </h4>
-                                            @Html.ActionLink("read more", "GetNews", "News", new { Id = news.Id }, "href")
+                                            @Html.ActionLink("read more", "GetNews", "News", new { Id = news.Id, title = news.Title }, "href")
                                         </div>
                                     </div>
                                 }

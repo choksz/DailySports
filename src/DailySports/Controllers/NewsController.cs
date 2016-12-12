@@ -3,6 +3,8 @@ using DailySports.ServiceLayer.IServices;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using DailySports.Models;
+using System.Net;
+using DailySports.Helpers;
 
 namespace DailySports.Controllers
 {
@@ -30,14 +32,16 @@ namespace DailySports.Controllers
             newsDtoList.PetOfTheWeek = pet;
             return View(newsDtoList);
         }
-
-        public IActionResult GetNews(int id)
+        [ServiceFilter(typeof(UrlEncode))]
+        [Route("News/{title}")]
+        public IActionResult GetNews(int id, string title)
         {
             NewsDto news = new NewsDto();
             news = _newsService.GetNews(id);
             //news.NextMatches = _matchService.NextMatches(_tournamentService.GetLatestTornamentId());
             PetOfTheWeekDto pet = _petService.GetPetOfTheWeek();
             news.PetOfTheWeek = pet;
+            news.Title = WebUtility.HtmlDecode(news.Title); 
             return View(news);
         }
         public IActionResult Search(string Search)
