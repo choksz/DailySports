@@ -111,7 +111,7 @@
                             @foreach (var tournament in Model.LatestTournament)
                             {
                                 <div class="tournament_box">
-                                    <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
+                                    <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id, title = tournament.Title })">
                                         <div class="tournament_box">
                                             <div class="tournament_box_img pad_zero" style="background-size: cover; background-repeat: no-repeat;background-image:url('@Globals.CDNContent(tournament.TournamentImage)'); background-repeat:no-repeat; background-position: center center;">
                                                 <div class="tournaments_title">
@@ -137,7 +137,7 @@
                             @foreach (var Event in Model.LatestEvents)
                             {
                                 <div class="latest_event_box">
-                                    <a href="@Url.Action("GetEvent","Event",new { @id=Event.Id })">
+                                    <a href="@Url.Action("GetEvent","Event",new { @id=Event.Id,title = Event.Title.Replace(" ", "_").Replace("'", "") })">
                                         <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-size: 100% 100%;background-image:url('@Globals.CDNContent(Event.EventImage)')">
                                             <div class="event_details">
                                                 <div class="event_name">@Event.Title</div>
@@ -165,7 +165,7 @@
                             <h4 class="f_bol main_head">ONGOING TOURNAMENTS</h4>
                             @foreach (var tournament in Model.OngoingTournaments)
                             {
-                                <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id })">
+                                <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id, title = tournament.Title.Replace(" ", "_").Replace("'", "") })">
                                     <div class="live_game_box bg-image" style="background-image: url('@Globals.CDNContent(tournament.TournamentImage)'); background-repeat:no-repeat; background-position: center center;">
                                         <div class="news_dota_ico">
                                             <img src="@Globals.CDNContent(tournament.Game.GameImage)" />

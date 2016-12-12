@@ -1,4 +1,5 @@
-﻿using DailySports.ServiceLayer.Dtos;
+﻿using DailySports.Helpers;
+using DailySports.ServiceLayer.Dtos;
 using DailySports.ServiceLayer.IServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,7 +34,8 @@ namespace DailySports.Controllers
             newTournamentList.AllGames = _gameService.GetAll();
             return View(newTournamentList);
         }
-
+        [ServiceFilter(typeof(UrlEncode))]
+        [Route("Tournaments/{title}")]
         public IActionResult GetTournament(int id)
         {
             TournementsDto TournamentDto = new TournementsDto();

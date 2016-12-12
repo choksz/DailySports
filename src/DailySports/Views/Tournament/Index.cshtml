@@ -27,7 +27,7 @@
                             }
                             <h3>@latest.Title <span class="grey">@latest.StartDate.ToString("D")</span> - <span class="grey">@latest.EndDate.ToString("D")</span> <span class="pull-right green">$@prizePool+</span></h3>
                             <p>@Html.Raw(latest.Overview))</p>
-                            <a href="@Url.Action("GetTournament", new { @id = latest.Id })" class="pull-right grey">Read more</a>
+                            <a href="@Url.Action("GetTournament", new { @id = latest.Id,title=latest.Title.Replace(" ", "_").Replace("'", "") })" class="pull-right grey">Read more</a>
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
                         @foreach (var Tournament in Model.AllTournaments)
                         {
                             <div class="tour_filter_layout element-item dota bf3 tour" data-filter="@Tournament.GameId">
-                                <a href="@Url.Action("GetTournament",new { @id=Tournament.Id })">
+                                <a href="@Url.Action("GetTournament",new { @id=Tournament.Id,title = Tournament.Title.Replace(" ", "_").Replace("'", "") })">
                                     <div class="tour_filter_box br-bottom">
                                         <div class="col-sm-3 pad-zero">
                                             <div class="tour_filter_box_image">

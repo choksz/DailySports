@@ -75,7 +75,7 @@
 
                                                     <div class="latest_event_box">
 
-                                                        <a href="@Url.Action("GetEvent",new { @id=Event.Id })">
+                                                        <a href="@Url.Action("GetEvent",new { @id=Event.Id, title = Event.Title.Replace(" ", "_").Replace("'","")})">
                                                             <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-size:contain; background-image:url('@Globals.CDNContent(Event.EventImage)'); background-repeat: no-repeat">
                                                                 <div class="event_details">
                                                                     <div class="event_name">@Event.Title</div>

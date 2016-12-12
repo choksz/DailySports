@@ -2,6 +2,7 @@
 using DailySports.ServiceLayer.IServices;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using DailySports.Helpers;
 
 namespace DailySports.Controllers
 {
@@ -44,6 +45,8 @@ namespace DailySports.Controllers
             allEvents = _eventService.GetAll();
             return View(allEvents);
         }
+        [ServiceFilter(typeof(UrlEncode))]
+        [Route("Events/{title}")]
         public IActionResult GetEvent(int id)
         {
             EventDto newEventDto = new EventDto();
