@@ -21,7 +21,7 @@
                         cls = "item";
                     }
                     <div class="@cls">
-                        <img style="max-width: 100%;max-height: 100%;" src="@Globals.CDNContent(item.Image)" alt="#">
+                        <img style="max-width: 100%; max-height: 100%;" src="@Globals.CDNContent(item.Image)" alt="#">
                         <div class="carousel-caption">
                             <div class="home_upper_heading">
                                 <h5>@item.Text</h5>
@@ -110,12 +110,14 @@
                             <h4 class="tournaments_title f_bol main_head">latest tournaments</h4>
                             @foreach (var tournament in Model.LatestTournament)
                             {
+                                if (tournament.Title != null && tournament.Title.Length > 0)
+                                {
                                 <div class="tournament_box">
                                     <a href="@Url.Action("GetTournament", "Tournament", new { @id = tournament.Id, title = tournament.Title })">
                                         <div class="tournament_box">
-                                            <div class="tournament_box_img pad_zero" style="background-size: cover; background-repeat: no-repeat;background-image:url('@Globals.CDNContent(tournament.TournamentImage)'); background-repeat:no-repeat; background-position: center center;">
+                                            <div class="tournament_box_img pad_zero" style="background: linear-gradient(rgba(0, 0, 0, 0.58),rgba(0, 0, 0, 0.58)),url('@Globals.CDNContent(tournament.TournamentImage)'); background-size: cover; background-repeat: no-repeat; background-position: center center;">
                                                 <div class="tournaments_title">
-                                                    @tournament.Title
+                                                    <h4>@tournament.Title</h4>
                                                     <div class="pull-right">
                                                         @tournament.StartDate.ToString("d") - @tournament.EndDate.ToString("d")
                                                     </div>
@@ -127,6 +129,7 @@
                                         </div>
                                     </a>
                                 </div>
+                                }
                             }
                             <a href="@Url.Action("Index","Tournament")" class="btn more_tour_btn">more tournaments</a>
                         </div>
@@ -138,12 +141,12 @@
                             {
                                 <div class="latest_event_box">
                                     <a href="@Url.Action("GetEvent","Event",new { @id=Event.Id,title = Event.Title.Replace(" ", "_").Replace("'", "") })">
-                                        <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-size: 100% 100%;background-image:url('@Globals.CDNContent(Event.EventImage)')">
+                                        <div class="col-sm-9 latest_event_img pad-zero bg-image" style="background-size: cover; background-repeat: no-repeat; background-position: center center;background-image:url('@Globals.CDNContent(Event.EventImage)')">
                                             <div class="event_details">
                                                 <div class="event_name">@Event.Title</div>
                                                 <div class="countdown">
-                                                    <div class="timing-titles"><span>@Event.StartDate.Value.Day</span><span>@Event.StartDate.Value.Hour</span><span>MINUTES</span><span>Seconds</span></div>
-                                                    <div class="times"><span>00</span><span>00</span><span>00</span><span>00</span></div>
+                                                    <div class="timing-titles"><span>Starts:</span></div>
+                                                    <div class="times"><span>@Event.StartDate</span></div>
                                                 </div>
                                                 <div class="event_city">@Event.Location</div>
                                             </div>
