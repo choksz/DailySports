@@ -7,6 +7,8 @@
 <div class="main-tour-img bg-image" style="background-image:url('@Globals.CDNContent("website-tournament-banner.png")')">
     @foreach (var latest in Model.LatestTournament)
     {
+        if (latest.Title != null && latest.Title.Length > 0)
+        {
         <div class="main-tour-sec">
             <div class="container">
                 <div class="col-sm-6 pad-left-zero">
@@ -33,6 +35,7 @@
                 </div>
             </div>
         </div>
+        }
     }
 </div>
 <div class="container bg-inherit">
@@ -69,6 +72,8 @@
                     <div class="isotope">
                         @foreach (var Tournament in Model.AllTournaments)
                         {
+                            if (Tournament.Title != null && Tournament.Title.Length > 0)
+                            {
                             <div class="tour_filter_layout element-item dota bf3 tour" data-filter="@Tournament.GameId">
                                 <a href="@Url.Action("GetTournament",new { @id=Tournament.Id,title = Tournament.Title.Replace(" ", "_").Replace("'", "") })">
                                     <div class="tour_filter_box br-bottom">
@@ -147,6 +152,7 @@
                                     </div>
                                 </div>
                             </div>
+                            }
                         }
                     </div>
 
