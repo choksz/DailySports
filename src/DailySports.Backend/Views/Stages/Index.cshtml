@@ -49,7 +49,10 @@
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </td>
                                         <td>
-                                            @Regex.Replace(item.Description, "<(.|\\n)*?>", string.Empty).ToString()
+                                            @{
+                                                var rawText = (item.Description != null) ? Regex.Replace(item.Description, "<(.|\\n)*?>", String.Empty) : "";
+                                            }
+                                            @String.Format("{0} {1}", rawText.Substring(0, rawText.Length > 200 ? 200 : rawText.Length), rawText.Length > 200 ? "...." : string.Empty)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.StartDate)

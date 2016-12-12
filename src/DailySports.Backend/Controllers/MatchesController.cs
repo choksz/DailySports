@@ -25,7 +25,7 @@ namespace DailySports.Backend.Controllers
             return View(matches.ToList());
         }
 
-        private SelectList GetStageSelectList()
+        private SelectList GetStageSelectList(int? stageId)
         {
             var list = db.Stages.
                 Join(db.Tournaments, st => st.TournamentId, t => t.Id, (st, t) => new { stage = st, tour = t }).
@@ -39,10 +39,10 @@ namespace DailySports.Backend.Controllers
                     Value = x.Id.ToString()
                 });
             }
-            return new SelectList(items, "Value", "Text");
+            return (stageId.HasValue) ? new SelectList(items, "Value", "Text", stageId.Value) : new SelectList(items, "Value", "Text") ;
         }
 
-        private SelectList GetTeamSelectList()
+        private SelectList GetTeamSelectList(int? teamId)
         {
             var list = db.Teams.Join(db.Games, t => t.GameId, g => g.Id, (t, g) => new { team = t, game = g }).
                 Select(x => new { Id = x.team.Id, Team = x.team.Name, Game = x.game.Name }).ToList();
@@ -55,16 +55,16 @@ namespace DailySports.Backend.Controllers
                     Value = x.Id.ToString()
                 });
             }
-            return new SelectList(items, "Value", "Text");
+            return (teamId.HasValue) ? new SelectList(items, "Value", "Text", teamId.Value) : new SelectList(items, "Value", "Text");
         }
 
         // GET: Matches/Create
         public IActionResult Create()
         {
-            var Teams = GetTeamSelectList();
+            var Teams = GetTeamSelectList(null);
             ViewBag.TeamAId = Teams;
             ViewBag.TeamBId = Teams;
-            ViewBag.StageId = GetStageSelectList();
+            ViewBag.StageId = GetStageSelectList(null);
             return View(new Match());
         }
 
@@ -82,10 +82,10 @@ namespace DailySports.Backend.Controllers
                 return RedirectToAction("Index");
             }
 
-            var Teams = GetTeamSelectList();
+            var Teams = GetTeamSelectList(null);
             ViewBag.TeamAId = Teams;
             ViewBag.TeamBId = Teams;
-            ViewBag.StageId = GetStageSelectList();
+            ViewBag.StageId = GetStageSelectList(null);
             return View(match);
         }
 
@@ -101,10 +101,10 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            var Teams = GetTeamSelectList();
-            ViewBag.TeamAId = Teams;
-            ViewBag.TeamBId = Teams;
-            ViewBag.StageId = GetStageSelectList();
+            //var Teams = GetTeamSelectList();
+            ViewBag.TeamAId = GetTeamSelectList(match.TeamAId);
+            ViewBag.TeamBId = GetTeamSelectList(match.TeamBId);;
+            ViewBag.StageId = GetStageSelectList(match.StageId);
             return View(match);
         }
 
@@ -121,10 +121,10 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            var Teams = GetTeamSelectList();
-            ViewBag.TeamAId = Teams;
-            ViewBag.TeamBId = Teams;
-            ViewBag.StageId = GetStageSelectList();
+            //var Teams = GetTeamSelectList();
+            ViewBag.TeamAId = GetTeamSelectList(match.TeamAId);
+            ViewBag.TeamBId = GetTeamSelectList(match.TeamBId);;
+            ViewBag.StageId = GetStageSelectList(match.StageId);
             return View(match);
         }
 

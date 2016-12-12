@@ -65,8 +65,8 @@ namespace DailySports.Backend.Controllers
             {
                 return NotFound();
             }
-            ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
-            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
+            ViewBag.GameId = new SelectList(db.Games, "Id", "Name", team.GameId);
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name", team.CountryCode);
             ViewBag.oldFileName = team.Logo;
             return View(team);
         }
@@ -93,8 +93,8 @@ namespace DailySports.Backend.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.GameId = new SelectList(db.Games, "Id", "Name");
-            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name");
+            ViewBag.GameId = new SelectList(db.Games, "Id", "Name", team.GameId);
+            ViewBag.CountryCode = new SelectList(db.Countries, "Code", "Name", team.CountryCode);
             ViewBag.oldFileName = team.Logo;
             return View(team);
         }

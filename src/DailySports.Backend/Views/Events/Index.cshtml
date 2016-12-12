@@ -77,7 +77,10 @@
                                             @Html.DisplayFor(modelItem => item.Tag)
                                         </td>
                                         <td>
-                                            @String.Format("{0} {1}", Regex.Replace(item.Description, "<(.|\\n)*?>", string.Empty).ToString().Substring(0, item.Description.Length > 200 ? 200 : item.Description.Length), item.Description.Length > 200 ? "...." : string.Empty)
+                                            @{
+                                                var rawText = (item.Description != null) ? Regex.Replace(item.Description, "<(.|\\n)*?>", String.Empty) : "";
+                                            }
+                                            @String.Format("{0} {1}", rawText.Substring(0, rawText.Length > 200 ? 200 : rawText.Length), rawText.Length > 200 ? "...." : string.Empty)
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Game.Name)
