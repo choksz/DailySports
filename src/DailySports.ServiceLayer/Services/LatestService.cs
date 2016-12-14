@@ -86,7 +86,11 @@ namespace DailySports.ServiceLayer.Services
             List<TournementsDto> LatestTournaments = new List<TournementsDto>();
             try
             {
-                List<Tournaments> TournamentList = _tournamentsRepository.GetAll().OrderByDescending(T => T.StartDate).Take(4).ToList();
+                List<Tournaments> TournamentList = _tournamentsRepository.GetAll().
+                    OrderByDescending(T => T.StartDate).
+                    Include(t => t.Game).
+                    Take(4).
+                    ToList();
                 foreach(var tournament in TournamentList)
                 {
                     LatestTournaments.Add(new TournementsDto
@@ -96,7 +100,8 @@ namespace DailySports.ServiceLayer.Services
                             Overview = tournament.Overview,
                             TournamentImage = tournament.TournamentImage,
                             StartDate = tournament.StartDate,
-                            EndDate = tournament.EndDate
+                            EndDate = tournament.EndDate,
+                            Game = new GameDto(tournament.Game)
                         }
                     );
                 }
