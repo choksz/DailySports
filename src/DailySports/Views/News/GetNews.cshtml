@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "GetNews";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+} 
 <script type="text/javascript">var switchTo5x = true;</script>
 <script type="text/javascript" src="https://ws.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({ publisher: "854ea013-b4bc-4a7a-aab5-8e5c26e958e7", doNotHash: false, doNotCopy: false, hashAddressBar: false });</script>
@@ -25,7 +25,9 @@
                     </div>
                     <div class="col-sm-8 pad-zero br-right">
                         <div class="news_post_area">
-                            <div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.NewsImage)');background-size: 100%; background-repeat: no-repeat; background;">
+                            <div style="position:relative;">
+
+                                <img src="@Globals.CDNContent(Model.NewsImage)" style="min-width:100%;max-width:100%;">
                                 <div class="news_post_content hvr-sweep-to-top">
                                     <div class="col-sm-2">
                                         <div class="news_post_subimg">
@@ -38,6 +40,19 @@
                                     </div>
                                 </div>
                             </div>
+                            @*<div class="news_post_area_img bg-image" style="background-image:url('@Globals.CDNContent(Model.NewsImage)');background-size: 100%; background-repeat: no-repeat; background;">
+                                <div class="news_post_content hvr-sweep-to-top">
+                                    <div class="col-sm-2">
+                                        <div class="news_post_subimg">
+                                            <img src="@Globals.CDNContent(Model.Author.Image)" alt="#">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-10">
+                                        <h4 class="f_bol">@Model.Author.Name<span class='st_facebook_large' displayText='Facebook'></span><span class='st_twitter_large' displayText='Tweet'></span><span class='st_googleplus_large' displayText='Google +'></span>  </h4>
+                                        <p>@Model.Author.Biography</p>
+                                    </div>
+                                </div>
+                            </div>*@
                         </div>
                         <div>
                             <div class="col-sm-12">
